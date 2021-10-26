@@ -1,4 +1,4 @@
-# GEI
+# GEI (versão 2.0)
 Gestão do Equipamento Informático:
 - inventário preciso de todos os equipamentos informáticos.
 - todas as características de cada equipamento são armazenadas numa base de dados.
