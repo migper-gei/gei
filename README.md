@@ -1,3 +1,9 @@
+# GEI (versão 4.0 fevereiro 2022)
+  - melhoramento da inserção de avarias
+  - melhoramento do separador utilizadores (novo tipo: reparador)
+  - indicação se o utilizador tem ou não mensagens no chat
+
+
 # GEI (versão 3.0 - dezembro 2021) 
   - melhoramento da listagem de utilizadores
   - separador configurações: importação de tipos de equipamento
