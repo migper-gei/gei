@@ -131,7 +131,7 @@ include("msg_bemvindo.php");
 
 <?php
 
-if ($_SESSION['tipo']==1)
+if ($_SESSION['tipo']==1 || $_SESSION['tipo']==3)
 {
 
 ?>
