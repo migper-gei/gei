@@ -202,7 +202,27 @@ function validaImg() {
 }
 
 
-      $sql1 = "SELECT * FROM avaria_reparacao where id=".$url[0]."";
+
+
+//echo ($url[0]);
+
+$em=$_SESSION['email'];
+
+$sql0 = "
+SELECT count(*) as c FROM avaria_reparacao
+where id=".$url[0]." and autoravaria='".$em."'    ";
+
+//SELECT autoravaria FROM avaria_reparacao where id=".$url[0]." ";
+
+$result0 = mysqli_query($db,$sql0);
+$rows0 =mysqli_fetch_row($result0);
+$aut = $rows0[0];
+
+//echo $aut;
+
+if ($aut<>0)
+{
+      $sql1 = "SELECT * FROM avaria_reparacao where id=".$url[0]." ";
       $result1 = mysqli_query($db,$sql1);
       $row1=mysqli_fetch_array($result1);
 
@@ -245,7 +265,7 @@ function validaImg() {
                     <br />
                     <br>
                     <label>Avaria (descrição): </label>  <br>  
-                    <textarea required    style="background-color:#CEF6CE;text-align: justify;" rows="4" cols="50"  name="avaria"><?php echo $row1['avaria']; ?></textarea>
+                    <textarea required    style="background-color:#CEF6CE;text-align: justify;" rows="4" cols="80"  name="avaria"><?php echo $row1['avaria']; ?></textarea>
                    
                         
                  
@@ -325,14 +345,47 @@ function validaImg() {
                 </div>
         
  
-              
+               
+
+
                  </form>
                     
+     
+                 
+<?php
+}
+else
+{
+?>
+
+   <script>
+    
+   swal({
+   title: 'Não é o autor da avaria!',
+   //text: 'Não tem permisssão!',
+   icon: 'error',
+   //buttons: false,
+   
+   })
+   .then(function() {
+   window.location = "<?php echo SVRURL ?>myavarias?op=t";
+   });
+   
+   
+   </script>
+
+<?php
+}
+?>
+
+
 
 <form action = "<?php echo SVRURL ?>myavarias" method="post" >
 <input type = "hidden"  >
 <input title="Voltar" type=image 
 src="<?php echo SVRURL ?>images/voltar.svg"  >
+
+
 
 </form>
 
