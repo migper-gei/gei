@@ -187,27 +187,34 @@ $result = mysqli_query($db,$sql);
 
 
 //echo('<select name="sala">');
-?>
 
+
+
+//echo($_REQUEST["sala"]);
+
+?>
 
 <select required style="background-color:#CEF6CE" required name="sala" id="sala" onChange="showequi(this.value);">
 
 <?php
+
+
+
 
 echo('<option value=""> Escolha a sala   </option>');  
 
 while($row=mysqli_fetch_array($result))
 {
 
+   
 
 if ($row['no']==$_REQUEST["sala"])
 {
-echo('<option selected value="'.$row['no'].'">'.$row['no'].'</option>');
+echo('<option selected value="'.$_REQUEST["sala"].'">'.$_REQUEST["sala"].'</option>');
 }
 else
-
-
 echo('<option value="'.$row['no'].'">'.$row['no'].'</option>');
+
 
 }
 
@@ -245,7 +252,7 @@ echo('</select>');
 
               // $sa=$_POST["sala"];
                $em=$_SESSION['email'];
-               //echo($sa);
+              // echo($sa);
                //echo($em);
              
 
