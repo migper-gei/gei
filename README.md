@@ -1,4 +1,4 @@
-# GEI (versão 5.0: a disponiblizar no inicio de março 2022):
+# GEI (versão 5.0: março 2022):
 - possibilidade de suportar várias escolas do agrupamento
 - optimização e restruturação da base de dados
 - melhoramento em todos os separadores
