@@ -1,0 +1,106 @@
+RewriteEngine On
+
+#RewriteRule ^(.*)$ https://localhost:8080/gei/$1 [R,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+
+#todos os ficheiros
+#RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+
+#RewriteRule ^(.*)$ 22.php?url=$1 [QSA,L]
+
+
+
+#RewriteRule ^pa$ 11.php [L]
+#RewriteRule ^22/([a-zA-Z0-9-/]+)$ 22.php?url=$1 [QSA,L]
+
+
+
+RewriteRule ^i$ index.php [L]
+RewriteRule ^l$ login.php [L]
+
+RewriteRule ^sair$ logout.php [L]
+
+RewriteRule ^equip$ equipamento.php [L]
+RewriteRule ^avaria$ avarias.php [L]
+RewriteRule ^lista$ listagens.php [L]
+RewriteRule ^manut$ manutencao.php [L]
+RewriteRule ^configura$ configuracao.php [L]
+
+
+
+RewriteRule ^recuperapass/([0-9-/]+)$ recupera_reset_pass.php?url=$1 [QSA,L]
+
+RewriteRule ^registauser$ registauser.php [L]
+RewriteRule ^gravaus$ gravauser.php [L]
+
+RewriteRule ^validaus/([0-9-/]+)$ validauser.php?url=$1 [QSA,L]
+
+RewriteRule ^inserirequip$ inserir_equipamento.php [L]
+RewriteRule ^equip$ equipamento.php [L]
+RewriteRule ^gravaequip$ grava_equipamento.php [L]
+RewriteRule ^atualiequip$ atualizar_equipamento.php [L]
+RewriteRule ^verequipsala$ ver_equipamentos_sala.php [L]
+
+#RewriteRule ^eliminaequi/([0-9-/]+)$ elimina_equip.php?url=$1 [QSA,L]
+RewriteRule ^eliminaequi/([0-9-/]+)/([^/]+)/([^/]+)$ elimina_equip.php?url=$1&url2=$2&url3=$3  [QSA,L]
+
+
+
+
+RewriteRule ^tiposequip$ tipos_equipamento.php [L]
+RewriteRule ^inserirtequip$ inserir_tipo_equip.php [L]
+RewriteRule ^gravatequip$ grava_tipo_equip.php [L]
+ 
+
+
+RewriteRule ^eliminatequip/([0-9-/]+)$ elimina_tipo_equip.php?url=$1 [QSA,L]
+#RewriteRule ^atualtequip/([0-9]+)/(.*)$ atualiza_tipo_equip.php?url=$1&url2=$2 [QSA,L]
+RewriteRule ^atualtequip/([0-9-/]+)$ atualiza_tipo_equip.php?url=$1 [QSA,L]
+
+RewriteRule ^periodos$ periodos.php [L]
+RewriteRule ^atualizaper/([0-9-/]+)$ atualiza_periodo.php?url=$1 [QSA,L]
+RewriteRule ^eliminaper/([0-9-/]+)$ elimina_periodo.php?url=$1 [QSA,L]
+RewriteRule ^inserirper$ inserir_periodo.php [L]
+RewriteRule ^gravaper$ grava_periodo.php [L]
+
+RewriteRule ^salas$ salas.php [L]
+RewriteRule ^atualizasala/([0-9-/]+)$ atualiza_sala.php?url=$1 [QSA,L]
+RewriteRule ^eliminasala/([0-9-/]+)$ elimina_sala.php?url=$1 [QSA,L]
+RewriteRule ^inserirsala$ inserir_sala.php [L]
+RewriteRule ^gravasala$ grava_sala.php [L]
+RewriteRule ^copiasala/([0-9-/]+)$ copia_sala.php?url=$1 [QSA,L]
+RewriteRule ^importarsalas$ importar_salas.php [L]
+
+RewriteRule ^utiliz$ utilizadores.php [L]
+RewriteRule ^eliminauser/([0-9-/]+)$ elimina_user.php?url=$1 [QSA,L]
+RewriteRule ^importarusers$ importar_users.php [L]
+RewriteRule ^userspdf$ utilizadores_pdf.php [L]
+RewriteRule ^userscsv$ utilizadores_csv.php [L]
+RewriteRule ^atualizautili/([0-9-/]+)$ atualiza_utiliz.php?url=$1 [QSA,L]
+
+
+RewriteRule ^dadosesc$ inserir_logotipo.php [L]
+RewriteRule ^gravaesc$ grava_logotipo.php [L]
+RewriteRule ^dadosescola$ dados_escola.php [L]
+RewriteRule ^atualizaesc/([0-9-/]+)$ atualiza_escola.php?url=$1 [QSA,L]
+RewriteRule ^atualizaescok/([0-9-/]+)$ atualiza_ok_escola.php?url=$1 [QSA,L]
+RewriteRule ^eliminaesc/([0-9-/]+)$ elimina_escola.php?url=$1 [QSA,L]
+
+RewriteRule ^inserirmanut$ inserir_manutencao.php [L]
+RewriteRule ^gravamanutsala/([0-9-/]+)$ grava_manutencao_sala.php?url=$1 [QSA,L]
+
+
+RewriteRule ^eliminaavaria/([0-9-/]+)$ elimina_avaria.php?url=$1 [QSA,L]
+RewriteRule ^atualavaria/([0-9-/]+)$ atualiza_avaria.php?url=$1 [QSA,L]
+RewriteRule ^atualokavaria/([0-9-/]+)$ atualiza_ok_avaria.php?url=$1 [QSA,L]
+
+RewriteRule ^myavarias$ minhas_avarias.php [L]
+RewriteRule ^insereavaria$ inserir_avaria.php [L]
+
+RewriteRule ^reparafazsala/([0-9-/]+)$ reparacoes_efetuar_sala.php?url=$1 [QSA,L]
+RewriteRule ^reparafaz$ reparacoes_efetuar.php [L]
+
