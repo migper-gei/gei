@@ -317,8 +317,8 @@ if (!empty($_POST["escola"])) {
 
 
 $sqla = "SELECT  DISTINCT(s.nome) as no, s.id as sid
-FROM escolas e, salas s
-where e.id=s.id_escola
+FROM escolas e, salas s, avarias_reparacoes ar
+where e.id=s.id_escola and ar.id_sala=s.id
 and e.id=$esc
 order by s.nome";
 
