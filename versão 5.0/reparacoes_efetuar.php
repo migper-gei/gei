@@ -192,8 +192,11 @@ $em=$_SESSION['email'];
 if ($op=='t')
 {
 
- $sql = "select * from avarias_reparacoes where datareparacao is null 
- order by dataavaria asc LIMIT $paginationStart, $limit";
+ $sql = "select ar.*, e.nomeequi, s.nome
+ from avarias_reparacoes ar, equipamento e, salas s
+ where ar.id_equi=e.id and ar.id_sala=s.id
+  and ar.datareparacao is null 
+ order by ar.dataavaria asc LIMIT $paginationStart, $limit";
  $result = mysqli_query($db,$sql);
 
 
@@ -207,7 +210,10 @@ if ($op=='al')
 
 //echo $rows0[0] ;
 
-$sql2 = "select * from avarias_reparacoes where datareparacao is null 
+$sql2 = "select ar.*, e.nomeequi, s.nome
+from avarias_reparacoes ar, equipamento e, salas s
+where ar.id_equi=e.id and ar.id_sala=s.id
+  and ar.datareparacao is null 
 and ano_letivo='".$rows0[0]."' 
 order by dataavaria asc LIMIT $paginationStart, $limit";
 $result = mysqli_query($db,$sql2);
@@ -345,7 +351,7 @@ else {
 
                     ?>
                 <tr>
-                    <th width="20%"  scope="row"><?php echo $row['sala']; echo('<br>'.'/'.'<br>'); echo $row['nomeequi'];?>
+                    <th width="20%"  scope="row"><?php echo $row['nome']; echo('<br>'.'/'.'<br>'); echo $row['nomeequi'];?>
                  
                     </th>
                     <td width="30%" >
