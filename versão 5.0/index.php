@@ -64,6 +64,9 @@
               
                                <p>
                                <img src="<?php echo SVRURL ?>images/check.svg" alt="" > 
+                                gestão do equipamento de uma ou várias escolas. 
+                              <br>  <br>
+                               <img src="<?php echo SVRURL ?>images/check.svg" alt="" > 
                                 inventário preciso de todos os equipamentos informáticos e suas caraterísticas. 
                               <br>  <br>
                               <img src="<?php echo SVRURL ?>images/check.svg" alt="" > 
