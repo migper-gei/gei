@@ -234,7 +234,7 @@ Selecionar pelo menos uma opção.
 <br />
 <input type="checkbox" name="m[]" value="Instalação / atualização software">Instalação / atualização software
 <br />
-<input type="checkbox" name="m[]" value="Instalação / atualização software">Instalação / atualização hardware
+<input type="checkbox" name="m[]" value="Instalação / atualização hardware">Instalação / atualização hardware
 
 <br /> <br />
 <input type="checkbox" name="m[]" value="Eliminação adware / spyware">Eliminação adware / spyware
