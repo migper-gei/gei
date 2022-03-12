@@ -13,10 +13,10 @@
 
    <!-- body -->
    <body class="main-layout">
-      <!-- loader  -->
+      <!-- loader  
       <div class="loader_bg">
          <div class="loader"><img src="<?php echo SVRURL ?>images/loading.gif" alt="Loading" /></div>
-      </div>
+      </div>-->
       <!-- end loader -->
 
 
@@ -139,6 +139,13 @@ function showesc(escola) {
 
 }
 
+
+function showesc2(saladata) {
+//alert("aa");
+document.manutencoes2.submit();
+
+}
+
 </script>
 
 
@@ -252,7 +259,7 @@ order by nome";
 $result = mysqli_query($db,$sql);
 
 
-echo('<select name="sala">');
+echo('<select name="sala" required>');
 while($row=mysqli_fetch_array($result))
 {
 
@@ -311,7 +318,7 @@ order by s.nome";
 $result2 = mysqli_query($db,$sql2);
 
 
-echo('<select name="sala">');
+echo('<select name="sala" required>');
 while($row=mysqli_fetch_array($result2))
 {
 
@@ -351,14 +358,14 @@ Equipamento:
 
 
 $sql2 = "SELECT DISTINCT(e.nomeequi) as no, e.id
-FROM manutencao m, equipamento e
-where m.id_equi=e.id
+FROM manutencao m, equipamento e, salas s
+where m.id_equi=e.id and e.id_sala=s.id and s.id_escola=$esc
 order by e.nomeequi";
 
 $result2 = mysqli_query($db,$sql2);
 
 
-echo('<select name="equip">');
+echo('<select name="equip" required>');
 while($row2=mysqli_fetch_array($result2))
 {
 
@@ -383,6 +390,8 @@ entre  &nbsp;&nbsp;&nbsp;&nbsp;
    
  </form>
 
+
+<br><br>
 
 
 
