@@ -64,56 +64,10 @@ include("msg_bemvindo.php");
 <br>
                    
 
-
 <?php
 
 
-
-//$nome = $_GET["nome"];
-if( isset($_POST['nome']) )
-{
-
-$sa=$_POST["nome"];
-
-
-
-
-
-
-$sql = "select count(*) from salas where nome='".$sa."' and id_escola=".$idescola." ";
-$result = mysqli_query($db,$sql);
-
-$count = mysqli_fetch_array($result);
-
-
-//echo ($count[0]); && $_SESSION['tipo']<>1
-
-if ($count[0]>0 )
-
-{
-?>
-    <script>
-    
-    swal({
-title: 'A sala já existe!',
-text: '<?php echo $sa; ?>',
-icon: 'error',
-//buttons: false,
-
-})
-.then(function() {
-window.location = "<?php echo SVRURL ?>inserirsala?id=<?php echo $idescola ?>";
-});
-
-
-</script>
-
-
-<?php
-}
-
-
-elseif ( $_SESSION['tipo']==1)
+if ( $_SESSION['tipo']==1)
 {
 
 
@@ -172,24 +126,6 @@ window.location = "<?php echo SVRURL ?>salas";
 
 
 <?php
-}
-
-}
-
-
-else
-
-{
-?>
-    <script>
-window.setTimeout(function() {
-    window.location.href = 'salas';
-}, 10);
-</script>
-
-
-<?php
-
 }
 
 ?>
