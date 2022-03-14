@@ -13,10 +13,10 @@
 
    <!-- body -->
    <body class="main-layout">
-      <!-- loader  -->
+      <!-- loader  
       <div class="loader_bg">
          <div class="loader"><img src="<?php echo SVRURL ?>images/loading.gif" alt="Loading" /></div>
-      </div>
+      </div>-->
       <!-- end loader -->
 
 
@@ -86,8 +86,9 @@ window.setTimeout(function() {
 
 
 
-$sql2 = "select count(*), s.nome as sa from equipamento e, salas s where s.id='".$url[0]."'
-and e.sala=s.nome";
+$sql2 = "select count(*), s.nome as sa 
+from equipamento e, salas s 
+where s.id='".$url[0]."' ";
 $result2 = mysqli_query($db,$sql2);
 $rows =mysqli_fetch_row($result2);
   
