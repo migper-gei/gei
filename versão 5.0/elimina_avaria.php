@@ -81,7 +81,7 @@ window.setTimeout(function() {
 }
 
 $sql = "delete from avarias_reparacoes where id='".$url[0]."'";
-//$result = mysqli_query($db,$sql);
+$result = mysqli_query($db,$sql);
 
 //header("Refresh:0;url=minhas_avarias.php");
 mysqli_close($db);
