@@ -1,3 +1,8 @@
+# GEI (versão 6.0: março 2022):
+- separador configurações: adição da opção tarefas a realizar
+- adição da tabela "tarefas" na base de dados
+- melhoramento do separador manutenção
+
 # GEI (versão 5.0: março 2022):
 - possibilidade de suportar várias escolas do agrupamento
 - optimização e restruturação da base de dados
