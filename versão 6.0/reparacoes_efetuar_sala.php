@@ -507,7 +507,7 @@ onSubmit="return enviardados2();"
 
                      <input value="<?php echo date("Y-m-d");?>"  required id="datarep"   size="10" type = "date" name = "datarep" >
 
-                    <!--value="<?php echo date("Y-m-d");?>" -->
+                    <!--value="<php echo date("Y-m-d");?>" -->
 
                     <br /><br />
 

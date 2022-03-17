@@ -411,7 +411,7 @@ else {
 
 
                     <form name="reparacao" action="repara_avaria.php?id=<?php echo ($row['id']);?>&&em=<?php echo ($em) ?>" method="post"
-                    onSubmit="return enviardados2();" >
+                   >
 
                     <td width="30%" >
                     
@@ -447,9 +447,8 @@ else {
                     <td width="1%">
                 
 
-                  
-
-                    <input title="Reparar" alt="Reparar" type="image" src="<?php echo SVRURL ?>images/reparacao.svg"/> 
+                
+                    <input title="Reparar" value="<?php echo date("Y-m-d");?>"   required alt="Reparar" type="image" src="<?php echo SVRURL ?>images/reparacao.svg"/> 
                  
              
 
