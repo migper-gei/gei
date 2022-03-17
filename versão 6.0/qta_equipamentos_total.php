@@ -54,6 +54,7 @@ $idescola=$_GET["escola"];
 }
 
 
+//echo $idescola;
 
 $sql11 = "select nome_escola  from escolas where id=$idescola";
 $result11 = mysqli_query($db,$sql11); 
@@ -115,12 +116,18 @@ $paginationStart = ($page - 1) * $limit;
 $em=$_SESSION['email'];
 
 
-$sql = "select tipo,count(*) as qta from equipamento 
-group by tipo order by tipo asc LIMIT $paginationStart, $limit";
+$sql = "select tipo,count(*) as qta 
+from equipamento e, salas s
+where e.id_sala=s.id and s.id_escola=$idescola
+group by tipo 
+order by tipo asc LIMIT $paginationStart, $limit";
 $result = mysqli_query($db,$sql);
 
 
 // Get total records
+$totallinhas=$result->num_rows;
+
+echo $totallinhas;
 
 
 // Prev + Next
@@ -160,8 +167,8 @@ $next = $page + 1;
                     //$n=$row['id'];
                    
               
-                      $c=$c+1;
-                      $totallinhas = $c;
+                     // $c=$c+1;
+                      //$totallinhas = $c;
                    
                    
                    
@@ -242,7 +249,7 @@ $next = $page + 1;
 
 $sql2 = "SELECT e.tipo as ti ,count(DISTINCT(a.id_equi)) as c2 
 FROM avarias_reparacoes a,equipamento e 
-WHERE  a.datareparacao is null and a.id_equi=e.id
+WHERE  a.datareparacao is null and a.id_equi=e.id and a.id_escola=$idescola
 group by e.tipo order by tipo asc"; 
       $result2 = mysqli_query($db,$sql2);
 
@@ -308,6 +315,8 @@ while($row2=mysqli_fetch_array($result2)) {
         ?>
         <img src="<?php echo SVRURL ?>images/informacao.svg" alt="Informação">
         Sem avarias. 
+
+        <br>
    <?php
  
     }

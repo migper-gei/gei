@@ -127,7 +127,7 @@ $em=$_SESSION['email'];
 
 
   // Get total records
-
+  $totallinhas=$result->num_rows;
 
   // Prev + Next
   $prev = $page - 1;
@@ -171,8 +171,8 @@ $em=$_SESSION['email'];
                     //$n=$row['id'];
                    
               
-                      $c=$c+1;
-                      $totallinhas = $c;
+                      //$c=$c+1;
+                      //$totallinhas = $c;
                    
                    
                    
@@ -264,7 +264,7 @@ $em=$_SESSION['email'];
   $sql2 = "
   SELECT e.tipo as ti ,count(DISTINCT(a.id_equi)) as c2 
   FROM avarias_reparacoes a,equipamento e, salas s
-  WHERE a.id_equi=e.id and s.id=e.id_sala
+  WHERE a.id_equi=e.id and s.id=e.id_sala and a.id_escola=$idescola
   and a.id_sala=".$sa." 
   and a.datareparacao is null  group by e.tipo order by tipo asc";
   
@@ -293,8 +293,9 @@ $em=$_SESSION['email'];
 
 <?php  
   $sql2 = "
-  SELECT e.tipo as ti ,count(DISTINCT(a.id_equi)) as c2 FROM avarias_reparacoes a,equipamento e 
-  WHERE a.id_sala=".$sa." 
+  SELECT e.tipo as ti ,count(DISTINCT(a.id_equi)) as c2 
+  FROM avarias_reparacoes a,equipamento e 
+  WHERE a.id_sala=".$sa." and a.id_escola=$idescola
   and a.datareparacao is null and a.id_equi=e.id group by e.tipo order by tipo asc";
    
 $result2 = mysqli_query($db,$sql2);
