@@ -38,6 +38,8 @@ else echo ('(Reparador)');
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="<?php echo SVRURL ?>images/chat.svg" alt="Chat">
 <a  target="_new" class="underlineHover" title="Chat" href="<?php echo SVRURL ?>chat/index.php">
 <h6 style="color:blue;">CHAT</h6></a>

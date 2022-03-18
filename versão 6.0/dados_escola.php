@@ -65,7 +65,7 @@ include("msg_bemvindo.php");
     <img src="<?php echo SVRURL ?>images/informacao.svg" alt="Informação">
         Só é possível eliminir escolas sem salas. 
 
-
+        <br>  <br>
         <?php 
 
 
@@ -94,12 +94,14 @@ $result = mysqli_query($db,$sql);
 
 
 // Get total records
- $sql1 = "select count(*) as cs from escolas";
+/* 
+$sql1 = "select count(*) as cs from escolas";
 $result1 = mysqli_query($db,$sql1); 
 $rows =mysqli_fetch_row($result1);
 
-
 $totallinhas = $rows[0];
+*/
+$totallinhas=$result->num_rows;;
 //echo($totallinhas );
 
 
@@ -167,18 +169,12 @@ function(isConfirm){
 
 
 
-       <!-- Select dropdown -->
-       <div class="d-flex flex-row-reverse bd-highlight mb-3">
-            <form action="salas" method="post">
-                      <?php include("num_linhas.php");?>
-            </form>
-        </div>
 
         <!-- Datatable class="table table-striped"-->
         <table   class="table table-striped" id="js-sort-table"  >
             <thead>
                 <tr class="table-success">
-                <th  scope="col">ID da escola</th>
+               
                     <th  scope="col">Nome da escola</th>
                    
                         
@@ -208,10 +204,7 @@ function(isConfirm){
 
                     ?>
                 <tr>
-                    <td width="10%"  scope="row">
-                        <?php echo $row['id']; ?>
                     
-                    </td>
                     <td width="40%"  scope="row">
                         <?php echo $row['nome_escola']; ?>
                     
