@@ -90,7 +90,7 @@ if ( $_SESSION['tipo']==1)
 <form action="<?php echo SVRURL ?>inserirequip?x=0" method="post">
 
 
-<h3 style="color:blue;">INSERIR EM
+<h3 style="color:blue;">INSERIR NA ESCOLA
 
 
 <select  name="escola">
