@@ -145,7 +145,7 @@ $rowcount = mysqli_num_rows($result);
 <form action="<?php echo SVRURL ?>insereavaria?x=0" method="post">
 
 
-<h3 style="color:blue;">INSERIR EM
+<h3 style="color:blue;">INSERIR NA ESCOLA
 
 
 
