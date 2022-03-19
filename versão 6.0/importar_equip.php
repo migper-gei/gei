@@ -236,7 +236,7 @@ while($rowa=mysqli_fetch_array($resulta))
                                        
                  </form>
 
-                 <form action = "<?php echo SVRURL ?>periodos" method="post" >
+                 <form action = "<?php echo SVRURL ?>configura" method="post" >
 <input type = "hidden"  value = "<?php echo $sa?>">
 <input title="Voltar" type=image 
 src="<?php echo SVRURL ?>images/voltar.svg"  >
@@ -250,7 +250,7 @@ src="<?php echo SVRURL ?>images/voltar.svg"  >
 
 }
 ?>
-<br><br><br>
+<br>
 
                     </div>
                
