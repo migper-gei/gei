@@ -103,12 +103,15 @@ $result = mysqli_query($db,$sql);
 
 
 // Get total records
+
 $sql1 = "select count(*) as cs from utilizadores";
 $result1 = mysqli_query($db,$sql1); 
 $rows =mysqli_fetch_row($result1);
 
 
 $totallinhas = $rows[0];
+
+
 
 
 // Calculate total pages

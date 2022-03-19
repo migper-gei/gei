@@ -52,7 +52,7 @@ include("sessao_timeout.php");
             
             <div class="container">
                <div class="row">
-                  <div class="col-md-6 offset-md-3">
+                  <div class="col-md-8 offset-md-3">
               
                         
 
@@ -60,7 +60,7 @@ include("sessao_timeout.php");
 include("msg_bemvindo.php");
 ?>
     
-
+<br>
 
 <?php
   
@@ -83,8 +83,14 @@ include("msg_bemvindo.php");
 
 
   // Get total records
-  $totallinhas=mysqli_num_rows($result);
+  $sql1 = "select count(*) as cs from periodos";
+  $result1 = mysqli_query($db,$sql1); 
+  $rows =mysqli_fetch_row($result1);
+  
+
+  $totallinhas = $rows[0];
 //echo($totallinhas );
+
 
 
   

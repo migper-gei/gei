@@ -156,7 +156,49 @@ else
 
 
 
-<form action = "<?php echo SVRURL ?>atualiza_ok_periodo.php?id=<?php echo $row['id'];?>" method = "post" >
+
+<script language="JavaScript" >
+function validardatas(){
+
+//alert("aaaa");
+
+var di= document.getElementsByName("datai")[0].value;
+var df= document.getElementsByName("dataf")[0].value;
+
+//alert (di);
+//alert (df);
+
+
+var di2=new Date(di);
+//alert (di2);
+var df2=new Date(df);
+//alert (df2);
+
+//alert(di2- df2); 
+
+
+
+if((di2-df2)>0 )
+{
+      alert( "A data de fim deve ser igual ou superior à data de inicio." );
+  
+      return false;
+}
+
+else {
+   //alert( "ccc");
+      return true;
+
+  }
+
+}
+
+</script>
+
+
+
+
+<form  onSubmit="return validardatas();" action = "<?php echo SVRURL ?>atualiza_ok_periodo.php?id=<?php echo $row['id'];?>" method = "post" >
                     <label>Ano Letivo (aaaa/aaaa): </label>  <br>  
                     <input class="underlineHover" placeholder="aaaa/aaaa" pattern="[0-9]+/[0-9]{4,4}" size=10 type = "text" name = "anoletivo"  required value="<?php echo $row['ano_lectivo']; ?>"/><br /><br />
                     
@@ -213,21 +255,24 @@ else
                     <br>
                     <label>Data Início: </label>  <br>  
                        
-                    <input value="<?php echo $row['data_inicio']; ?>"  required        size="10" type = "date" name = "datai" >          
+                    <input value="<?php echo $row['data_inicio']; ?>"  required size="10" type = "date" name = "datai" >          
                 
                     <br> <br> 
                     <label>Data Fim: </label>  <br>  
                 
-                    <input value="<?php echo $row['data_fim']; ?>"  required        size="10" type = "date" name = "dataf" >          
+                    <input
+                   
+                    value="<?php echo $row['data_fim']; ?>"  required   size="10" type = "date" name = "dataf" >          
                 
                     <br />
-                    <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Atualizar"/>     </div>
+                    <div  style=" text-align:center;width:90%"> 
+                    <input type = "submit" value = "Atualizar"/>     </div>
                  </form>
 
 
 
                  <form action = "<?php echo SVRURL ?>periodos" method="post" >
-<input type = "hidden" name = "sala" value = "<?php echo $sa?>">
+<input type = "hidden" name = "" value = "">
 <input title="Voltar" type=image 
 src="<?php echo SVRURL ?>images/voltar.svg"  >
 
