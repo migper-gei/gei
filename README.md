@@ -1,28 +1,31 @@
 # GEI (versão 6.0: março 2022):
-- separador configurações: adição da opção tarefas a realizar
-- adição da tabela "tarefas" na base de dados
-- melhoramento do separador manutenção
+- separador configurações: adição da opção tarefas a realizar.
+- adição da tabela "tarefas" na base de dados.
+- melhoramento do separador manutenção.
 
 Concultar ficheiro "configurações_GEI.pdf"
 
 # GEI (versão 5.0: março 2022):
-- possibilidade de suportar várias escolas do agrupamento
-- optimização e restruturação da base de dados
-- melhoramento em todos os separadores
+- possibilidade de suportar várias escolas do agrupamento.
+- optimização e restruturação da base de dados.
+- melhoramento em todos os separadores.
+-
 Concultar ficheiro "configurações_GEI.pdf"
 
 # GEI (versão 4.0 fevereiro 2022)
-  - melhoramento da inserção de avarias
-  - melhoramento do separador utilizadores (novo tipo: reparador)
-  - indicação se o utilizador tem ou não mensagens no chat
+  - melhoramento da inserção de avarias.
+  - melhoramento do separador utilizadores (novo tipo: reparador).
+  - indicação se o utilizador tem ou não mensagens no chat.
+  
 Concultar ficheiro "configurações_GEI.pdf"
 
 
 # GEI (versão 3.0 - dezembro 2021) 
-  - melhoramento da listagem de utilizadores
-  - separador configurações: importação de tipos de equipamento
-  - separador avarias/reparações (inserir avaria): possibilidade de inserir um vídeo da avaria
-  - adição do campo vídeo na tabela "avaria_reparação"
+  - melhoramento da listagem de utilizadores.
+  - separador configurações: importação de tipos de equipamento.
+  - separador avarias/reparações (inserir avaria): possibilidade de inserir um vídeo da avaria.
+  - adição do campo vídeo na tabela "avaria_reparação".
+  
  Concultar ficheiro "configurações_GEI.pdf"
 
 
@@ -33,4 +36,6 @@ Concultar ficheiro "configurações_GEI.pdf"
 - registo das avarias dos utilizadores.
 - listagens e estatísticas.
 - importação e exportação de dados. 
-- chat entre os utilizadores
+- chat entre os utilizadores.
+
+Concultar ficheiro "configurações_GEI.pdf"
