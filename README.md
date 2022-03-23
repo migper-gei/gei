@@ -2,6 +2,7 @@
 - separador configurações: adição da opção tarefas a realizar
 - adição da tabela "tarefas" na base de dados
 - melhoramento do separador manutenção
+
 Concultar ficheiro "configurações_GEI.pdf"
 
 # GEI (versão 5.0: março 2022):
