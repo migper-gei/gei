@@ -1,3 +1,9 @@
+# GEI (versão 7.0: abril 2022):
+- criação de etiquetas e código de barras dos equipamentos.
+- optimizações gerais.
+
+Consultar ficheiro "configurações_GEI.pdf"
+
 # GEI (versão 6.0: março 2022):
 - separador configurações: adição da opção tarefas a realizar.
 - adição da tabela "tarefas" na base de dados.
