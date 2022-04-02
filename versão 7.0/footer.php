@@ -67,7 +67,7 @@
 
   
   <p><b>Versão 7.0 (abril 2022):</b></p>
-  <p>- criação de etiquetas / código de barras dos equipamentos</p>
+  <p>- criação de etiquetas / código de barras dos equipamentos (separador equipamento)</p>
   <p>- adição de novas listagens: quantidade por sala do tipo e nº de avarias por tipo equipamento (separador listagens)</p>
   <p>- optimizações e correções gerais</p>
  
