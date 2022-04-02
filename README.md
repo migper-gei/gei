@@ -1,5 +1,5 @@
 # GEI (versão 7.0: abril 2022):
-- criação de etiquetas e código de barras dos equipamentos.
+- criação de etiquetas e código de barras dos equipamentos (separador equipamento).
 - adição de novas listagens: quantidade por sala do tipo e nº de avarias por tipo equipamento (separador listagens)
 - optimizações e correções gerais.
 
