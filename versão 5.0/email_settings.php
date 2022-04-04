@@ -15,5 +15,5 @@ $mail->SMTPAuth = true;
 //$mail->SMTPDebug=3;
 
         $mail->Username = "gsimasterdb@gmail.com";
-        $mail->Password = "admingsi+123abc";  
+        $mail->Password = "-------";  
         ?>
