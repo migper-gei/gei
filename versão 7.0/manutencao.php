@@ -255,7 +255,7 @@ order by s.nome";
 $result = mysqli_query($db,$sql);
 
 
-echo('<select name="sala">');
+echo('<select name="sala" required>' );
 while($row=mysqli_fetch_array($result))
 {
 
@@ -407,7 +407,7 @@ order by s.nome,m.data_manutencao desc";
 $result2a = mysqli_query($db,$sql2a);
 
 
-echo('<select name="saladata">');
+echo('<select name="saladata"  required>');
 while($row2a=mysqli_fetch_array($result2a))
 {
 
@@ -448,7 +448,7 @@ order by e.nomeequi, m.data_manutencao desc";
 $result2b = mysqli_query($db,$sql2b);
 
 
-echo('<select name="equipdata">');
+echo('<select name="equipdata"  required>');
 while($row2b=mysqli_fetch_array($result2b))
 {
 
