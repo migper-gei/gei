@@ -151,7 +151,8 @@ $sql = "select  ar.id_sala,s.nome,ar.ano_letivo, count(*) as c
 FROM avarias_reparacoes ar, salas s
 where ar.id_sala=s.id 
 and ar.id_escola=$idescola
-GROUP by ar.id_sala order by c desc
+GROUP by ar.id_sala, ar.ano_letivo
+order by ar.id_sala, ar.ano_letivo desc, c desc
 LIMIT $paginationStart, $limit";
 $result = mysqli_query($db,$sql);
 }
@@ -163,7 +164,8 @@ if ($op=='al')
     FROM avarias_reparacoes ar, salas s
     where s.id=ar.id_sala and
     ar.ano_letivo='".$rows3[0]."' and ar.id_escola=$idescola
-    GROUP by ar.id_sala order by c desc
+    GROUP by ar.id_sala, ar.ano_letivo
+    order by ar.id_sala, ar.ano_letivo desc,c desc
     LIMIT $paginationStart, $limit";
     $result = mysqli_query($db,$sql);
 }
