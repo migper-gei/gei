@@ -148,7 +148,8 @@ if ($op=='t')
 $sql = "select id_equi,ano_letivo, count(*) as c 
 FROM avarias_reparacoes
 where id_escola=$idescola
-GROUP by id_equi order by c desc
+GROUP by id_equi , ano_letivo
+order by id_equi,ano_letivo desc,c desc
 LIMIT $paginationStart, $limit";
 $result = mysqli_query($db,$sql);
 }
