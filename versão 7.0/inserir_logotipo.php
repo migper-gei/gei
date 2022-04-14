@@ -158,6 +158,63 @@ window.location = "<?php echo SVRURL ?>dadosesc";
 
 </script>
 
+
+
+<script>
+
+
+
+function l() {
+
+//alert ('aaa');
+
+
+
+  event.preventDefault(); // prevent form submit
+
+   swal({
+
+  title: "Deseja eliminar o logotipo?",
+ //text: "Sala: "+s1+" (Escola: "+ne1+")",
+  type: "warning",
+  showCancelButton: true,
+  //confirmButtonColor: "#DD6B55",
+
+
+  confirmButtonText: "Sim",
+  cancelButtonText: "Não",
+  closeOnConfirm: false,
+  closeOnCancel: false
+ 
+},
+function(isConfirm){
+  if (isConfirm) {
+    
+    
+        window.setTimeout(function() {
+    window.location.href = '<?php echo SVRURL ?>elimina_logotipo.php';
+}, 10);
+
+
+          
+  } else {
+    swal("Cancelado.");
+
+//    window.setTimeout(function() {
+  //  window.location.href = '<?php echo SVRURL ?>salas?x=1&&escola='+es1;
+//}, 10);
+  
+
+  }
+
+});
+
+}
+
+</script>
+
+
+
 <br>
 <div style="  text-align: center;">              
       <a  class="underlineHover" href="<?php echo SVRURL ?>dadosescola" title="Ver escolas" style="color:blue;font-size:16px;">Ver escolas</a>
@@ -174,8 +231,10 @@ window.location = "<?php echo SVRURL ?>dadosesc";
                 
                     <!--  <input type="file" multiple accept=".png"/>    -->
 
+
+
                      &nbsp; &nbsp;
-                    <a  class="underlineHover" href="<?php echo SVRURL ?>elimina_logotipo.php" title="Remover logotipo" style="color:blue;font-size:16px;">Remover logotipo</a>
+                    <a   onclick="l();"  class="underlineHover" href="<?php echo SVRURL ?>elimina_logotipo.php" title="Remover logotipo" style="color:blue;font-size:16px;">Remover logotipo</a>
 
 
 
@@ -241,6 +300,7 @@ src="<?php echo SVRURL ?>images/voltar.svg"  >
       <!-- end about -->
     
 
+      <?php include ("jquery_bootstrap.php");?>
 
       <?php include ("footer.php");?>
 
