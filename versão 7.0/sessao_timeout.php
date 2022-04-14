@@ -65,7 +65,7 @@ if( isset( $_SESSION[ 'lastaccess' ] ) ) {
 ?>
 	<!--	  -->
 
-    <script> location.replace("i"); </script> 
+    <script> location.replace("<?php echo SVRURL ?>/i"); </script> 
 <?php
 
 
