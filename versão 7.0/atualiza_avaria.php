@@ -57,6 +57,126 @@ include("msg_bemvindo.php");
     
 
 
+
+
+    <script>
+
+function fot(n) {
+
+
+var n1;
+n1=n;
+
+
+  event.preventDefault(); // prevent form submit
+
+   swal({
+
+  title: "Deseja eliminar a foto?",
+ //text: "Sala: "+s1+" (Escola: "+ne1+")",
+  type: "warning",
+  showCancelButton: true,
+  //confirmButtonColor: "#DD6B55",
+
+
+  confirmButtonText: "Sim",
+  cancelButtonText: "Não",
+  closeOnConfirm: false,
+  closeOnCancel: false
+ 
+},
+function(isConfirm){
+  if (isConfirm) {
+    
+    
+        window.setTimeout(function() {
+    window.location.href = '<?php echo SVRURL ?>eliminafovi/'+n1+'/f';
+}, 10);
+
+
+          
+  } else {
+    swal("Cancelado.");
+
+//    window.setTimeout(function() {
+  //  window.location.href = '<?php echo SVRURL ?>salas?x=1&&escola='+es1;
+//}, 10);
+  
+
+  }
+
+});
+
+}
+
+</script>
+
+
+
+
+<script>
+
+function vid(n) {
+
+
+var n1;
+n1=n;
+
+
+  event.preventDefault(); // prevent form submit
+
+   swal({
+
+  title: "Deseja eliminar o vídeo?",
+ //text: "Sala: "+s1+" (Escola: "+ne1+")",
+  type: "warning",
+  showCancelButton: true,
+  //confirmButtonColor: "#DD6B55",
+
+
+  confirmButtonText: "Sim",
+  cancelButtonText: "Não",
+  closeOnConfirm: false,
+  closeOnCancel: false
+ 
+},
+function(isConfirm){
+  if (isConfirm) {
+    
+    
+        window.setTimeout(function() {
+    window.location.href = '<?php echo SVRURL ?>eliminafovi/'+n1+'/v';
+}, 10);
+
+
+          
+  } else {
+    swal("Cancelado.");
+
+//    window.setTimeout(function() {
+  //  window.location.href = '<?php echo SVRURL ?>salas?x=1&&escola='+es1;
+//}, 10);
+  
+
+  }
+
+});
+
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
     <script type="text/javascript">
 
 function Filevalida () {
@@ -132,6 +252,8 @@ window.setTimeout(function() {
 
 
 
+
+
 <script> 
           
    // Function to increase image size 
@@ -202,8 +324,14 @@ function validaImg() {
 
 
 
+
+
+
       <?php
 }
+
+
+
 
 
 
@@ -303,13 +431,20 @@ if ($aut<>0)
                          echo '<img name="i1" id="img1" onmouseover="enImg(this)" onmouseout="rImg(this)" 
                          height="150" width="250" src="data:image/jpeg;base64,'.base64_encode($row1['imgavaria']).' ">';
                           
-                   }
+                  
                  ?> 
+                 <br>
+             
+                  <a  onclick="fot(<?php echo $url[0];?>);"  class="underlineHover" href="<?php echo SVRURL ?>eliminafovi/<?php echo $url[0] ?>/f" title="Remover foto" style="color:blue;font-size:16px;">Remover foto</a>
 
+                  <?php
+                   }
+                  ?>
 
                   </td>
                   <td>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;
                   <?php 
           
 
@@ -328,11 +463,21 @@ if ($aut<>0)
                   </video>
       
                   ';    
-                  }
+                  
 
 
 
                    ?>
+                    <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;
+                  <a  onclick="vid(<?php echo $url[0];?>);"  class="underlineHover" href="<?php echo SVRURL ?>eliminafovi/<?php echo $url[0] ?>/v" title="Remover vídeo" style="color:blue;font-size:16px;">Remover vídeo</a>
+
+                  <?php
+                   }
+                  ?>
+
+
 
                   </td>
 
@@ -417,7 +562,7 @@ src="<?php echo SVRURL ?>images/voltar.svg"  >
       </div>
       <!-- end about -->
     
-
+      <?php include ("jquery_bootstrap.php");?>
 
       <?php include ("footer.php");?>
 
