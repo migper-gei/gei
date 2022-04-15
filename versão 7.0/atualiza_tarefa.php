@@ -225,19 +225,26 @@ while($rowa=mysqli_fetch_array($resulta))
 
 <?php
 
-echo('<option value="">Escolha a urgência</option>');
+//echo('<option value="">Escolha a urgência</option>');
 
 if ($row['urgencia']=='Alta')
-    
+  {  
       echo('<option selected value="Alta">Alta</option>');
-
+      echo('<option value="Média">Média</option>');
+      echo('<option value="Baixa">Baixa</option>');
+  }
 elseif ($row['urgencia']=='Média')
+{
       echo('<option selected value="Média">Média</option>');
-    
+      echo('<option value="Alta">Alta</option>');
+      echo('<option value="Baixa">Baixa</option>');
+}
 else
+{
       echo('<option selected value="Baixa">Baixa</option>');
-        
-
+      echo('<option value="Média">Média</option>');
+      echo('<option value="Alta">Alta</option>');
+}
 ?>     
 </select>
 <br><br>

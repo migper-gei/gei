@@ -345,8 +345,8 @@ function(isConfirm){
                     <th  scope="col">Sala</th>
                     <th   scope="col">Descrição</th>
                     <th   scope="col">Urgência</th>
-                    <th   scope="col">Criado por e data</th>
-                    <th   scope="col">Concluído por e data</th>
+                    <th   scope="col">Criado por / data</th>
+                    <th   scope="col">Concluído por / data</th>
                   
      
                      
