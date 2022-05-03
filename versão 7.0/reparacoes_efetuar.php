@@ -192,9 +192,9 @@ $em=$_SESSION['email'];
 if ($op=='t')
 {
 
- $sql = "select ar.*, e.nomeequi, s.nome
- from avarias_reparacoes ar, equipamento e, salas s
- where ar.id_equi=e.id and ar.id_sala=s.id
+ $sql = "select ar.*, e.nomeequi, s.nome, esc.nome_escola
+ from avarias_reparacoes ar, equipamento e, salas s, escolas esc
+ where ar.id_equi=e.id and ar.id_sala=s.id and ar.id_escola=esc.id
   and ar.datareparacao is null 
  order by ar.dataavaria asc LIMIT $paginationStart, $limit";
  $result = mysqli_query($db,$sql);
@@ -210,9 +210,9 @@ if ($op=='al')
 
 //echo $rows0[0] ;
 
-$sql2 = "select ar.*, e.nomeequi, s.nome
-from avarias_reparacoes ar, equipamento e, salas s
-where ar.id_equi=e.id and ar.id_sala=s.id
+$sql2 = "select ar.*, e.nomeequi, s.nome, esc.nome_escola
+ from avarias_reparacoes ar, equipamento e, salas s, escolas esc
+ where ar.id_equi=e.id and ar.id_sala=s.id and ar.id_escola=esc.id
   and ar.datareparacao is null 
 and ano_letivo='".$rows0[0]."' 
 order by dataavaria asc LIMIT $paginationStart, $limit";
@@ -320,7 +320,7 @@ else {
         <table class="table table-striped">
             <thead>
                 <tr class="table-success">
-                    <th scope="col">Sala / Equipamento</th>
+                    <th scope="col">Escola / Sala / Equipamento</th>
                     <th scope="col">Avaria</th>
                     <th scope="col">Reparação</th>
                     <th scope="col">&nbsp;&nbsp; </th>
@@ -351,7 +351,8 @@ else {
 
                     ?>
                 <tr>
-                    <th width="20%"  scope="row"><?php echo $row['nome']; echo('<br>'.'/'.'<br>'); echo $row['nomeequi'];?>
+                    <th width="20%"  scope="row"><?php echo $row['nome_escola']; echo('<br>'.'/'.'<br>');
+                    echo $row['nome']; echo('<br>'.'/'.'<br>'); echo $row['nomeequi'];?>
                  
                     </th>
                     <td width="30%" >
