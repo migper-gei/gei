@@ -302,7 +302,7 @@ echo('</select>');
               &&em=<?php echo ($em);?>" method = "post" enctype="multipart/form-data" 
               onSubmit="return enviardados();">
 
-                   <label>Equipamento:  </label> 
+                   <label>Equipamento: (se lista vazia, escolha a sala) </label> 
                    <br>
                    <?php
                echo('<select name="equip" required style="background-color:#CEF6CE">');
