@@ -45,7 +45,7 @@ include("sessao_timeout.php");
             <div class="row">
                <div class="col-md-12">
                <div class="titlepage">
-                     <h2>Importar salas</h2>
+                     <h2>Importar Equipamentos</h2>
                   </div>
                </div>
             </div>

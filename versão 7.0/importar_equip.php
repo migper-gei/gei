@@ -45,7 +45,7 @@ include("sessao_timeout.php");
             <div class="row">
                <div class="col-md-12">
                <div class="titlepage">
-                     <h2>Importar equipamento</h2>
+                     <h2>Importar equipamentos</h2>
                   </div>
                </div>
             </div>
@@ -105,7 +105,7 @@ echo $idescola;
 $sql2 = "SELECT * FROM escolas ORDER by nome_escola";
 $result2 = mysqli_query($db,$sql2);
 
-echo('<option value=""> Escolha a escola  </option>');  
+//echo('<option value=""> Escolha a escola  </option>');  
 
 while($row2=mysqli_fetch_array($result2))
 {
@@ -201,7 +201,7 @@ while($rowa=mysqli_fetch_array($resulta))
 </select>
 
   
-
+(Se lista vazia, inserir salas)
 
 
 
