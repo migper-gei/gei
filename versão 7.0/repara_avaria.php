@@ -81,7 +81,7 @@ reparacao='".$_POST["reparacao"]."',
 rep_efectuada_por='".$_POST["repar_por"]."'
 where id=".$_GET["id"]."";
 
-//$result = mysqli_query($db,$sql2);
+$result = mysqli_query($db,$sql2);
 
 
 
