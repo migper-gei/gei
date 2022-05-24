@@ -23,11 +23,29 @@ else
     ?>
 <script>
 window.setTimeout(function() {
-    window.location.href = 'i';
+    window.location.href = '<?php echo SVRURL ?>i';
 }, 10);
 </script>
 <?php
 }
+
+
+if ($url[0]>1)
+{
+?>
+<script>
+window.setTimeout(function() {
+    window.location.href = '<?php echo SVRURL ?>i';
+}, 10);
+</script>
+
+<?php
+}
+?>
+
+
+
+<?php
 
     
 $rsenha = $url[0];
@@ -78,6 +96,7 @@ elseif ($rsenha==1)
 {
 ?>
     <h2> Mudar password </h2>
+   
 <?php
 
 }

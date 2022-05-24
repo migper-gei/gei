@@ -71,15 +71,31 @@
     $pwd = $_POST['password'];
     $pwdc = $_POST['confirmapassword'];
   
+  //echo $pwdant;
   
   
-  
-    $sql = "select count(*) from utilizadores where email='".$_POST["email"]."' and AES_DECRYPT(pass, 'secret') = '$pwdant'";
+  $sql0 = "select AES_DECRYPT(pass, 'secret') from utilizadores where email='".$_POST["email"]."' ";
+  $result0 = mysqli_query($db,$sql0);
+   $rows2 =mysqli_fetch_row($result0);
+
+  //echo $rows2[0];
+
+  $passant = $rows2[0];
+
+  $count =0;
+if ($passant==$pwdant)
+{
+    $sql = "select count(*) from utilizadores where email='".$_POST["email"]."' and AES_DECRYPT(pass, 'secret') = '$passant'";
         $result = mysqli_query($db,$sql);
        
         $count = mysqli_num_rows($result);
-  
-  
+
+    //    echo ('<br>');
+  //echo $count;
+ } 
+
+
+
     if($count == 0) 
         {
        
