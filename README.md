@@ -1,3 +1,9 @@
+# GEI (versão 8.0: maio 2022):
+- visualização das últimas 5 avarias registadas (separador avarias/reparações).
+- optimizações e correções gerais.
+
+Consultar ficheiro "configurações_GEI.pdf"
+
 # GEI (versão 7.0: abril 2022):
 - criação de etiquetas e código de barras dos equipamentos (separador equipamento).
 - adição de novas listagens: quantidade por sala do tipo e nº de avarias por tipo equipamento (separador listagens)

@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
         
         })
         .then(function() {
-        window.location = "<?php echo SVRURL ?>importarusers";
+        window.location = "<?php echo SVRURL ?>importar_equip.php";
         })
         ;
         
