@@ -1,9 +1,10 @@
 # GEI (versão 9.0: brevemente junho 2022):
 - possibilidade de requisição de material (separador equipamentos).
 - alteração da tabela "salas" (adição de um novo campo).
-- adição de novas tabelas "requisicao" e "equip_requisitado"
-- melhoramento do aspeto gráfico
-- optimizações e correções gerais
+- adição de novas tabelas "requisicao" e "equip_requisitado".
+- novo tipo de utilizadores: funcionário.
+- melhoramento do aspeto gráfico.
+- optimizações e correções gerais.
 
 Consultar ficheiro "configurações_GEI.pdf"
 
