@@ -1,6 +1,6 @@
 # GEI (versão 9.0: brevemente junho 2022):
 - possibilidade de requisição de material (separador equipamentos).
-- possibilidade de um equipamento mudar de sala
+- possibilidade de um equipamento mudar de sala.
 - alteração da tabela "salas" (adição de um novo campo).
 - adição de novas tabelas "requisicao" e "equip_requisitado".
 - novo tipo de utilizadores: funcionário.
