@@ -1,4 +1,4 @@
-# GEI (versão 9.0: brevemente junho 2022):
+# GEI (versão 9.0: junho 2022):
 - possibilidade de requisição de material (separador equipamentos).
 - possibilidade de um equipamento mudar de sala.
 - alteração da tabela "salas" (adição de um novo campo).
