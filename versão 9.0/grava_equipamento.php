@@ -55,14 +55,14 @@ include("sessao_timeout.php");
 
 
 <?php
-if ( !isset($_POST['nome']) || !isset($_POST['localizacao']) || !isset($_POST['eqreq']) )
+if ( !isset($_POST['tipoeq']) || !isset($_POST['sala']) || !isset($_POST['nomeq']) )
 {
 ?>
 
 
 <script>
 window.setTimeout(function() {
-    window.location.href = '<?php echo SVRURL ?>configura';
+    window.location.href = '<?php echo SVRURL ?>equip';
 }, 140);
 </script>
 
@@ -197,7 +197,6 @@ window.setTimeout(function() {
 }
 
 ?>
-
 
 
 
