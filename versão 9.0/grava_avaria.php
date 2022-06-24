@@ -55,10 +55,10 @@ include("msg_bemvindo.php");
 ?>
     
 <br>
-                   
+                  
 
-<?php
-if ( !isset($_POST['equip']) || !isset($_POST['data']) || !isset($_POST['sala']) )
+<?php  //|| !isset($_POST['sala'])
+if ( !isset($_POST['equip']) || !isset($_POST['data']) || !isset($_POST['avaria']) )
 {
 ?>
 
