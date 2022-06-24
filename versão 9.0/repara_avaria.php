@@ -54,6 +54,28 @@ include("sessao_timeout.php");
 
 
                   <?php
+if ( !isset($_POST['datarep']) || !isset($_POST['reparacao']) || !isset($_POST['repar_por']) )
+{
+?>
+
+
+<script>
+window.setTimeout(function() {
+    window.location.href = '<?php echo SVRURL ?>avaria';
+}, 140);
+</script>
+
+
+<?php
+}
+?>
+
+
+
+
+
+
+                  <?php
 
 
 
