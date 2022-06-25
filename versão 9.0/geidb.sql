@@ -455,10 +455,10 @@ CREATE TABLE `utilizadores` (
 --
 
 INSERT INTO `utilizadores` (`id`, `nome`, `email`, `tipo`, `pass`, `sessao_ativa`) VALUES
-(87, 'Administrador', 'gsimasterdb@gmail.com', 1, 0x41579e3d233189c2e2c3af45c10c96c5, 0),
-(94, 'mig', 'migarper@gmail.com', 3, 0xa4ebc5870de72635b9349a1570b273bc, 0),
-(325, 'Administrador ão é', 'adminteste@escola.pt', 1, 0x6d6a2dba8d50543f2c0ef186bca66f0e, 0),
-(326, 'User', 'userteste@escola.pt', 2, 0x6c19749f3daae859edb32b15a35339cb, 0);
+(325, 'Administrador ', 'adminteste@escola.pt', 1, 0x6d6a2dba8d50543f2c0ef186bca66f0e, 0),
+(326, 'User', 'userteste@escola.pt', 2, 0x6c19749f3daae859edb32b15a35339cb, 0),
+(327, 'User_reparador', 'repar@escola.pt', 3, 0x942d367d94063f3d6627f3ef2cb941f9, 0),
+(328, 'Funcionário', 'func1@escola.pt', 4, 0x5e4a763bb07e23adb84105e8bf0ec3df, 0),
 
 
 
