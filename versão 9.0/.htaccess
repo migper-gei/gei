@@ -70,7 +70,7 @@ RewriteRule ^gravaper$ grava_periodo.php [L]
 
 RewriteRule ^salas$ salas.php [L]
 RewriteRule ^atualizasala/([0-9-/]+)$ atualiza_sala.php?url=$1 [QSA,L]
-RewriteRule ^eliminasala/([0-9-/]+)$ elimina_sala.php?url=$1 [QSA,L]
+RewriteRule ^eliminasala/([0-9-/]+)/([^/]+)$ elimina_sala.php?url=$1&url2=$2  [QSA,L]
 RewriteRule ^inserirsala$ inserir_sala.php [L]
 RewriteRule ^gravasala$ grava_sala.php [L]
 RewriteRule ^copiasala/([0-9-/]+)$ copia_sala.php?url=$1 [QSA,L]
