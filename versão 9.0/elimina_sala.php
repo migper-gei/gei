@@ -106,7 +106,7 @@ if ($rows[0]==0 && $_SESSION['tipo']==1  )
 {
 
 $sql = "delete from salas where id='".$url[0]."'";
-$result = mysqli_query($db,$sql);
+//$result = mysqli_query($db,$sql);
 
 
 
@@ -115,7 +115,7 @@ $result = mysqli_query($db,$sql);
 <script>
 
 window.setTimeout(function() {
-              window.location.href = '<?php echo SVRURL ?>salas?x=1&&escola=<?php echo $idescola?>';
+              window.location.href = '<?php echo SVRURL ?>salas?x=1&&esi=<?php echo base64_encode($idescola)?>';
           },40);
           </script>
 
