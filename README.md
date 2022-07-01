@@ -1,3 +1,9 @@
+# GEI (versão 9.1: brevemente  2022):
+- adição do campo "observações" na tabela equipamento.
+- optimizações e correções gerais.
+
+Consultar ficheiro "configurações_GEI.pdf"
+
 # GEI (versão 9.0: junho 2022):
 - possibilidade de requisição de material (separador equipamentos).
 - possibilidade de um equipamento mudar de sala.
