@@ -1,4 +1,4 @@
-# GEI (versão 9.1: brevemente  2022):
+# GEI (versão 9.1: julho  2022):
 - adição do campo "observações" na tabela equipamento.
 - optimizações e correções gerais.
 
