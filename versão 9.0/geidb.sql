@@ -457,7 +457,7 @@ CREATE TABLE `utilizadores` (
 INSERT INTO `utilizadores` (`id`, `nome`, `email`, `tipo`, `pass`, `sessao_ativa`) VALUES
 (325, 'Administrador ', 'adminteste@escola.pt', 1, 0x6d6a2dba8d50543f2c0ef186bca66f0e, 0),
 (326, 'User', 'userteste@escola.pt', 2, 0x6c19749f3daae859edb32b15a35339cb, 0),
-(327, 'User_reparador', 'repar@escola.pt', 3, 0x942d367d94063f3d6627f3ef2cb941f9, 0),
+(327, 'User_reparador', 'repar@escola.pt', 3, 0xf42a7653959e8de73e505477c6bc641c, 0),
 (328, 'Funcionário', 'func1@escola.pt', 4, 0x5e4a763bb07e23adb84105e8bf0ec3df, 0),
 
 
@@ -682,6 +682,3 @@ ALTER TABLE `utilizadores`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=327;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

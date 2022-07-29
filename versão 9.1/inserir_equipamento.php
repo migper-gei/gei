@@ -35,16 +35,23 @@ include("sessao_timeout.php");
 
 //print_r(scandir(session_save_path()));
 
-$sql2a = "select max(id) as me  from escolas ";
-$result2a = mysqli_query($db,$sql2a); 
-$rows2a =mysqli_fetch_row($result2a);
+$sql2a =  $db->prepare("select max(id) as me  from escolas ");
+//$result2a = mysqli_query($db,$sql2a); 
+//$rows2a =mysqli_fetch_row($result2a);
 
+
+$sql2a->execute();
+$rows2a = $sql2a->get_result()->fetch_row();
 
 $maxesc = $rows2a[0];
 
 //echo $maxesc;
+$x=base64_decode($_GET["x"]);
 
-if ($_GET['x']>1 || $_GET["escola"]>$maxesc)
+//echo $x;
+
+
+if ($x>1 || $x<0 || base64_decode($_GET["ies"])>$maxesc)
 {
 
 ?>
@@ -53,8 +60,8 @@ if ($_GET['x']>1 || $_GET["escola"]>$maxesc)
 <script>
 
 window.setTimeout(function() {
-              window.location.href = '<?php echo SVRURL ?>equip';
-          },40);
+             // window.location.href = '<?php echo SVRURL ?>equip';
+          },10);
           </script>
 
 
@@ -62,22 +69,23 @@ window.setTimeout(function() {
 }
 
 
-if ($_GET["x"]==1)
+if ($x==1)
 {
-$idescola=$_GET["escola"];
+$idescola= base64_decode($_GET["ies"]);
 }
-elseif ($_GET["x"]==0)
+elseif ($x==0)
 {
-$idescola=$_GET["escola"];
+$idescola= base64_decode($_GET["ies"]);
 
 }
  
 
-$sql11 = "select nome_escola  from escolas where id=$idescola";
-$result11 = mysqli_query($db,$sql11); 
-$rows11 =mysqli_fetch_row($result11);
+$sql11 = $db->prepare("select nome_escola  from escolas where id=?");
+$sql11->bind_param("i", $idescola);
+$sql11->execute();
 
 
+$rows11= $sql11->get_result()->fetch_row();
 $ne = $rows11[0];
 
 
@@ -120,7 +128,7 @@ include("msg_bemvindo.php");
 
 
 
-<form name="equipamento" action = "<?php echo SVRURL ?>gravaequip?escola=<?php echo $idescola ?>" method = "post">
+<form name="equipamento" action = "<?php echo SVRURL ?>gravaequip?ies=<?php echo base64_encode ($idescola) ?>" method = "post">
 
 
 
@@ -130,11 +138,13 @@ include("msg_bemvindo.php");
                     <?php
 
 
-      $sql = "SELECT DISTINCT(nome) as no FROM tipos_equipamento order by nome";
+      $sql = $db->prepare("SELECT DISTINCT(nome) as no FROM tipos_equipamento order by nome");
       
-      $result = mysqli_query($db,$sql);
-     
- 
+      //$result = mysqli_query($db,$sql);
+
+      $sql->execute();
+      $result= $sql-> get_result();
+
     //echo('<select name="sala">');
 ?>
 
@@ -161,15 +171,7 @@ echo('<option value=""> </option>');
           echo('</select>');
      ?>     
    
-   <!--
-   &nbsp;&nbsp;   
-             
-<form action="<?php echo SVRURL ?>tiposequip" method="post">
-
-<button title="Inserir novo tipo de equipamento" type="submit" class="btn btn-outline-primary" >Novo tipo</button>
-
-</form>
-      -->    
+    
       &nbsp;&nbsp;&nbsp;
               <a 
               style="color:blue;" class="underlineHover" href="<?php echo SVRURL ?>tiposequip" title="Inserir novo tipo de equipamento">  
@@ -184,11 +186,20 @@ echo('<option value=""> </option>');
                 
               <?php
 
-   $sql = "select * FROM salas where id_escola=$idescola order by nome";
-   $result = mysqli_query($db,$sql);
+   $sql = $db->prepare("select * FROM salas 
+   where id_escola=? order by nome");
+   //$result = mysqli_query($db,$sql);
+   
+   $sql->bind_param("i", $idescola);
+   $sql->execute();
+ 
+   $result = $sql-> get_result();
+  
+
    $rowcount = mysqli_num_rows($result);
              
-            
+             
+  
              
              ?>  
 
@@ -261,6 +272,11 @@ echo ("A escola/agrupamento não têm salas.");
                      <input  size="10"   type = "date" name = "datacompra" placeholder="Data da compra"> 
 
                      <br />  
+                     <br />  
+
+                   <label>Observações: </label>  <br>  
+                   <textarea  rows="5" cols="80"  name="obs"></textarea>
+                   <br>
 
                      <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Inserir"/>   
     </div>
