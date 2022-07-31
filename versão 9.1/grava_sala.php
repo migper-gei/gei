@@ -29,7 +29,9 @@
      <?php
 
 
+include("sessao_timeout.php");
 
+$idescola=base64_decode($_GET['ie']);
 
 
 $sql2 = "select max(id) from escolas";
@@ -41,7 +43,7 @@ $conta = $rows2[0];
 //echo $_GET['id'];
 
 if ( !isset($_POST['eqreq']) || !isset($_POST['nome']) || !isset($_POST['localizacao']) 
-|| !isset($_GET['ie']) || $_GET['ie']>$conta  || $_GET['ie']<1
+|| !isset($_GET['ie']) || $_GET['ie']>$conta  || $idescola<1
 || empty($_POST['eqreq'])  || empty($_POST['nome'])  || empty($_POST['localizacao']) 
 )
 {
@@ -50,8 +52,8 @@ if ( !isset($_POST['eqreq']) || !isset($_POST['nome']) || !isset($_POST['localiz
 
 <script>
 window.setTimeout(function() {
-    window.location.href = '<?php echo SVRURL ?>salas?x=0';
-}, 140);
+   // window.location.href = '<?php echo SVRURL ?>salas?x=<?php echo base64_encode(0)?>';
+}, 10);
 </script>
 
 
@@ -66,11 +68,8 @@ window.setTimeout(function() {
 
 
 
-include("sessao_timeout.php");
 
-$idescola=base64_decode($_GET['ie']);
 
-base64_decode($idescola);
 
 //echo base64_decode($idescola);
 
@@ -103,7 +102,16 @@ include("msg_bemvindo.php");
 <br>
 
 
+<?php
+$sql0 = "select count(*) as cs from salas
+where nome='".$_POST["nome"]."' and id_escola=$idescola";
 
+$result = mysqli_query($db,$sql0);
+$rows0 =mysqli_fetch_row($result);
+$cs = $rows0[0];
+
+
+?>
 
 
 
@@ -119,7 +127,7 @@ if (isset($_SESSION['token'])
 
 
 
-if ( $_SESSION['tipo']==1)
+if ( $_SESSION['tipo']==1 && $cs==0)
 {
 
 
@@ -128,7 +136,7 @@ if ( $_SESSION['tipo']==1)
 $sql = "insert into salas (nome,localizacao,departamento,id_escola,equip_requisitavel) 
 values ('".$_POST["nome"]."','".$_POST["localizacao"]."','".$_POST["departamento"]."',".$idescola.",'".$_POST["eqreq"]."')";
 
-//$result = mysqli_query($db,$sql);
+$result = mysqli_query($db,$sql);
 
 
 mysqli_close($db);
@@ -147,7 +155,7 @@ icon: 'success',
 
 })
 .then(function() {
-window.location = "<?php echo SVRURL ?>salas?x=1&&esi=<?php echo base64_encode($idescola) ?>";
+window.location = "<?php echo SVRURL ?>salas?x=<?php echo base64_encode(1)?>&&esi=<?php echo base64_encode($idescola) ?>";
 });
 
 
@@ -165,14 +173,14 @@ else
 <script>
     
 swal({
-title: 'Não pode inserir!',
-text: 'Não tem permisssão!',
+title: 'Não tem permissão ou o nome da sala já existe na escola!',
+//text: 'Não tem permisssão!',
 icon: 'error',
 //buttons: false,
 
 })
 .then(function() {
-window.location = "<?php echo SVRURL ?>salas";
+window.location = "<?php echo SVRURL ?>salas?x=<?php echo base64_encode(1)?>&&esi=<?php echo base64_encode($idescola) ?>";
 });
 
 
