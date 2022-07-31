@@ -78,7 +78,7 @@ if ( !isset($_POST['anoletivo']) || !isset($_POST['periodo']) || !isset($_POST['
 <script>
 window.setTimeout(function() {
     window.location.href = '<?php echo SVRURL ?>periodos';
-}, 140);
+}, 10);
 </script>
 
 
