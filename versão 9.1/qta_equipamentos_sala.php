@@ -259,6 +259,7 @@ $em=$_SESSION['email'];
 
                 
                 $c=0;
+                $somaqta=0;
                 while($row=mysqli_fetch_array($result)) { 
                     //$n=$row['id'];
                    
@@ -290,7 +291,7 @@ $em=$_SESSION['email'];
                     
                     <?php echo $row['qta']; echo('<br>'); 
                     
-
+                    $somaqta=$somaqta+$row['qta'];
                     
                     ?>
                     
@@ -369,7 +370,7 @@ $em=$_SESSION['email'];
                 <li class="page-item ">
                 <?php
       echo str_repeat("&nbsp;", 5);
-        echo("TOTAL: ".$totallinhas);
+        echo("TOTAL: ". $somaqta);
         ?>
                 </li>
             </ul>
