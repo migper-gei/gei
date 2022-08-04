@@ -341,7 +341,7 @@ include("msg_bemvindo.php");
                 <li class="page-item ">
                 <?php
       echo str_repeat("&nbsp;", 5);
-        echo("TOTAL: ".$totallinhas);
+        echo("TOTAL: ".$soma);
 
       
         ?>
@@ -354,7 +354,7 @@ include("msg_bemvindo.php");
         
         <?php
 
-  echo("QUANTIDADE TOTAL: ".$soma);
+  //echo("QUANTIDADE TOTAL: ".$soma);
         ?>
 
 
