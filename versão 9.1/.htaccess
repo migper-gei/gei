@@ -95,7 +95,6 @@ RewriteRule ^eliminaesc/([0-9-/]+)$ elimina_escola.php?url=$1 [QSA,L]
 RewriteRule ^inserirmanut$ inserir_manutencao.php [L]
 RewriteRule ^gravamanutsala/([0-9-/]+)$ grava_manutencao_sala.php?url=$1 [QSA,L]
 
-
 RewriteRule ^eliminaavaria/([0-9-/]+)$ elimina_avaria.php?url=$1 [QSA,L]
 RewriteRule ^atualavaria/([^/.]+)$ atualiza_avaria.php?url=$1 [QSA,L]
 RewriteRule ^atualokavaria/([^/.]+)$ atualiza_ok_avaria.php?url=$1 [QSA,L]
