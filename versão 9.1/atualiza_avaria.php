@@ -448,7 +448,7 @@ if ($aut<>0)
                  ?> 
                  <br>
              
-                  <a  onclick="fot(<?php echo $url[0];?>);"  class="underlineHover" href="<?php echo SVRURL ?>eliminafovi/<?php echo $url[0] ?>/f" title="Remover foto" style="color:blue;font-size:16px;">Remover foto</a>
+                  <a  onclick="fot(<?php echo $url[0];?>);"  class="underlineHover" href="<?php echo SVRURL ?>eliminafovi/<?php echo $url[0] ?>/<?php echo base64_encode('f') ?>" title="Remover foto" style="color:blue;font-size:16px;">Remover foto</a>
 
                   <?php
                    }
@@ -484,7 +484,7 @@ if ($aut<>0)
                     <br>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   &nbsp;&nbsp;
-                  <a  onclick="vid(<?php echo $url[0];?>);"  class="underlineHover" href="<?php echo SVRURL ?>eliminafovi/<?php echo $url[0] ?>/v" title="Remover vídeo" style="color:blue;font-size:16px;">Remover vídeo</a>
+                  <a  onclick="vid(<?php echo $url[0];?>);"  class="underlineHover" href="<?php echo SVRURL ?>eliminafovi/<?php echo $url[0] ?>/<?php echo base64_encode('v') ?>" title="Remover vídeo" style="color:blue;font-size:16px;">Remover vídeo</a>
 
                   <?php
                    }

@@ -73,8 +73,8 @@ $url2 = explode('/',$_GET['url2']);
 //echo $url2[0];
 
 
-$id=$url[0];
-$tipo=$url2[0];
+$id=base64_decode($url[0]);
+$tipo=base64_decode($url2[0]);
 
 
 }
@@ -83,7 +83,7 @@ else
     ?>
 <script>
 window.setTimeout(function() {
-    window.location.href = '<?php echo SVRURL ?>i';
+    window.location.href = '<?php echo SVRURL ?>myavarias?op=t';
 }, 10);
 </script>
 <?php
