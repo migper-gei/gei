@@ -40,7 +40,7 @@ include("sessao_timeout.php");
             <div class="row">
                <div class="col-md-12">
                <div class="titlepage">
-                     <h2>Utilizadores</h2>
+                     <h2>Configurações >> Utilizadores</h2>
                   </div>
                </div>
             </div>
