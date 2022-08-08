@@ -110,7 +110,7 @@ RewriteRule ^reparafaz$ reparacoes_efetuar.php [L]
 RewriteRule ^eliminatarefa/([0-9-/]+)/([0-9-/]+)$ elimina_tarefa.php?url=$1&url2=$2  [QSA,L]
 RewriteRule ^atualtarefa/([^/.]+)/([^/]+)$ atualiza_tarefa.php?url=$1&url2=$2  [QSA,L]
 
-RewriteRule ^eliminafovi/([0-9-/]+)/([^/]+)$ elimina_foto_video_avaria.php?url=$1&url2=$2  [QSA,L]
+RewriteRule ^eliminafovi/([^/]+)/([^/]+)$ elimina_foto_video_avaria.php?url=$1&url2=$2  [QSA,L]
 
 
 RewriteRule ^reqequip$ requisicao_equip.php [L]
