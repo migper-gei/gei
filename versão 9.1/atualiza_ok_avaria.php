@@ -63,11 +63,14 @@ include("msg_bemvindo.php");
 
 
     <?php 
+
+
+
+
 if ( !isset($_POST['data']) || !isset($_POST['avaria']) 
 || empty($_POST['data']) || empty($_POST['avaria']) 
 )
 {
-
 ?>
 
 
@@ -79,21 +82,16 @@ window.setTimeout(function() {
 
 
 <?php
-}
 
+}
 else
 {
+
+   
 ?>
-
-
-
-
-    <?php
-
+ 
+ <?php
   
-
-
-    
 
 
 if ( $_SERVER["REQUEST_METHOD"] == "POST" )
@@ -101,7 +99,7 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" )
 
 {
 
-  // echo ("zzz");
+ //echo ("zzz");
 
 
 
@@ -116,8 +114,8 @@ if ( $_SERVER["REQUEST_METHOD"] == "POST" )
 
 
 $x=0;
-$filename = $_FILES["imgavaria"]["name"];
-
+$filenamei=$_FILES["imgavaria"]["name"];
+//echo($filenamei);
 
 
 
@@ -132,14 +130,14 @@ $vid=0;
 
 
 }
-elseif ($filenamev<>"" )
+if ($filenamev<>"" )
 {
    $tmpv=addslashes(file_get_contents($tmpnamev));
    $vid=1;
 }
 
 
-   if ($filename=="")
+   if ($filenamei=="")
    {
    $tmp="";
 
@@ -150,8 +148,13 @@ elseif ($filenamev<>"" )
 
 
  }
-elseif ($filename<>"" )
+
+
+if ($filenamei<>"" )
 {
+
+  
+
 $tmpname=$_FILES["imgavaria"]["tmp_name"];
 $filetype= $_FILES["imgavaria"]["type"];
 
@@ -159,51 +162,50 @@ $tmp=addslashes(file_get_contents($tmpname));
 $img=1;
 
 
-
-
 $filepath = $_FILES['imgavaria']['tmp_name'];
 $fileSize = filesize($filepath);
 $fileinfo = finfo_open(FILEINFO_MIME_TYPE);
 $filetype = finfo_file($fileinfo, $filepath);
 
-
+//echo $filetype;
 
 $allowedTypes = [
- 'image/png' => 'png',
-'image/jpeg' => 'jpeg',
-'image/jpg' => 'jpg',
-'image/bpm' => 'bmp',
-'image/gif' => 'gif'
-];
-
-if (!in_array($filetype, array_keys($allowedTypes))) 
+   'image/png' => 'png',
+  'image/jpeg' => 'jpeg',
+  'image/jpg' => 'jpg',
+  'image/bpm' => 'bmp',
+  'image/gif' => 'gif'
+  ];
+  
+  if (!in_array($filetype, array_keys($allowedTypes))) 
 {
 //echo("File not allowed.");
 //$x=1;
 $x=1;
 
+
 ?>
-<script>
+ <script>
+          
+          swal({
+      title: 'ERRO',
+      text: 'O ficheiro não tem conteúdo de imagem!',
+      icon: 'error',
+      //buttons: false,
       
-swal({
-title: 'ERRO',
-text: 'O ficheiro não tem conteúdo de imagem!',
-icon: 'error',
-//buttons: false,
+      })
+      .then(function() {
+      window.location = "<?php echo SVRURL ?>myavarias?op=t";
+      })
+      ;
+      
+      </script>
 
-})
-.then(function() {
-window.location = "<?php echo SVRURL ?>myavarias?op=t";
-})
-;
 
-</script>
 
 <?php
+     
 }
-
-
-
 
 }
 
@@ -232,22 +234,13 @@ window.setTimeout(function() {
 }, 10);
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <?php
 }
+
+
+
+
+
 if ($img==0)
 {
 $sql = "update avarias_reparacoes 
@@ -255,46 +248,8 @@ set dataavaria=STR_TO_DATE('".$_POST["data"]."','%Y-%m-%d'),avaria='".$_POST["av
  where id=".$idav."";
 
 $result = mysqli_query($db,$sql);
-}
 
-
-if ($x==0 && $img==1 && $vid==0)
-{
-$sql = "update avarias_reparacoes 
-set dataavaria=STR_TO_DATE('".$_POST["data"]."','%Y-%m-%d'),avaria='".$_POST["avaria"]."',
-imgavaria='$tmp' where id=".$idav."";
-
-$result = mysqli_query($db,$sql);
-}
-
-
-if ($vid==1 && ($x==1 || $img==0))
-{
-$sql = "update avarias_reparacoes 
-set dataavaria=STR_TO_DATE('".$_POST["data"]."','%Y-%m-%d'),avaria='".$_POST["avaria"]."',
-video='$tmpv' where id=".$idav."";
-
-$result = mysqli_query($db,$sql);
-}
-
-
-if ($x==0 && $img==1 && $vid==1)
-{
-$sql = "update avarias_reparacoes 
-set dataavaria=STR_TO_DATE('".$_POST["data"]."','%Y-%m-%d'),avaria='".$_POST["avaria"]."',
-imgavaria='$tmp',video='$tmpv' where id=".$idav."";
-
-$result = mysqli_query($db,$sql);
-}
-
-
-//header("Refresh:0;url=minhas_avarias.php");
-mysqli_close($db);
 ?>
-
-
-
-
 
 <script>
     
@@ -310,6 +265,114 @@ window.location = "<?php echo SVRURL ?>myavarias?op=t";
 ;
 
 </script>
+<?php
+}
+
+
+
+
+
+if ($x==0 && $img==1 && $vid==0)
+{
+$sql = "update avarias_reparacoes 
+set dataavaria=STR_TO_DATE('".$_POST["data"]."','%Y-%m-%d'),avaria='".$_POST["avaria"]."',
+imgavaria='$tmp' where id=".$idav."";
+
+$result = mysqli_query($db,$sql);
+
+?>
+
+<script>
+    
+    swal({
+title: 'Os dados foram atualizados!',
+
+icon: 'success',
+
+})
+.then(function() {
+window.location = "<?php echo SVRURL ?>myavarias?op=t";
+})
+;
+
+</script>
+<?php
+
+}
+
+
+
+
+
+if ($vid==1 && ($x==1 || $img==0))
+{
+$sql = "update avarias_reparacoes 
+set dataavaria=STR_TO_DATE('".$_POST["data"]."','%Y-%m-%d'),avaria='".$_POST["avaria"]."',
+video='$tmpv' where id=".$idav."";
+
+$result = mysqli_query($db,$sql);
+
+?>
+
+<script>
+    
+    swal({
+title: 'Os dados foram atualizados!',
+
+icon: 'success',
+
+})
+.then(function() {
+window.location = "<?php echo SVRURL ?>myavarias?op=t";
+})
+;
+
+</script>
+<?php
+
+}
+
+
+
+
+
+if ($x==0 && $img==1 && $vid==1)
+{
+$sql = "update avarias_reparacoes 
+set dataavaria=STR_TO_DATE('".$_POST["data"]."','%Y-%m-%d'),avaria='".$_POST["avaria"]."',
+imgavaria='$tmp',video='$tmpv' where id=".$idav."";
+
+$result = mysqli_query($db,$sql);
+
+?>
+
+<script>
+    
+    swal({
+title: 'Os dados foram atualizados!',
+
+icon: 'success',
+
+})
+.then(function() {
+window.location = "<?php echo SVRURL ?>myavarias?op=t";
+})
+;
+
+</script>
+<?php
+}
+
+
+//header("Refresh:0;url=minhas_avarias.php");
+mysqli_close($db);
+?>
+
+
+
+
+
+
 
 
 <?php
@@ -332,9 +395,13 @@ window.location = "<?php echo SVRURL ?>myavarias?op=t";
       <!-- end about -->
     
 
+   
 
-      <?php include ("footer.php");?>
-
+      <?php include ("footer.php");  ?>
+      
+      
+      
+    
 
    </body>
 </html>
