@@ -212,7 +212,7 @@ if ($conta==0)
         <script>
     
         swal({
-    title: 'A requisição não foi efetuada!',
+    title: 'A requisição não foi atualizada!',
     text: 'Algum equipamento que selecionou está requisitado.  Consulte a tabela das requisições para o dia.',
     icon: 'error',
     //buttons: false,
@@ -278,7 +278,7 @@ mysqli_close($db);
 <script>
     
         swal({
-    title: 'A requisição foi efetuada!',
+    title: 'A requisição foi atualizada!',
     //text: 'Algum equipamento já requisitado para essa data, horas e sala!',
     icon: 'success',
     //buttons: false,
