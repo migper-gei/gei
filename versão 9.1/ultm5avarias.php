@@ -37,6 +37,67 @@ include("sessao_timeout.php");
 
  
 
+      <?php
+
+$sql2a = "select max(id) as me  from escolas ";
+$result2a = mysqli_query($db,$sql2a); 
+$rows2a =mysqli_fetch_row($result2a);
+
+
+$maxesc = $rows2a[0];
+
+
+if (base64_decode($_GET["aves"])>$maxesc)
+{
+
+?>
+
+
+<script>
+
+window.setTimeout(function() {
+              window.location.href = '<?php echo SVRURL ?>avaria';
+          },10);
+          </script>
+
+
+<?php
+}
+
+
+   $idescola=base64_decode($_GET["aves"]);
+   
+
+
+   if ( !isset($idescola)    || empty($idescola)     || !is_numeric($idescola) 
+   )
+   
+   {
+      //echo "aaaaaa";
+   ?>
+   
+   
+   <script>
+   window.setTimeout(function() {
+       window.location.href = '<?php echo SVRURL ?>avaria';
+   }, 10);
+   </script>
+   
+   
+   <?php
+   }
+
+$sql11 = "select nome_escola  from escolas where id=$idescola";
+$result11 = mysqli_query($db,$sql11); 
+$rows11 =mysqli_fetch_row($result11);
+
+
+$ne = $rows11[0];
+
+
+?>
+
+
 
       <!-- about -->
       <div  class="about">
@@ -44,7 +105,10 @@ include("sessao_timeout.php");
             <div class="row">
                <div class="col-md-12">
                <div class="titlepage">
-                     <h2>Avarias >> Últimas 5 avarias registadas</h2> 
+                     <h2>Avarias >> Últimas 5 avarias registadas
+
+                     <br><?php echo $ne?>
+                     </h2> 
                      
                      
                   </div>
@@ -69,6 +133,15 @@ include("msg_bemvindo.php");
 ?>
   
     
+
+
+
+
+
+
+
+
+
 
            <?php
            //include('config.php');
@@ -128,7 +201,7 @@ $em=$_SESSION['email'];
  $sql = "select ar.*, e.nomeequi, s.nome, esc.nome_escola
  from avarias_reparacoes ar, equipamento e, salas s, escolas esc
  where ar.id_equi=e.id and ar.id_sala=s.id and ar.id_escola=esc.id
-  and ar.datareparacao is null 
+  and ar.datareparacao is null and esc.id=$idescola
  order by ar.dataavaria desc 
  LIMIT 5";
  $result = mysqli_query($db,$sql);
@@ -216,7 +289,7 @@ else {
         <table class="table table-striped">
             <thead>
                 <tr class="table-success">
-                    <th scope="col">Escola / Sala / Equipamento</th>
+                    <th scope="col">Sala / Equipamento</th>
                     <th scope="col">Avaria</th>
                     <th scope="col">Reparação</th>
                     <th scope="col">&nbsp;&nbsp; </th>
@@ -247,7 +320,7 @@ else {
 
                     ?>
                 <tr>
-                    <th width="20%"  scope="row"><?php echo $row['nome_escola']; echo('<br>'.'/'.'<br>');
+                    <th width="20%"  scope="row"><?php  
                     echo $row['nome']; echo('<br>'.'/'.'<br>'); echo $row['nomeequi'];?>
                  
                     </th>

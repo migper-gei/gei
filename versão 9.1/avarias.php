@@ -259,7 +259,7 @@ if (!empty($_POST["escola"])) {
         {
            ?>
 
-<form action="<?php echo SVRURL ?>last5avarias" method="post" >
+<form action="<?php echo SVRURL ?>last5avarias?aves=<?php echo base64_encode($esc)?>" method="post" >
 
 <button style="width:310px;" type="submit" class="btn btn-outline-primary" title="Últimas 5 avarias registadas">Últimas 5 avarias registadas</button>
         </form >
