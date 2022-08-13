@@ -212,7 +212,7 @@ if (!$mail->send()) {
 
 <script>
 window.setTimeout(function() {
-window.location.href = 'last5avarias?aves=<?php echo base64_encode($row['id_escola'])?>';
+window.location.href = 'avaria';
 }, 0);
 </script>
 
