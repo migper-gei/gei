@@ -79,6 +79,9 @@ require $a.'/PHPMailer/PHPMailer/src/SMTP.php';
 
 $id=base64_decode($_GET["ia"]);
 
+
+
+
 //echo($em);
 
 //$sql = "select AES_DECRYPT('pass', 'secret') as p from utilizadores where email='".$_GET["em"]."'";
@@ -126,7 +129,8 @@ $mail = new PHPMailer();
        SALA / EQUIPAMENTO: '.$row['nome'].' / '.$row['nomeequi'].'  
         <br><br>DATA: '.$row['dataavaria'].'
         <br><br>AVARIA: '.$row['avaria'].' <br><br>
-        ---------------------------------------------------------------------------------------------------------
+        ------------------------------------------------------------------------------------------
+        <br>
         <b>REPARAÇÃO: </b>
         <br><br>
         <br>DATA: '.$row['datareparacao'].'
@@ -208,7 +212,7 @@ if (!$mail->send()) {
 
 <script>
 window.setTimeout(function() {
-window.location.href = 'avaria';
+window.location.href = 'last5avarias?aves=<?php echo base64_encode($row['id_escola'])?>';
 }, 0);
 </script>
 
