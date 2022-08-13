@@ -644,7 +644,8 @@ if ( $_SESSION['tipo']==4 || $_SESSION['tipo']==1)
 ?>
 
  <br> 
-<form action="<?php echo SVRURL ?>requisicoes_terminar_dia.php?x=<?php echo base64_encode(0) ?>" method="post" >
+<form action="<?php echo SVRURL ?>requisicoes_terminar_dia.php?x=<?php echo base64_encode(0) ?>
+&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
 
 <button   style="width:310px;" title="Requisições a terminar no dia " type="submit" class="btn btn-outline-primary" >Requisições a terminar no dia  </button>
@@ -693,7 +694,8 @@ if ( $_SESSION['tipo']==4 || $_SESSION['tipo']==1)
 
 
  <br> 
-<form name="requi" action="<?php echo SVRURL ?>requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(0) ?>" method="post" >
+<form name="requi" action="<?php echo SVRURL ?>requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(0) ?>
+&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
 <button  style="width:310px;" onclick="return clickMe2();"  title="Requisições a terminar entre datas" type="submit" class="btn btn-outline-primary" >Requisições a terminar entre </button>
 
