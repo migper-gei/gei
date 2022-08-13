@@ -95,6 +95,44 @@ if (isConfirm) {
 
 $x=base64_decode($_GET["x"]);
 
+$esc=base64_decode($_GET["ies"]);
+
+
+
+$sql2a = "select max(id) as me  from escolas ";
+$result2a = mysqli_query($db,$sql2a); 
+$rows2a =mysqli_fetch_row($result2a);
+
+
+$maxesc = $rows2a[0];
+
+
+if (base64_decode($_GET["ies"])>$maxesc)
+{
+
+?>
+
+
+<script>
+
+window.setTimeout(function() {
+              window.location.href = '<?php echo SVRURL ?>lista';
+          },10);
+          </script>
+
+
+<?php
+}
+
+
+
+$sql11 = "select nome_escola  from escolas where id=$esc";
+$result11 = mysqli_query($db,$sql11); 
+$rows11 =mysqli_fetch_row($result11);
+
+
+$ne = $rows11[0];
+
 
 
 
@@ -113,7 +151,7 @@ else
 
 
 
-if (!isset($x)  || !is_numeric($x) 
+if (!isset($x)  || !is_numeric($x) || !isset($esc)  || !is_numeric($esc) 
 ||  $x<0 ||  $x>1  
 || !isset($_POST["datai1"]) || empty($_POST["datai1"])
 || !isset($_POST["dataf1"]) || empty($_POST["dataf1"])
@@ -193,8 +231,8 @@ window.setTimeout(function() {
                <div class="titlepage">
                      <h2>Listagens >> Requisições a terminar entre datas   
                      <br> 
-                   Entre <?php echo date('d/m/Y',strtotime($d1)) ?>  e  <?php echo date('d/m/Y',strtotime($d2)) ?> </h2>
-                   
+                   Entre <?php echo date('d/m/Y',strtotime($d1)) ?>  e  <?php echo date('d/m/Y',strtotime($d2)) ?> 
+                   <br><?php echo $ne ?></h2>
                      
                   </div>
                </div>
@@ -237,6 +275,7 @@ and datautil BETWEEN
 STR_TO_DATE('$d1','%Y-%m-%d') AND
 STR_TO_DATE('$d2','%Y-%m-%d')
 and dataentrega is null
+and s.id_escola=$esc
 order by datautil LIMIT $paginationStart, $limit";
 $result = mysqli_query($db,$sql);
 
@@ -249,6 +288,7 @@ and datautil BETWEEN
 STR_TO_DATE('$d1','%Y-%m-%d') AND
 STR_TO_DATE('$d2','%Y-%m-%d')
 and dataentrega is null
+and s.id_escola=$esc
 order by datautil ";
 $result1 = mysqli_query($db,$sql1); 
 $rows =mysqli_fetch_row($result1);
