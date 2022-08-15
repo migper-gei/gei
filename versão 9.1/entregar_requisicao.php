@@ -63,6 +63,8 @@ include("msg_bemvindo.php");
 $idr=($_GET['ir']);
 $d1=($_GET['d']);
 
+$esc=($_GET['ies']);
+
 //echo $idr;
 //echo $d1;
 
@@ -78,7 +80,7 @@ if (
 <script>
 
 window.setTimeout(function() {
-             /window.location.href = '<?php echo SVRURL ?>lista';
+             window.location.href = '<?php echo SVRURL ?>requisicoes_terminar_dia.php?x=<?php echo base64_encode(1) ?>&&d=<?php echo base64_encode($d1)?>&&ies=<?php echo base64_encode($esc) ?>';
           },10);
           </script>
 
@@ -99,7 +101,7 @@ $sql = "update requisicao
 set dataentrega=STR_TO_DATE('".$d."','%Y-%m-%d') 
  where id=".$idr."";
 
- $result = mysqli_query($db,$sql);
+ //$result = mysqli_query($db,$sql);
 
 
 
@@ -108,7 +110,7 @@ set dataentrega=STR_TO_DATE('".$d."','%Y-%m-%d')
 <script>
 
 window.setTimeout(function() {
-              window.location.href = '<?php echo SVRURL ?>requisicoes_terminar_dia.php?x=<?php echo base64_encode(1) ?>&&d=<?php echo base64_encode($d1)?>';
+              window.location.href = '<?php echo SVRURL ?>requisicoes_terminar_dia.php?x=<?php echo base64_encode(1) ?>&&d=<?php echo base64_encode($d1)?>&&ies=<?php echo base64_encode($esc) ?>';
           },10);
           </script>
 
