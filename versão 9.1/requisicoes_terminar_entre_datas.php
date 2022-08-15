@@ -34,12 +34,13 @@ include("sessao_timeout.php");
 
 
 <script>
-function a2(n,d,da) {
+function a2(n,d,da,es) {
 
 var n1,d1,d2;
 n1=n;
 d1=d;
 d2=da;
+es1=es;
 
 //alert(n1);
 //alert(d1);
@@ -67,7 +68,7 @@ if (isConfirm) {
   
 
       window.setTimeout(function() {
-  window.location.href = '<?php echo SVRURL ?>entregar_requisicao_datas.php?ir='+n1+'&d1='+d1+'&d2='+d2;
+  window.location.href = '<?php echo SVRURL ?>entregar_requisicao_datas.php?ir='+n1+'&d1='+d1+'&d2='+d2+'&ies='+es1;
 }, 10);
 
 
@@ -206,7 +207,7 @@ if ( ( !isset($d1) && !isset($d2))  )
 
 window.setTimeout(function() {
               window.location.href = '<?php echo SVRURL ?>lista';
-          },40);
+          },10);
           </script>
 
 
@@ -318,7 +319,7 @@ $next = $page + 1;
         <!-- Select dropdown -->
       <!-- Select dropdown -->
       <div class="d-flex flex-row-reverse bd-highlight mb-3">
-            <form action="requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(2)?>&&d1=<?php echo base64_encode($d1);?>&&d2=<?php echo base64_encode($d2);?>" method="post">
+            <form action="requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(2)?>&&d1=<?php echo base64_encode($d1);?>&&d2=<?php echo base64_encode($d2);?>&&ies=<?php echo base64_encode($esc) ?>" method="post">
                       <?php include("num_linhas.php");?>
             </form>
         </div>
@@ -407,7 +408,7 @@ while($row3=mysqli_fetch_array($result3)) {
                 
                     <td  >
                     <a 
-                    onclick="a2(<?php echo $idr;?>,'<?php echo $d1;?>','<?php echo $d2;?>');"
+                    onclick="a2(<?php echo $idr;?>,'<?php echo $d1;?>','<?php echo $d2;?>',<?php echo $esc;?>);"
                     title="Entregar" href="<?php echo SVRURL ?>>entregar_requisicao_datas.php">
                     <img src="<?php echo SVRURL;?>images/entregar.svg" alt="Entregar" > </a>
                    </td  >
@@ -435,18 +436,18 @@ include "realcelinhatabela.php";
             <ul class="pagination justify-content-center">
                 <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
                     <a style="color:black;" class="page-link"
-                        href="<?php if($page <= 1){ echo '#'; } else { echo "?x=".base64_encode(2)."&&d1=".base64_encode($d1)."&&d2=".base64_encode($d2)."&&page=" . $prev; } ?>"><<</a>
+                        href="<?php if($page <= 1){ echo '#'; } else { echo "?x=".base64_encode(2)."&&d1=".base64_encode($d1)."&&d2=".base64_encode($d2)."&&ies=".base64_encode($esc)."&&page=" . $prev; } ?>"><<</a>
                 </li>
 
                 <?php for($i = 1; $i <= $totoalPages; $i++ ): ?>
                 <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                    <a style="color:black;" class="page-link" href="requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(2);?>&&d1=<?php echo base64_encode($d1);?>&&d2=<?php echo base64_encode($d2);?>&&page=<?= $i; ?>"> <?= $i; ?> </a>
+                    <a style="color:black;" class="page-link" href="requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(2);?>&&d1=<?php echo base64_encode($d1);?>&&d2=<?php echo base64_encode($d2);?>&&ies=<?php echo base64_encode($esc);?>&&page=<?= $i; ?>"> <?= $i; ?> </a>
                 </li>
                 <?php endfor; ?>
 
                 <li class="page-item <?php if($page >= $totoalPages) { echo 'disabled'; } ?>">
                     <a style="color:black;"  class="page-link"
-                        href="<?php if($page >= $totoalPages){ echo '#'; } else {echo "?x=".base64_encode(2)."&&d1=".base64_encode($d1)."&&d2=".base64_encode($d2)."&&page=". $next; } ?>">>></a>
+                        href="<?php if($page >= $totoalPages){ echo '#'; } else {echo "?x=".base64_encode(2)."&&d1=".base64_encode($d1)."&&d2=".base64_encode($d2)."&&ies=".base64_encode($esc)."&&page=". $next; } ?>">>></a>
                 </li>
 
                 <li class="page-item ">

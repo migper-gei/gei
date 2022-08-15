@@ -63,6 +63,8 @@ include("msg_bemvindo.php");
 $idr=$_GET['ir'];
 $d1=$_GET['d1'];
 $d2=$_GET['d2'];
+$esc=($_GET['ies']);
+
 //echo $d;
 
 if (
@@ -78,7 +80,7 @@ if (
   <script>
   
   window.setTimeout(function() {
-               window.location.href = '<?php echo SVRURL ?>lista';
+               window.location.href = '<?php echo SVRURL ?>requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(2) ?>&&d1=<?php echo base64_encode($d1)?>&&d2=<?php echo base64_encode($d2)?>&&ies=<?php echo base64_encode($esc) ?>';
             },10);
             </script>
   
@@ -105,7 +107,7 @@ set dataentrega=STR_TO_DATE('".$d."','%Y-%m-%d')
 <script>
 
 window.setTimeout(function() {
-              window.location.href = '<?php echo SVRURL ?>requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(2) ?>&&d1=<?php echo base64_encode($d1)?>&&d2=<?php echo base64_encode($d2)?>';
+              window.location.href = '<?php echo SVRURL ?>requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(2) ?>&&d1=<?php echo base64_encode($d1)?>&&d2=<?php echo base64_encode($d2)?>&&ies=<?php echo base64_encode($esc) ?>';
           },10);
           </script>
 
