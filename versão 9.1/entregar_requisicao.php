@@ -101,7 +101,7 @@ $sql = "update requisicao
 set dataentrega=STR_TO_DATE('".$d."','%Y-%m-%d') 
  where id=".$idr."";
 
- //$result = mysqli_query($db,$sql);
+ $result = mysqli_query($db,$sql);
 
 
 
