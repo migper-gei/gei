@@ -50,7 +50,7 @@ include("verifica_sessao.php");
   ?>
 
   <img src="<?php echo SVRURL ?>images/seta.svg">
-  <a title="Ver tarefas a realizar" href="<?php echo SVRURL ?>tarefas.php?x=0">
+  <a title="Ver tarefas a realizar" href="<?php echo SVRURL ?>tarefas.php?x=<?php echo base64_encode(0) ?>">
   <img src="<?php echo SVRURL ?>images/tarefas.svg" alt="Ver tarefas a realizar">
   </a>
 
