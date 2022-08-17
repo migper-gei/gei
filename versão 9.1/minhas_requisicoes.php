@@ -128,7 +128,7 @@ event.preventDefault(); // prevent form submit
  swal({
 
 title: "Deseja eliminar?",
-//text: "Sala: "+s1,
+text: "Nº requisição: "+n1,
 type: "warning",
 showCancelButton: true,
 //confirmButtonColor: "#DD6B55",
