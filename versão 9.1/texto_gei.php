@@ -1,7 +1,24 @@
 
-<br>
+
    
-Links de acesso rápido:
+Links de acesso rápido:     
+<?php
+if ($_SESSION['tipo']<>1)
+{
+  ?>
+
+ &nbsp;   &nbsp;   &nbsp;   &nbsp;    &nbsp;   &nbsp;           
+ &nbsp;   &nbsp;   &nbsp;   &nbsp;    &nbsp;   &nbsp;       
+ &nbsp;   &nbsp;   &nbsp;   &nbsp;    &nbsp;   &nbsp;  
+
+
+<a  target="_blank" class="underlineHover" href="<?php echo SVRURL ?>Manual/GEI-manual_utilizador.pdf" title="Manual do utilizador" style="color:blue;">Manual do utilizador</a>
+        
+<?php
+}
+?>
+
+
    <ul>
          <b>  
          <li class="list-group-item">  
