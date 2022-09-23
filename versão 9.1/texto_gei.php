@@ -1,7 +1,7 @@
 
 
    
-Links de acesso rápido:     
+<!--Links de acesso rápido:-->     
 <?php
 if ($_SESSION['tipo']<>1)
 {

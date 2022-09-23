@@ -36,7 +36,7 @@ include ("head.php");?>
                <div class="col-md-10 offset-md-2">
 
               <div class="titlepage">
-                     <h2></h2>
+                     <h2>Links de acesso rápido</h2>
                   </div>
    
 
