@@ -162,12 +162,12 @@ $result = mysqli_query($db,$sql);
 
 
 
-$sql1 =  $db->prepare("select max(id) from escolas ");
+$sql1 =  $db->prepare("select max(id) from equipamento ");
 $sql1->execute();
 $rows2 = $sql1->get_result()->fetch_row();
 
 
-$maxid = $rows2[0];
+$maxideq = $rows2[0];
 
 mysqli_close($db);
 ?>
@@ -182,7 +182,7 @@ icon: 'success',
 
 })
 .then(function() {
-window.location = "<?php echo SVRURL ?>dados_tec_redes.php?z=1&&qi=<?php echo base64_encode($maxid);?>&&ies=<?php echo base64_encode ($idescola) ?>";
+window.location = "<?php echo SVRURL ?>dados_tec_redes.php?z=1&&qi=<?php echo base64_encode($maxideq);?>&&ies=<?php echo base64_encode ($idescola) ?>";
 });
 
 

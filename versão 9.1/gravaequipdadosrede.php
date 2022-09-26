@@ -56,8 +56,8 @@ include("sessao_timeout.php");
 if($_SERVER["REQUEST_METHOD"] == "POST") 
 {
 
-   $id=$_GET["qi"];
-   $idescola=$_GET["esi"];
+   $id=base64_decode($_GET["qi"]);
+   $idescola=base64_decode($_GET["esi"]);
 
 
 

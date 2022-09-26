@@ -38,6 +38,8 @@ include("sessao_timeout.php");
 $idescola=base64_decode($_GET["ies"]);
 
 $id=base64_decode($_GET["qi"]);
+
+
 $z=$_GET["z"];
 
 
@@ -52,7 +54,7 @@ if ( !isset($_GET["ies"]) || !isset($_GET["qi"]) || !isset($_GET["z"])
 <script>
 window.setTimeout(function() {
     window.location.href = '<?php echo SVRURL ?>equip';
-}, 140);
+}, 10);
 </script>
 
 
@@ -111,7 +113,7 @@ if ($conta==0)
 ?>
    <script>
    window.setTimeout(function() {
-       window.location.href = '<?php echo SVRURL ?>inserirequip?x=1&&escola=<?php echo $idescola ?>';
+       window.location.href = '<?php echo SVRURL ?>inserirequip?x=<?php echo base64_encode(1)?>&&escola=<?php echo $idescola ?>';
    }, 10);
    </script>
 <?php
@@ -148,7 +150,7 @@ if ($z==1)
 {
 
 ?>
-<a class="underlineHover" title="Dados de rede" href="<?php echo SVRURL ?>dados_tec_redes.php?id=<?php echo ($id);?>&z=2&&escola=<?php echo $idescola ?>">
+<a class="underlineHover" title="Dados de rede" href="<?php echo SVRURL ?>dados_tec_redes.php?qi=<?php echo base64_encode($id);?>&z=2&&ies=<?php echo base64_encode($idescola) ?>">
   <h3 style="color:blue;">DADOS DE REDE</h3>
 </a>
 
@@ -165,7 +167,7 @@ if ($z==1)
 
 
 
- <form name="equipamento" action = "<?php echo SVRURL ?>gravaequipdadostec.php?id=<?php echo($id)?>&&escola=<?php echo $idescola ?>" method = "post">
+ <form name="equipamento" action = "<?php echo SVRURL ?>gravaequipdadostec.php?qi=<?php echo base64_encode($id)?>&&ies=<?php echo base64_encode($idescola) ?>" method = "post">
 
 
 
@@ -223,7 +225,7 @@ elseif ($z==2)
  
 
 
-<a class="underlineHover" title="Dados de rede" href="<?php echo SVRURL ?>dados_tec_redes.php?id=<?php echo ($id);?>&z=1&&escola=<?php echo $idescola ?>">
+<a class="underlineHover" title="Dados de rede" href="<?php echo SVRURL ?>dados_tec_redes.php?qi=<?php echo base64_encode($id);?>&z=1&&ies=<?php echo base64_encode($idescola) ?>">
   <h3 style="color:blue;">DADOS TÉCNICOS</h3>
 </a>
 <br><br>
