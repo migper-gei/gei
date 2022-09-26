@@ -412,7 +412,7 @@ else {
 
 
 
-                    <form name="reparacao" action="repara_avaria.php?id=<?php echo ($row['id']);?>&&em=<?php echo ($em) ?>" method="post"
+                    <form name="reparacao" action="repara_avaria.php?ia=<?php echo base64_encode($row['id']);?>&&em=<?php echo ($em) ?>" method="post"
                    >
 
                     <td width="30%" >
