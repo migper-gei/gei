@@ -56,6 +56,7 @@ $x=base64_decode($_GET["x"]);
 $idescola=base64_decode($_GET["ies"]);
 
 //echo $x;
+//echo $idescola;
 
 if ($x==2 && (empty($_POST['sala']) || !isset($_POST['sala']) )   )
 
@@ -90,10 +91,10 @@ window.setTimeout(function() {
 
 
 
+//echo $_POST["sala"];
 
 
-
-if (!isset($_POST["sala"]) || empty($_POST["sala"]))
+if ($x==0 && (!isset($_POST["sala"]) || empty($_POST["sala"])))
 {
 
 ?>

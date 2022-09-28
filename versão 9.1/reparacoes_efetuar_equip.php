@@ -519,7 +519,7 @@ onSubmit="return enviardados2();"
 <div style="  text-align: center;">   
       
 
-<form action = "<?php echo SVRURL ?>ver_equipamentos_sala.php?x=1&&sala=<?php echo $said ?>&&escola=<?php echo $idescola ?>" method="post" >
+<form action = "<?php echo SVRURL ?>ver_equipamentos_sala.php?x=<?php echo base64_encode(1) ?>&&si=<?php echo base64_encode($said) ?>&&ies=<?php echo base64_encode($idescola) ?>" method="post" >
 <input type = "hidden"  value = "<?php echo $sa?>">
 <input title="Voltar" type=image 
 src="<?php echo SVRURL ?>images/voltar.svg"  >
