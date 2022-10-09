@@ -103,7 +103,7 @@ $result = mysqli_query($db,$sql0);
 
 
 $sql2 = "update equipamento set tipo='".$_POST["nomeeq"]."' where tipo='".$_GET["nom"]."'";
-//$result2 = mysqli_query($db,$sql2);
+$result2 = mysqli_query($db,$sql2);
 
 
 //header("Refresh:0;url=tiposequip");
