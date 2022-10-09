@@ -69,7 +69,7 @@ include("msg_bemvindo.php");
 $idtipo=base64_decode($_GET['tpi']);
 
 
-if ( !isset($_POST['nome']) || empty($_POST['nome']) 
+if ( !isset($_POST['nomeeq']) || empty($_POST['nomeeq']) 
 || empty($idtipo) || !isset($idtipo) )
 
 {
