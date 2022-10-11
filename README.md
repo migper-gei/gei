@@ -2,6 +2,8 @@
 • adição da tabela "tipos manutenção".
 • melhoramento do separador manutenções: inserir manutenção da sala.
 
+Consultar ficheiro "configurações_GEI.pdf"
+
 
 # GEI (versão 9.1: julho 2022):
 - adição do campo "observações" tabela "Equipamento".
