@@ -354,7 +354,7 @@ $ne = $rows[0];
      {
    ?>
     <img src="<?php echo SVRURL ?>images/informacao.svg" alt="Informação">
-        Só é possível eliminir salas sem equipamento associado. 
+        Só é possível eliminar salas sem equipamento associado. 
 
      <?php
      }
