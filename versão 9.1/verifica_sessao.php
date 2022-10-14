@@ -1,4 +1,17 @@
- <?php
+<h5> Ano Letivo: 
+
+<?php
+$sql2 = "select max(ano_lectivo) from periodos";
+$result2 = mysqli_query($db,$sql2); 
+$rows2 =mysqli_fetch_row($result2);
+
+$conta = $rows2[0];
+echo $conta;
+?>
+
+</h5> 
+
+<?php
 
 //echo $_SESSION['user_agent'];
 //echo ('<br><br>');
