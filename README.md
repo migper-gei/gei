@@ -1,7 +1,8 @@
 # GEI (versão 9.2: outubro 2022) - brevemente:
 - adição da tabela "tipos manutenção".
+- separador configurações: tipos de manutenção.
 - melhoramento do separador manutenções: inserir manutenção da sala.
-- melhoramento do separador manutenções: sala e equipamento entre datas.
+- melhoramento do separador manutenções: sala entre datas.
 
 Consultar ficheiro "configurações_GEI.pdf"
 
