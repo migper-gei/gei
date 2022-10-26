@@ -1,0 +1,4 @@
+nome,email,pass (minimo 6 carateres),tipo (1-administrador       2-utilizador        3-reparador         4-funcionário)
+user1,user1@aeds.pt,123456,2
+user2,user2@aeds.pt,123456,2
+user3,user3@aeds.pt,123456,1
