@@ -270,7 +270,8 @@ include("msg_bemvindo.php");
 
 
   $sql = "
-  SELECT * FROM manutencao m, equipamento e, salas s
+  SELECT m.*,e.*,s.*, m.observacoes as mobs
+  FROM manutencao m, equipamento e, salas s
   WHERE m.id_equi=e.id and e.id_sala=s.id
 and e.id_sala=".$sa." and m.data_manutencao BETWEEN 
 STR_TO_DATE('$di','%Y-%m-%d') AND
@@ -327,7 +328,7 @@ STR_TO_DATE('$df','%Y-%m-%d')
             <thead>
                 <tr class="table-success" >
                     <th scope="col">Equipamento</th>
-                    <th  scope="col">Data</th>
+                    <th scope="col">Data</th>
                     <th scope="col">Descrição</th>
                     <th scope="col">Realizada por</th>      
                     <th scope="col">Observações</th>      
@@ -342,18 +343,9 @@ STR_TO_DATE('$df','%Y-%m-%d')
       
 
                 <?php  
-                
-             
-
-
                 while($row=mysqli_fetch_array($result)) { 
                     //$n=$row['id'];
                    
-              
-                   
-                   
-               
-
                     ?>
                 <tr>
                     <td width="20%"  scope="row">
@@ -370,7 +362,7 @@ STR_TO_DATE('$df','%Y-%m-%d')
                  
                     </td>
 
-                    <td width="30%" >
+                    <td width="25%" >
                     
                     <?php echo $row['descricao']; 
                     
@@ -383,11 +375,10 @@ STR_TO_DATE('$df','%Y-%m-%d')
                     
                  
                     </td>
-                    <td width="15%" >
+                    <td width="15%" >                    
+                    <?php echo $row['mobs'];    ?>
                     
-                    <?php echo $row['observacoes']; 
-                    
-                    ?>
+                 
                     
                  
                     </td>
