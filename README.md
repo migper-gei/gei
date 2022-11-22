@@ -1,4 +1,4 @@
-# GEI (versão 9.2: outubro 2022):
+# GEI (versão 9.3: novembro 2022):
 - optimizações e correções gerais.
 
 Consultar ficheiro "configurações_GEI.pdf"
