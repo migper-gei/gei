@@ -1,3 +1,8 @@
+# GEI (versão 9.4: janeiro 2023 - brevemente):
+  - após a introdução de uma avaria, os administradores/reparadores recebem email de aviso.
+  - optimizações e correções gerais.
+  - 
+
 # GEI (versão 9.3: novembro 2022):
 - optimizações e correções gerais.
 
