@@ -1,5 +1,6 @@
 # GEI (versão 9.4: janeiro 2023 - brevemente):
   - após a introdução de uma avaria, os administradores/reparadores recebem email de aviso.
+  - possibilidade do administrador enviar email (com dados de uma dada avaria) para um reparador à escolha.
   - optimizações e correções gerais.
   
 
