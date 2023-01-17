@@ -35,39 +35,66 @@ include("sessao_timeout.php");
   ?>
       
 
+ 
+
       <?php
 
-$op=$_GET["op"];
+$sql2a = "select max(id) as me  from escolas ";
+$result2a = mysqli_query($db,$sql2a); 
+$rows2a =mysqli_fetch_row($result2a);
 
-//echo $op;
 
-if ($op=='t')
+$maxesc = $rows2a[0];
+
+
+if (base64_decode($_GET["aves"])>$maxesc)
 {
-$op2='Todas';
-}
-elseif ($op=='al')
-{
-$op2='Ano letivo';
 
-
-}
-else
-{
 ?>
+
+
 <script>
-  window.setTimeout(function() {
-      window.location.href = '<?php echo SVRURL ?>reparafaz?op=t';
-  }, 10);
-  </script>
+
+window.setTimeout(function() {
+              window.location.href = '<?php echo SVRURL ?>avaria';
+          },10);
+          </script>
+
+
 <?php
-
 }
-?>
-      <?php
 
-$sql3 = "select max(ano_lectivo) from periodos";
-$result3 = mysqli_query($db,$sql3); 
-$rows3 =mysqli_fetch_row($result3);
+
+   $idescola=base64_decode($_GET["aves"]);
+   
+
+
+   if ( !isset($idescola)    || empty($idescola)     || !is_numeric($idescola) 
+   )
+   
+   {
+      //echo "aaaaaa";
+   ?>
+   
+   
+   <script>
+   window.setTimeout(function() {
+       window.location.href = '<?php echo SVRURL ?>avaria';
+   }, 10);
+   </script>
+   
+   
+   <?php
+   }
+
+$sql11 = "select nome_escola  from escolas where id=$idescola";
+$result11 = mysqli_query($db,$sql11); 
+$rows11 =mysqli_fetch_row($result11);
+
+
+$ne = $rows11[0];
+
+
 ?>
 
 
@@ -78,16 +105,11 @@ $rows3 =mysqli_fetch_row($result3);
             <div class="row">
                <div class="col-md-12">
                <div class="titlepage">
-                     <h2>Reparações a efetuar - <?php echo $op2?> </h2> 
-                     <br> 
-                      <h4>
-                     <a style="color:black;" class="underlineHover" title="Reparações a efetuar (todas)" 
-                       href="<?php echo SVRURL ?>reparafaz?op=t">
-                       Todas </a>  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   
-                       <a style="color:black;" class="underlineHover" title="Reparações a efetuar (ano letivo)" 
-                       href="<?php echo SVRURL ?>reparafaz?op=al">
-                        Ano letivo: <?php echo $rows3[0]; ?></a>
-                          </h4>
+                     <h2>Avarias >> Últimas 5 avarias registadas
+
+                     <br><?php echo $ne?>
+                     </h2> 
+                     
                      
                   </div>
                </div>
@@ -101,12 +123,25 @@ $rows3 =mysqli_fetch_row($result3);
 
                   <?php
            
-           include("verifica_sessao.php");
+          // include("verifica_sessao.php");
              
              ?>
            
 
+           <?php
+include("msg_bemvindo.php");
+?>
+  
     
+
+
+
+
+
+
+
+
+
 
            <?php
            //include('config.php');
@@ -114,39 +149,14 @@ $rows3 =mysqli_fetch_row($result3);
           
 
 
-           if ($op=='t')
-           {
-           
        
            
-             $sql1 = "select count(*) from avarias_reparacoes where datareparacao is null";
-             $result1 = mysqli_query($db,$sql1); 
-             $rows =mysqli_fetch_row($result1);
-             
-             //echo($_SESSION['tipo']);
+        
            
-             $totallinhas = $rows[0];
-            }
+             $totallinhas = 5;
            
            
-            
-           if ($op=='al')
-           {
-           $sql0 = "select max(ano_lectivo) from periodos";
-           $result0 = mysqli_query($db,$sql0); 
-           $rows0 =mysqli_fetch_row($result0);
-           
-           
-              
-           
-           $sql1 = "select count(*) from avarias_reparacoes where datareparacao is null and ano_letivo='".$rows0[0]."'";
-           $result1 = mysqli_query($db,$sql1); 
-           $rows1 =mysqli_fetch_row($result1);
-           
-           //echo($_SESSION['tipo']);
-           
-           $totallinhas = $rows1[0];
-           }
+         
            
 
 
@@ -188,38 +198,15 @@ $em=$_SESSION['email'];
 
 
 
-
-if ($op=='t')
-{
-
  $sql = "select ar.*, e.nomeequi, s.nome, esc.nome_escola
  from avarias_reparacoes ar, equipamento e, salas s, escolas esc
  where ar.id_equi=e.id and ar.id_sala=s.id and ar.id_escola=esc.id
-  and ar.datareparacao is null 
- order by ar.dataavaria asc LIMIT $paginationStart, $limit";
+  and ar.datareparacao is null and esc.id=$idescola
+ order by ar.dataavaria desc 
+ LIMIT 5";
  $result = mysqli_query($db,$sql);
 
 
-
- }
-
-
- 
-if ($op=='al')
-{
-
-//echo $rows0[0] ;
-
-$sql2 = "select ar.*, e.nomeequi, s.nome, esc.nome_escola
- from avarias_reparacoes ar, equipamento e, salas s, escolas esc
- where ar.id_equi=e.id and ar.id_sala=s.id and ar.id_escola=esc.id
-  and ar.datareparacao is null 
-and ano_letivo='".$rows0[0]."' 
-order by dataavaria asc LIMIT $paginationStart, $limit";
-$result = mysqli_query($db,$sql2);
-
-
-}
 
 
 
@@ -284,29 +271,10 @@ else {
 
 
 
-   
-        <!-- Select dropdown 
-        <div class="d-flex flex-row-reverse bd-highlight mb-3">
-            <form action="reparafaz" method="post">
-            <?php include("num_linhas.php");?>
-            </form>
-        </div>
--->
 <div class="d-flex flex-row-reverse bd-highlight mb-3">
-       
-<form action="<?php echo SVRURL ?>reparafaz?op=<?php echo $op?>" method="post"  name="form1">
+        <form action="<?php echo SVRURL ?>reparafaz?op=<?php echo $op?>" method="post"  name="form1">
  
 
- <select name="records-limit"  onchange="this.form.submit()" class="custom-select">
-                    <option disabled selected>Nº Linhas</option>
-                    <?php foreach([10,20,30,40,50] as $limit) : ?>
-                    <option
-                        <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
-                        value="<?= $limit; ?>">
-                        <?= $limit; ?>
-                    </option>
-                    <?php endforeach; ?>
-                </select>
 
 
 
@@ -321,11 +289,11 @@ else {
         <table class="table table-striped">
             <thead>
                 <tr class="table-success">
-                    <th scope="col">Escola / Sala / Equipamento</th>
+                    <th scope="col">Sala / Equipamento</th>
                     <th scope="col">Avaria</th>
                     <th scope="col">Reparação</th>
                     <th scope="col">&nbsp;&nbsp; </th>
-        
+             
                      
                      
                     
@@ -352,7 +320,7 @@ else {
 
                     ?>
                 <tr>
-                    <th width="20%"  scope="row"><?php echo $row['nome_escola']; echo('<br>'.'/'.'<br>');
+                    <th width="20%"  scope="row"><?php  
                     echo $row['nome']; echo('<br>'.'/'.'<br>'); echo $row['nomeequi'];?>
                  
                     </th>
@@ -363,7 +331,7 @@ else {
                     echo('<br>'.'Email: '); 
                     echo $em; 
                     echo('<br><br>'.'Data avaria: '); 
-                     echo $row['dataavaria']; 
+                     echo  date('d/m/Y',strtotime($row['dataavaria'])); 
                     echo('<br><br>'.'Descrição:'.'<br>'); 
                     echo $row['avaria']; echo('<br>');
                     ?>
@@ -412,14 +380,13 @@ else {
 
 
 
-                    <form name="reparacao" action="repara_avaria.php?ia=<?php echo base64_encode($row['id']);?>&&em=<?php echo ($em) ?>" method="post"
-                   >
+                    <form name="reparacao" action="repara_avaria.php?ia=<?php echo base64_encode($row['id']);?>" method="post">
 
                     <td width="30%" >
                     
-               
+           
                     <label>Data: </label>  
-                     <input  required             
+                     <input  required     value="<?php echo date("Y-m-d") ?>"        
                      size="10" type = "date" name = "datarep" >
                     
                     <br /><br />
@@ -456,8 +423,9 @@ else {
 
                     </td>
                    
-                  
-                <?php if ($_SESSION['tipo']==1)
+                    
+  
+                    <?php if ($_SESSION['tipo']==1)
                 {
                 ?>
 
@@ -468,6 +436,8 @@ else {
                 </a>
                 </td>
                 <?php } ?>
+
+
 
                    </form>
 
@@ -481,34 +451,6 @@ else {
 
 
 
-        <!-- Pagination -->
-        <nav aria-label="Page navigation example mt-5">
-            <ul class="pagination justify-content-center">
-                <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-                    <a  style="color:black;" class="page-link"
-                        href="<?php if($page <= 1){ echo '#'; } else { echo "?op=$op&&page=" . $prev; } ?>"><<</a>
-                </li>
-
-                <?php for($i = 1; $i <= $totoalPages; $i++ ): ?>
-                <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                    <a  style="color:black;" class="page-link" href="reparafaz?op=<?php echo $op?>&&page=<?= $i; ?>"> <?= $i; ?> </a>
-                </li>
-                <?php endfor; ?>
-
-                <li class="page-item <?php if($page >= $totoalPages) { echo 'disabled'; } ?>">
-                    <a  style="color:black;" class="page-link"
-                        href="<?php if($page >= $totoalPages){ echo '#'; } else {echo "?op=$op&&page=". $next; } ?>">>></a>
-                </li>
-
-                <li class="page-item ">
-                <?php
-      echo str_repeat("&nbsp;", 5);
-        echo("TOTAL: ".$totallinhas);
-        ?>
-                </li>
-            </ul>
-        </nav>
-       
 
 
 
@@ -516,6 +458,14 @@ else {
 
 
 
+
+        <a href="<?php echo SVRURL ?>avaria">
+<img src="<?php echo SVRURL ?>images/voltar.svg" alt="Voltar">
+</a>
+
+
+
+<br>
 
 
 
