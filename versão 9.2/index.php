@@ -92,7 +92,7 @@
                                importação e exportação de dados. 
                               <br><br>
                               <img src="<?php echo SVRURL ?>images/check.svg" alt="" > 
-                               chat entre os utlizadores. 
+                               chat entre os utilizadores. 
                              
                            </p>
                           
