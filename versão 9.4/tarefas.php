@@ -290,11 +290,25 @@ $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1
 $paginationStart = ($page - 1) * $limit;
 
 
+
+if ($x==0)
+{
 $sql = "select * FROM tarefas
 where id_escola=$esc
 order by data_criacao desc, data_conclusao
 LIMIT $paginationStart, $limit";
 $result = mysqli_query($db,$sql);
+}
+
+if ($x==1)
+{
+$sql = "select * FROM tarefas
+where id_escola=$esc and data_conclusao is null
+order by data_criacao desc, data_conclusao
+LIMIT $paginationStart, $limit";
+$result = mysqli_query($db,$sql);
+}
+
 
 
 // Get total records
