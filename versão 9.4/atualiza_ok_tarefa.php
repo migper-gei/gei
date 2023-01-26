@@ -104,7 +104,7 @@ concluido_por='".$_POST["concluido_por"]."',
 data_conclusao=STR_TO_DATE('".$_POST["data_conclusao"]."','%Y-%m-%d')
   where id=".$idtar."";
 
- // $result = mysqli_query($db,$sql);
+  $result = mysqli_query($db,$sql);
 
 
 
