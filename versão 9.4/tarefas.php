@@ -311,6 +311,10 @@ $result = mysqli_query($db,$sql);
 
 
 
+
+if ($x==0)
+{
+
 // Get total records
 $sql1 = "select count(*) as cs from tarefas where id_escola=$esc";
 $result1 = mysqli_query($db,$sql1); 
@@ -319,6 +323,26 @@ $rows =mysqli_fetch_row($result1);
 
 $totallinhas = $rows[0];
 //echo($totallinhas );
+
+}
+
+
+if ($x==1)
+{
+
+// Get total records
+$sql1 = "select count(*) as cs from tarefas where id_escola=$esc and data_conclusao is null";
+$result1 = mysqli_query($db,$sql1); 
+$rows =mysqli_fetch_row($result1);
+
+
+$totallinhas = $rows[0];
+//echo($totallinhas );
+
+}
+
+
+
 
 
 
