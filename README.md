@@ -7,6 +7,8 @@
   - após a introdução de uma avaria, os administradores/reparadores recebem email de aviso.
   - possibilidade do administrador enviar email (com dados de uma dada avaria) para um reparador à escolha.
   - optimizações e correções gerais.
+
+Consultar ficheiro "configurações_GEI.pdf"
   
 
 # GEI (versão 9.3: novembro 2022):
