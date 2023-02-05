@@ -1,7 +1,14 @@
+# GEI (versão 9.5: fevereiro 2023) - brevemente:
+ - configuração do email para envio de alertas.
+ - configuração do tempo de sessão ativa do utilizador.
+  
+
 # GEI (versão 9.4: janeiro 2023):
   - após a introdução de uma avaria, os administradores/reparadores recebem email de aviso.
   - possibilidade do administrador enviar email (com dados de uma dada avaria) para um reparador à escolha.
   - optimizações e correções gerais.
+
+Consultar ficheiro "configurações_GEI.pdf"
   
 
 # GEI (versão 9.3: novembro 2022):
@@ -60,7 +67,7 @@ Consultar ficheiro "configurações_GEI.pdf"
 - possibilidade de suportar várias escolas do agrupamento.
 - optimização e restruturação da base de dados.
 - melhoramento em todos os separadores.
--
+
 Consultar ficheiro "configurações_GEI.pdf"
 
 # GEI (versão 4.0 fevereiro 2022)
