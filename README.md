@@ -1,4 +1,4 @@
-# GEI (versão 9.5: fevereiro 2023):
+# GEI (versão 9.5: fevereiro 2023) - brevemente:
  - configuração do email para envio de alertas.
  - configuração do tempo de sessão ativa do utilizador.
   
