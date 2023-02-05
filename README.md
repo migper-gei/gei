@@ -67,7 +67,7 @@ Consultar ficheiro "configurações_GEI.pdf"
 - possibilidade de suportar várias escolas do agrupamento.
 - optimização e restruturação da base de dados.
 - melhoramento em todos os separadores.
--
+
 Consultar ficheiro "configurações_GEI.pdf"
 
 # GEI (versão 4.0 fevereiro 2022)
