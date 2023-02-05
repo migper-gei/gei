@@ -52,7 +52,7 @@ if ( !isset($_POST['eqreq']) || !isset($_POST['nome']) || !isset($_POST['localiz
 
 <script>
 window.setTimeout(function() {
-   // window.location.href = '<?php echo SVRURL ?>salas?x=<?php echo base64_encode(0)?>';
+    window.location.href = '<?php echo SVRURL ?>salas?x=<?php echo base64_encode(0)?>';
 }, 10);
 </script>
 
