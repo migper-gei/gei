@@ -1,4 +1,4 @@
-# GEI (versão 9.5: fevereiro 2023) - brevemente:
+# GEI (versão 9.5: fevereiro 2023):
    - configuração das definições do email para envio de alertas (separador configurações).
    - configuração do tempo de sessão ativa do utilizador (separador configurações).
    - adição da tabela "settings".
