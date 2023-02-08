@@ -1,7 +1,9 @@
 # GEI (versão 9.5: fevereiro 2023) - brevemente:
- - configuração do email para envio de alertas.
- - configuração do tempo de sessão ativa do utilizador.
-  
+   - configuração das definições do email para envio de alertas (separador configurações).
+   - configuração do tempo de sessão ativa do utilizador (separador configurações).
+   - adição da tabela "settings".
+ 
+Consultar ficheiro "configurações_GEI.pdf"
 
 # GEI (versão 9.4: janeiro 2023):
   - após a introdução de uma avaria, os administradores/reparadores recebem email de aviso.
