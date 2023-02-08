@@ -1,7 +1,7 @@
 # GEI (versão 9.5: fevereiro 2023):
    - configuração das definições do email para envio de alertas (separador configurações).
    - configuração do tempo de sessão ativa do utilizador (separador configurações).
-   - adição da tabela "settings".
+   - adição da tabela "settings" (ficheiro settings.sql).
  
 Consultar ficheiro "configurações_GEI.pdf"
 
