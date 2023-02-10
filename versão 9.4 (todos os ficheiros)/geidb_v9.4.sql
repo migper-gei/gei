@@ -35,7 +35,7 @@ CREATE TABLE `avarias_reparacoes` (
   `dataavaria` date NOT NULL,
   `avaria` longtext NOT NULL,
   `imgavaria` longblob DEFAULT NULL,
-  `video` longblob NOT NULL,
+  `video` longblob NULL,
   `datareparacao` date DEFAULT NULL,
   `reparacao` longtext DEFAULT NULL,
   `rep_efectuada_por` varchar(255) DEFAULT NULL,
