@@ -67,9 +67,9 @@
     <form action = "<?php echo SVRURL ?>validaus/<?php echo base64_encode(0)?>" method = "post">
     <!--
     <i class="fa fa-envelope" aria-hidden="true"></i>
-      -->     
+      
      
-<img src=images/users_demo.png>
+<img src=images/users_demo.png>  -->   
 
       <input required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" data-validate = "Email válido: ex@abc.xyz"
 					type = "text" name = "email"  id="login" class="fadeIn second" name="login" placeholder="Email">
