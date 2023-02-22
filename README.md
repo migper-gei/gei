@@ -3,7 +3,7 @@
    - configuração do tempo de sessão ativa do utilizador (separador configurações).
    - adição da tabela "settings" (ficheiro settings.sql).
  
-Consultar ficheiro "configurações_GEI.pdf"
+Consultar ficheiro "configurações_GEI.pdf" e "Configuração na Conta Google para app de terceiros.pdf"
 
 # GEI (versão 9.4: janeiro 2023):
   - após a introdução de uma avaria, os administradores/reparadores recebem email de aviso.
