@@ -61,7 +61,7 @@ RewriteRule ^gravatequip$ grava_tipo_equip.php [L]
 RewriteRule ^eliminatequip/([0-9-/]+)$ elimina_tipo_equip.php?url=$1 [QSA,L]
 RewriteRule ^atualtequip/([^/.]+)$ atualiza_tipo_equip.php?url=$1 [QSA,L]
 
-RewriteRule ^periodos$ periodos.php [L]
+RewriteRule ^per$ periodos.php [L]
 RewriteRule ^atualizaper/([^/.]+)$ atualiza_periodo.php?url=$1 [QSA,L]
 RewriteRule ^eliminaper/([0-9-/]+)$ elimina_periodo.php?url=$1 [QSA,L]
 RewriteRule ^inserirper$ inserir_periodo.php [L]

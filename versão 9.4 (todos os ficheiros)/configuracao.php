@@ -84,7 +84,7 @@ DADOS DO AGRUPAMENTO/ESCOLA <br>(Logotipo, nome, site)</button>
 
 <br>
 
-<form action="<?php echo SVRURL ?>periodos" method="post">
+<form action="<?php echo SVRURL ?>per" method="post">
 
 <button style="width:310px;" title="Períodos/Semestres" type="submit" class="btn btn-outline-primary" > PERÍODOS / SEMESTRES</button>
 
