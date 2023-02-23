@@ -476,7 +476,7 @@ function(isConfirm){
 
        <!-- Select dropdown -->
        <div class="d-flex flex-row-reverse bd-highlight mb-3">
-            <form action="<?php echo SVRURL ?>salas?x=<?php echo base64_encode(1) ?>&&esi=<?php echo base64_encode($esc);?>" method="post">
+            <form action="<?php echo SVRURL ?>sala?x=<?php echo base64_encode(1) ?>&&esi=<?php echo base64_encode($esc);?>" method="post">
                       <?php include("num_linhas.php");?>
             </form>
         </div>
@@ -601,7 +601,7 @@ include "realcelinhatabela.php";
 
                 <?php for($i = 1; $i <= $totoalPages; $i++ ): ?>
                 <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                    <a style="color:black;" class="page-link" href="<?php echo SVRURL ?>salas?x=<?php echo base64_encode(1) ?>&&esi=<?php echo( base64_encode($esc) );?>&&page=<?= $i; ?>"> <?= $i; ?> </a>
+                    <a style="color:black;" class="page-link" href="<?php echo SVRURL ?>sala?x=<?php echo base64_encode(1) ?>&&esi=<?php echo( base64_encode($esc) );?>&&page=<?= $i; ?>"> <?= $i; ?> </a>
                 </li>
                 <?php endfor; ?>
 

@@ -84,7 +84,7 @@ DADOS DO AGRUPAMENTO/ESCOLA <br>(Logotipo, nome, site)</button>
 
 <br>
 
-<form action="<?php echo SVRURL ?>periodos" method="post">
+<form action="<?php echo SVRURL ?>peri" method="post">
 
 <button style="width:310px;" title="Períodos/Semestres" type="submit" class="btn btn-outline-primary" > PERÍODOS / SEMESTRES</button>
 
@@ -151,7 +151,7 @@ echo str_repeat("&nbsp;", 26);
 
 <br><br>
  
-<form action="<?php echo SVRURL ?>salas.php?x=<?php echo base64_encode(0) ?>" method="post">
+<form action="<?php echo SVRURL ?>salas?x=<?php echo base64_encode(0) ?>" method="post">
 
 <button style="width:310px;" title="Salas" type="submit" class="btn btn-outline-primary" > SALAS</button>
 

@@ -61,7 +61,7 @@ icon: 'success',
 
 })
 .then(function() {
-window.location = "<?php echo SVRURL ?>salas?x=<?php echo base64_encode(0)?>";
+window.location = "<?php echo SVRURL ?>sala?x=<?php echo base64_encode(0)?>";
 });
 
 </script>
@@ -166,7 +166,7 @@ icon: 'success',
 
 })
 .then(function() {
-window.location = "<?php echo SVRURL ?>salas?x=<?php echo base64_encode(1)?>&&esi=<?php echo base64_encode($idescola) ?>";
+window.location = "<?php echo SVRURL ?>sala?x=<?php echo base64_encode(1)?>&&esi=<?php echo base64_encode($idescola) ?>";
 });
 
 
