@@ -1,3 +1,10 @@
+# GEI (versão 9.6: março 2023) - brevemente:
+  - suporte aos equipamentos da escola digital (separador equipamentos e separador avarias).
+  - para os equipamento da escola digital envio de email ao fornecedor com a descrição da avaria.
+  - adição de novos campos na tabela "equipamento" e tabela "escolas".
+ 
+Consultar ficheiro "configurações_GEI.pdf" e "Configuração na Conta Google para app de terceiros.pdf"
+
 # GEI (versão 9.5: fevereiro 2023):
    - configuração das definições do email para envio de alertas (separador configurações).
    - configuração do tempo de sessão ativa do utilizador (separador configurações).
