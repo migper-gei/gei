@@ -1,0 +1,15 @@
+ALTER TABLE equipamento 
+ADD COLUMN escola_digital varchar(5),
+ADD COLUMN num_inv_dgest varchar(50),
+ADD COLUMN fornecedor  varchar(100),
+ADD COLUMN email_fornecedor  varchar(50),
+ADD COLUMN nif_pessoa  int(9),
+ADD COLUMN num_rma  varchar(50)
+
+
+
+ALTER TABLE escolas 
+ADD COLUMN morada varchar(255),
+ADD COLUMN codigopostal  varchar(8),
+ADD COLUMN localidade  varchar(100),
+ADD COLUMN telefone  int(9);
