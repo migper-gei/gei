@@ -1,3 +1,8 @@
+# GEI (versão 9.7: março 2023):
+  - possibilidade de exportar os dados para formato CSV (utilizadores, tipos de equipamento, salas, equipamentos, tipos de manutenção, tarefas a realizar) >> (separador configurações).
+  -
+Consultar ficheiro "configurações_GEI.pdf" e "Configuração na Conta Google para app de terceiros.pdf"
+
 # GEI (versão 9.6: março 2023):
   - suporte aos equipamentos da escola digital (separador equipamentos e separador avarias).
   - para os equipamento da escola digital envio de email ao fornecedor com a descrição da avaria.
