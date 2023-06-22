@@ -1,3 +1,8 @@
+# GEI (versão 9.8: maio 2023):
+  - otimizações e correções gerais.
+  
+Consultar ficheiro "configurações_GEI.pdf" e "Configuração na Conta Google para app de terceiros.pdf"
+
 # GEI (versão 9.7: maio 2023):
   - possibilidade de exportar os dados para formato CSV (utilizadores, tipos de equipamento, salas, equipamentos, tipos de manutenção, tarefas a realizar) >> (separador configurações).
   
