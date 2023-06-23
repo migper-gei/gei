@@ -1,3 +1,8 @@
+# GEI Versão 10 (junho 2023):
+- possibilidade de adicionar outros equipamentos que não sejam informáticos >> (separador equipamentos).
+- adição de nova tabela: outro_equipamento (ficheiro: outro_equipamento.sql).
+
+
 # GEI (versão 9.8: maio 2023):
   - otimizações e correções gerais.
   
