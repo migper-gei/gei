@@ -68,7 +68,7 @@ window.setTimeout(function() {
 
 $ia=base64_decode($_GET["ia"]);
 $em=base64_decode($_GET["em"]);
-
+$sa=base64_decode($_GET["sa"]);
 
 
 ?>
@@ -178,7 +178,7 @@ if(chk.checked==true){
                  } 
              </script> 
 <?php
-$sql2 = "select ar.*, e.nomeequi, s.nome, esc.nome_escola
+$sql2 = "select ar.*, e.nomeequi, s.nome, esc.nome_escola, esc.id as ide
 from avarias_reparacoes ar, equipamento e, salas s, escolas esc
 where ar.id_equi=e.id and ar.id_sala=s.id and ar.id_escola=esc.id
 and ar.id=$ia and ar.datareparacao is null";
@@ -189,6 +189,9 @@ $row2=mysqli_fetch_array($result2);
 $sql2a = "select nome from utilizadores where email='$em' ";
 $result2a = mysqli_query($db,$sql2a); 
 $rows2a =mysqli_fetch_row($result2a);
+
+
+//echo $row2['ide'];
 
 ?>
 
@@ -319,8 +322,12 @@ while($row3=mysqli_fetch_array($result3))
 
  </form>
     
-
+<!--
  <a href="<?php echo SVRURL ?>avaria">
+-->
+
+<a href="<?php echo SVRURL ?>reparacoes_efetuar_sala.php?x=<?php echo base64_encode(1)?>&&op=t&&ies=<?php echo base64_encode($row2['ide'])?>&&sai=<?php echo base64_encode($sa)?>">
+
 <img src="<?php echo SVRURL ?>images/voltar.svg" alt="Voltar">
 </a>
 

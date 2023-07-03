@@ -660,7 +660,7 @@ onSubmit="return enviardados2();"
 
                     <td width="5%">
                          
-                 <a href="enviar_email_reparador.php?ia=<?php echo base64_encode($row['id']);?>&&em=<?php echo base64_encode($em)?>">
+                 <a title="Enviar email a reparador" href="enviar_email_reparador.php?ia=<?php echo base64_encode($row['id']);?>&&em=<?php echo base64_encode($em)?>&&sa=<?php echo base64_encode($sa)?>">
                  <img alt="Enviar email a reparador" src="<?php echo SVRURL ?>images/envelope.svg"> 
                 </a>
                 </td>
@@ -736,8 +736,12 @@ onSubmit="return enviardados2();"
         <?php include ("jquery_bootstrap.php");?>
 
 
-        <a href="<?php echo SVRURL ?>avaria">
-<img src="<?php echo SVRURL ?>images/voltar.svg" alt="Voltar">
+       <!-- 
+       <a href="<?php echo SVRURL ?> reparacoes_efetuar_sala.php?x=<?php echo base64_encode(0) ?>&&op=t&&ies=<?php echo base64_encode($idescola)?>">
+   -->
+
+    <a href="<?php echo SVRURL ?>avaria">
+       <img src="<?php echo SVRURL ?>images/voltar.svg" alt="Voltar">
 </a>
 
 
