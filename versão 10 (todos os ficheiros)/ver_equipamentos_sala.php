@@ -724,13 +724,21 @@ X
 
 
                     <br> 
-                    
+             
 
                       <?php
-                      if ($row['data_compra']<>null)
+
+
+
+                      if ( ($row['data_compra']<>null) && ( strcmp($row['data_compra'], "0000-00-00") !== 0) )
                       {
                       echo ('Data da compra: ');
                       echo ($row['data_compra']);
+                      }
+                      else
+                      {
+                        echo ('Data da compra: ---');
+             
                       }
                       ?>
                      </th>
