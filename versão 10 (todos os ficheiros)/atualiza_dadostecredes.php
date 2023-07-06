@@ -213,23 +213,23 @@ echo('</h4>');
                      <br>   
 <h3 style="color:black;">DADOS REDE:</h3>        
            <br> <label>Domínio</label>  <br>
-            <input   size="30" type = "text" name = "dominio" placeholder="Domínio"> 
+            <input  value="<?php echo $row['dominio']?>" size="30" type = "text" name = "dominio" placeholder="Domínio"> 
             
               <br>
                 <label>Endereço IP</label>    <br>  
-            <input   size="15" maxlength=15 type = "text" name = "ip" placeholder=" Endereço IP">
+            <input  value="<?php echo $row['ip']?>"  size="15" maxlength=15 type = "text" name = "ip" placeholder=" Endereço IP">
             <br>
                 <label>Máscara de rede</label>    <br> 
-            <input   size="15" maxlength=15 type = "text" name = "mascara" placeholder="Máscara de rede">  
+            <input  value="<?php echo $row['mascara_rede']?>" size="15" maxlength=15 type = "text" name = "mascara" placeholder="Máscara de rede">  
             <br>
                 <label>Gareway</label>    <br> 
-            <input   size="15" maxlength=15 type = "text" name = "gateway" placeholder="Gateway">   
+            <input   value="<?php echo $row['gateway']?>" size="15" maxlength=15 type = "text" name = "gateway" placeholder="Gateway">   
             <br>
                 <label>DNS preferido</label>    <br> 
          
-            <input   size="15" maxlength=15 type = "text" name = "dnsp" placeholder="DNS preferido">
+            <input  value="<?php echo $row['dns_principal']?>" size="15" maxlength=15 type = "text" name = "dnsp" placeholder="DNS preferido">
             <br>DND alternativo</label>    <br> 
-            <input   size="15" maxlength=15 type = "text" name = "dnsa" placeholder="DNS alternativo"> 
+            <input   value="<?php echo $row['dns_alternativo']?>" size="15" maxlength=15 type = "text" name = "dnsa" placeholder="DNS alternativo"> 
          
          
          
