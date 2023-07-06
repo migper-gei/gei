@@ -114,7 +114,7 @@ include("msg_bemvindo.php");
          
                           
     
-<form name="equipamento" action = "<?php echo SVRURL ?>atualiza_dadostecredes_OK.php?ide=<?php echo base64_encode($id)?>" method = "post">
+<form name="equipamento" action = "<?php echo SVRURL ?>atualiza_dadostecredes_OK.php?id=<?php echo base64_encode($id)?>" method = "post">
 
 <div  style=" text-align:center;width:90%">
 <?php
