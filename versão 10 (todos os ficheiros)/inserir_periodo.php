@@ -158,7 +158,7 @@ $_SESSION['token']=$token;
                                        
                  </form>
 
-                 <form action = "<?php echo SVRURL ?>periodos" method="post" >
+                 <form action = "<?php echo SVRURL ?>peri" method="post" >
 <input type = "hidden"  value = "">
 <input title="Voltar" type=image 
 src="<?php echo SVRURL ?>images/voltar.svg"  >
