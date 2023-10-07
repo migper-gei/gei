@@ -1,3 +1,9 @@
+Versão 11 (outubro 2023) - brevemente:
+- adaptação da aplicação para a utilização de outras instituições que não escolas.
+- optimizações e correções gerais
+
+Consultar ficheiro "configurações_GEI.pdf" e "Configuração na Conta Google para app de terceiros.pdf"
+
 # GEI Versão 10 (junho 2023):
 - possibilidade de adicionar outros equipamentos que não sejam informáticos >> (separador equipamentos).
 - adição de nova tabela: outro_equipamento (ficheiro: outro_equipamento.sql).
