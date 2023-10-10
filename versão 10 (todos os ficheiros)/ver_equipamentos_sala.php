@@ -561,6 +561,7 @@ order by e.tipo desc
 ?> 
 
 <?php
+
      if ($_SESSION['tipo']==1 )
      {
    ?>
@@ -606,13 +607,18 @@ title="Resumo do equipamento" style="color:blue;font-size:16px;">Resumo do equip
                     <th scope="col">
 
                     <?php
-if ($totallinhas>0) {
+if ( ($totallinhas>0) && ($_SESSION['tipo']==1))
+ {
   //echo $ns;
   //echo $ne;
   //echo $said;
+  //echo ($_SESSION['tipo']);
+  //echo $totallinhas;
 ?>
    &nbsp;&nbsp;&nbsp;
 
+
+   
 
    <a onclick="a2a(<?php echo $said;?>,'<?php echo $ns;?>','<?php echo $ne;?>')"
  href="<?php echo SVRURL ?>elimina_equi_sala.php?id=<?php echo base64_encode($said);?>" target="_blank">

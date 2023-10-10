@@ -603,10 +603,14 @@ title="Resumo do equipamento" style="color:blue;font-size:16px;">Resumo do equip
                     <th scope="col">Tipo / Nome</th>
                     <th scope="col">Dados técnicos</th>
                     <th scope="col">Dados rede</th>
+                    
+                      <?php
+if ( ($totallinhas>0) && ($_SESSION['tipo']==1) ) {
+  ?>
                     <th scope="col">
 
-                    <?php
-if ($totallinhas>0) {
+<?php
+                 
   //echo $ns;
   //echo $ne;
   //echo $said;
@@ -913,11 +917,13 @@ order by oe.nomeoutro ";
                     <th scope="col">Nome</th>
                     <th scope="col">Quantidade</th>
                     <th scope="col">Observações</th>
-
+<?php
+if ( ($count>0)  && ($_SESSION['tipo']==1) ) {
+  ?>
                     <th scope="col">
 
+
 <?php
-if ($count>0) {
 //echo $ns;
 //echo $ne;
 //echo $said;
@@ -1009,6 +1015,8 @@ X
                     <a title="Atualizar" href="<?php echo SVRURL ?>atualioutequip?ide=<?php echo base64_encode($n) ?>&&sai=<?php echo base64_encode($said) ?>&&ies=<?php echo base64_encode($idescola) ?>">
                     <img src="<?php echo SVRURL ?>images/atualizar.svg" alt="Atualizar" > </a>
                  
+
+              
                     &nbsp;   &nbsp;&nbsp;
                     <a onclick="a1a('<?php echo $n;?>','<?php echo $ns;?>','<?php echo $ne;?>','<?php echo $noeq;?>','<?php echo $idescola;?>','<?php echo $said;?>');" title="Eliminar" 
                     href="<?php echo SVRURL ?>eliminaoutequip">
