@@ -1,4 +1,4 @@
-# GEI Versão 11 (outubro 2023) - brevemente:
+# GEI Versão 11 (outubro 2023):
 - adaptação da aplicação para a utilização de outras instituições que não escolas.
 - optimizações e correções gerais
 
