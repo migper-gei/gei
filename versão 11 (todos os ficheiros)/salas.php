@@ -113,7 +113,7 @@ function showesc(escola) {
       
 <form action="<?php echo SVRURL ?>salas_num_escola.php" method="post">
 
-<button title="Ver nº de salas por escola" type="submit" class="btn btn-outline-primary" > Ver nº de salas por escola</button>
+<button title="Ver nº de salas por escola" type="submit" class="btn btn-outline-primary" > Ver nº de salas por escola/instituição</button>
 
 </form>
 
@@ -132,7 +132,7 @@ function showesc(escola) {
 <div style="text-align: left;">
 
 
-<h3 style="color:black;">ESCOLA:
+<h3 style="color:black;">ESCOLA/INSTITUIÇÃO:
 
 
 <?php

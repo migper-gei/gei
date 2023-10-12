@@ -50,7 +50,7 @@ include("sessao_timeout.php");
             <div class="row">
                <div class="col-md-12">
                <div class="titlepage">
-                     <h2>Salas: Nº por escola</h2>
+                     <h2>Salas: Nº por escola/instituição</h2>
                   </div>
                </div>
             </div>
