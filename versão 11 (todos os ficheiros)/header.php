@@ -141,7 +141,7 @@ class="btn btn-primary"
 
 <li class="nav-item d_none">
  <a class="nav-link" title="Início" href="<?php echo SVRURL ?>acessorap"> 
- <img style="width:25px; height:25px;" src="<?php echo SVRURL ?>images/home.png" alt="Início"> </a>
+ <img style="width:25px; height:25px;" src="<?php echo SVRURL ?>images/home5.png" alt="Início"> </a>
  </li>
 
 
@@ -159,7 +159,7 @@ else
 
 <li class="nav-item d_none">
  <a class="nav-link" title="Início" href="<?php echo SVRURL ?>i"> 
- <img style="width:25px; height:25px;" src="<?php echo SVRURL ?>images/home.png" alt="Início"> </a>
+ <img style="width:30px; height:30px;" src="<?php echo SVRURL ?>images/home.png" alt="Início"> </a>
  </li>
               <?php
                    }
