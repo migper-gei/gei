@@ -74,7 +74,7 @@ include ("svrurl.php");
       <link rel="stylesheet" href="<?php echo SVRURL ?>css/jquery.mCustomScrollbar.min.css">
 
     
-      <!-- Tweaks for older IEs-->
+      <!-- Tweaks for older IEs
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
       
@@ -82,7 +82,7 @@ include ("svrurl.php");
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-  
+  -->
 
 
 
