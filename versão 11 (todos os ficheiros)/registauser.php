@@ -22,8 +22,8 @@ document.getElementById('email_err').style.color = "#FF0000";
 }
 else
 {
-//document.getElementById('email_err').innerHTML = 'Valid email format';
-//document.getElementById('email_err').style.color = "#00AF33";
+   document.getElementById('email_err').innerHTML = '<br>'+'Email válido';
+document.getElementById('email_err').style.color = "#00AF33";
 }
 }
 </script>

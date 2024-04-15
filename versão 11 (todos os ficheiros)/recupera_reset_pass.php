@@ -14,14 +14,14 @@ var email_length = email_value.length;
 if(!email_value.match(mailformat) || email_length === 0)
 {
 
-document.getElementById('email_err').innerHTML = '<br>'+'Email inválido.';
+document.getElementById('email_err').innerHTML = '<br>'+'Email inválido.'+'<br>';
 email_name.focus();
 document.getElementById('email_err').style.color = "#FF0000";
 }
 else
 {
-//document.getElementById('email_err').innerHTML = 'Valid email format';
-//document.getElementById('email_err').style.color = "#00AF33";
+   document.getElementById('email_err').innerHTML = '<br>'+'Email válido'+'<br>';
+document.getElementById('email_err').style.color = "#00AF33";
 }
 }
 </script>
@@ -180,7 +180,8 @@ elseif ($rsenha==1)
 <form action = "<?php echo SVRURL ?>reset_pass_OK.php" method = "post">
            
              <input title="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
-					type = "text" name = "email"  class="fadeIn second"  placeholder="Email">
+					type = "text" name = "email"  class="fadeIn second"  placeholder="Email"
+               onBlur="email_validation();" id="email"><span id="email_err"></span>
                     
              
                    <br>
