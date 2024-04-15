@@ -5,7 +5,28 @@
 
 <?php include ("head.php");?>
 
+<script>
+function email_validation(){
+'use strict';
 
+var mailformat = /^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,3})+$/;
+var email_name = document.getElementById("email");
+var email_value = document.getElementById("email").value;
+var email_length = email_value.length;
+if(!email_value.match(mailformat) || email_length === 0)
+{
+
+document.getElementById('email_err').innerHTML = '<br>'+'Email inválido.';
+email_name.focus();
+document.getElementById('email_err').style.color = "#FF0000";
+}
+else
+{
+//document.getElementById('email_err').innerHTML = 'Valid email format';
+//document.getElementById('email_err').style.color = "#00AF33";
+}
+}
+</script>
 
 
    </head>
@@ -55,11 +76,13 @@
     <form action="<?php echo SVRURL ?>gravaus?x=<?php echo base64_encode(0)?>" method = "post">
 
       <input type = "text"  required class="fadeIn second" name="nome" placeholder="Primeiro e último nome">
+     
       
-      <input required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
-    type = "text" name = "email" class="fadeIn second" placeholder="Email">
- 
- <!--
+   
+      <input required  type = "text" name = "email" class="fadeIn second" placeholder="Email"  
+      onBlur="email_validation();" id="email"><span id="email_err"></span>
+
+ <!--pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
 
       <input pattern=".{6,}" minlength="6" required  type = "password" name = "password" class="fadeIn third" placeholder="Password (mínimo 6 carateres)">
  
