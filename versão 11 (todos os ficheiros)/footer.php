@@ -50,7 +50,7 @@
       <div class="footer">
                       
                 <div class="col-md-12">
-                   <p style= "color:white;font-size:10px">Copyright 2021-2023 | <a   href="#" id="myBtn">Versão 11</a>
+                   <p style= "color:white;font-size:10px">Copyright 2021-2024 | <a   href="#" id="myBtn">Versão 11</a>
                    | gei@miguelarpereira.pt
                   </p>
                 </div>
