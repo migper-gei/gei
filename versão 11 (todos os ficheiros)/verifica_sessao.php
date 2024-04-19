@@ -47,8 +47,10 @@ if ( $_SESSION['user_agent'] != $_SERVER['HTTP_USER_AGENT'])
 
 
 
-
+/*
 $id_user=$_SESSION['user_id'];
+
+echo $id_user;
 
 $sql0 = $db->prepare("select tipo from utilizadores where id=?");
 
@@ -63,6 +65,9 @@ $rows0 = $sql0->get_result()->fetch_row();
 //echo($_SESSION['tipo']);
 
 $tipo = $rows0[0];
+*/
+
+$tipo=$_SESSION['tipo'];
 
 if ($tipo==1)
 echo ('(Administrador)');
