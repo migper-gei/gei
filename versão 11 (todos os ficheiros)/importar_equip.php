@@ -86,7 +86,7 @@ function showesc(escola) {
 
 
 
-<label>ESCOLA: </label>  
+<label>ESCOLA/INSTITUIÇÃO: </label>  
 
 
 

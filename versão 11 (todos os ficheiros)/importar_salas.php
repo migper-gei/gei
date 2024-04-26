@@ -251,7 +251,7 @@ window.location = "<?php echo SVRURL ?>sala?x=<?php echo base64_encode(1) ?>&&es
 <br><br>
 <form enctype="multipart/form-data" method="post" action="<?php echo SVRURL ?>importarsalas">
                 
-<label >ESCOLA: </label>      
+<label >ESCOLA/INSTITUIÇÃO: </label>      
 <select  name="escola"  class="btn btn-info dropdown-toggle" style="width:310px;">
 
 
