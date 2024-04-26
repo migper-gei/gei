@@ -170,7 +170,7 @@ function l() {
 
 
 
-  event.preventDefault(); // prevent form submit
+  //event.preventDefault(); // prevent form submit
 
    swal({
 
