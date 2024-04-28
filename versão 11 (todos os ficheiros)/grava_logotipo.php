@@ -124,7 +124,28 @@ if ($filename=="")
 {
 
 $tmp="";
+$x=1;
+?>
 
+<script>
+
+swal({
+title: 'Não foi escolhido nenhuma imagem!',
+//text: 'Os dados foram guardados!',
+icon: 'success',
+//buttons: false,
+
+})
+.then(function() {
+window.location = "<?php echo SVRURL ?>dadosesc";
+});
+
+
+</script>
+
+
+
+<?php
 }
 
 elseif  ($filename<>"")
@@ -195,6 +216,39 @@ $x=1;
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && $x==0) 
 {
+
+
+
+if (isset($_POST['checklogo']))
+{
+
+   echo ($_POST['checklogo']);
+
+?>
+
+   <script>
+
+   swal({
+   title: 'Os dados foram guardados!',
+   //text: 'Os dados foram guardados!',
+   icon: 'success',
+   //buttons: false,
+   
+   })
+   .then(function() {
+   window.location = "<?php echo SVRURL ?>configura";
+   });
+   
+   
+   </script>
+   
+   <?php
+   }
+   
+
+
+
+
 
 //$sql2 = "delete from logotipo;";
 //$result = mysqli_query($db,$sql2);

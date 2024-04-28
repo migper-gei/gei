@@ -152,3 +152,6 @@ RewriteRule ^emsess$ email_sessao.php [L]
 RewriteRule ^inseriremse$ inserir_emailsessao.php [L]
 RewriteRule ^gravaemse$ grava_emailsessao.php [L]
 RewriteRule ^atualtemse/([^/.]+)$ atualiza_emailsessao.php?url=$1 [QSA,L]
+
+RewriteRule ^atulog$ atualiza_logotipo.php [L]
+RewriteRule ^atulogok$ atualiza_ok_logotipo.php [L]

@@ -8,6 +8,10 @@
  include ("head.php");
 ?>
 
+
+
+
+
    </head>
 
 
@@ -60,6 +64,52 @@ include("sessao_timeout.php");
 include("msg_bemvindo.php");
 ?>
     
+
+    <script>
+
+
+function cont_validation(){
+'use strict';
+var numbers = /^[0-9]+$/;
+var zip_name = document.getElementById("con");
+var zip_value = document.getElementById("con").value;
+var zip_length = zip_value.length;
+if(!zip_value.match(numbers) || zip_length !== 9)
+{
+document.getElementById('con_err').innerHTML = '<br>'+'Contato inválido.';
+zip_name.focus();
+document.getElementById('con_err').style.color = "#FF0000";
+}
+else
+{
+   //zip_name.focus();
+document.getElementById('con_err').innerHTML = '<br>'+'Contato válido.';
+document.getElementById('con_err').style.color = "#00AF33";
+}
+}
+
+
+function validarCP() {
+   var cp_name = document.getElementById("cp");
+   var input = document.getElementById("cp").value;
+
+    if (input.length === 8 && /^[0-9]{4}-[0-9]{3}$/.test(input)) {
+        //alert("Código postal válido!");
+      
+document.getElementById('cp_err').innerHTML = '<br>'+'Código postal válido.';
+document.getElementById('cp_err').style.color = "#00AF33";
+    } else {
+        //alert("Código postal inválido!");
+      
+        document.getElementById('cp_err').innerHTML = '<br>'+'Código postal inválido.';
+cp_name.focus();
+document.getElementById('cp_err').style.color = "#FF0000";
+
+    }
+}
+
+</script>
+
 
 
     <script type="text/javascript">
@@ -156,12 +206,6 @@ window.location = "<?php echo SVRURL ?>dadosesc";
  }
 }
 
-</script>
-
-
-
-<script>
-
 
 
 function l() {
@@ -169,10 +213,12 @@ function l() {
 //alert ('aaa');
 
 
+  //event.preventDefault(); // prevent form submit
+  
 
-  event.preventDefault(); // prevent form submit
+  
 
-   swal({
+swal({
 
   title: "Deseja eliminar o logotipo?",
  //text: "Sala: "+s1+" (Escola: "+ne1+")",
@@ -216,7 +262,7 @@ function(isConfirm){
 
 
 <br>
-<div style="  text-align: center;">  
+<div style="text-align: center;">  
 
 
 <form action="<?php echo SVRURL ?>dadosescola" method="post">
@@ -228,30 +274,51 @@ function(isConfirm){
      
 </div>
 <br>
-<div style="  text-align: left;">  
-<form action="<?php echo SVRURL ?>elimina_logotipo.php" method="post">
 
-<button onclick="l();"  title="Remover logotipo" type="submit" class="btn btn-outline-danger" >Remover logotipo</button>
+<table style="width:60%; margin-left:auto;margin-right:auto;">
+  <tr>
+    <th>
+    <form action="<?php echo SVRURL ?>atulog" method="post">
+
+<button   title="Alterar logotipo" type="submit" class="btn btn-outline-success" >Alterar logotipo</button>
 
 </form>
-</div>
+
+    </th>
+    <th>
+
+    <form action="<?php echo SVRURL ?>elimina_logotipo.php" method="post">
+
+<button   title="Remover logotipo" type="submit" class="btn btn-outline-danger" >Remover logotipo</button>
+
+</form>
+    </th>
+  </tr>
+</table>
 
 
+
+
+
+<br><br>
+<img title="Informação" src="images/informacao.svg" alt="Informação" width="3%" height="3%" />
+<label>(Ao inserir os dados obrigatórios (a verde), os anteriores serão substituídos) </label>  
+<br><br>
 <form name="a" action="gravaesc" method="post" enctype="multipart/form-data">
 
                     
 
                     <label>Logotipo (imagem: PNG) (tamanho: 120px larg x 110px alt): </label>  <br>  
-                  <input   accept="image/png" size=50 type="file" name = "logo" id="img" onchange="validateImage()" />
+                  <input   accept="image/png" size="50" type="file" name = "logo" id="img" onchange="validateImage()" />
                 
                     <!--  <input type="file" multiple accept=".png"/>    -->
 
 
 
-                     &nbsp; &nbsp;
        
-<br><br>
-<label>(Ao inserir os dados obrigatórios (a verde), os anteriores serão substituídos) </label>  
+
+<br>
+
                     <br />  <br />
                  
                     <label>Nome da escola/instituição: </label>  
@@ -260,26 +327,30 @@ function(isConfirm){
                      <br>     
                     <label>Site: (http://www.....)  </label>  
                     <br>
-                     <input style="background-color:#CEF6CE" required size="80" type = "text" name="site" placeholder="http://www."">
+                     <input style="background-color:#CEF6CE" required size="80" type = "text" name="site" placeholder="http://www.">
                      <br>
                      <label>Morada: </label>  
                     <br>
-                     <input style="background-color:#CEF6CE" size="80" type = "text" name="morada" placeholder="Morada"">
+                     <input style="background-color:#CEF6CE" size="80" type = "text" name="morada" placeholder="Morada">
                      <br>
                      <label>Código Postal (0000-000): </label>  
                     <br>
                      <input maxlength="8" pattern="\d{4}-\d{3}"
-                     style="background-color:#CEF6CE" size="80" type = "text" name="codpostal" placeholder="Código Postal"">
-                     <br>
+                     onBlur="validarCP();" id="cp"
+                     style="background-color:#CEF6CE" size="80" type = "text" name="codpostal" placeholder="Código Postal">
+                     <span id="cp_err"></span>
+                     <br>  <br>
                      <label>Localidade: </label>  
                     <br>
-                     <input style="background-color:#CEF6CE" size="80" type = "text" name="localidade" placeholder="Localidade"">
+                     <input style="background-color:#CEF6CE" size="80" type = "text" name="localidade" placeholder="Localidade">
                      <br>
           
-                     <label>Telefone: </label>  
+                     <label>Contato: </label>  
                     <br>
-                     <input maxlength="9" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  
-                     style="background-color:#CEF6CE" size="80" type = "text" name="telefone" placeholder="Telefone"">
+                     <input onBlur="cont_validation();" 
+                     maxlength="9" 
+                                  style="background-color:#CEF6CE" size="80" type = "text" name="telefone" placeholder="Contato" id="con">
+                     <span id="con_err"></span>
                     
 
                      <br />  <br />
