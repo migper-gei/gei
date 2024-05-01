@@ -363,9 +363,9 @@ if (!empty($_POST["escola"])) {
 
 
 $sql = "SELECT DISTINCT(s.nome) as no,s.id 
-FROM salas s, equipamento e
+FROM salas s, equipamento e, outro_equipamento oe
 where s.id=e.id_sala
-and s.id_escola=$esc
+and s.id_escola=$esc or oe.id_sala=s.id
 order by nome";
 
 $result = mysqli_query($db,$sql);

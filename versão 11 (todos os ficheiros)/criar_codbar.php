@@ -21,7 +21,7 @@ span { font-size: 18px;}
 		include 'barcode128.php';
 		
 
-
+		session_start();
 		
 include('config.php');
 

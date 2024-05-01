@@ -22,7 +22,9 @@
       <!-- end loader -->
 
 
-     <?php include ("header.php");?>
+     <?php include ("header.php");
+  
+     ?>
      
 
 
@@ -212,6 +214,9 @@ function(isConfirm){
    
    //echo $idescola;
    
+
+
+
    
    
    $sql2 = "SELECT * FROM escolas ORDER by nome_escola";
@@ -382,8 +387,8 @@ X
 
 
 $sqla =  $db->prepare("SELECT  DISTINCT(s.nome) as no, s.id as sid
-FROM escolas e, salas s, equipamento eq
-where e.id=s.id_escola and eq.id_sala=s.id
+FROM escolas e, salas s, equipamento eq, outro_equipamento oe
+where e.id=s.id_escola and eq.id_sala=s.id or oe.id_sala=s.id
 and e.id=?
 order by s.nome");
 
@@ -447,7 +452,7 @@ if ( $_SESSION['tipo']==1)
 
 $sqla2 =  $db->prepare("SELECT  DISTINCT(s.nome) as no, s.id as sid
 FROM escolas e, salas s, equipamento eq
-where e.id=s.id_escola and eq.id_sala=s.id
+where e.id=s.id_escola and eq.id_sala=s.id 
 and e.id=?
 order by s.nome");
 

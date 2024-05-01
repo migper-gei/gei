@@ -1,11 +1,21 @@
 <?php
+session_start();
+
+
 require_once("fpdf/fpdf.php");
+
+
+
+
 
 include('config.php');
 
 //include 'barcode128.php';
 
 $id_escola=base64_decode($_GET["escola"]);
+
+
+echo $id_escola;
 
 $sa=$_POST['salaet'];
 
@@ -29,8 +39,8 @@ $leti = "70"; // Largura da Etiqueta (mm)
 $aeti = "27"; // Altura da Etiqueta (mm)
 $ehet = "3";//"3.2"; // Espaço horizontal entre as Etiquetas (mm)
 
-
-$pdf = new FPDF();
+ob_start();
+$pdf=new FPDF();
 $pdf->AddPage("P","A4");
 
 //$pdf->Open(); // inicia documento
@@ -112,5 +122,5 @@ $coluna = $coluna+1;
 }
 
 $pdf->Output();
-
+ob_end_flush();
 ?>

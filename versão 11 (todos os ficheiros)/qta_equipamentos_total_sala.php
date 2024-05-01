@@ -196,8 +196,8 @@ $next = $page + 1;
 
 <?php
 $sql0 = "select distinct(s.id), s.nome
-from equipamento e, salas s
-where e.id_sala=s.id and s.id_escola=$idescola
+from equipamento e, salas s, outro_equipamento oe
+where e.id_sala=s.id and s.id_escola=$idescola or s.id=oe.id_sala
 order by s.nome asc";
 $result0 = mysqli_query($db,$sql0);
 ?>
@@ -332,19 +332,19 @@ order by oe.nomeoutro ";
 
 
 <tr>
-<td>  </td>
+<td   width="45%"  scope="row"> </td>
 
-                    <td width="30%"  scope="row"><?php  echo $row5['nomeoutro'];  ?>
+                    <td width="40%"  scope="row"><?php  echo $row5['nomeoutro'];  ?>
                
                                      
                      </td>
 
 
-                    <td width="35%" contenteditable="true" >
+                    <td width="15%" contenteditable="true" >
                     
-                    <?php  echo $row5['so']; 
+                    <?php  echo $row5['so']; ?>
                    
-                    ?>
+                    
                     
                  
                     </td>
