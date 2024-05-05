@@ -89,6 +89,7 @@ RewriteRule ^gravasala$ grava_sala.php [L]
 RewriteRule ^copiasala/([0-9-/]+)$ copia_sala.php?url=$1 [QSA,L]
 RewriteRule ^importarsalas$ importar_salas.php [L]
 RewriteRule ^eliminasalasemequi/([0-9-/]+)$ elimina_sala_semequi.php?url=$1 [QSA,L]
+RewriteRule ^salasnum$ salas_num_escola.php [L]
 
 
 RewriteRule ^utiliz$ utilizadores.php [L]
