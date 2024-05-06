@@ -214,7 +214,7 @@ $result3=mysqli_query($db,$sql3);
 Dados da avaria:
 <br>
 <li class="list-group-item">  
-<b>Escola / Sala / Equipamento:</b>
+<b>Instituição / Sala / Equipamento:</b>
 
 <?php echo $row2['nome_escola']; echo(' / ');
                     echo $row2['nome']; echo(' / '); echo $row2['nomeequi'];?>
