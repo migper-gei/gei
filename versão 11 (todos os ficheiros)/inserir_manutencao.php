@@ -123,9 +123,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">MANUTENÇÕES >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Manutenções >> Inserir manutenção 
-                        <br><?php echo $ns ?> 
+                     <h2><?php echo $ns ?> 
                   | <?php echo $ne ?>
                   </h2>
 
@@ -267,7 +267,7 @@ $result3=mysqli_query($db,$sql3);
 
 ?>
 
-<br>
+
 
 <br>
 <label>Data: </label>  
@@ -275,12 +275,12 @@ $result3=mysqli_query($db,$sql3);
      size="10" type = "date" name = "data" >
      <br>   <br>
      <label>Pessoa que realizou: </label>  <br>
-    <input required style="background-color:#CEF6CE" size=40 type = "text" name="pessoa"  />
+    <input required style="background-color:#CEF6CE;Width:100%" size=40 type = "text" name="pessoa"  />
     <br> 
     <br>
 
 <br>
-Escolha os PCs em que deseja efetuar a manutenção:
+Escolha os equipamentos em que deseja efetuar a manutenção:
 <!--
 <div style="visibility:hidden; color:red; " id="chk_option_error">
 Selecionar pelo menos uma opção.
@@ -363,14 +363,14 @@ while($row4=mysqli_fetch_array($result4))
 
 <br><br>
                    <label>Observações: </label>  <br>  
-                   <textarea  rows="5" cols="80"  name="obs"></textarea>
+                   <textarea  style="width:100%" rows="5"   name="obs"></textarea>
                   
     <br /><br />
       
 
 
                  
-    <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Inserir"/>   
+    <div  style=" text-align:center;width:100%"> <input  type = "submit" value = "Inserir"/>   
     </div>
 
               

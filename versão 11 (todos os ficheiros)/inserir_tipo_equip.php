@@ -39,8 +39,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> TIPOS DE EQUIPAMENTO >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Inserir tipos equipamento</h2>
+               
                   </div>
                </div>
             </div>
@@ -61,9 +62,9 @@ include("msg_bemvindo.php");
 
 <form action = "<?php echo SVRURL ?>gravatequip" method = "post" >
                     <label>Nome do tipo de equipamento: </label>  <br>  
-                    <input size=50 type = "text" name = "nome"  required style="background-color:#CEF6CE"/>
+                    <input  type = "text" name = "nome"  required style="background-color:#CEF6CE;width:100%"/>
            
-                                    <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Inserir"/>   
+                                    <div  style=" text-align:center;width:100%"> <input  type = "submit" value = "Inserir"/>   
     </div>
                          
                  

@@ -158,8 +158,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">AVARIAS >> EQUIPAMENTO</a>
                <div class="titlepage">
-                     <h2>Avarias do equipamento<br> <?php echo($noeq);?>
+                     <h2> <?php echo($noeq);?>
                      <br>  <?php echo($ns);?>
                      |
                      <?php echo($ne);?> </h2>
@@ -270,7 +271,7 @@ $totallinhas=mysqli_num_rows($result);
             <thead>
                 <tr class="table-success">
                  
-                    <th scope="col">Ano letivo(civil) / Período (Semestre)</th>
+                    <th scope="col">Ano / Período</th>
                     <th scope="col">Avaria</th>
                     <th scope="col">Reparação</th>
              

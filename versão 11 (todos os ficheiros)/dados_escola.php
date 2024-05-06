@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES</a>
                <div class="titlepage">
-                     <h2>Escolas / Instituições</h2>
+                     <h2>Instituições</h2>
                   </div>
                </div>
             </div>
@@ -54,7 +55,7 @@ include("sessao_timeout.php");
                <div class="row">
                   <div class="col-md-8 offset-md-3">
               
-                        
+               
 
 <?php
 include("msg_bemvindo.php");
@@ -63,7 +64,7 @@ include("msg_bemvindo.php");
 
    
     <img src="<?php echo SVRURL ?>images/informacao.svg" alt="Informação">
-        Só é possível eliminar escolas/instituições sem salas. 
+        Só é possível eliminar instituições sem salas. 
 
         <br>  <br>
         <?php 
@@ -129,7 +130,7 @@ s1=s;
    swal({
 
   title: "Deseja eliminar?",
- text: "Escola: "+s1,
+ text: "Instituição: "+s1,
   type: "warning",
   showCancelButton: true,
   //confirmButtonColor: "#DD6B55",
@@ -175,7 +176,7 @@ function(isConfirm){
             <thead>
                 <tr class="table-success">
                
-                    <th  scope="col">Nome da escola/instituição</th>
+                    <th  width="80%" scope="col">Nome</th>
                    
                         
                      
@@ -205,7 +206,7 @@ function(isConfirm){
                     ?>
                 <tr>
                     
-                    <td width="40%"  scope="row">
+                    <td width="80%"  scope="row">
                         <?php echo $row['nome_escola']; ?>
 
                         <?php 

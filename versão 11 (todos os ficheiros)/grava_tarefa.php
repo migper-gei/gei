@@ -46,8 +46,9 @@ $rows11 =mysqli_fetch_row($result11);
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> TAREFAS >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Gravar tarefa <br> <?php echo $rows11[0] ?></h2>
+                     <h2> <?php echo $rows11[0] ?></h2>
                   </div>
                </div>
             </div>

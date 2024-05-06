@@ -110,11 +110,11 @@ $ne = $rows11[0];
 
 if ($op=='t')
 {
-$op2='Todos os anos letivos/civis';
+$op2='Todos os anos';
 }
 elseif ($op=='al')
 {
-$op2='Ano letivo/civil';
+$op2='Ano';
 
 
 }
@@ -148,8 +148,9 @@ $rows3 =mysqli_fetch_row($result3);
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> EQUIPAMENTOS COM MAIS AVARIAS (TOP 10)</a>
                <div class="titlepage">
-                     <h2>Listagens >> Equipamentos com mais avarias <br>top 10 - <?php echo $op2?> 
+                     <h2> <?php echo $op2?> 
                     <br><?php echo $ne;?>
                     </h2>
 
@@ -157,10 +158,10 @@ $rows3 =mysqli_fetch_row($result3);
                       <h4>
                      <a style="color:black;" class="underlineHover" title="Equipamentos com mais avarias - top 10 (todos os anos letivos)" 
                        href="<?php echo SVRURL ?>equipamentos_mais_avarias_top.php?op=t&&ies=<?php echo base64_encode($idescola); ?>">
-                       Todos os anos letivos/civis </a>  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   
+                       Todos os anos </a>  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   
                        <a style="color:black;" class="underlineHover" title="Equipamentos com mais avarias - top 10 (ano letivo)" 
                        href="<?php echo SVRURL ?>equipamentos_mais_avarias_top.php?op=al&&ies=<?php echo base64_encode($idescola); ?>">
-                        Ano letivo/civil: <?php echo $rows3[0]; ?></a>
+                        Ano: <?php echo $rows3[0]; ?></a>
                           </h4>
                   </div>
                </div>
@@ -251,7 +252,7 @@ $next = $page + 1;
             <thead>
                 <tr class="table-success">
                     <th scope="col">Equipamento</th>
-                    <th scope="col">Ano letivo/civil</th>
+                    <th scope="col">Ano</th>
                     <th class="js-sort-number" scope="col">Nº avarias</th>
                   
                                  

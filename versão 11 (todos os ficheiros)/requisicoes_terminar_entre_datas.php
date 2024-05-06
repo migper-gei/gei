@@ -229,10 +229,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> REQUISIÇÕES A TERMINAR ENTRE DATAS</a>
                <div class="titlepage">
-                     <h2>Listagens >> Requisições a terminar entre datas   
-                     <br> 
-                   Entre <?php echo date('d/m/Y',strtotime($d1)) ?>  e  <?php echo date('d/m/Y',strtotime($d2)) ?> 
+                     <h2> <?php echo date('d/m/Y',strtotime($d1)) ?>  a  <?php echo date('d/m/Y',strtotime($d2)) ?> 
                    <br><?php echo $ne ?></h2>
                      
                   </div>

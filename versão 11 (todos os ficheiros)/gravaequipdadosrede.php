@@ -38,6 +38,7 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">EQUIPAMENTOS >> INSERIR</a>
                <div class="titlepage">
                      
                   </div>

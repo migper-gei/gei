@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> TIPOS DE MANUTENÇÃO >> IMPORTAR</a>
                <div class="titlepage">
-                     <h2>Importar tipos de manutencão</h2>
+              
                   </div>
                </div>
             </div>
@@ -242,7 +243,7 @@ window.location = "<?php echo SVRURL ?>tiposmanuten";
 
 
 ?>
-<br>
+<br><br>
 
 <form enctype="multipart/form-data" method="post" action="<?php echo SVRURL ?>importar_tiposmanuten.php">
                 <div class="form-group">
@@ -254,7 +255,7 @@ window.location = "<?php echo SVRURL ?>tiposmanuten";
                 </div>
                 <br><br>
                 <div class="form-group">
-                <div  style=" text-align:center;width:90%"> <input name="submit" type = "submit" value = "Importar"/>   
+                <div  style=" text-align:center;width:100%"> <input name="submit" type = "submit" value = "Importar"/>   
                </div>
             </form>
 

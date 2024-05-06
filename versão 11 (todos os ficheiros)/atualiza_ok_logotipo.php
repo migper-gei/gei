@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> GERAIS </a>
                <div class="titlepage">
-                     <h2>Dados da Escola/Agrupamento</h2>
+                  
                   </div>
                </div>
             </div>
@@ -181,6 +182,9 @@ $id = $rows[0];
 $totalesc = $rows[1];
 
 //echo $totalesc;
+
+
+
 
 if ($totalesc>0)
 {

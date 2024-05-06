@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> OUTROS EQUIPAMENTOS >> IMPORTAR</a>
                <div class="titlepage">
-                     <h2>Importar outros equipamentos</h2>
+                    
                   </div>
                </div>
             </div>
@@ -75,8 +76,7 @@ function showesc(escola) {
 
 
 
-<br>
-<br>
+
 
 
 
@@ -86,13 +86,7 @@ function showesc(escola) {
 
 
 
-<label>ESCOLA: </label>  
-
-
-
-
-
-<select  style="width:310px;" class="btn btn-info dropdown-toggle" name="escola" onChange="showesc(this.value);">
+<select  style="width:100%" class="btn btn-info dropdown-toggle" name="escola" onChange="showesc(this.value);">
 
 
 <?php
@@ -133,6 +127,8 @@ echo('</select>');
 ?>
 
 </form>
+
+<br>
 
 
 <?php
@@ -178,7 +174,6 @@ $resulta = mysqli_query($db,$sqla);
 
 
 
-
 <form enctype="multipart/form-data" method="post" action="<?php echo SVRURL ?>importar_outro_equip_ok.php">
                
              
@@ -216,7 +211,7 @@ while($rowa=mysqli_fetch_array($resulta))
 
 
 
-<br><br>
+<br><br><br>
 
 
 
@@ -230,7 +225,7 @@ while($rowa=mysqli_fetch_array($resulta))
                 </div>
                 <br>
                 <div class="form-group">
-                <div  style=" text-align:center;width:90%"> <input name="submit" type = "submit" value = "Importar"/>   
+                <div  style=" text-align:center;width:100%"> <input name="submit" type = "submit" value = "Importar"/>   
     </div>
                          
                  

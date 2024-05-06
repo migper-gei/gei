@@ -42,10 +42,13 @@ include("sessao_timeout.php");
       <div  class="about">
          <div class="container">
             <div class="row">
-               <div class="col-md-12">
-               <div class="titlepage">
-                     <h2>Equipamentos</h2>
-                  </div>
+               <div >
+             <!--
+                     <h3><b>EQUIPAMENTOS</b></h3>
+-->    
+
+                     <a href="#" class="btn btn-secondary disabled">EQUIPAMENTOS</a>
+
                </div>
             </div>
             
@@ -147,7 +150,7 @@ ne1=ne;
    swal({
 
   title: "Deseja eliminar todos os equipamentos informáticos (todas as avarias serão eliminadas)?",
- text: "Escola: "+es1+" ",
+ text: "Instituição: "+es1+" ",
   type: "warning",
   showCancelButton: true,
   //confirmButtonColor: "#DD6B55",
@@ -198,15 +201,15 @@ function(isConfirm){
 
    <div style="text-align: left;">
 
-
-   <h3 style="color:black;">ESCOLA/INSTITUIÇÃO:
+<!--
+   <h3 style="color:black;">Instituição:
    
- 
+-->
    
    
-   <select title="Escolha a escola" 
+   <select title="Escolha a instituição" 
    class="btn btn-info dropdown-toggle"
-    name="escola" onChange="showescola(this.value);"  style="width:310px;" >
+    name="escola" onChange="showescola(this.value);"  style="width:100%;" >
    
    
    <?php
@@ -250,6 +253,9 @@ function(isConfirm){
    
 </form>
 </h3>
+
+
+<br>
 
 <?php
 $limit = 1;
@@ -347,7 +353,7 @@ X
 
 <h3>
 
-<button style="width:310px;" title="Inserir equipamento" type="submit" class="btn btn-outline-primary" >Inserir equipamento informático</button>
+<button style="width:100%;" title="Inserir equipamento" type="submit" class="btn btn-outline-primary" >Inserir equipamento informático</button>
 
 
 
@@ -365,12 +371,11 @@ X
 
 <h3>
 
-<button style="width:310px;" title="Inserir outro equipamento" type="submit" class="btn btn-outline-primary" >Inserir outro equipamento</button>
+<button style="width:100%;" title="Inserir outro equipamento" type="submit" class="btn btn-outline-primary" >Inserir outro equipamento</button>
 
 
 
 
-</h3>
   
 </form>
 
@@ -380,8 +385,7 @@ X
 <?php
 }
 ?>
-
-
+<br>
 
 <?php
 
@@ -406,7 +410,7 @@ $resulta = $sqla-> get_result();
 
 <form action="<?php echo SVRURL ?>verequipsala?x=<?php echo base64_encode(0) ?>&&ies=<?php echo base64_encode($esc)?>" method="post" >
 
-<button style="width:310px;"  type="submit" class="btn btn-outline-primary" title="Ver equipamento da sala">Ver da sala</button>
+<button style="width:100%;"  type="submit" class="btn btn-outline-primary" title="Ver equipamento da sala">Ver da sala</button>
 
 
 
@@ -415,7 +419,7 @@ $resulta = $sqla-> get_result();
 
 <br>
 
-<select style="width:310px;"  class="btn btn-outline-secondary dropdown-toggle" name="sala" required>
+<select style="width:100%;"  class="btn btn-outline-secondary dropdown-toggle" name="sala" required>
 
 
 <?php
@@ -468,12 +472,12 @@ $resulta2 = $sqla2-> get_result();
 
     <h3 >
     
-    <button style="width:310px;" title="Ver etiquetas" type="submit" class="btn btn-outline-primary" >Ver etiquetas da sala</button>
+    <button style="width:100%;" title="Ver etiquetas" type="submit" class="btn btn-outline-primary" >Ver etiquetas da sala</button>
 
     
 <br>
 
-<select style="width:310px;"  class="btn btn-outline-secondary dropdown-toggle" name="salaet" required>
+<select style="width:100%;"  class="btn btn-outline-secondary dropdown-toggle" name="salaet" required>
 
 
 <?php
@@ -514,13 +518,13 @@ $resulta3 = $sqla3-> get_result();
 
     <h3 >
     
-    <button style="width:310px;" title="Ver Código de barras" type="submit" class="btn btn-outline-primary" >Ver código de barras da sala</button>
+    <button style="width:100%;" title="Ver Código de barras" type="submit" class="btn btn-outline-primary" >Ver código de barras da sala</button>
    
 
     
 <br>
 
-<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" name="salacod" required>
+<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" name="salacod" required>
 
 
 <?php
@@ -562,9 +566,9 @@ if ( $_SESSION['tipo']<>4)
 
     <form name="requisi" action="<?php echo SVRURL ?>reqequip?x=<?php echo base64_encode(0) ?>&&rei=<?php echo base64_encode($esc) ?>" method="post">
 
-    <button onclick="return clickMe3();" style="width:310px;" title="Inserir requisição" type="submit" class="btn btn-outline-primary" >Inserir requisição para o dia</button>
+    <button onclick="return clickMe3();" style="width:100%" title="Inserir requisição" type="submit" class="btn btn-outline-primary" >Inserir requisição para o dia</button>
     <br>
-<input   value="<?php echo date("Y-m-d",$mod_date);?>"   style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name = "datareq" > 
+<input   value="<?php echo date("Y-m-d",$mod_date);?>"   style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name = "datareq" > 
  
 </form>
 
@@ -574,7 +578,7 @@ if ( $_SESSION['tipo']<>4)
 
     <form action="<?php echo SVRURL ?>myrequi" method="post">
 
-    <button style="width:310px;"  title="Minhas requisições" type="submit" class="btn btn-outline-primary" >Minhas requisições</button>
+    <button style="width:100%;"  title="Minhas requisições" type="submit" class="btn btn-outline-primary" >Minhas requisições</button>
    
 </form>
 

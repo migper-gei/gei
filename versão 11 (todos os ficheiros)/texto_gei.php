@@ -3,6 +3,9 @@
    
 <!--Links de acesso rápido:-->     
 <?php
+
+
+
 if ($_SESSION['tipo']<>1)
 {
   ?>
@@ -29,7 +32,7 @@ if ($_SESSION['tipo']<>1)
 
 <h3 >
 
-<button style="width:300px;" title="Inserir avaria" type="submit" class="btn btn-outline-primary" >Inserir avaria</button>
+<button style="width:100%;" title="Inserir avaria" type="submit" class="btn btn-outline-primary" >Inserir avaria</button>
 </h3>
 </form>
 
@@ -39,7 +42,7 @@ if ($_SESSION['tipo']<>1)
 
 <h3 >
 
-<button style="width:300px;" title="Minhas avarias" type="submit" class="btn btn-outline-primary" >Minhas avarias</button>
+<button style="width:100%;" title="Minhas avarias" type="submit" class="btn btn-outline-primary" >Minhas avarias</button>
 </h3>
 </form>
 
@@ -53,7 +56,7 @@ if ($_SESSION['tipo']==1)
 
 <form action="<?php echo SVRURL ?>last5avarias" method="post" >
 
-<button style="width:300px;" type="submit" class="btn btn-outline-primary" title="Últimas 5 avarias registadas">Últimas 5 avarias registadas</button>
+<button style="width:100%;" type="submit" class="btn btn-outline-primary" title="Últimas 5 avarias registadas">Últimas 5 avarias registadas</button>
        </form >
 
 
@@ -81,7 +84,7 @@ if ($_SESSION['tipo']<>4)
          <li class="list-group-item"> 
          <form action="<?php echo SVRURL ?>equip" method="post">
 <h3 >
-<button style="width:300px;" title="Inserir requisição" type="submit" class="btn btn-outline-primary" >Inserir requisição</button>
+<button style="width:100%;" title="Inserir requisição" type="submit" class="btn btn-outline-primary" >Inserir requisição</button>
 </h3>
 </form>
 
@@ -92,7 +95,7 @@ if ($_SESSION['tipo']<>4)
          <li class="list-group-item">  
          <form action="<?php echo SVRURL ?>myrequi" method="post">
 <h3 >
-<button style="width:300px;" title="Minhas requisições" type="submit" class="btn btn-outline-primary" >Minhas requisições</button>
+<button style="width:100%;" title="Minhas requisições" type="submit" class="btn btn-outline-primary" >Minhas requisições</button>
 </h3>
 </form>
 

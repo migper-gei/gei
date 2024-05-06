@@ -97,8 +97,9 @@ $ne = $rows11[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> TAREFAS >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Inserir tarefa <br> <?php echo $ne ?></h2>
+                     <h2> <?php echo $ne ?></h2>
                   </div>
                </div>
             </div>
@@ -148,7 +149,7 @@ while($rowa=mysqli_fetch_array($resulta))
 
 <br><br>
 <label>Descrição: </label>  <br>  
-                   <textarea  required style="text-align: justify;background-color:#CEF6CE" rows="5" cols="70"  name="descricao"></textarea>
+                   <textarea  required style="text-align: justify;background-color:#CEF6CE;width:100%" rows="5" cols="70"  name="descricao"></textarea>
                    <br><br>
                     <label>Urgência: </label>  
                    
@@ -169,7 +170,7 @@ echo('<option value="">Escolha a urgência</option>');
 <br><br>
 
                      <label>Criado por: </label>  <br>  
-                    <input size=50 type = "text" name = "criado_por"  required style="background-color:#CEF6CE"/><br /><br />
+                    <input  type = "text" name = "criado_por"  required style="background-color:#CEF6CE;width:100%"/><br /><br />
                    
                     <label>Data: </label>  
                     <input style="background-color:#CEF6CE" required  value="<?php echo date("Y-m-d"); ?>"            
@@ -178,7 +179,7 @@ echo('<option value="">Escolha a urgência</option>');
 <br><br>
 
                     
-                    <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Inserir"/>   
+                    <div  style=" text-align:center;width:100%"> <input  type = "submit" value = "Inserir"/>   
     </div>
                  </form>
 

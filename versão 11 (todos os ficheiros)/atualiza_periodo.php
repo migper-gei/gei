@@ -42,8 +42,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> PERÍODOS >> ATUALIZAR</a>
                <div class="titlepage">
-                     <h2>Atualizar Períodos / Semestres</h2>
+                  
                   </div>
                </div>
             </div>
@@ -211,8 +212,8 @@ else {
 
 
 <form  onSubmit="return validardatas();" action = "<?php echo SVRURL ?>atualiza_ok_periodo.php?pi=<?php echo base64_encode($row['id']);?>" method = "post" >
-                    <label>Ano Letivo (aaaa/aaaa): </label>  <br>  
-                    <input class="underlineHover" placeholder="aaaa/aaaa" pattern="[0-9]+/[0-9]{4,4}" size=10 type = "text" name="anoletivo"  required value="<?php echo $row['ano_lectivo']; ?>"/><br /><br />
+                    <label>Ano: </label>  <br>  
+                    <input style="width:100%" class="underlineHover" placeholder="Ano"  size=10 type = "text" name="anoletivo"  required value="<?php echo $row['ano_lectivo']; ?>"/><br /><br />
                     
                     <!--pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
                     <select name="anoletivo">
@@ -221,7 +222,7 @@ else {
                         </select>
                     -->
                    
-                     <label>Período/Semestre: </label>  <br>  
+                     <label>Período: </label>  <br>  
 
                      <select name="periodo">
                             <?php 
@@ -277,7 +278,7 @@ else {
                     value="<?php echo $row['data_fim']; ?>"  required   size="10" type = "date" name="dataf" >          
                 
                     <br />
-                    <div  style=" text-align:center;width:90%"> 
+                    <div  style=" text-align:center;width:100%"> 
                     <input type = "submit" value = "Atualizar"/>     </div>
                  </form>
 

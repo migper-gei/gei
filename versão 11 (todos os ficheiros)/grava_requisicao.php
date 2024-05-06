@@ -39,6 +39,7 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">EQUIPAMENTOS >> REQUISIÇÕES >> INSERIR</a>
                <div class="titlepage">
                      <h2>Grava requisicao</h2>
                   </div>

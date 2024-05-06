@@ -103,8 +103,9 @@ $ns = $rows12[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">AVARIAS >> SALA</a>
                <div class="titlepage">
-                     <h2>Avarias da sala<br> <?php echo($ns);?> 
+                     <h2> <?php echo($ns);?> 
                      | <?php echo($ne);?>
                     </h2>
                   </div>

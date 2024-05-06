@@ -77,8 +77,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> SALAS</a>
                <div class="titlepage">
-                     <h2>Configurações >> Salas </h2>
+            
                   </div>
                </div>
             </div>
@@ -107,13 +108,13 @@ function showesc(escola) {
 </script>
 
 
-<br>
+
 
 <div style="  text-align: center;">   
       
-<form action="<?php echo SVRURL ?>salas_num_escola.php" method="post">
+<form action="<?php echo SVRURL ?>salasnum" method="post">
 
-<button title="Ver nº de salas por escola" type="submit" class="btn btn-outline-primary" > Ver nº de salas por escola/instituição</button>
+<button title="Ver nº de salas por escola" type="submit" class="btn btn-outline-primary" > Ver nº de salas por instituição</button>
 
 </form>
 
@@ -131,9 +132,9 @@ function showesc(escola) {
 
 <div style="text-align: left;">
 
-
+<!--
 <h3 style="color:black;">ESCOLA/INSTITUIÇÃO:
-
+-->
 
 <?php
 //echo base64_decode($_GET["esi"]);
@@ -165,7 +166,7 @@ echo 'req: '.($_REQUEST["escola"]);
 */
 ?>
 
-<select style="width:310px;" class="btn btn-info dropdown-toggle" name="escola" onChange="showesc(this.value);" >
+<select style="width:100%;" class="btn btn-info dropdown-toggle" name="escola" onChange="showesc(this.value);" >
 
 
 <?php
@@ -473,7 +474,7 @@ ne1=ne;
    swal({
 
   title: "Deseja eliminar todas as salas sem equipamento?",
- text: "Escola: "+es1+" ",
+ text: "Instituição: "+es1+" ",
   type: "warning",
   showCancelButton: true,
   //confirmButtonColor: "#DD6B55",
@@ -527,7 +528,7 @@ ne1=ne;
    swal({
 
   title: "Deseja eliminar?",
- text: "Sala: "+s1+" (Escola: "+ne1+")",
+ text: "Sala: "+s1+" (Instituição: "+ne1+")",
   type: "warning",
   showCancelButton: true,
   //confirmButtonColor: "#DD6B55",
@@ -577,7 +578,7 @@ function(isConfirm){
         <!-- Datatable class="table table-striped"-->
         <table   class="table table-striped" id="js-sort-table"  >
             <thead>
-                <tr class="table-success">
+                <tr class="table-success" >
                  
                     <th  scope="col">Nome</th>
                     <th   scope="col">Localização</th>
@@ -621,23 +622,21 @@ function(isConfirm){
                     ?>
                 <tr>
              
-                      <td width="25%"  scope="row"><?php echo $row['nome']; ?></td>
+                      <td width="20%"  scope="row"><?php echo $row['nome']; ?></td>
                     <td width="20%" ><?php echo $row['localizacao']; ?></td>
-                    <td width="35%" ><?php echo $row['departamento']; ?></td>
-                    <td width="10%" ><?php echo $row['equip_requisitavel']; ?></td>
+                    <td width="25%" ><?php echo $row['departamento']; ?></td>
+                    <td width="7%" ><?php echo $row['equip_requisitavel']; ?></td>
                     
                     <?php
                       if ($_SESSION['tipo']==1 )
                       {
 
 
-                        
-
                      ?>
-                    <td width="5%" >
+                    <td width="3%">
                     <a title="Atualizar" href="<?php echo SVRURL ?>atualizasala/<?php echo base64_encode($n) ?>">
                     <img src="<?php echo SVRURL ?>images/atualizar.svg" alt="Atualizar" >  </a></td>
-                    <td width="5%"  >
+                    <td width="3%">
                     <?php
                     //&& $row['equip_requisitavel']<>'Sim'
                       if ($contasala==0 )

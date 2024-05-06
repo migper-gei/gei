@@ -121,9 +121,10 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">EQUIPAMENTOS >> ATUALIZAR</a>
                <div class="titlepage">
-                     <h2>Atualizar equipamento (identificação) <br>
-                     <?php echo $row3['nomeequi'] ?>  | <?php echo $row3['nome'] ?> | <?php echo $row3['nome_escola'] ?>
+                     <h2>
+                     <?php echo $row3['nomeequi'] ?>  | <?php echo $row3['nome'] ?> <br> <?php echo $row3['nome_escola'] ?>
                   </h2>
 
                     <br>
@@ -278,17 +279,17 @@ echo('<option value=""> </option>');
                                               
 <br>
 
-<input required type = "text" name = "nomeq" value="<?php echo $row3['nomeequi']?>" style=" background-color:#CEF6CE;" >
+<input required type = "text" name = "nomeq" value="<?php echo $row3['nomeequi']?>" style="width:90%; background-color:#CEF6CE;" >
                     
               
 <br>
 
 
      
-                     <input  type = "text" name = "nserie" placeholder="Nº de série">  
+                     <input  style="width:90% " type = "text" name = "nserie" placeholder="Nº de série">  
                      <br>  
           
-                     <input    type = "text" name = "marcamod" placeholder="Marca/Modelo"> 
+                     <input   style="width:90% " type = "text" name = "marcamod" placeholder="Marca/Modelo"> 
 
                      <br />   
 
@@ -300,7 +301,9 @@ echo('<option value=""> </option>');
                      <br />  
                  
                   <br>
-                   <textarea  type = "text" rows="5" cols="50"  name="obs" placeholder="Observações" ><?php echo $row3['observacoes']?></textarea>
+                
+                   <textarea style="width:100%;display: block;    margin-left: auto;    margin-right: auto;"
+                    type = "text" rows="5"   name="obs" placeholder="Observações" ><?php echo $row3['observacoes']?></textarea>
                    <br>
       </div>
 

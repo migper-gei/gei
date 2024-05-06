@@ -96,8 +96,9 @@ $ne = $rows11[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">EQUIPAMENTOS >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Equipamentos >> Inserir outro equipamento<br>
+                     <h2>Outro equipamento<br>
                      <?php echo $ne ?>
                   </h2>
                   </div>
@@ -166,7 +167,7 @@ method = "post">
 
 
 
-<select name="sala" style=" background-color:#CEF6CE; "  required   >
+<select name="sala" style=" background-color:#CEF6CE;  "  required   >
   
   <?php
 
@@ -210,7 +211,7 @@ echo ("A escola/agrupamento não têm salas.");
                                               
 <br>  <br>
 <label>Nome: </label>  <br>
-<input required type = "text" name = "nomeq" placeholder="Nome" style=" background-color:#CEF6CE;" >
+<input required type = "text" name = "nomeq" placeholder="Nome" style=" background-color:#CEF6CE;width:100%" >
                     
                    
      
@@ -229,7 +230,7 @@ echo ("A escola/agrupamento não têm salas.");
                      <br />  
 
                    <label>Observações: </label>  <br>  
-                   <textarea  rows="5" cols="80"  name="obs"></textarea>
+                   <textarea style=" width:100%"   rows="5" cols="80"  name="obs"></textarea>
                    <br>
 
                      <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Inserir"/>   

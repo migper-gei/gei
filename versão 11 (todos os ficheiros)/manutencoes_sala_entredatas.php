@@ -223,10 +223,11 @@ function(isConfirm){
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">MANUTENÇÕES >> SALA ENTRE DATAS</a>
                <div class="titlepage">
-                     <h2>Manutenções >> Sala 
-                         <br><?php echo($ns); ?> | <?php echo($ne);?>
-                     <br> entre <?php echo date('d/m/Y',strtotime($di));?> e <?php echo date('d/m/Y',strtotime($df));?></h2>
+                     <h2>
+                        <?php echo date('d/m/Y',strtotime($di));?> a <?php echo date('d/m/Y',strtotime($df));?>
+                     <br>  <?php echo($ns); ?> | <?php echo($ne);?> </h2>
                   </div>
                </div>
             </div>

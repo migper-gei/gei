@@ -38,8 +38,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> OUTRO EQUIPAMENTO >> ATUALIZAR</a>
                <div class="titlepage">
-               <h2>Atualizar outro equipamento</h2>
+         
                   </div>
                </div>
             </div>

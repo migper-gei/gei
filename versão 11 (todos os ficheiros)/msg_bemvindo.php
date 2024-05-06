@@ -1,5 +1,7 @@
     <?php
            
+          
+
 
   $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
 
@@ -30,21 +32,34 @@ include("verifica_sessao.php");
   ?>
   &nbsp; 
 
+  <br>  <br>
+  
+ 
+  <table style="width: 100%;" >
+  <tr>
+    <td>
 
-  <h3>
+    
+  <h4>
   <img src="<?php echo SVRURL ?>images/aviso.svg" alt="Reparações a efetuar">
   ATENÇÃO: Existem reparações a efetuar 
   
   <img src="<?php echo SVRURL ?>images/seta.svg">
   <a title="Ver reparações a efetuar" href="<?php echo SVRURL ?>reparafaz?op=t">
   <img src="<?php echo SVRURL ?>images/reparacao.svg" alt="Ver reparações a efetuar">
-  </a>
+  </a></h4>
+    </td>
 
-  &nbsp;  &nbsp;    &nbsp;   &nbsp;   &nbsp; 
-<?php
+    <td>
+    &nbsp;   &nbsp;   &nbsp; 
+      </td>
+
+    <td>
+
+    <?php
   if ($totallinhas2 >0 &&  $_SESSION['tipo'] ==1)
   {
-     echo ('Existem tarefas por realizar');
+     echo ('<h4>'.'Existem tarefas por realizar');
     // echo ('da');
 
   ?>
@@ -53,14 +68,21 @@ include("verifica_sessao.php");
   <a title="Ver tarefas a realizar" href="<?php echo SVRURL ?>tarefas.php?x=<?php echo base64_encode(0) ?>">
   <img src="<?php echo SVRURL ?>images/tarefas.svg" alt="Ver tarefas a realizar">
   </a>
-
+  </h4>
 
   <?php
   }
 ?>
 
 
-</h3>
+
+    </td>  
+
+  </tr>
+
+</table>
+
+
 <?php
       //echo('<br>');
     }

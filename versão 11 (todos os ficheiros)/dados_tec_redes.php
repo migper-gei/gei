@@ -79,8 +79,9 @@ $ne = $rows11[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">EQUIPAMENTOS >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Equipamentos <br> (Dados técnicos e de rede)
+                     <h2>Dados técnicos e de rede
                         <br> <?php echo $ne ?>
 
                      </h2>

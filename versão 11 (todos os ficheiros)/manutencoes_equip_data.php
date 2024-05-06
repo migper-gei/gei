@@ -190,11 +190,12 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">MANUTENÇÕES >> EQUIPAMENTO POR DATA</a>
                <div class="titlepage">
-                     <h2>Manutenções >> MANUTENÇÕES do equipamento 
-                         <br> <?php echo($neq); ?>  <br> 
+                     <h2>
+                          <?php echo($neq); ?> | <?php echo date('d/m/Y',strtotime(($dat)));?><br> 
                          <?php echo($ns);?>  | <?php echo($ne);?> 
-                         <br>  <?php echo date('d/m/Y',strtotime(($dat)));?></h2>
+                        </h2>
                   </div>
                </div>
             </div>

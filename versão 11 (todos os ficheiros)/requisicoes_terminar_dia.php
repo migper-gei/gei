@@ -196,8 +196,10 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> REQUISIÇÕES A TERMINAR NO DIA</a>
+            
                <div class="titlepage">
-                     <h2>Listagens >> Requisições a terminar no dia <?php echo date('d/m/Y',strtotime($d)) ?>  
+                     <h2> <?php echo date('d/m/Y',strtotime($d)) ?>  
                     <br><?php echo $ne ?>
                     </h2> 
                    

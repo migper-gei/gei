@@ -78,8 +78,9 @@ $ne = $rows11[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> SALAS >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Inserir sala <br> <?php echo $ne ?></h2>
+                     <h2><?php echo $ne ?></h2>
                   </div>
                </div>
             </div>
@@ -114,17 +115,17 @@ $_SESSION['token']=$token;
    <input type="hidden" name="token" value="<?php echo $token; ?>" >
 <br>  
                     <label>Nome da sala: </label>  <br>  
-                    <input size=50 type = "text" name ="nome"  required style="background-color:#CEF6CE"/><br /><br />
+                    <input  type = "text" name ="nome"  required style="background-color:#CEF6CE;width:100%;"/><br /><br />
                  
                      <label>Localização: </label>  <br>  
-                    <input size=50 type = "text" name ="localizacao"  required style="background-color:#CEF6CE"/><br /><br />
+                    <input  type = "text" name ="localizacao"  required style="background-color:#CEF6CE;width:100%;"/><br /><br />
                    
                     <label>Departamento / Grupo / Serviço: </label>  <br>  
-                    <input size=50 type = "text" name ="departamento"  /><br /><br />
+                    <input  style="background-color:#CEF6CE;width:100%;" type = "text" name ="departamento"  /><br /><br />
                     
                     <label>Equipamento requisitável: </label>                
 
-                    <select required name="eqreq" required style="background-color:#CEF6CE">
+                    <select required name="eqreq" required style="background-color:#CEF6CE;">
 
 <?php
       echo('<option selected value=""></option>');
@@ -136,11 +137,11 @@ $_SESSION['token']=$token;
 
 
                     
-                    <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Inserir"/>   
+                    <div  style=" text-align:center;width:100%"> <input  type = "submit" value = "Inserir"/>   
     </div>
                  </form>
 
-<form action = "<?php echo SVRURL ?>salas?x=<?php echo base64_encode(1)?>&&esi=<?php echo base64_encode($idescola) ?>" method="post" >
+<form action = "<?php echo SVRURL ?>sala?x=<?php echo base64_encode(1)?>&&esi=<?php echo base64_encode($idescola) ?>" method="post" >
 <input type = "hidden"  value = "<?php echo $sa?>">
 <input title="Voltar" type=image 
 src="<?php echo SVRURL ?>images/voltar.svg"  >

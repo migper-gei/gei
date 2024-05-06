@@ -164,8 +164,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> QUANTIDADE DE EQUIPAMENTO POR TIPO</a>
                <div class="titlepage">
-                     <h2>Listagens >> Quantidade de equipamento <br> Tipo <?php echo($tipoeq);?> | <?php echo($ne);?> </h2>
+                     <h2>  <?php echo($tipoeq);?> | <?php echo($ne);?> </h2>
                   </div>
                </div>
             </div>
@@ -184,10 +185,6 @@ include("msg_bemvindo.php");
 
 
 <?php 
-
-
-
-
 
   // Database
   //include('config.php');
@@ -228,7 +225,7 @@ include("msg_bemvindo.php");
 ?>
 
 
-<br>
+
 
       <!-- Select dropdown -->
       <div class="d-flex flex-row-reverse bd-highlight mb-3">

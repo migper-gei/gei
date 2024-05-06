@@ -167,10 +167,11 @@ $ne = $rows11[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> Nº DE AVARIAS ENTRE DATAS</a>
                <div class="titlepage">
-                     <h2>Listagens >> Nº de avarias <br> 
-                     entre <?php echo date('d/m/Y',strtotime(($di)));?> 
-                     e <?php echo date('d/m/Y',strtotime(($df)));?>
+                     <h2> 
+                     <?php echo date('d/m/Y',strtotime(($di)));?> 
+                     a <?php echo date('d/m/Y',strtotime(($df)));?>
                     <br><?php echo($ne);?>
                     </h2>
                   </div>

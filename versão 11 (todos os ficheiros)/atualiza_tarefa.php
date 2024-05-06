@@ -116,8 +116,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> TAREFAS >> ATUALIZAR</a>
                <div class="titlepage">
-                     <h2>Atualizar tarefa <br> 
+               <h2> 
                      <?php echo $rows11[0] ?></h2>
                   </div>
                </div>
@@ -231,7 +232,7 @@ while($rowa=mysqli_fetch_array($resulta))
 
 
 
-                <textarea required style="text-align: justify;background-color:#CEF6CE" rows="5" cols="80"  name="descricao"><?php echo $row['descricao']?>
+                <textarea required style="text-align: justify;background-color:#CEF6CE;width:100%" rows="5" cols="80"  name="descricao"><?php echo $row['descricao']?>
                 </textarea>
                    <br><br>
 
@@ -271,7 +272,7 @@ else
                     <label>Criado por: </label>  <br>  
                     <input size=50 type = "text" name = "criado_por"  
                     value="<?php echo $row['criado_por']; ?>"
-                    required style="background-color:#CEF6CE"/><br /><br />
+                    required style="background-color:#CEF6CE;width:100%"/><br /><br />
                    
                     <label>Data criação: </label>  
                     <input style="background-color:#CEF6CE" required  
@@ -279,7 +280,7 @@ else
                     size="10" type = "date" name = "data_criacao" >
                     <br /><br />
                     <label>Concluido por: </label>  <br>  
-                    <input size=50 type = "text" name = "concluido_por"  
+                    <input style="width:100%" type = "text" name = "concluido_por"  
                     value="<?php echo $row['concluido_por']; ?>"
                      /><br /><br />
                     
@@ -294,7 +295,7 @@ else
                   <br> <br>
 
 
-                                    <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Atualizar"/>     </div>
+                                    <div  style=" text-align:center;width:100%"> <input  type = "submit" value = "Atualizar"/>     </div>
                  </form>
 
 

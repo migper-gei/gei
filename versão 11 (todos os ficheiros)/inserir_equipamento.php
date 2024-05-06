@@ -96,8 +96,9 @@ $ne = $rows11[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">EQUIPAMENTOS >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Equipamentos >> Inserir equipamento (identificação)<br>
+                     <h2>Identificação<br>
                      <?php echo $ne ?>
                   </h2>
                   </div>
@@ -222,7 +223,7 @@ if ($escdig=="Sim")
 
                     <label>Tipo de equipamento: </label> 
                  
-                    <br>
+                    
                     <?php
 
 
@@ -269,7 +270,7 @@ echo('<option value=""> </option>');
 
 
                 <label>Sala: </label>  
-                <br>
+                
                 &nbsp;   
                 
               <?php
@@ -293,7 +294,7 @@ echo('<option value=""> </option>');
 
 
 
-<select name="sala" style=" background-color:#CEF6CE; "  required   >
+<select name="sala" style=" background-color:#CEF6CE;  "  required   >
   
   <?php
 
@@ -320,7 +321,7 @@ echo('<option value=""> </option>');
  //echo('<h3 style="color:blue;">SALAS ');
  
 
-echo ("A escola/agrupamento não têm salas.");
+echo ("A instituição não têm salas.");
 
 ?>
 
@@ -337,7 +338,8 @@ echo ("A escola/agrupamento não têm salas.");
                                               
 <br>  <br>
 <label>Nome: </label>  <br>
-<input required type = "text" name = "nomeq" placeholder="Nome" style=" background-color:#CEF6CE;" >
+<input required type = "text" name = "nomeq" placeholder="Nome" 
+style=" background-color:#CEF6CE;width:100% " >
                     
                    
      
@@ -350,20 +352,20 @@ echo ("A escola/agrupamento não têm salas.");
              
                       <label>Nº de série: </label>  <br>
      
-                     <input  type = "text" name = "nserie" placeholder="Nº de série">  
+                     <input  style="width:100% "  type = "text" name = "nserie" placeholder="Nº de série">  
                      <br>   <br> 
                      <label>Marca/Modelo:</label>  <br>
-                     <input    type = "text" name = "marcamod" placeholder="Marca/Modelo"> 
+                     <input   style="width:100% "  type = "text" name = "marcamod" placeholder="Marca/Modelo"> 
 
                      <br />       <br />  
                      <label>Data da compra:</label>  
-                     <input  size="10"   type = "date" name = "datacompra" placeholder="Data da compra"> 
+                     <input   size="10"   type = "date" name = "datacompra" placeholder="Data da compra"> 
 
                      <br />  
                      <br />  
 
                    <label>Observações: </label>  <br>  
-                   <textarea  rows="5" cols="80"  name="obs"></textarea>
+                   <textarea  style="width:100% "  rows="5" cols="80"  name="obs"></textarea>
                    <br>
 
                      <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Inserir"/>   

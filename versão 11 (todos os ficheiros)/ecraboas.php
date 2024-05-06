@@ -34,9 +34,9 @@ include ("head.php");?>
             
                <div class="row">
                <div class="col-md-10 offset-md-2">
-
+               <a href="#" class="btn btn-secondary disabled">LINKS DE ACESSO RÁPIDO</a>
               <div class="titlepage">
-                     <h2>Links de acesso rápido</h2>
+                    
                   </div>
    
 
@@ -49,7 +49,7 @@ include("sessao_timeout.php");
 
 
       include("msg_bemvindo.php");
-      echo('<br>');
+      //echo('<br>');
       include("texto_gei.php");
         
 

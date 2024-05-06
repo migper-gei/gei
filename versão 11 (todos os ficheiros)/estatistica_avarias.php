@@ -114,9 +114,10 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> Nº DE AVARIAS (ÚLTIMOS 5 ANOS)</a>
                <div class="titlepage">
-                     <h2>Listagens >> Estatística de avarias <br> últimos 5 anos letivos
-                     <br> <?php echo $ne; ?>
+                     <h2>
+                     <?php echo $ne; ?>
                     </h2>
                   </div>
                </div>
@@ -190,8 +191,8 @@ $next = $page + 1;
         <table class="table table-striped" id="js-sort-table"  >
             <thead>
                 <tr class="table-success">
-                    <th scope="col">Ano Letivo/Civil</th>
-                    <th scope="col">Período/Semestre</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Período</th>
                     <th scope="col">Nº avarias</th>
                  
                                  

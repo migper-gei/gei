@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> UTILIZADORES >> IMPORTAR</a>
                <div class="titlepage">
-                     <h2>Importar utilizadores</h2>
+                    
                   </div>
                </div>
             </div>
@@ -260,7 +261,7 @@ window.location = "<?php echo SVRURL ?>utiliz";
                 </div>
                 <br>
                 <div class="form-group">
-                <div  style=" text-align:center;width:90%"> <input name="submit" type = "submit" value = "Importar"/>   
+                <div  style=" text-align:center;width:100%"> <input name="submit" type = "submit" value = "Importar"/>   
                </div>
                 </div>
             </form>

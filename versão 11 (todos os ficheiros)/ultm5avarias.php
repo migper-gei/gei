@@ -104,10 +104,11 @@ $ne = $rows11[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">AVARIAS >> ÚLTIMAS 5</a>
                <div class="titlepage">
-                     <h2>Avarias >> Últimas 5 avarias registadas
+                     <h2>
 
-                     <br><?php echo $ne?>
+                   <?php echo $ne?>
                      </h2> 
                      
                      
@@ -431,8 +432,8 @@ else {
 
                     <td width="5%">
                          
-                 <a href="enviar_email_reparador.php?ia=<?php echo base64_encode($row['id']);?>&&em=<?php echo base64_encode($em)?>">
-                 <img alt="Enviar email a reparador" src="<?php echo SVRURL ?>images/envelope.svg"> 
+                 <a title="Enviar email ao reparador" href="enviar_email_reparador.php?ia=<?php echo base64_encode($row['id']);?>&&em=<?php echo base64_encode($em)?>">
+                 <img alt="Enviar email ao reparador" src="<?php echo SVRURL ?>images/envelope.svg"> 
                 </a>
                 </td>
                 <?php } ?>

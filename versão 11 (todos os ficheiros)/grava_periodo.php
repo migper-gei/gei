@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> PERÍODOS >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Inserir Períodos / Semestres</h2>
+                    
                   </div>
                </div>
             </div>
@@ -116,7 +117,7 @@ if ($count[0]>0)
     <script>
     
     swal({
-title: 'O ano letivo e período já existem!',
+title: 'O ano e período já existem!',
 text: '<?php echo $al; ?>' + '  -  ' + '<?php echo $np; ?>',
 icon: 'error',
 //buttons: false,

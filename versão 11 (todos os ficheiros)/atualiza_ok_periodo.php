@@ -39,8 +39,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> PERÍODOS >> ATUALIZAR</a>
                <div class="titlepage">
-                     <h2>Inserir Períodos / Semestres</h2>
+                 
                   </div>
                </div>
             </div>

@@ -86,8 +86,9 @@ $ne = $rows11[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">MANUTENÇÕES >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Grava manutenção 
+                     <h2>
                      (<?php echo $ns ?>)
                   <br><?php echo $ne ?>
                      </h2>

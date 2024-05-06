@@ -49,8 +49,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> TAREFAS >> Nº POR INSTITUIÇÃO</a>
                <div class="titlepage">
-                     <h2>Tarefas: Nº por escola/instituição</h2>
+                  
                   </div>
                </div>
             </div>
@@ -124,7 +125,7 @@ $next = $page + 1;
             <thead>
                 <tr class="table-success">
                    
-                    <th  scope="col">Escola/Instituição</th>
+                    <th  scope="col">Instituição</th>
                     <th   scope="col">Nº de tarefas a realizar</th>
                  
                   
@@ -205,7 +206,7 @@ include "realcelinhatabela.php";
 
 
 
-        <form action = "<?php echo SVRURL ?>tarefas.php?x=<?php echo base64_encode(0) ?>" method="post" >
+        <form action = "<?php echo SVRURL ?>tarefas.php?x=<?php echo base64_encode(0) ?>&&z=<?php echo base64_encode(0) ?>" method="post" >
 <input type = "hidden" name = "sala" value = "">
 <input title="Voltar" type=image 
 src="<?php echo SVRURL ?>images/voltar.svg"  >

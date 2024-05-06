@@ -189,10 +189,10 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">MANUTENÇÕES >> SALA POR DATA</a>
                <div class="titlepage">
-                     <h2>Manutenções >> MANUTENÇÕES da sala 
-                         <br><?php echo($ns); ?> | <?php echo($ne);?>
-                     <br>  <?php echo date('d/m/Y',strtotime(($dat)));?></h2>
+                     <h2><?php echo($ns); ?> | <?php echo date('d/m/Y',strtotime(($dat)));?>
+                     <br> <?php echo($ne);?> </h2>
                   </div>
                </div>
             </div>

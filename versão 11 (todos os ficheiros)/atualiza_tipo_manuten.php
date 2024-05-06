@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> TIPOS DE MANUTENÇÃO >> ATUALIZAR</a>
                <div class="titlepage">
-                     <h2>Atualizar tipos manutenção</h2>
+                   
                   </div>
                </div>
             </div>
@@ -125,13 +126,17 @@ else
 
     
 
-
 <form action = "<?php echo SVRURL ?>atualiza_ok_tiposmanuten.php?tpi=<?php echo base64_encode($row['id']); ?>&nom=<?php echo $row['nome']; ?>" method = "post" >
                     <label>Tipo de manutenção:     </label>  <br>  
+                   
+
                     <input class="underlineHover" size=50 type = "text" name="nomema"  
                     required value="<?php echo urldecode($row['nome']); ?>"/><br>
                     (Ao atualizar, também será atualizado o tipo nas respetivos manutenções)
-                    <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Atualizar"/>     </div>
+                   
+                    <div  style=" text-align:center;width:100%"> 
+                    <br> <br>
+                    <input  type = "submit" value = "Atualizar"/>     </div>
                                  
                                         
                  </form>

@@ -51,6 +51,7 @@ require $a.'/PHPMailer/PHPMailer/src/SMTP.php';
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> UTILIZADORES >> INSERIR</a>
                   <div class="titlepage">
              
                    

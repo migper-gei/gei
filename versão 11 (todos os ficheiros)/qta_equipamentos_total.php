@@ -125,8 +125,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> QUANTIDADE TOTAL DE EQUIPAMENTO</a>
                <div class="titlepage">
-                     <h2>Listagens >> Quantidade de equipamento total <br>
+                     <h2>
                     <?php echo $ne ?>
                     </h2>
                   </div>
@@ -189,7 +190,6 @@ $next = $page + 1;
 ?>
 
 
-<br>
 
         <!-- Select dropdown -->
         <div class="d-flex flex-row-reverse bd-highlight mb-3">

@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS</a>
                <div class="titlepage">
-                     <h2>Listagens</h2>
+                     
                   </div>
                </div>
             </div>
@@ -276,12 +277,11 @@ function showesc(escola) {
 <div style="text-align: left;">
 
 
-<h3 style="color:black;">ESCOLA/INSTITUIÇÃO:
 
 
 
 
-<select  style="width:310px;" name="escola" onChange="showesc(this.value);"   class="btn btn-info dropdown-toggle">
+<select  style="width:100%;" name="escola" onChange="showesc(this.value);"   class="btn btn-info dropdown-toggle">
 
 
 <?php
@@ -356,7 +356,7 @@ if (!empty($_POST["escola"])) {
 <form action="<?php echo SVRURL ?>qta_equipamentos_sala.php?z=<?php echo base64_encode('li') ?>&&x=<?php echo base64_encode(0) ?>&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
 
-<button style="width:310px;" title="Quantidade de equipamento da sala" type="submit" class="btn btn-outline-primary" > Quantidade de equipamento da sala</button>
+<button style="width:100%;" title="Quantidade de equipamento da sala" type="submit" class="btn btn-outline-primary" > Quantidade de equipamento da sala</button>
 
 <br>
 <?php
@@ -371,7 +371,7 @@ order by nome";
 $result = mysqli_query($db,$sql);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" required name="sala">');
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" required name="sala">');
 while($row=mysqli_fetch_array($result))
 {
 
@@ -402,7 +402,7 @@ if ( $_SESSION['tipo']<>4 )
  <form action="<?php echo SVRURL ?>qta_equipamentos_sala_tiposequi.php?x=<?php echo base64_encode(0) ?>&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
 
- <button style="width:310px;" title="Quantidade por sala do tipo" type="submit" class="btn btn-outline-primary" >Quantidade por sala do tipo</button>
+ <button style="width:100%;" title="Quantidade por sala do tipo" type="submit" class="btn btn-outline-primary" >Quantidade por sala do tipo</button>
 
 
 <br>
@@ -420,7 +420,7 @@ order by t.nome";
 $resulteq = mysqli_query($db,$sqleq);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" required name="tiposequi">');
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" required name="tiposequi">');
 while($roweq=mysqli_fetch_array($resulteq))
 {
 
@@ -456,7 +456,7 @@ if ($_SESSION['tipo']==1)
 <form action="<?php echo SVRURL ?>qta_equipamentos_total_sala.php?x=<?php echo base64_encode(0) ?>&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
 
-<button style="width:310px;" title="Quantidade de equipamento total (por sala)" type="submit" class="btn btn-outline-primary" >Quantidade equipamento (por sala)</button>
+<button style="width:100%;" title="Quantidade de equipamento total (por sala)" type="submit" class="btn btn-outline-primary" >Quantidade equipamento por sala</button>
 
    
  </form>
@@ -469,7 +469,7 @@ if ($_SESSION['tipo']==1)
 <form action="<?php echo SVRURL ?>qta_equipamentos_total.php?x=<?php echo base64_encode(0) ?>&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
 
-<button style="width:310px;" title="Quantidade de equipamento (TOTAL)" type="submit" class="btn btn-outline-primary" >Quantidade total equipamento</button>
+<button style="width:100%;" title="Quantidade de equipamento (TOTAL)" type="submit" class="btn btn-outline-primary" >Quantidade total de equipamento</button>
 
    
  </form>
@@ -483,12 +483,12 @@ if ($_SESSION['tipo']==1)
 <form name="avarias" action="num_avarias_entredatas.php?x=<?php echo base64_encode(0) ?>&&ies=<?php echo  base64_encode($esc) ?>" method="post" >
 
 
-<button style="width:310px;" onclick="return clickMe1();" title="Nº de avarias e reparações entre datas" type="submit" class="btn btn-outline-primary" >Nº de avarias entre </button>
+<button style="width:100%;" onclick="return clickMe1();" title="Nº de avarias e reparações entre datas" type="submit" class="btn btn-outline-primary" >Nº de avarias entre </button>
 <br>
 
- <input  style="width:140px;" class="btn btn-outline-secondary dropdown-toggle" required  type ="date" name ="datai" > 
- e  
-<input  style="width:140px;" class="btn btn-outline-secondary dropdown-toggle" required  type ="date" name ="dataf" >   
+ <input  style="width:47%;" class="btn btn-outline-secondary dropdown-toggle" required  type ="date" name ="datai" > 
+ &nbsp; e  &nbsp;
+<input  style="width:47%;" class="btn btn-outline-secondary dropdown-toggle" required  type ="date" name ="dataf" >   
 
   
  </form>
@@ -498,7 +498,7 @@ if ($_SESSION['tipo']==1)
 
  <form action="<?php echo SVRURL ?>num_avarias_equipamento.php?x=<?php echo base64_encode(0) ?>&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
- <button  style="width:310px;" title="Nº de avarias do equipamento" type="submit" class="btn btn-outline-primary" >Nº de avarias do equipamento </button>
+ <button  style="width:100%;" title="Nº de avarias do equipamento" type="submit" class="btn btn-outline-primary" >Nº de avarias do equipamento </button>
 
 
 <br>
@@ -514,7 +514,7 @@ order by e.nomeequi;";
 $result = mysqli_query($db,$sql);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" required name="equi">');
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" required name="equi">');
 while($row=mysqli_fetch_array($result))
 {
 
@@ -538,7 +538,7 @@ while($row=mysqli_fetch_array($result))
 <form action="<?php echo SVRURL ?>num_avarias_sala.php?x=<?php echo base64_encode(0) ?>&&ies=<?php echo base64_encode($esc)?>" method="post" >
 
 
-<button style="width:310px;" title="Nº de avarias da sala" type="submit" class="btn btn-outline-primary" >Nº de avarias da sala</button>
+<button style="width:100%;" title="Nº de avarias da sala" type="submit" class="btn btn-outline-primary" >Nº de avarias da sala</button>
 
 
 <br>
@@ -553,7 +553,7 @@ where ar.id_sala=s.id and ar.id_escola=$esc
 $result = mysqli_query($db,$sql);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle"  required name="sala2">');
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle"  required name="sala2">');
 while($row=mysqli_fetch_array($result))
 {
 
@@ -579,7 +579,7 @@ while($row=mysqli_fetch_array($result))
 
 <form action="<?php echo SVRURL ?>num_avarias_tipoeq.php?x=<?php echo base64_encode(0)?>&&ies=<?php echo base64_encode($esc)?>" method="post" >
 
-<button  style="width:310px;" title="Nº de avarias por tipo equipamento" type="submit" class="btn btn-outline-primary" >Nº de avarias por tipo equipamento</button>
+<button  style="width:100%;" title="Nº de avarias por tipo equipamento" type="submit" class="btn btn-outline-primary" >Nº de avarias por tipo equipamento</button>
 
 
 
@@ -595,7 +595,7 @@ where ar.id_equi=eq.id and ar.id_escola=$esc
 $result = mysqli_query($db,$sql);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" required name="tipoeq">');
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" required name="tipoeq">');
 while($row=mysqli_fetch_array($result))
 {
 
@@ -618,7 +618,7 @@ while($row=mysqli_fetch_array($result))
 <form action="<?php echo SVRURL ?>estatistica_avarias.php?ies=<?php echo base64_encode($esc) ?>" method="post" >
 
 
-<button  style="width:310px;" title="Avarias (últimos 5 anos letivos) " type="submit" class="btn btn-outline-primary" >Avarias (últimos 5 anos letivos) </button>
+<button  style="width:100%;" title="Avarias (últimos 5 anos letivos) " type="submit" class="btn btn-outline-primary" >Avarias (últimos 5 anos) </button>
 
    
    
@@ -630,7 +630,7 @@ while($row=mysqli_fetch_array($result))
 <form action="<?php echo SVRURL ?>equipamentos_mais_avarias_top.php?op=t&&ies=<?php echo base64_encode($esc) ?> " method="post" >
 
 
-<button  style="width:310px;" title="Equipamentos com mais avarias (top 10)" type="submit" class="btn btn-outline-primary" >Equipamentos com mais avarias (top 10) </button>
+<button  style="width:100%;" title="Equipamentos com mais avarias (top 10)" type="submit" class="btn btn-outline-primary" >Equipamentos com mais avarias (top 10) </button>
 
  </form>
 
@@ -638,7 +638,7 @@ while($row=mysqli_fetch_array($result))
  <br>
 <form action="salas_mais_avarias_top.php?op=t&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
-<button  style="width:310px;" title="Salas com mais avarias (top 10)  " type="submit" class="btn btn-outline-primary" >Salas com mais avarias (top 10)  </button>
+<button  style="width:100%;" title="Salas com mais avarias (top 10)  " type="submit" class="btn btn-outline-primary" >Salas com mais avarias (top 10)  </button>
 
 
  </form>
@@ -662,7 +662,7 @@ if ( $_SESSION['tipo']==4 || $_SESSION['tipo']==1)
 <form action="<?php echo SVRURL ?>requisicoes_terminar_dia.php?x=<?php echo base64_encode(0)?>&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
 
-<button   style="width:310px;" title="Requisições a terminar no dia " type="submit" class="btn btn-outline-primary" >Requisições a terminar no dia  </button>
+<button   style="width:100%;" title="Requisições a terminar no dia " type="submit" class="btn btn-outline-primary" >Requisições a terminar no dia  </button>
 <br>
 
 <!--
@@ -670,7 +670,7 @@ if ( $_SESSION['tipo']==4 || $_SESSION['tipo']==1)
       -->
       <select title="Escolha a data" required
       class="btn btn-outline-secondary dropdown-toggle"
-    name="data"  style="width:310px;" >
+    name="data"  style="width:100%;" >
    
     <?php
    
@@ -710,12 +710,12 @@ if ( $_SESSION['tipo']==4 || $_SESSION['tipo']==1)
  <br> 
 <form name="requi" action="<?php echo SVRURL ?>requisicoes_terminar_entre_datas.php?x=<?php echo base64_encode(0) ?>&&ies=<?php echo base64_encode($esc) ?>" method="post" >
 
-<button  style="width:310px;" onclick="return clickMe2();"  title="Requisições a terminar entre datas" type="submit" class="btn btn-outline-primary" >Requisições a terminar entre </button>
+<button  style="width:100%;" onclick="return clickMe2();"  title="Requisições a terminar entre datas" type="submit" class="btn btn-outline-primary" >Requisições a terminar entre </button>
 
 <br>
-<input style="width:140px;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name="datai1" > 
- e   
- <input style="width:140px;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name="dataf1" >   
+<input style="width:47%;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name="datai1" > 
+&nbsp; e   &nbsp;
+ <input style="width:47%" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name="dataf1" >   
 
  </form>
 

@@ -48,8 +48,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES</a>
                <div class="titlepage">
-                     <h2>Configurações >> Alterar logotipo escola/instituição</h2>
+                     <h2>Alterar logotipo da instituição</h2>
                   </div>
                </div>
             </div>
@@ -174,7 +175,7 @@ window.location = "<?php echo SVRURL ?>dadosesc";
 
 
 
-<br><br>	<br>
+<br>
 
 <form name="a" action="<?php echo SVRURL ?>atulogok" method="post" enctype="multipart/form-data">
 
@@ -213,7 +214,7 @@ window.location = "<?php echo SVRURL ?>dadosesc";
       <!-- end about -->
     
 
-      <br>	<br>	<br>
+      <br>	<br>	
 
       <?php include ("footer.php");?>
 

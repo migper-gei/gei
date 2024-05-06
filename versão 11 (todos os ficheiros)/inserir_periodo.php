@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> PERÍODOS</a>
                <div class="titlepage">
-                     <h2>Inserir Períodos / Semestres</h2>
+                     <h2>Inserir</h2>
                   </div>
                </div>
             </div>
@@ -106,7 +107,14 @@ closeOnCancel: false
 
   }
 	}
+
+
+
+
 </script>
+
+
+
 
 
 
@@ -120,16 +128,16 @@ $_SESSION['token']=$token;
 
 
 <form name="per" action = "<?php echo SVRURL ?>gravaper" method = "post" >
-                <label>Ano letivo/civil: </label>  <br>  
+                <label>Ano: </label>  <br>  
                 
                 
                 <input type="hidden" name="token" value="<?php echo $token; ?>" >
                 
-                <input style="background-color:#CEF6CE" placeholder="aaaa/aaaa" pattern="[0-9]+/[0-9]{4,4}" size=10 type = "text" name = "anoletivo"  required /><br /><br />
+                <input style="background-color:#CEF6CE;width:100%" placeholder="Ano" size=10 type = "text" name = "anoletivo"  required /><br /><br />
                     
             
                
-                     <label>Período/Semestre: </label>  
+                     <label>Período: </label>  
                    
                         <select name="periodo" style="background-color:#CEF6CE">
                             <option value=1>1º</option>

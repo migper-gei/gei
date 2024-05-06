@@ -75,7 +75,7 @@ if ($op=='t')
 }
 elseif ($op=='al')
 {
-    $op2='Ano letivo';
+    $op2='Ano';
 
     
 }
@@ -103,34 +103,24 @@ $rows3 =mysqli_fetch_row($result3);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
       
       <!-- about -->
       <div  class="about">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">AVARIAS >> MINHAS AVARIAS</a>
                <div class="titlepage">
-                     <h2>Avarias >> Minhas avarias - <?php echo $op2?> </h2> 
+                     <h2> <?php echo $op2?> </h2> 
                      <br> 
                       <h4>
                      <a style="color:black;" class="underlineHover" title="Minhas avarias (todas)" 
                        href="<?php echo SVRURL ?>myavarias?op=t">
-                       Todas </a>  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   
-                       <a style="color:black;" class="underlineHover" title="Minhas avarias (ano letivo)" 
+                       Todas </a>   
+                       &nbsp;&nbsp; | &nbsp; 
+                       <a style="color:black;" class="underlineHover" title="Minhas avarias (ano)" 
                        href="<?php echo SVRURL ?>myavarias?op=al">
-                        Ano letivo/civil: <?php echo $rows3[0]; ?></a>
+                        Ano: <?php echo $rows3[0]; ?></a>
                           </h4>
                      
                   </div>
@@ -309,7 +299,7 @@ if (isConfirm) {
         <table class="table table-striped">
             <thead>
                 <tr class="table-success">
-                    <th scope="col">Escola (Instituição) / Sala / Equipamento</th>
+                    <th scope="col">Instituição / Sala / Equipamento</th>
                     <th scope="col">Avaria</th>
                     <th scope="col">Reparação</th>
                     

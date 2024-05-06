@@ -39,6 +39,7 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> TIPOS DE MANUTENÇÃO >> INSERIR</a>
                <div class="titlepage">
                      <h2>Inserir tipos manutenção</h2>
                   </div>

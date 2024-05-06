@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">MANUTENÇÕES</a>
                <div class="titlepage">
-                     <h2>Manutenções</h2>
+               
                   </div>
                </div>
             </div>
@@ -186,7 +187,7 @@ function showesc(escola) {
 
 
 
-<br>
+
 
 
 <form name="frm" id="frm" action = "" method = "post" >
@@ -196,12 +197,10 @@ function showesc(escola) {
 <div style="text-align: left;">
 
 
-<h3 style="color:black;">ESCOLA/INSTITUIÇÃO:
 
 
 
-
-<select  style="width:310px;" name="escola" onChange="showesc(this.value);"  class="btn btn-info dropdown-toggle">
+<select  style="width:100%;" name="escola" onChange="showesc(this.value);"  class="btn btn-info dropdown-toggle">
 
 
 <?php
@@ -277,10 +276,11 @@ if ($_SESSION['tipo']==1 || $_SESSION['tipo']==3)
 ?>
 
 
+<br>
 
 <form action="inserirmanut?esm=<?php echo base64_encode($esc);?>" method="post" >
 
-<button style="width:310px;" title="Inserir manutenção da sala" type="submit" class="btn btn-outline-primary" > Inserir na sala</button>
+<button style="width:100%;" title="Inserir manutenção da sala" type="submit" class="btn btn-outline-primary" > Inserir na sala</button>
 
 <br>
 <?php
@@ -294,7 +294,7 @@ order by s.nome";
 $result = mysqli_query($db,$sql);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" name="sala" required>' );
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" name="sala" required>' );
 while($row=mysqli_fetch_array($result))
 {
 
@@ -336,7 +336,7 @@ while($row=mysqli_fetch_array($result))
 
 <form name="manutencoes" action="<?php echo SVRURL ?>manutencoes_sala_entredatas.php?x=<?php echo base64_encode(0)?>&&esm=<?php echo base64_encode($esc);?>" method="post" >
 
-<button style="width:310px;" onclick="return clickMe();" title="Manutenção da sala entre datas" type="submit" class="btn btn-outline-primary" > Sala entre datas</button>
+<button style="width:100%;" onclick="return clickMe();" title="Manutenção da sala entre datas" type="submit" class="btn btn-outline-primary" > Sala entre datas</button>
 
 <br>
 <?php
@@ -350,7 +350,7 @@ order by s.nome";
 $result2 = mysqli_query($db,$sql2);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" name="sala" required>>');
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" name="sala" required>>');
 while($row=mysqli_fetch_array($result2))
 {
 
@@ -365,10 +365,11 @@ while($row=mysqli_fetch_array($result2))
 <br>
 
         
-<input style="width:140px;"  class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name="datami" > 
-
+<input style="width:47%;"  class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name="datami" > 
+&nbsp;&nbsp;
 e  
-<input style="width:140px;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name="datamf" >   
+&nbsp;&nbsp;
+<input style="width:47%" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name="datamf" >   
 
 
    
@@ -383,7 +384,7 @@ e
 <form name="manutencoes2" action="<?php echo SVRURL ?>manutencoes_equip_entredatas.php?x=<?php echo base64_encode(0)?>&&esm=<?php echo  base64_encode($esc);?>" method="post" >
 
 
-<button style="width:310px;" onclick="return clickMe2();" title="Manutenção do equipamento entre datas" type="submit" class="btn btn-outline-primary" > Equipamento entre datas</button>
+<button style="width:100%;" onclick="return clickMe2();" title="Manutenção do equipamento entre datas" type="submit" class="btn btn-outline-primary" > Equipamento entre datas</button>
 
 <br>
 
@@ -398,7 +399,7 @@ order by e.nomeequi";
 $result2 = mysqli_query($db,$sql2);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" name="equip" required>');
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" name="equip" required>');
 while($row2=mysqli_fetch_array($result2))
 {
 
@@ -412,9 +413,11 @@ while($row2=mysqli_fetch_array($result2))
 
 <br>
         
-<input style="width:140px;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name = "datami2" > 
- e  
-<input style="width:140px;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name = "datamf2" >   
+<input style="width:47%;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name = "datami2" > 
+&nbsp;&nbsp;
+e  
+&nbsp;&nbsp;
+<input style="width:47%;" class="btn btn-outline-secondary dropdown-toggle" required size="10" type = "date" name = "datamf2" >   
 
 
    
@@ -428,7 +431,7 @@ while($row2=mysqli_fetch_array($result2))
 action="<?php echo SVRURL ?>manutencoes_sala_data.php?x=<?php echo base64_encode(0)?>&&esm=<?php echo base64_encode($esc);?>" method="post" >
 
 
-<button  style="width:310px;" title="Sala e data" type="submit" class="btn btn-outline-primary" > Sala e data</button>
+<button  style="width:100%" title="Sala e data" type="submit" class="btn btn-outline-primary" > Sala e data</button>
 
 <br>
  
@@ -443,7 +446,7 @@ order by s.nome,m.data_manutencao desc";
 $result2a = mysqli_query($db,$sql2a);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" name="saladata"  required>');
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" name="saladata"  required>');
 while($row2a=mysqli_fetch_array($result2a))
 {
 
@@ -466,7 +469,7 @@ while($row2a=mysqli_fetch_array($result2a))
 
  <form name="manutencoes" action="<?php echo SVRURL ?>manutencoes_equip_data.php?x=<?php echo base64_encode(0)?>&&esm=<?php echo base64_encode($esc);?>" method="post" >
 
- <button  style="width:310px;"title="Equipamento e data" type="submit" class="btn btn-outline-primary" > Equipamento e data</button>
+ <button  style="width:100%;"title="Equipamento e data" type="submit" class="btn btn-outline-primary" > Equipamento e data</button>
 
  <br>
 
@@ -481,7 +484,7 @@ order by e.nomeequi, m.data_manutencao desc";
 $result2b = mysqli_query($db,$sql2b);
 
 
-echo('<select style="width:310px;" class="btn btn-outline-secondary dropdown-toggle" name="equipdata"  required>');
+echo('<select style="width:100%;" class="btn btn-outline-secondary dropdown-toggle" name="equipdata"  required>');
 while($row2b=mysqli_fetch_array($result2b))
 {
 

@@ -125,8 +125,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> QUANTIDADE DE EQUIPAMENTO POR SALA</a>
                <div class="titlepage">
-                     <h2>Listagens >> Quantidade de equipamento total por sala<br>
+                     <h2>
                     <?php echo $ne ?>
                     </h2>
                   </div>
@@ -213,11 +214,28 @@ $result0 = mysqli_query($db,$sql0);
                     $idsa=$row0['id'];
                     $nos=$row0['nome'];
                   //  echo $row0['nome']; 
+                  //echo $idsa;
                     
                 
 ?>
 
+<?php
 
+$sql001 = "select id_escola
+from  salas s
+where s.id=$idsa";
+$result001 = mysqli_query($db,$sql001);
+$rows001 =mysqli_fetch_row($result001);
+
+/*
+echo $rows001[0];
+echo '<br>';
+echo $idescola;
+*/
+
+if ($rows001[0]==$idescola)
+{
+?>
 
         <!-- Datatable -->
         <table class="table table-sm" id="js-sort-table">
@@ -236,6 +254,10 @@ $result0 = mysqli_query($db,$sql0);
       
 
                 <?php  
+
+
+
+
 
 
 
@@ -360,6 +382,7 @@ order by oe.nomeoutro ";
                   
              
             }   
+        }
                 ?>
 
 

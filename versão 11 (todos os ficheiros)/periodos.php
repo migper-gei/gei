@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES</a>
                <div class="titlepage">
-                     <h2>Configurações >> Períodos/Semestres</h2>
+                     <h2>Períodos</h2>
                   </div>
                </div>
             </div>
@@ -60,7 +61,7 @@ include("sessao_timeout.php");
 include("msg_bemvindo.php");
 ?>
     
-<br>
+
 
 <?php
   
@@ -164,11 +165,11 @@ function(isConfirm){
    <div class="table-responsive">-->
 
 
-   <table class="table table-striped" id="js-sort-table">
+   <table class="table table-striped" id="js-sort-table" >
             <thead>
                 <tr class="table-success">
-                    <th scope="col">Ano Letivo/Civil</th>
-                    <th scope="col">Período/Semestre</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Período</th>
                     <th scope="col">Data Início</th>
                     <th scope="col">Data Fim</th>
                      
@@ -208,8 +209,8 @@ function(isConfirm){
                 <tr>
                     <td width="20%"  scope="row"><?php echo $row['ano_lectivo']; ?></td>
                     <td width="10%" ><?php echo $row['num_periodo']; ?></td>
-                    <td width="25%" ><?php echo date('d/m/Y',strtotime($row['data_inicio'])); ?></td>
-                    <td width="25%" ><?php echo date('d/m/Y',strtotime($row['data_fim'])); ?></td>
+                    <td width="20%" ><?php echo date('d/m/Y',strtotime($row['data_inicio'])); ?></td>
+                    <td width="20%" ><?php echo date('d/m/Y',strtotime($row['data_fim'])); ?></td>
 
                     <?php
                       if ($_SESSION['tipo']==1 )

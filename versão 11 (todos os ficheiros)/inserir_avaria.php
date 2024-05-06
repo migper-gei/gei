@@ -101,9 +101,9 @@ $ne = $rows11[0];
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">AVARIAS >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Avarias >> Inserir avaria
-                        <br><?php echo $ne?>
+                     <h2><?php echo $ne?>
                      </h2>
                   </div>
                </div>
@@ -395,7 +395,7 @@ echo('</select>');
                    <br />
                    <br>
                    <label>Avaria (descrição): </label>  <br>  
-                   <textarea  required style="text-align: justify;background-color:#CEF6CE" rows="4" cols="60"  name="avaria"></textarea>
+                   <textarea  required style="text-align: justify;background-color:#CEF6CE;width:100%" rows="4" cols="60"  name="avaria"></textarea>
                   
                   
                    <br />
@@ -409,7 +409,7 @@ echo('</select>');
                    
                    <br /><br />
                                    
-                   <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Inserir"/>   
+                   <div  style=" text-align:center;width:100%"> <input  type = "submit" value = "Inserir"/>   
     </div>
 
                 </form>

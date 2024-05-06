@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> SALAS >> IMPORTAR</a>
                <div class="titlepage">
-                     <h2>Importar salas</h2>
+                    
                   </div>
                </div>
             </div>
@@ -248,11 +249,11 @@ window.location = "<?php echo SVRURL ?>sala?x=<?php echo base64_encode(1) ?>&&es
 
 
 ?>
-<br><br>
+
 <form enctype="multipart/form-data" method="post" action="<?php echo SVRURL ?>importarsalas">
                 
-<label >ESCOLA/INSTITUIÇÃO: </label>      
-<select  name="escola"  class="btn btn-info dropdown-toggle" style="width:310px;">
+   
+<select  name="escola"  class="btn btn-info dropdown-toggle" style="width:100%;">
 
 
 <?php
@@ -273,7 +274,7 @@ while($row=mysqli_fetch_array($result))
 echo('</select>');
 
 ?>
-<br><br>
+<br><br><BR>
 
                 <div class="form-group">
                     <label for="file">Escolha o ficheiro .CSV para importar (Caso já exista a sala, não é importada)</label>
@@ -284,7 +285,7 @@ echo('</select>');
                 </div>
                 <br>
                 <div class="form-group">
-                <div  style=" text-align:center;width:90%"> <input name="submit" type = "submit" value = "Importar"/>   
+                <div  style=" text-align:center;width:100%"> <input name="submit" type = "submit" value = "Importar"/>   
                </div>
             </form>
 

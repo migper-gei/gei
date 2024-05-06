@@ -97,8 +97,10 @@ else
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> AVARIAS DA SALA</a>
                <div class="titlepage">
-                     <h2>REPARAÇÕES <br> SALA <?php echo($ns);?> entre <?php echo($di);?> e <?php echo($df);?> 
+                     <h2> <?php echo($ns);?> 
+                     <!--| <?php echo($di);?> a <?php echo($df);?> -->
                     <br><?php echo($ne);?> 
                     
                     </h2>

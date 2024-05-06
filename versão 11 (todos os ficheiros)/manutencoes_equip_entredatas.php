@@ -181,11 +181,15 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">MANUTENÇÕES >> EQUIPAMENTO ENTRE DATAS</a>
                <div class="titlepage">
-                     <h2>Manutenções >> Equipamento  <?php echo($neq); ?>  
+                     <h2> 
+                     <?php echo date('d/m/Y',strtotime($di));?> a <?php echo date('d/m/Y',strtotime(($df)));?>
+                     <br>   
+                     <?php echo($neq); ?>  
                      <br> <?php echo($ns);?>
                          | <?php echo($ne);?> <br> 
-                     entre <?php echo date('d/m/Y',strtotime($di));?> e <?php echo date('d/m/Y',strtotime(($df)));?></h2>
+                    </h2>
                   </div>
                </div>
             </div>

@@ -48,8 +48,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> GERAIS</a>
                <div class="titlepage">
-                     <h2>Configurações >> Inserir dados escola/instituição</h2>
+                
                   </div>
                </div>
             </div>
@@ -267,7 +268,7 @@ function(isConfirm){
 
 <form action="<?php echo SVRURL ?>dadosescola" method="post">
 
-<button title="Ver escolas" type="submit" class="btn btn-outline-primary" > Ver escolas/instituições</button>
+<button title="Ver escolas" type="submit" class="btn btn-outline-primary" > Ver instituições</button>
 
 </form>
 
@@ -309,7 +310,7 @@ function(isConfirm){
                     
 
                     <label>Logotipo (imagem: PNG) (tamanho: 120px larg x 110px alt): </label>  <br>  
-                  <input   accept="image/png" size="50" type="file" name = "logo" id="img" onchange="validateImage()" />
+                  <input   accept="image/png" style=" width:50%" type="file" name = "logo" id="img" onchange="validateImage()" />
                 
                     <!--  <input type="file" multiple accept=".png"/>    -->
 
@@ -321,65 +322,65 @@ function(isConfirm){
 
                     <br />  <br />
                  
-                    <label>Nome da escola/instituição: </label>  
+                    <label>Nome da instituição: </label>  
                     <br>
-                     <input style="background-color:#CEF6CE" required size="80" type = "text" name="nomeescola">
+                     <input style="background-color:#CEF6CE; width:100%" required  type = "text" name="nomeescola" placeholder="Nome">
                      <br>     
                     <label>Site: (http://www.....)  </label>  
                     <br>
-                     <input style="background-color:#CEF6CE" required size="80" type = "text" name="site" placeholder="http://www.">
+                     <input style="background-color:#CEF6CE;width:100%" required  type = "text" name="site" placeholder="http://www.">
                      <br>
                      <label>Morada: </label>  
                     <br>
-                     <input style="background-color:#CEF6CE" size="80" type = "text" name="morada" placeholder="Morada">
+                     <input style="background-color:#CEF6CE;width:100%" " type = "text" name="morada" placeholder="Morada">
                      <br>
                      <label>Código Postal (0000-000): </label>  
                     <br>
                      <input maxlength="8" pattern="\d{4}-\d{3}"
                      onBlur="validarCP();" id="cp"
-                     style="background-color:#CEF6CE" size="80" type = "text" name="codpostal" placeholder="Código Postal">
+                     style="background-color:#CEF6CE;width:100%"  type = "text" name="codpostal" placeholder="Código Postal">
                      <span id="cp_err"></span>
-                     <br>  <br>
+                     <br>  
                      <label>Localidade: </label>  
                     <br>
-                     <input style="background-color:#CEF6CE" size="80" type = "text" name="localidade" placeholder="Localidade">
+                     <input style="background-color:#CEF6CE;width:100%"  type = "text" name="localidade" placeholder="Localidade">
                      <br>
           
                      <label>Contato: </label>  
                     <br>
                      <input onBlur="cont_validation();" 
                      maxlength="9" 
-                                  style="background-color:#CEF6CE" size="80" type = "text" name="telefone" placeholder="Contato" id="con">
+                                  style="background-color:#CEF6CE;width:100%"  type = "text" name="telefone" placeholder="Contato" id="con">
                      <span id="con_err"></span>
                     
 
                      <br />  <br />
-                     <label>(Nome de outras escolas/instituições) </label>  
+                     <label>(Nome de outras instituições) </label>  
                   <br>
-                 <label>Nome escola/instituição 2: </label>  
+                 <label>Nome da instituição 2: </label>  
                  <br>
-                  <input  size="80" type = "text" name = "nomeescola2">
+                  <input   style="width:100%" type = "text" name = "nomeescola2">
                   <br>     <br />
                  
-                 <label>Nome escola/instituição 3: </label>  
+                 <label>Nome da instituição 3: </label>  
                  <br>
-                  <input  size="80" type = "text" name = "nomeescola3">
+                  <input  style="width:100%"  type = "text" name = "nomeescola3">
                   <br>     <br />
                   
-                 <label>Nome escola/instituição 4: </label>  
+                 <label>Nome da instituição 4: </label>  
                  <br>
-                  <input  size="80" type = "text" name = "nomeescola4">
+                  <input  style="width:100%"  type = "text" name = "nomeescola4">
                   <br> 
                   <br>     
                   
-                  <label>Nome escola/instituição 5: </label>  
+                  <label>Nome da instituição 5: </label>  
                   <br>
-                   <input  size="80" type = "text" name = "nomeescola5">
+                   <input  style="width:100%"  type = "text" name = "nomeescola5">
                    <br>      
                    
 			<br>
     
-                <div  style=" text-align:center;width:90%"> 
+                <div  style=" text-align:center;width:100%"> 
                 <input  type = "submit" value = "Inserir"/>     
 </form> 
             <br>

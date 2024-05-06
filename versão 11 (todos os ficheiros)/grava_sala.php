@@ -33,36 +33,44 @@ include("sessao_timeout.php");
 
 $idescola=base64_decode($_GET['ie']);
 
+//echo $idescola;
 
 $sql2 = "select max(id) from escolas";
 $result2 = mysqli_query($db,$sql2); 
 $rows2 =mysqli_fetch_row($result2);
 
 $conta = $rows2[0];
+/*
+echo $conta;
+echo $idescola;
+echo $_GET['ie'];
 
-//echo $_GET['id'];
+
+
+echo $_POST['eqreq'];
+echo $_POST['nome'];
+echo $_POST['localizacao'];
+echo $_POST['departamento'];
+*/
+
+
 
 if ( !isset($_POST['eqreq']) || !isset($_POST['nome']) || !isset($_POST['localizacao']) 
-|| !isset($_GET['ie']) || $_GET['ie']>$conta  || $idescola<1
+|| !isset($idescola) || $idescola>$conta  || $idescola<1
 || empty($_POST['eqreq'])  || empty($_POST['nome'])  || empty($_POST['localizacao']) 
 )
 {
+
+   echo ('zzz');
 ?>
 
 
 
 <script>
     
-swal({
-title: 'Os dados foram guardados!',
-//text: 'Os dados foram guardados!',
-icon: 'success',
-//buttons: false,
-
-})
-.then(function() {
-window.location = "<?php echo SVRURL ?>sala?x=<?php echo base64_encode(0)?>";
-});
+function() {
+//window.location = "<?php echo SVRURL ?>sala?x=<?php echo base64_encode(0)?>";
+};
 
 </script>
 
@@ -95,8 +103,9 @@ $rows11 =mysqli_fetch_row($result11);
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> SALAS >> INSERIR</a>
                <div class="titlepage">
-                     <h2>Inserir sala <br> <?php echo $rows11[0] ?></h2>
+                    <h2>  <?php echo $rows11[0] ?></h2>
                   </div>
                </div>
             </div>
@@ -121,24 +130,26 @@ $result = mysqli_query($db,$sql0);
 $rows0 =mysqli_fetch_row($result);
 $cs = $rows0[0];
 
-
+//echo '<br>'.$cs;
+//echo $_SESSION['tipo'];
 ?>
 
 
 
 
 <?php
+//&& $_POST['token'] == $_SESSION['token']
 
 if (isset($_SESSION['token']) 
 && (isset($_POST['token'])) 
-&& $_POST['token'] == $_SESSION['token'])
+)
 {
 
 
 
 
 
-if ( $_SESSION['tipo']==1 && $cs==0)
+if ($_SESSION['tipo']==1 && $cs==0 )
 {
 
 
@@ -152,7 +163,7 @@ $result = mysqli_query($db,$sql);
 
 mysqli_close($db);
 
-
+ 
 ?>
 
 
@@ -184,7 +195,7 @@ else
 <script>
     
 swal({
-title: 'Não tem permissão ou o nome da sala já existe na escola!',
+title: 'Não tem permissão ou o nome da sala já existe!',
 //text: 'Não tem permisssão!',
 icon: 'error',
 //buttons: false,
@@ -201,8 +212,8 @@ window.location = "<?php echo SVRURL ?>salas?x=<?php echo base64_encode(1)?>&&es
 <?php
 }
 
-
 }
+
 ?>
 
 

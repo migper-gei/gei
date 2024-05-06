@@ -53,8 +53,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> TAREFAS</a>
                <div class="titlepage">
-                     <h2>Configurações >> Tarefas</h2>
+                   
                   </div>
                </div>
             </div>
@@ -112,7 +113,7 @@ function showesc(escola) {
 <div style="text-align: left;">
 
 
-<h3 style="color:black;">ESCOLA/INSTITUIÇÃO:
+
 
 
 <?php
@@ -124,12 +125,12 @@ echo ($x);
 
 echo ('<br>');
 //echo ($_GET["esi"]) ;
-
 */
+
 ?>
       
 
-<select  title="Escolha a escola" style="width:310px;" class="btn btn-info dropdown-toggle" name="escola" onChange="showesc(this.value);"  >
+<select  title="Escolha a instiuição" style="width:100%;" class="btn btn-info dropdown-toggle" name="escola" onChange="showesc(this.value);"  >
 
 
 <?php
@@ -147,7 +148,7 @@ if (  empty($_GET["x"]) ||  !isset($_GET["x"]) || !is_numeric($x)
   <script>
 
   window.setTimeout(function() {
-               window.location.href = '<?php echo SVRURL ?>configura';
+              window.location.href = '<?php echo SVRURL ?>configura';
             },10);
             </script>
 <?php

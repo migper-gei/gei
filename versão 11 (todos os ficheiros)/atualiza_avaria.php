@@ -39,8 +39,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">AVARIAS >> ATUALIZAR</a>
                <div class="titlepage">
-                     <h2>Atualizar avaria</h2>
+                    
                   </div>
                </div>
             </div>
@@ -388,19 +389,19 @@ if ($aut<>0)
 <form name="avaria" action = "<?php echo SVRURL ?>atualokavaria/<?php echo base64_encode($idav);?>" method = "post" enctype="multipart/form-data" onSubmit="return enviardados1();">
       
 <br>
-&nbsp;<label>Escola: </label>  
+&nbsp;<label>Instituição: </label>  
 <br>
-<input  value="<?php echo $idescola; ?>" readonly   name = "escola"  type="text" />
+<input style="width:100%"  value="<?php echo $idescola; ?>" readonly   name = "escola"  type="text" />
          <br><br>
 &nbsp;<label>Sala: </label>  
 <br>
-<input  value="<?php echo $row1['nome']; ?>" readonly   name = "sala"  type="text" />
+<input style="width:100%"  value="<?php echo $row1['nome']; ?>" readonly   name = "sala"  type="text" />
                     
  
   <br>  <br>
   &nbsp;<label>Equipamento: </label> 
                     <br>
-                    <input  value="<?php echo $row1['nomeequi']; ?>" readonly   type = "text" name = "nomeequi"  />
+                    <input style="width:100%"  value="<?php echo $row1['nomeequi']; ?>" readonly   type = "text" name = "nomeequi"  />
                     
                     
                     <?php
@@ -423,7 +424,7 @@ if ($aut<>0)
                     <br />
                     <br>
                     <label>Avaria (descrição): </label>  <br>  
-                    <textarea required    style="background-color:#CEF6CE;text-align: justify;" rows="4" cols="80" name="avaria"><?php echo $row1['avaria']; ?></textarea>
+                    <textarea required    style="background-color:#CEF6CE;text-align: justify;width:100%" rows="4" cols="80" name="avaria"><?php echo $row1['avaria']; ?></textarea>
                    
                         
                  
@@ -509,13 +510,13 @@ if ($aut<>0)
                     <br /><br />
 									
            
-
+                    <br>
 <label>Avaria (vídeo tamanho máximo 3Mb, tipo MP4): </label>  <br>  
 <input accept="video/mp4" size=50 type="file" name="v" id="file" onChange="return Filevalida();">
 
 <br /><br />
                            
-                <div  style=" text-align:center;width:90%"> 
+                <div  style=" text-align:center;width:100%"> 
                     <input  type = "submit" value = "Atualizar"/>    
                 </div>
         

@@ -293,9 +293,10 @@ else
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">EQUIPAMENTOS >> REQUISIÇÃO</a>
                <div class="titlepage">
-                     <h2>Equipamentos >> Requisição de equipamento
-                        <br><?php echo $ne?> | 
+                     <h2>
+                        <?php echo $ne?> | 
                         <?php echo date('d/m/Y',strtotime($dr)); ?>
                      </h2>
                   </div>

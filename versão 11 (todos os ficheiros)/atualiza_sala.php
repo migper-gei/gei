@@ -101,8 +101,9 @@ $rows11 =mysqli_fetch_row($result11);
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> SALAS >> ATUALIZAR</a>
                <div class="titlepage">
-                     <h2>Atualizar sala <br> <?php echo $rows11[0] ?></h2>
+                     <h2> <?php echo $rows11[0] ?></h2>
                   </div>
                </div>
             </div>
@@ -163,13 +164,13 @@ else
 <form 
 action = "<?php echo SVRURL ?>atualiza_ok_sala.php?sai=<?php echo base64_encode($row['id']); ?> " method = "post" >
                     <label>Nome da sala: </label>  <br>  
-                    <input class="underlineHover" size=50 type = "text" name ="nome"  required value="<?php echo $row['nome']; ?>"/><br /><br />
+                    <input class="underlineHover" style="width:100%;" type = "text" name ="nome"  required value="<?php echo $row['nome']; ?>"/><br /><br />
                  
                      <label>Localização: </label>  <br>  
-                    <input class="underlineHover" size=50 type = "text" name ="localizacao"  required value="<?php echo $row['localizacao']; ?>"/><br /><br />
+                    <input class="underlineHover" style="width:100%;" type = "text" name ="localizacao"  required value="<?php echo $row['localizacao']; ?>"/><br /><br />
                 
-                    <label>Departamento: </label>  <br>  
-                    <input class="underlineHover" size=50 type = "text" name ="departamento"   value="<?php echo $row['departamento']; ?>"/><br /><br />
+                    <label>Departamento/Grupo/Serviço: </label>  <br>  
+                    <input class="underlineHover" style="width:100%;" type = "text" name ="departamento"   value="<?php echo $row['departamento']; ?>"/><br /><br />
                     <label>Equipamento requisitável: </label>                
 
                     <select name="eqreq" required >
@@ -192,7 +193,8 @@ else
                          <!--           (Ao atualizar, também será atualizado a sala nos respetivos equipamentos)  
                           -->
 
-                                    <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Atualizar"/>     </div>
+                                    <div  style=" text-align:center;width:100%"> 
+                                    <input  type = "submit" value = "Atualizar"/>     </div>
                  </form>
 
 

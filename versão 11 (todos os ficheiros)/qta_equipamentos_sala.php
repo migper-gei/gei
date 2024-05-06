@@ -172,8 +172,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> QUANTIDADE DE EQUIPAMENTO POR SALA</a>
                <div class="titlepage">
-                     <h2>Listagens >> Quantidade de equipamento <br> Sala <?php echo($ns);?> | <?php echo($ne);?> </h2>
+                     <h2>  <?php echo($ns);?> <BR> <?php echo($ne);?> </h2>
                   </div>
                </div>
             </div>

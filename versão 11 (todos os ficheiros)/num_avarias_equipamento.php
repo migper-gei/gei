@@ -147,8 +147,9 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">LISTAGENS >> Nº DE AVARIAS DO EQUIPAMENTO</a>
                <div class="titlepage">
-                     <h2>Listagens >> Nº de avarias do equipamento<br> 
+                     <h2>
                      <?php echo($noeq);?> 
                     | <?php echo($ne);?>
                 </h2>
@@ -228,8 +229,8 @@ $next = $page + 1;
    <table class="table table-striped" id="js-sort-table">
             <thead>
                 <tr class="table-success">
-                    <th scope="col">Ano Letivo/Civil</th>
-                    <th scope="col">Período/Semestre</th>
+                    <th scope="col">Ano</th>
+                    <th scope="col">Período</th>
                     <th class="js-sort-number" scope="col">Nº avarias</th>
                   
                                  

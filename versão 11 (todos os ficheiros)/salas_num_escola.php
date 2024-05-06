@@ -49,8 +49,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> SALAS >> Nº POR INSTITUIÇÃO</a>
                <div class="titlepage">
-                     <h2>Salas: Nº por escola/instituição</h2>
+             
                   </div>
                </div>
             </div>
@@ -64,11 +65,7 @@ include("sessao_timeout.php");
 <?php
 include("msg_bemvindo.php");
 ?>
-    <br>
-
-      
- 
-
+   
 
 
         <?php 
@@ -121,7 +118,7 @@ $next = $page + 1;
             <thead>
                 <tr class="table-success">
                    
-                    <th  scope="col">Escola</th>
+                    <th  scope="col">Instituição</th>
                     <th   scope="col">Nº de salas</th>
                  
                   
@@ -198,7 +195,7 @@ include "realcelinhatabela.php";
 
 
 
-        <form action = "<?php echo SVRURL ?>salas.php?x=<?php echo base64_encode(0) ?>" method="post" >
+        <form action = "<?php echo SVRURL ?>sala?x=<?php echo base64_encode(0) ?>" method="post" >
 <input type = "hidden" name = "sala" value = "">
 <input title="Voltar" type=image 
 src="<?php echo SVRURL ?>images/voltar.svg"  >

@@ -101,7 +101,7 @@ $op2='Todas';
 }
 elseif ($op=='al')
 {
-$op2='Ano letivo';
+$op2='Ano';
 
 
 }
@@ -178,15 +178,16 @@ window.setTimeout(function() {
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">AVARIAS >> VER DA SALA</a>
                <div class="titlepage">
-                     <h2>Avarias >> Reparações a efetuar <br> <?php echo $ns ?> | <?php echo $ne ?>  <br> <?php echo $op2?> <br>
+                     <h2> <?php echo $ns ?> | <?php echo $ne ?>  <br> <?php echo $op2?> <br>
                     <h4>
                      <a style="color:black;" class="underlineHover" title="Reparações a efetuar (todas)" 
                        href="<?php echo SVRURL ?>reparacoes_efetuar_sala.php?x=<?php echo base64_encode(1) ?>&op=t&&sai=<?php echo base64_encode($sa);?>&&ies=<?php echo base64_encode($idescola) ?>">
-                       Todas </a>  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;   
-                       <a style="color:black;" class="underlineHover" title="Reparações a efetuar (ano letivo)" 
+                       Todas </a>  &nbsp;&nbsp; |  &nbsp;&nbsp;
+                       <a style="color:black;" class="underlineHover" title="Reparações a efetuar (ano)" 
                        href="<?php echo SVRURL ?>reparacoes_efetuar_sala.php?x=<?php echo base64_encode(1) ?>&&op=al&&sai=<?php echo base64_encode($sa);?>&&ies=<?php echo base64_encode($idescola) ?>">
-                        Ano letivo/civil: <?php echo $rows3[0]; ?></a>
+                        Ano: <?php echo $rows3[0]; ?></a>
                           </h4>
                     </h2>
                   </div>

@@ -44,8 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> EMAIL/SESSÃO >> ATUALIZAR</a>
                <div class="titlepage">
-                     <h2>Atualizar email/sessao</h2>
+                 
                   </div>
                </div>
             </div>
@@ -64,6 +65,30 @@ include("msg_bemvindo.php");
 
 
 <script>
+
+function email_validation(){
+'use strict';
+
+var mailformat = /^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,3})+$/;
+var email_name = document.getElementById("email");
+var email_value = document.getElementById("email").value;
+var email_length = email_value.length;
+if(!email_value.match(mailformat) || email_length === 0)
+{
+
+document.getElementById('email_err').innerHTML = '<br>'+'Email inválido.';
+email_name.focus();
+document.getElementById('email_err').style.color = "#FF0000";
+}
+else
+{
+document.getElementById('email_err').innerHTML = '<br>'+'Email válido';
+document.getElementById('email_err').style.color = "#00AF33";
+}
+}
+
+
+
          function myFunction() {
            var x = document.getElementById("mypass1");
            if (x.type === "password") {
@@ -141,31 +166,34 @@ $row0 = $sql->get_result()->fetch_row();
 
 <form action = "<?php echo SVRURL ?>atualiza_ok_emailsessao.php?i=<?php echo base64_encode($row['id']);?>" method = "post" >
 <label>Email:    </label>  <br>                    
-<input  style="background-color:#CEF6CE" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
-value="<?php echo ($row['email_user']); ?>" type = "text" name = "email" class="fadeIn second" placeholder="Email">
-    <br>  
+<input  style="background-color:#CEF6CE;width:100%" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
+value="<?php echo ($row['email_user']); ?>" type = "text" name = "email" class="fadeIn second" placeholder="Email"
+onBlur="email_validation();" id="email"><span id="email_err"></span>
+    
+
+<br>  
     <br>  
     <label>Password:  </label>  <br>  
-                    <input value="<?php echo ($row0[0]); ?>"  id="mypass1" type = "password" placeholder="Password do email" size=50 type = "text" name = "pass"  required style="background-color:#CEF6CE"/>
+                    <input value="<?php echo ($row0[0]); ?>"  id="mypass1" type = "password" placeholder="Password do email" size=50 type = "text" name = "pass"  required style="background-color:#CEF6CE;width:100%"/>
                     <br> 
                     <input title="Mostrar password" type="checkbox" onclick="myFunction()"> Mostrar password 
          <br>  <br>
          <label>Smtp: </label>  <br>
-         <input    value="<?php echo ($row['email_smtp']); ?>" placeholder="Smtp" size=50 type = "text" name = "smtp"  required style="background-color:#CEF6CE"/>
+         <input    value="<?php echo ($row['email_smtp']); ?>" placeholder="Smtp" size=50 type = "text" name = "smtp"  required style="background-color:#CEF6CE;width:100%"/>
                     <br><br> 
                     <label>Smtp porta: </label>  
                     <input  placeholder="Smtp porta"  
                     value="<?php echo ($row['email_smtpport']); ?>"
-                    type = "number" name = "smtpport"  required style="background-color:#CEF6CE"/>
+                    type = "number" name = "smtpport"  required style="background-color:#CEF6CE;"/>
                     <br><br> 
                      
                      <label>Nome (sigla):  </label>  <br>  
-                    <input value="<?php echo ($row['nome_app']); ?>" placeholder="Nome (sigla)" size=50 type = "text" name = "nome"  required style="background-color:#CEF6CE"/>
+                    <input value="<?php echo ($row['nome_app']); ?>" placeholder="Nome (sigla)" size=50 type = "text" name = "nome"  required style="background-color:#CEF6CE;width:100%"/>
                     <br>  <br> 
                     <label>Tempo duração da sessão (em segundos): </label>   
                     <input value="<?php echo ($row['sessao_timeout']); ?>" type = "number" name = "sessao"  required style="background-color:#CEF6CE"/>
                     <br>  <br>
-                    <div  style=" text-align:center;width:90%"> <input  type = "submit" value = "Atualizar"/>     </div>
+                    <div  style=" text-align:center;width:100%"> <input  type = "submit" value = "Atualizar"/>     </div>
                           
 
                  </form>
