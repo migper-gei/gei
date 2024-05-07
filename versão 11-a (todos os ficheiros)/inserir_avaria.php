@@ -34,6 +34,39 @@ include("sessao_timeout.php");
  
   ?>
 
+<?php
+
+$sql1 = "select count(*) as cs from periodos";
+$result1 = mysqli_query($db,$sql1); 
+$rows =mysqli_fetch_row($result1);
+
+if ($rows[0]==0)
+{
+?>
+
+
+<script>
+    
+swal({
+title: 'Não tem períodos definidos!',
+//text: 'Os dados foram guardados!',
+icon: 'error',
+//buttons: false,
+
+})
+.then(function() {
+window.location = "<?php echo SVRURL ?>avaria";
+});
+
+</script>
+
+
+<?php
+
+}
+?>
+
+
 
 
 <?php
