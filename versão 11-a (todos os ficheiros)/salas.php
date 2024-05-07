@@ -570,6 +570,7 @@ function(isConfirm){
 
        <!-- Select dropdown -->
        <div class="d-flex flex-row-reverse bd-highlight mb-3">
+        
             <form action="<?php echo SVRURL ?>sala?x=<?php echo base64_encode(1) ?>&&esi=<?php echo base64_encode($esc);?>" method="post">
                       <?php include("num_linhas.php");?>
             </form>
@@ -619,6 +620,15 @@ function(isConfirm){
                     $contasala = $rows2[0];
                     //echo($contasala);
 
+
+
+                    $sql2a = "select count(*) from outro_equipamento,salas 
+                    where salas.id=outro_equipamento.id_sala
+                    and salas.id='$n' ";
+                    $result2a = mysqli_query($db,$sql2a); 
+                    $rows2a =mysqli_fetch_row($result2a);
+                    
+                    $contasalaoe = $rows2a[0];
                     ?>
                 <tr>
              
@@ -637,9 +647,10 @@ function(isConfirm){
                     <a title="Atualizar" href="<?php echo SVRURL ?>atualizasala/<?php echo base64_encode($n) ?>">
                     <img src="<?php echo SVRURL ?>images/atualizar.svg" alt="Atualizar" >  </a></td>
                     <td width="3%">
+
                     <?php
                     //&& $row['equip_requisitavel']<>'Sim'
-                      if ($contasala==0 )
+                      if ($contasala==0 && $contasalaoe==0)
                       {
                      ?>
               
