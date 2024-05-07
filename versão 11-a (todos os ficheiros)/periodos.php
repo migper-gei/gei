@@ -44,9 +44,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES</a>
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> PERÍODOS</a>
                <div class="titlepage">
-                     <h2>Períodos</h2>
+          
                   </div>
                </div>
             </div>
@@ -151,6 +151,9 @@ function(isConfirm){
 
 </script>
 
+<br>
+<img src="images/informacao.svg"> Não é possível atualizar/eliminar períodos com avarias associadas.
+
 
        <!-- Select dropdown -->
        <div class="d-flex flex-row-reverse bd-highlight mb-3">
@@ -215,12 +218,30 @@ function(isConfirm){
                     <?php
                       if ($_SESSION['tipo']==1 )
                       {
+
                      ?>
-                    <td  width="20%">
+
+                    <?php
+                          $sql9 = "select count(*) as cav from avarias_reparacoes
+                          where ano_letivo='".$al."' and periodo=".$np."  ";
+                          $result9 = mysqli_query($db,$sql9); 
+                          $rows9 =mysqli_fetch_row($result9);
+                          
+                          $ccav=$rows9[0];
+
+                          if ($ccav==0)
+                          {
+                        ?>
+
+
+                    <td  width="10%">
                     <a title="Atualizar" href="atualizaper/<?php echo base64_encode($id) ?>">
                     <img src="<?php echo SVRURL ?>images/atualizar.svg" alt="Atualizar" >  </a>
             
                    
+                     
+
+
                     &nbsp;   &nbsp;&nbsp;            
                     <a onclick="a(<?php echo $id;?>,'<?php echo $al;?>',<?php echo $np;?>);" title="Eliminar" 
                     href="<?php echo SVRURL ?>eliminaper">
@@ -229,7 +250,12 @@ function(isConfirm){
                     <img src="<?php echo SVRURL ?>images/eliminar.svg" alt="Eliminar" > </a>
                     </td>
                   
-                  
+                  <?php
+                          }
+                  ?>
+
+
+
                     <!--
                     <td width="5%" align="center" >
                     <a title="Copiar" href="copia_periodo.php?id=<php echo $n ?>">
