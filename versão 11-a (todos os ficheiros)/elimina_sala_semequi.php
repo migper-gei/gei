@@ -39,8 +39,9 @@ include("sessao_timeout.php");
          <div class="container">
             <div class="row">
                <div class="col-md-12">
+               <a href="#" class="btn btn-secondary disabled">CONFIGURAÇÕES >> SALAS</a>
                <div class="titlepage">
-                     <h2>Eliminar salas sem equipamento</h2>
+         
                   </div>
                </div>
             </div>
@@ -93,8 +94,8 @@ $id=$url[0];
 $sql = "select id,nome from salas 
 where id_escola=$id and id not in (
 select  s.id
-from equipamento e, salas s 
-where s.id=e.id_sala 
+from equipamento e, salas s «, outro_equipamento oe
+where s.id=e.id_sala or oe.id_sala=s.id
 and s.id_escola=$id )";
 $result = mysqli_query($db,$sql);
 
