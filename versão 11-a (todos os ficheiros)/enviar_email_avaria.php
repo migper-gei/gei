@@ -121,9 +121,9 @@ $mail = new PHPMailer();
          '.$row['telefone'].' 
 
 
-         <br><br>
+         <!--<br><br>
          <img height="150" width="250" src="data:image/jpeg;base64,'.base64_encode($row['imgavaria']).'">
-         
+         -->
      
          
          <br><br>
@@ -150,9 +150,7 @@ $mail = new PHPMailer();
         <br><br>AVARIA: '.$row['avaria'].' 
 
        
-        <br><br>
-        <img height="150" width="250" src="data:image/jpeg;base64,'.base64_encode($row['imgavaria']).'">
-        
+       
     
         
         <br><br>
@@ -264,6 +262,10 @@ window.setTimeout(function() {
 window.location.href = 'avaria';
 }, 0);
 </script>
+
+ <br><br>
+        <img height="150" width="250" src="data:image/jpeg;base64,'.base64_encode($row['imgavaria']).'">
+        
 -->
 
 
