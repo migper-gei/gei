@@ -273,6 +273,9 @@ $next = $page + 1;
         Só é possível atualizar/eliminar manutenções no ano letivo corrente. 
 -->
 
+<img src="<?php echo SVRURL ?>images/informacao.svg" alt="Informação">
+        Só é possível atualizar/eliminar manutenções no ano corrente. 
+
         <!-- Select dropdown -->
         <div class="d-flex flex-row-reverse bd-highlight mb-3">
             <form action="manutencoes_equip_entredatas.php?x=<?php echo base64_encode(2) ?>&&dmi=<?php echo base64_encode($di);?>&&dmf=<?php echo base64_encode($df);?>&&ei=<?php echo base64_encode($eq);?>&&esm=<?php echo base64_encode($idescola);?>" method="post">
