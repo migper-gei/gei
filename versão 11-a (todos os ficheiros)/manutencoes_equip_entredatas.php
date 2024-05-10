@@ -345,8 +345,70 @@ $next = $page + 1;
 
 
                
-                    <td width="15%" >
+                    <td width="10%" >
                    
+                    <?php
+$sql2 = "select max(ano_lectivo),min(num_periodo) from periodos";
+$result2 = mysqli_query($db,$sql2); 
+$rows2 =mysqli_fetch_row($result2);
+
+$mal = $rows2[0];
+$mnp=$rows2[1];
+//echo $mnp;
+
+$sql2b = "select data_inicio from periodos where 
+ano_lectivo='".$mal."' and num_periodo=".$mnp." ";
+$result2b = mysqli_query($db,$sql2b); 
+$rows2b =mysqli_fetch_row($result2b);
+
+$df2b=$rows2b[0];
+
+
+
+$dm=$row2['data_manutencao'];
+
+
+//echo $row['id_equi'];
+
+
+$sql3 = "
+SELECT count(*) FROM manutencao WHERE 
+id_equi=".$row2['id_equi']."  and
+data_manutencao=STR_TO_DATE('$dm','%Y-%m-%d') AND 
+STR_TO_DATE(data_manutencao,'%Y-%m-%d') > STR_TO_DATE('$df2b','%Y-%m-%d')";
+
+$result3 = mysqli_query($db,$sql3);
+$rows3 =mysqli_fetch_row($result3);
+$contama = $rows3[0];
+
+//echo $contama;
+
+
+                      if ( ($_SESSION['tipo']==1 || $_SESSION['tipo']==3 ) && $contama>0)
+                      {
+                     ?>
+                     
+                     <a title="Atualizar" href="atualiza_manutencao.php?c=<?php echo base64_encode($row2['codigo'])?>&&da1=<?php echo base64_encode($di)?>&&da2=<?php echo base64_encode($df)?>&&sa=<?php echo base64_encode($sa)?>&&ides=<?php echo base64_encode($idescola)?>">
+                    <img src="<?php echo SVRURL ?>images/atualizar.svg" alt="Atualizar" >  </a>
+
+
+                    &nbsp;   &nbsp;&nbsp;            
+                    <a onclick="a(<?php echo $row2['codigo'];?>);" title="Eliminar" 
+                    href="<?php echo SVRURL ?>eliminaman">
+                  
+
+                    <img src="<?php echo SVRURL ?>images/eliminar.svg" alt="Eliminar" > </a>
+                      <?php
+      
+                      }
+                     ?>
+                    </td>
+
+
+
+
+
+
 
                     
                 
