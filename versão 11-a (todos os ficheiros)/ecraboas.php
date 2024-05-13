@@ -60,7 +60,42 @@ include("sessao_timeout.php");
 
 
 
+<?php
+$hoje = date('d/m/Y');
+//echo $hoje;
 
+$da=date("Y");
+//echo $da;
+
+
+$sql3 = "
+SELECT count(*) FROM periodos WHERE 
+YEAR(data_fim) = $da; ";
+
+$result3 = mysqli_query($db,$sql3);
+$rows3 =mysqli_fetch_row($result3);
+$contap = $rows3[0];
+
+//echo $contap;
+$datai='01-01-'."$da";
+$dataf='31-12-'."$da";
+//echo $datai;
+//echo '<br>';
+//echo $dataf;
+
+//$datai=;
+
+if ($contap==0)
+{
+   $sql = "insert into periodos (ano_lectivo,num_periodo,data_inicio,data_fim) 
+   values ('".$da."',1,STR_TO_DATE('".$datai."','%d-%m-%Y'),STR_TO_DATE('".$dataf."','%d-%m-%Y'))";
+   
+   $result = mysqli_query($db,$sql);
+
+
+}
+
+?>
 
 
 
