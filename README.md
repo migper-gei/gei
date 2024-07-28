@@ -1,4 +1,4 @@
-# GEI Versão 12 (junho 2024) - brevemente (https://geiv12.miguelarpereira.pt/):
+# GEI Versão 12 (junho 2024) - (https://geiv12.miguelarpereira.pt/):
 - acesso através do nome de cada escola/instituição
 - optimizações e correções gerais
 
