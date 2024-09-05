@@ -1,16 +1,3 @@
-# GEI Versão 12 (junho 2024) - (https://geiv12.miguelarpereira.pt/):
-- acesso através do nome de cada escola/instituição
-- optimizações e correções gerais
-
-
-Consultar ficheiro "configurações_GEI.pdf" e "Configuração na Conta Google para app de terceiros.pdf"
-
-- # GEI Versão 11-a (maio 2024) - (https://gei.miguelarpereira.pt/):
-- optimizações e correções gerais
-- melhoramento do aspeto gráfico 
-
-Consultar ficheiro "configurações_GEI.pdf" e "Configuração na Conta Google para app de terceiros.pdf"
-
 
 # GEI Versão 11 (outubro 2023):
 - adaptação da aplicação para a utilização de outras instituições que não escolas.
