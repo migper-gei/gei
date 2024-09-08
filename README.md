@@ -1,4 +1,8 @@
 
+# GEI Versão 12 (outubro 2024): BREVEMENTE
+- possibilidade de autenticação com código da instituição (além do email e password).
+- optimizações e correções gerais
+
 # GEI Versão 11 (outubro 2023):
 - adaptação da aplicação para a utilização de outras instituições que não escolas.
 - optimizações e correções gerais
