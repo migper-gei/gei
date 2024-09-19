@@ -1,6 +1,6 @@
 
 # GEI Versão 12 (outubro 2024): BREVEMENTE
-- possibilidade de autenticação com código da instituição (além do email e password).
+- possibilidade de autenticação com código da instituição (além do email e da password).
 - optimizações e correções gerais
 
 # GEI Versão 11 (outubro 2023):
