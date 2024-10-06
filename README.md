@@ -3,6 +3,7 @@
 - possibilidade de autenticação com código da instituição (além do email e da password).
 - optimizações e correções gerais
 
+  Consultas os ficheiros: Instruções_criar BD e configurações.pdf   e    Configuração na Conta Google para app de terceiros.pdf
   
 
 # GEI Versão 11 (outubro 2023):
