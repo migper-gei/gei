@@ -118,6 +118,12 @@ mysqli_close($db);
 
 ?>
 
+<?php
+if(isset($_POST['my_check'])) {
+   // O checkbox foi selecionado
+
+?>
+
 
 <script>
     
@@ -138,6 +144,34 @@ window.location = "<?php echo SVRURL ?>enviar_email_reparacao.php?ia=<?php echo 
 
 
 <?php
+}
+
+else{
+?>
+
+
+<script>
+    
+    swal({
+title: 'Os dados foram guardados!',
+//text: 'Um email vai ser enviado com os dados da reparação!',
+icon: 'success',
+//buttons: false,
+
+})
+.then(function() {
+window.location = "<?php echo SVRURL ?>avaria";
+});
+
+
+</script>
+
+
+
+
+
+<?php
+}
 }
 ?>
 

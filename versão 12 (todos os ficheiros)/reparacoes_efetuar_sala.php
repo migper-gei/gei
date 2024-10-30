@@ -256,7 +256,7 @@ include("msg_bemvindo.php");
 <br>
 
 <img src="<?php echo SVRURL ?>images/informacao.svg" alt="Informação">
-        No fim da reparação será enviado um email ao autor da avaria. 
+        No fim da reparação poderá ser enviado um email ao autor da avaria. 
 
 
 
@@ -517,7 +517,7 @@ onSubmit="return enviardados2();"
 
                     </th>
 
-                    <td width="35%" >
+                    <td width="30%" >
 
                     
                     <label>Autor: </label> 
@@ -579,7 +579,7 @@ onSubmit="return enviardados2();"
 
 
                
-                    <td width="35%" >
+                    <td width="30%" >
 
                     <label>Data: </label>  
 
@@ -637,7 +637,7 @@ onSubmit="return enviardados2();"
 
 
 
-                    <td width="1%" >
+                    <td width="10%" >
 
                     <!--
 
@@ -652,7 +652,11 @@ onSubmit="return enviardados2();"
                                   
 
                     <input alt="Reparação" type="image" src="images/reparacao.png"/>  -->
-
+                  
+                        <input type=checkbox name="my_check" value="yes">  
+                    <img src="images/envelope.svg">
+                   
+                   <br>  <br>  <br><br>  <br>
                     <input  title="Reparar" alt="Reparar" type="image" src="<?php echo SVRURL ?>images/reparacao.svg"/> 
 
                     </td>
