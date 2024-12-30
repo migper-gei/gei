@@ -1,5 +1,5 @@
 
-# GEI Versão 14 (janeiro 2025) - brevemente (já atualizado em (https://gei.miguelarpereira.pt/)):
+# GEI Versão 14 (janeiro 2025) - brevemente:
 - tabela "utilizadores": novo campo adicionado "dataalteracaopass"
 - tabela "settings": novos campo adicionado "tempoduracaopass"
  - possibilidade de definir o nº de dias de duração da password dos utilizadores 
