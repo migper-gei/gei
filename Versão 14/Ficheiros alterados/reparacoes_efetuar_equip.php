@@ -446,7 +446,7 @@ onSubmit="return enviardados2();"
 
                     <label>Data: </label>  
 
-                     <input value="<?php echo date("Y-m-d");?>"  required id="datarep"   size="10" type = "date" name = "datarep" >
+                     <input onchange="return enviardados2();" value="<?php echo date("Y-m-d");?>"  required id="datarep"   size="10" type = "date" name = "datarep" >
 
                     <!--value="<php echo date("Y-m-d");?>" -->
 
@@ -456,7 +456,7 @@ onSubmit="return enviardados2();"
 
                     <label>Reparação: </label>  <br>  
 
-                    <textarea  required  style="text-align: justify;" rows="3" cols="35"  name="reparacao"></textarea>   
+                    <textarea  required  style="text-align: justify;" rows="3" cols="40"  name="reparacao"></textarea>   
 
                     <br /><br />
 

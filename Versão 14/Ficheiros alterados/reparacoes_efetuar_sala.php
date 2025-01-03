@@ -588,7 +588,7 @@ else {
 
                     <label>Data: </label>  
 
-                     <input value="<?php echo date("Y-m-d");?>"  required id="datarep"   size="10" type = "date" name = "datarep" >
+                     <input onchange="return enviardados2();" value="<?php echo date("Y-m-d");?>"  required id="datarep"   size="10" type = "date" name = "datarep" >
 
                     <!--value="<php echo date("Y-m-d");?>" -->
 

@@ -428,7 +428,7 @@ else {
                     
                
                     <label>Data: </label>  
-                     <input  required             
+                     <input  required    onchange="return enviardados2();" value="<?php echo date("Y-m-d");?>"         
                      size="10" type = "date" name = "datarep" >
                     
                     <br /><br />
