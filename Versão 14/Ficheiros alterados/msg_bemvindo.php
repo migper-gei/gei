@@ -54,7 +54,7 @@ include("verifica_sessao.php");
     &nbsp;   &nbsp;   &nbsp; 
       </td>
 
-    <td>
+    <td style="text-align: right;">
 
     <?php
   if ($totallinhas2 >0 &&  $_SESSION['tipo'] ==1)

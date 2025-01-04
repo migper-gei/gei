@@ -66,9 +66,9 @@ echo ('(Funcionário)');
 $id_user=$_SESSION['user_id'];
 
 
-$sql = "select dataalteracaopass from utilizadores where id=".$id_user."";
-$result = mysqli_query($db,$sql);
-$rows2 =mysqli_fetch_row($result);
+$sql22 = "select dataalteracaopass from utilizadores where id=".$id_user."";
+$result22 = mysqli_query($db,$sql22);
+$rows22 =mysqli_fetch_row($result22);
 
 $dataatual=date('Y-m-d');
 
@@ -81,7 +81,7 @@ $dataatual=date('Y-m-d');
 
 
 <?php
-if ( ($rows2[0]==Null) or ($dataatual>=$rows2[0]))
+if ( ($rows22[0]==Null) or ($dataatual>=$rows22[0]))
 {
   echo str_repeat('&nbsp;', 2);
 echo ('<i><u>Deve mudar a password</u></i>');
@@ -90,9 +90,15 @@ echo ('<i><u>Deve mudar a password</u></i>');
 }
 ?>
         </td>  
-        <td  > 
+
+
+        <td > 
+ 
 </td>  
-<td ><h5>Ano: 
+
+
+<td style="text-align: right;">
+Ano: 
 
 <?php
 $sql2 = "select max(ano_lectivo) from periodos";
@@ -108,14 +114,16 @@ echo 'não definido';
 
 }
 ?>
-
-</h5></td>  
+  </td>  
     </tr>  
 
 
     <tr>  
         <td >
 
+
+
+        
         <img src="<?php echo SVRURL ?>images/chat.svg" alt="Chat">
 <a  target="_new" class="underlineHover" title="Chat" href="<?php echo SVRURL ?>chat/index.php">
 <h6 style="color:blue;">CHAT</h6></a>
@@ -141,7 +149,9 @@ echo ('(Tem mensagens)');
 }
 else 
 {
+
   echo ('(Não tem mensagens)');
+
 }
 
 ?>
@@ -150,7 +160,21 @@ else
 
         </td>  
         <td ></td>  
-        <td ></td>  
+        <td style="text-align: right;">
+        <?php
+if ($_SESSION['tipo']<>1)
+{
+  ?>
+
+<a  target="_blank" class="underlineHover" href="<?php echo SVRURL ?>Manual/GEI-manual_utilizador.pdf" title="Manual de utilização" style="color:blue;">Manual de utilização</a>
+        
+<?php
+}
+?>
+
+
+</td>
+      
     </tr>  
    
 </tbody>  
