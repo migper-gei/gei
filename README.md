@@ -4,6 +4,7 @@
 - tabela "settings": novos campo adicionado "tempoduracaopass"
  - possibilidade de definir o nº de dias de duração da password dos utilizadores
  - optimizações e correções gerais
+ - atualização do manual de utilização
 
 
 # GEI Versão 12 (outubro 2024): 
