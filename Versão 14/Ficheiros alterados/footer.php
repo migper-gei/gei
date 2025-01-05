@@ -71,6 +71,7 @@
 <p>  - tabela "settings": novos campo adicionado "tempoduracaopass"</p>
 <p>  - possibilidade de definir o nº de dias de duração da password dos utilizadores </p>
 <p>  - optimizações e correções gerais</p>
+<p>  - atualização do manual de utilização</p>
  
   
   <br>
