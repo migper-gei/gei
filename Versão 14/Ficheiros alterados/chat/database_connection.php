@@ -28,7 +28,7 @@ else
 //echo $nobd;
 
 
-$connect = new mysqli($serverbd,"root","fm1003+-FM",$nobd);
+$connect = new mysqli($serverbd,"root","",$nobd);
 
 //echo $serverbd;
 
