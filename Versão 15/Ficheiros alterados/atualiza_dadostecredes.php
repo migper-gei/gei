@@ -204,6 +204,17 @@ echo('</h4>');
                         <?php
                      }
                    ?>
+                   <?php
+                     if ($row['tecladointerface']=='')
+                     {
+                   ?>
+                     <option selected value=""></option>
+                   <option  value="USB">USB</option>
+                   <option value="PS/2">PS/2</option>
+                        <option  value="Sem fios">Sem fios</option>
+                        <?php
+                     }
+                   ?>
                   </select>
               <br>
                 <label>Rato</label>    <br>  
@@ -214,6 +225,7 @@ echo('</h4>');
                      if ($row['ratointerface']=='USB')
                      {
                    ?>
+                    <option value=""></option>
                         <option selected value="USB">USB</option>
                         <option value="PS/2">PS/2</option>
                         <option value="Sem fios">Sem fios</option>
@@ -224,6 +236,7 @@ echo('</h4>');
                      if ($row['ratointerface']=='PS/2')
                      {
                    ?>
+                        <option value=""></option>
                        <option  value="USB">USB</option>
                         <option selected value="PS/2">PS/2</option>
                         <option value="Sem fios">Sem fios</option>
@@ -234,9 +247,21 @@ echo('</h4>');
                      if ($row['ratointerface']=='Sem fios')
                      {
                    ?>
+                   <option value=""></option>
                    <option  value="USB">USB</option>
                    <option value="PS/2">PS/2</option>
                         <option selected value="Sem fios">Sem fios</option>
+                        <?php
+                     }
+                   ?>
+                     <?php
+                     if ($row['ratointerface']=='')
+                     {
+                   ?>
+                    <option selected value=""></option>
+                   <option value="USB">USB</option>
+                   <option value="PS/2">PS/2</option>
+                        <option  value="Sem fios">Sem fios</option>
                         <?php
                      }
                    ?>

@@ -925,9 +925,13 @@ order by oe.nomeoutro ";
 <br>
 
 
+<?php
+
+if ($count>0)
+{
 
 
-
+  ?>
 
 
 
@@ -1064,14 +1068,10 @@ X
                 <?php } 
                 }
               
-                else
-                {
+                
                   ?>
                 
-            <tr>
-            <td>
-              Sem registos.</td>
-                </tr>
+           
 
 
                   <?php
@@ -1083,7 +1083,7 @@ X
       </tbody>
         </table>     
 
-        <br>  
+    
 
 
 
