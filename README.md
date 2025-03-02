@@ -1,4 +1,4 @@
-# GEI Versão 15 (fevereiro 2025): (brevemente)
+# GEI Versão 15 (março 2025): (brevemente)
 - tabela "equipamento": novos campos adicionados "ratointerface" e "tecladointerface"
 - possibilidade de ver o número de ratos e teclados por interface de ligação (total e por sala)
 - optimizações e correções gerais
