@@ -1,7 +1,7 @@
 # GEI Versão 16 (maio 2025):  (brevemente)
 - melhoramento aspeto gráfico
 ![Clipboard_04-05-2025_01](https://github.com/user-attachments/assets/1ac3dc28-45cd-4d16-881d-d2d10deadc13)
-![Doc1](https://github.com/user-attachments/assets/491f6271-841d-4daf-bcaa-867a9d0612fd)
+![Doc1](https://github.com/user-attachments/assets/9795bc67-4a85-40a6-97e6-2e0040055bdc)
 
 # GEI Versão 15 (março 2025):  (https://gei.miguelarpereira.pt/)
 - tabela "equipamento": novos campos adicionados "ratointerface" e "tecladointerface"
