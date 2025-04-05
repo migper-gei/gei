@@ -1,5 +1,5 @@
 # GEI Versão 16 (maio 2025):  (brevemente)
-- melhoramento aspeto gráfico"
+- melhoramento aspeto gráfico
 
   
 # GEI Versão 15 (março 2025):  (https://gei.miguelarpereira.pt/)
