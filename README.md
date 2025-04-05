@@ -1,6 +1,7 @@
 # GEI Versão 16 (maio 2025):  (brevemente)
 - melhoramento aspeto gráfico
 ![Clipboard_04-05-2025_01](https://github.com/user-attachments/assets/1ac3dc28-45cd-4d16-881d-d2d10deadc13)
+![Doc1](https://github.com/user-attachments/assets/e1908d0d-0e52-4ff7-988d-a417f24fd021)
 
   
 # GEI Versão 15 (março 2025):  (https://gei.miguelarpereira.pt/)
