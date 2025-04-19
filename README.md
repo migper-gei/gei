@@ -1,6 +1,6 @@
 # GEI Versão 16 (maio 2025):  Testar em: https://gei.miguelarpereira.pt/    (brevemente disponível)
 - melhoramento aspeto gráfico
-- Otpimizações e correções gerais
+- otimizações e correções gerais
 ![Clipboard_04-06-2025_01](https://github.com/user-attachments/assets/f53c6094-f546-431a-a232-0aaa9e3b813d)
 ![Doc1](https://github.com/user-attachments/assets/d9519adf-fa2c-4591-bc8c-544ceb5c2bbe)
 
