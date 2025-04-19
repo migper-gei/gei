@@ -1,4 +1,4 @@
-# GEI Versão 16 (maio 2025):  (brevemente)
+# GEI Versão 16 (maio 2025):   (https://gei.miguelarpereira.pt/)
 - melhoramento aspeto gráfico
 - Otpimizações e correções gerais
 ![Clipboard_04-06-2025_01](https://github.com/user-attachments/assets/f53c6094-f546-431a-a232-0aaa9e3b813d)
@@ -7,7 +7,7 @@
 
 
 
-# GEI Versão 15 (março 2025):  (https://gei.miguelarpereira.pt/)
+# GEI Versão 15 (março 2025): 
 - tabela "equipamento": novos campos adicionados "ratointerface" e "tecladointerface"
 - possibilidade de ver o número de ratos e teclados por interface de ligação (total e por sala)
 - optimizações e correções gerais
