@@ -1,0 +1,4 @@
+nome,email,pass (minimo 8 carateres),tipo (1-administrador       2-utilizador        3-reparador         4-funcionário)
+user1,user1@xyx.pt,123+-abc,2
+user2,user2@xyz.pt,123+-abc,2
+user3,user3@xyz.pt,123+-abc,1
