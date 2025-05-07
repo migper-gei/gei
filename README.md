@@ -1,10 +1,19 @@
-# GEI Versão 15 (março 2025): (brevemente)
+# GEI Versão 16 (maio 2025):  Testar em: https://gei.miguelarpereira.pt/    (brevemente disponível)
+- melhoramento aspeto gráfico
+- otimizações e correções gerais
+![Clipboard_04-06-2025_01](https://github.com/user-attachments/assets/f53c6094-f546-431a-a232-0aaa9e3b813d)
+![Doc1](https://github.com/user-attachments/assets/d9519adf-fa2c-4591-bc8c-544ceb5c2bbe)
+
+
+
+
+# GEI Versão 15 (março 2025): 
 - tabela "equipamento": novos campos adicionados "ratointerface" e "tecladointerface"
 - possibilidade de ver o número de ratos e teclados por interface de ligação (total e por sala)
 - optimizações e correções gerais
 
 
-# GEI Versão 14 (janeiro 2025): (https://gei.miguelarpereira.pt/)
+# GEI Versão 14 (janeiro 2025):
 - tabela "utilizadores": novo campo adicionado "dataalteracaopass"
 - tabela "settings": novos campo adicionado "tempoduracaopass"
  - possibilidade de definir o nº de dias de duração da password dos utilizadores
