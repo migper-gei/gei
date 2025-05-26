@@ -1,4 +1,50 @@
 
+
+--
+-- Banco de dados: `gei_escolas_instituicoes`
+--
+create database gei_escolas_instituicoes;
+-- --------------------------------------------------------
+
+use gei_escolas_instituicoes;
+
+--
+-- Estrutura da tabela `settingsbd`
+--
+
+CREATE TABLE `settingsbd` (
+  `codigo` int(9) NOT NULL,
+  `nome_esc_inst` varchar(200) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `contato` int(9) NOT NULL,
+  `nomebd` varchar(50) NOT NULL,
+  `serverbd` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `settingsbd`
+--
+
+--
+-- Índices para tabela `settingsbd`
+--
+ALTER TABLE `settingsbd`
+  ADD PRIMARY KEY (`codigo`);
+COMMIT;
+
+
+
+INSERT INTO settingsbd (codigo, nome_esc_inst, email, contato, nomebd, serverbd) 
+VALUES
+(123456, 'AE escola...', 'escola@gmail.com', 123456789, 'geidb', 'localhost');
+
+
+
+--------------------------------------------------------------------------------------------------------
+
+create database geidb;
+use geidb;
+
 --
 -- Table structure for table `escolas`
 --
