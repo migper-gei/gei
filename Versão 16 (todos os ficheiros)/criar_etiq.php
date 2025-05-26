@@ -111,10 +111,12 @@ if ($dados['logotipo']<>"")
 $pdf->Image($pic, $somaH, $somaV, 15, -300,'png'); // Imprime o logotipo
 }
 
+            
+              
 
-$pdf->Text($somaH,$somaV+12,$nomeequi); // Imprime o nome do equipamento
-$pdf->Text($somaH,$somaV+16,$nome); // Imprime o nome da sala
-$pdf->Text($somaH,$somaV+20,$nome_escola); // Imprime o nome da escola
+$pdf->Text($somaH,$somaV+12,mb_convert_encoding($nomeequi,'ISO-8859-1')); // Imprime o nome do equipamento
+$pdf->Text($somaH,$somaV+16,mb_convert_encoding($nome,'ISO-8859-1')); // Imprime o nome da sala
+$pdf->Text($somaH,$somaV+20,mb_convert_encoding($nome_escola,'ISO-8859-1')); // Imprime o nome da escola
 
 
 
