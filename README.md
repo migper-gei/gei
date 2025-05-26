@@ -2,7 +2,7 @@
 - melhoramento aspeto gráfico
 - otimizações e correções gerais
 
-
+Ver ficheiro: Instruções_criar Base de Dados e configurações na aplicação.pdf
 
 
 # GEI Versão 15 (março 2025): 
