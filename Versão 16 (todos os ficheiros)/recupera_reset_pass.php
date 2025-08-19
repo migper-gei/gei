@@ -115,10 +115,7 @@ window.setTimeout(function() {
                   
                   <div style="  text-align: right;">              
                   
-                  <a href="l">
-
-<button type="button" class="btn btn-outline-primary">Login</button>
-</a>
+      
 
 
 
