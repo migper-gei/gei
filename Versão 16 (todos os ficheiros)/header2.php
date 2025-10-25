@@ -60,6 +60,46 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0.5; }
   }
+
+
+
+
+  
+.text-login {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffb347;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.text-login i {
+  font-size: 1.3rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.text-login:hover {
+  color: #ffb347;
+  text-shadow: 0 0 10px rgba(255, 179, 71, 0.8);
+  transform: scale(1.05);
+}
+
+.text-login:hover i {
+  color: #ffb347;
+  transform: translateX(6px);
+}
+
+.text-login:active {
+  opacity: 0.85;
+  transform: scale(0.97);
+}
+
    </style>
       
  
@@ -105,11 +145,11 @@
                            </div>
                        </div>
  
-                     </div>    
+                     </div>
                      
                   
               
-                  </div>    
+                  </div>
                    
            
 
@@ -183,9 +223,9 @@ else
                 
                     
 
-                    
+<!--
                    <i class="fa-solid fa-arrow-right-to-bracket fa-lg" style="color:#f39c12"></i>
-
+-->
                    <a title="Login" href="<?php echo SVRURL; ?>l"  >
                
 
@@ -198,10 +238,12 @@ else
                     </button>
 -->
 
-    
+ <!--   
 <button class="blink-text-btn">Login</button>
-
-
+-->
+<button type="submit" class="text-login">
+  <i class="fas fa-arrow-right-to-bracket"></i> Entrar
+</button>
                 </a>
 
           
