@@ -1,3 +1,10 @@
+# GEI Versão 17 (março 2026):  BREVEMENTE  
+- melhoramento no envio de emails
+- cópias de segurança e restauro da base de dados
+- melhoramentos gráficos
+- optimizações gerais
+
+
 # GEI Versão 16 (maio 2025):  Testar em: https://gei.miguelarpereira.pt/    
 - melhoramento aspeto gráfico
 - otimizações e correções gerais
