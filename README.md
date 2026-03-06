@@ -1,5 +1,6 @@
 # GEI Versão 17 (março 2026):  BREVEMENTE  
-- dashboard
+- dashboard: Visão geral dos equipamentos e manutenção
+- visualização do estado de cada avaria
 - melhoramento no envio de emails
 - cópias de segurança e restauro da base de dados
 - melhoramentos gráficos
