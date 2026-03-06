@@ -1,4 +1,5 @@
 # GEI Versão 17 (março 2026):  BREVEMENTE  
+- dashboard
 - melhoramento no envio de emails
 - cópias de segurança e restauro da base de dados
 - melhoramentos gráficos
