@@ -8,7 +8,7 @@
 - optimizações gerais
 
 
-# GEI Versão 16 (maio 2025):  Testar em: https://gei.miguelarpereira.pt/    
+# GEI Versão 16 (maio 2025):  
 - melhoramento aspeto gráfico
 - otimizações e correções gerais
 
