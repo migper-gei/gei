@@ -6,6 +6,7 @@
 - cópias de segurança e restauro da base de dados
 - outros melhoramentos gráficos
 - optimizações gerais
+- formulário de contato (melhorias, erros, dúvidas, ...)
 
 
 # GEI Versão 16 (maio 2025):  
