@@ -1,9 +1,11 @@
 # GEI Versão 17 (março 2026): Testar em: https://gei.miguelarpereira.pt/     (brevemente disponível)
 - dashboard: Visão geral dos equipamentos e manutenção (atualização automática)
 - visualização do estado de cada avaria
+- cópia e restauro da base de dados
+- política de retenção de utilizadores
+- relatório de equipamento por idade
 - chat: melhoramento gráfico
 - melhoramento no envio de emails
-- cópias de segurança e restauro da base de dados
 - outros melhoramentos gráficos
 - optimizações gerais
 - formulário de contato (melhorias, erros, dúvidas, ...)
