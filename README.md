@@ -5,6 +5,7 @@
 - política de retenção de utilizadores
 - Qrcodes dos equipamentos para reportar avaria
 - relatório de equipamento por idade
+- autenticação em dois fatores (para administradores)
 - chat: melhoramento gráfico
 - melhoramento no envio de emails
 - outros melhoramentos gráficos
