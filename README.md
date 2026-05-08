@@ -8,7 +8,6 @@
 - planta das salas
 - modo escuro
 - auditoria (logs)
-- autenticação em dois fatores (para administradores)
 - chat: melhoramento gráfico
 - melhoramento no envio de emails
 - outros melhoramentos gráficos
