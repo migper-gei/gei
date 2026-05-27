@@ -1,0 +1,411 @@
+/* ================================================================
+   GEI — TEMA ESCURO
+   Ficheiro: css/dark-theme.css
+   Incluir DEPOIS de style.css em todas as páginas PHP
+   ================================================================ */
+
+/* ── 1. Variáveis de cor (tema claro — padrão) ── */
+:root {
+  --bg-page:        #f4f6fb;
+  --bg-card:        #ffffff;
+  --bg-navbar:      linear-gradient(to bottom, #56baed, #4f7af3);
+  --bg-userbar:     #f4f6fb;
+  --bg-input:       #ffffff;
+  --bg-table-head:  #eaecf4;
+  --bg-table-row:   #ffffff;
+  --bg-table-alt:   #f8f9fc;
+
+  --text-primary:   #1a2330;
+  --text-secondary: #666666;
+  --text-heading:   #111111;
+  --text-link:      #ffffff;
+
+  --border-color:   #e4e9f0;
+  --shadow:         0 2px 10px rgba(0,0,0,0.07);
+
+  --accent:         #4e73df;
+  --accent-hover:   #3a5ccc;
+
+  --toggle-bg:      #cbd2da;
+  --toggle-knob:    #ffffff;
+  --toggle-icon:    "🌙";
+}
+
+/* ── 2. Variáveis substituídas no tema escuro ── */
+[data-theme="dark"] {
+  --bg-page:        #0f1117;
+  --bg-card:        #1a1d27;
+  --bg-navbar:      linear-gradient(to bottom, #0e2a45, #152861);
+  --bg-userbar:     #1e2130;
+  --bg-input:       #252836;
+  --bg-table-head:  #1e2130;
+  --bg-table-row:   #1a1d27;
+  --bg-table-alt:   #1e2130;
+
+  --text-primary:   #e2e8f0;
+  --text-secondary: #94a3b8;
+  --text-heading:   #f1f5f9;
+  --text-link:      #e2e8f0;
+
+  --border-color:   #2d3348;
+  --shadow:         0 2px 10px rgba(0,0,0,0.4);
+
+  --accent:         #6489f5;
+  --accent-hover:   #7b9bf7;
+
+  --toggle-bg:      #4e73df;
+  --toggle-knob:    #ffffff;
+  --toggle-icon:    "☀️";
+}
+
+/* ── 3. Elementos base ── */
+[data-theme="dark"] body {
+  background-color: var(--bg-page) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: var(--text-heading) !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span:not(.gei-tipo-badge):not(.gei-btn span):not(.badge) {
+  color: var(--text-primary);
+}
+
+/* ── 4. Header / Navbar ── */
+[data-theme="dark"] .header,
+[data-theme="dark"] .navigation.navbar {
+  background-image: var(--bg-navbar) !important;
+}
+
+/* ── 5. Barra de utilizador (gei-userbar) ── */
+[data-theme="dark"] .gei-userbar-wrap {
+  background: var(--bg-userbar) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: var(--shadow) !important;
+}
+
+[data-theme="dark"] .gei-username {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .gei-sep {
+  background: var(--border-color) !important;
+}
+
+/* ── 6. Cards / painéis ── */
+[data-theme="dark"] .card,
+[data-theme="dark"] .action-section,
+[data-theme="dark"] .welcome-section,
+[data-theme="dark"] .panel,
+[data-theme="dark"] .box,
+[data-theme="dark"] [class*="card-"] {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+  box-shadow: var(--shadow) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .card-header,
+[data-theme="dark"] .card-footer {
+  background-color: var(--bg-table-head) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── 7. Tabelas ── */
+[data-theme="dark"] table,
+[data-theme="dark"] .table {
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .table thead th,
+[data-theme="dark"] .table > thead > tr > th {
+  background-color: var(--bg-table-head) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-heading) !important;
+}
+
+[data-theme="dark"] .table tbody tr {
+  background-color: var(--bg-table-row) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .table-striped tbody tr:nth-of-type(odd),
+[data-theme="dark"] .table tbody tr:nth-child(even) {
+  background-color: var(--bg-table-alt) !important;
+}
+
+[data-theme="dark"] .table tbody tr:hover,
+[data-theme="dark"] .table-hover tbody tr:hover {
+  background-color: #252836 !important;
+}
+
+[data-theme="dark"] .table td,
+[data-theme="dark"] .table th {
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── 8. Formulários / Inputs ── */
+[data-theme="dark"] input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] select,
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .nice-select {
+  background-color: var(--bg-input) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] label {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .form-control:focus {
+  background-color: var(--bg-input) !important;
+  border-color: var(--accent) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 0 0 0.2rem rgba(100, 137, 245, 0.25) !important;
+}
+
+/* ── 9. Botões ── */
+[data-theme="dark"] .btn-secondary-action {
+  background-color: var(--bg-card) !important;
+  color: var(--accent) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .btn-secondary-action:hover {
+  background-color: var(--bg-table-alt) !important;
+}
+
+[data-theme="dark"] .btn-outline-action {
+  color: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+[data-theme="dark"] .btn-outline-action:hover {
+  background-color: rgba(100, 137, 245, 0.15) !important;
+}
+
+/* ── 10. Modais ── */
+[data-theme="dark"] .modal-content {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer {
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .modal-header .close,
+[data-theme="dark"] .modal-title {
+  color: var(--text-heading) !important;
+}
+
+/* ── 11. Dropdowns ── */
+[data-theme="dark"] .dropdown-menu {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .dropdown-item {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+  background-color: var(--bg-table-alt) !important;
+  color: var(--text-heading) !important;
+}
+
+[data-theme="dark"] .dropdown-divider {
+  border-color: var(--border-color) !important;
+}
+
+/* ── 12. Alertas ── */
+[data-theme="dark"] .alert {
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .alert-info {
+  background-color: rgba(100, 137, 245, 0.15) !important;
+  color: #93b4f8 !important;
+  border-color: rgba(100, 137, 245, 0.3) !important;
+}
+
+[data-theme="dark"] .alert-success {
+  background-color: rgba(56, 200, 168, 0.15) !important;
+  color: #6ddcbe !important;
+  border-color: rgba(56, 200, 168, 0.3) !important;
+}
+
+[data-theme="dark"] .alert-warning {
+  background-color: rgba(232, 119, 34, 0.15) !important;
+  color: #f0a868 !important;
+  border-color: rgba(232, 119, 34, 0.3) !important;
+}
+
+[data-theme="dark"] .alert-danger {
+  background-color: rgba(231, 74, 59, 0.15) !important;
+  color: #f08080 !important;
+  border-color: rgba(231, 74, 59, 0.3) !important;
+}
+
+/* ── 13. Badges ── */
+[data-theme="dark"] .badge-primary { background-color: #3a56a5 !important; }
+[data-theme="dark"] .badge-secondary { background-color: #3d4455 !important; }
+[data-theme="dark"] .badge-success { background-color: #1e6b54 !important; }
+[data-theme="dark"] .badge-danger { background-color: #7a2020 !important; }
+
+/* ── 14. Paginação ── */
+[data-theme="dark"] .page-item .page-link {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .page-item.active .page-link {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+
+/* ── 15. Scrollbar (webkit) ── */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--bg-page);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #2d3348;
+  border-radius: 4px;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #3d4560;
+}
+
+/* ── 16. Secção de login ── */
+[data-theme="dark"] .login_form_area,
+[data-theme="dark"] .login-container,
+[data-theme="dark"] .login-box {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* ── 17. Transition suave em todos os elementos ── */
+/* A classe .gei-theme-ready é adicionada pelo dark-theme.js após o load,
+   garantindo que a transição não anima no primeiro render da página (FOUC) */
+.gei-theme-ready *,
+.gei-theme-ready *::before,
+.gei-theme-ready *::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
+/* ══════════════════════════════════════════════
+   BOTÃO TOGGLE — pode ser inserido em qualquer
+   página, incluindo na gei-userbar
+   ══════════════════════════════════════════════ */
+.gei-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 2px 0;
+  user-select: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.gei-theme-toggle:hover {
+  color: var(--text-primary);
+}
+
+/* Switch visual */
+.gei-toggle-track {
+  position: relative;
+  width: 34px;
+  height: 18px;
+  background-color: var(--toggle-bg);
+  border-radius: 9px;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.gei-toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background-color: var(--toggle-knob);
+  border-radius: 50%;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+}
+
+[data-theme="dark"] .gei-toggle-knob {
+  transform: translateX(16px);
+}
+
+/* Ícones sol / lua */
+.gei-toggle-icon {
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 0.4s ease;
+}
+
+[data-theme="dark"] .gei-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* ── Acessibilidade dark mode: foco visível ──────────────────────────────
+   Em fundo escuro o azul #4b6cb7 perde contraste. Usa-se o accent claro
+   do tema escuro (#6489f5) com um halo mais visível.                    */
+
+[data-theme="dark"] *:focus-visible {
+  outline-color: #6489f5;
+}
+
+[data-theme="dark"] input:focus-visible,
+[data-theme="dark"] select:focus-visible,
+[data-theme="dark"] textarea:focus-visible {
+  outline-color: #6489f5;
+  box-shadow: 0 0 0 3px rgba(100, 137, 245, 0.25);
+}
+
+[data-theme="dark"] button:focus-visible,
+[data-theme="dark"] .btn:focus-visible,
+[data-theme="dark"] [role="button"]:focus-visible {
+  outline-color: #6489f5;
+  box-shadow: 0 0 0 4px rgba(100, 137, 245, 0.22);
+}
+
+[data-theme="dark"] a:focus-visible {
+  outline-color: #6489f5;
+}
+
+/* ── Fim do bloco de acessibilidade dark mode ───────────────────────── */

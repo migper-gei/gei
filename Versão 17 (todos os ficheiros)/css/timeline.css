@@ -1,0 +1,312 @@
+/* ============================================================
+   timeline.css — GEI Timeline de Avarias por Equipamento
+   Inclui suporte automático a dark-theme.css via variáveis CSS
+   ============================================================ */
+
+/* ── Barra de estatísticas ───────────────────────────────── */
+.tl-stats-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.tl-stat {
+    flex: 1;
+    min-width: 110px;
+    background: var(--bg-card, #fff);
+    border: 1px solid var(--border-color, #e4e9f0);
+    border-radius: 12px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-left: 4px solid var(--border-color, #e4e9f0);
+    transition: box-shadow .2s, transform .2s;
+}
+.tl-stat:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,.08);
+    transform: translateY(-2px);
+}
+.tl-stat--danger  { border-left-color: #e74a3b; }
+.tl-stat--success { border-left-color: #1cc88a; }
+.tl-stat--info    { border-left-color: #36b9cc; }
+.tl-stat--primary { border-left-color: #4b6cb7; }
+
+.tl-stat-val {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-primary, #1a2330);
+    font-family: 'DM Mono', 'Courier New', monospace;
+}
+.tl-stat-val small {
+    font-size: .75rem;
+    font-weight: 400;
+    color: var(--text-secondary, #666);
+    margin-left: 2px;
+}
+.tl-stat--danger  .tl-stat-val { color: #e74a3b; }
+.tl-stat--success .tl-stat-val { color: #1cc88a; }
+.tl-stat--info    .tl-stat-val { color: #36b9cc; }
+.tl-stat--primary .tl-stat-val { color: #4b6cb7; }
+
+.tl-stat-label {
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--text-secondary, #666);
+    text-transform: uppercase;
+    letter-spacing: .4px;
+}
+.tl-stat-label i {
+    margin-right: 4px;
+    opacity: .7;
+}
+
+/* ── Estado vazio ────────────────────────────────────────── */
+.tl-empty {
+    text-align: center;
+    padding: 48px 24px;
+    color: var(--text-secondary, #666);
+}
+.tl-empty i {
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+    display: block;
+    opacity: .3;
+    color: #1cc88a;
+}
+.tl-empty p {
+    font-size: .9rem;
+    margin: 0;
+}
+
+/* ── Erro ────────────────────────────────────────────────── */
+.tl-erro {
+    padding: 16px;
+    color: #e74a3b;
+    font-size: .88rem;
+}
+
+/* ── Timeline container ──────────────────────────────────── */
+.gei-timeline {
+    position: relative;
+    padding: 4px 0 4px 0;
+}
+
+/* ── Item ────────────────────────────────────────────────── */
+.tl-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+/* ── Coluna do ponto + linha vertical ────────────────────── */
+.tl-dot-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 38px;
+}
+
+.tl-dot {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .95rem;
+    flex-shrink: 0;
+    z-index: 1;
+    border: 3px solid var(--bg-page, #f4f6fb);
+    box-shadow: 0 0 0 2px var(--border-color, #e4e9f0);
+    transition: transform .2s;
+}
+.tl-item:hover .tl-dot {
+    transform: scale(1.12);
+}
+.tl-item.open     .tl-dot { background: #fde8e6; color: #e74a3b; }
+.tl-item.resolved .tl-dot { background: #e0f7f0; color: #1cc88a; }
+
+/* Linha vertical entre pontos */
+.tl-line {
+    width: 2px;
+    flex: 1;
+    min-height: 20px;
+    background: var(--border-color, #e4e9f0);
+    margin: 4px 0;
+}
+
+/* ── Card ────────────────────────────────────────────────── */
+.tl-card {
+    flex: 1;
+    background: var(--bg-card, #fff);
+    border: 1px solid var(--border-color, #e4e9f0);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    transition: box-shadow .2s;
+}
+.tl-item.open     .tl-card { border-left: 3px solid #e74a3b; }
+.tl-item.resolved .tl-card { border-left: 3px solid #1cc88a; }
+.tl-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,.07);
+}
+
+/* ── Cabeçalho do card ───────────────────────────────────── */
+.tl-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.tl-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.tl-num {
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--text-secondary, #666);
+    background: var(--bg-table-alt, #f8f9fc);
+    border: 1px solid var(--border-color, #e4e9f0);
+    border-radius: 6px;
+    padding: 2px 7px;
+    font-family: 'DM Mono', monospace;
+}
+
+.tl-date-av, .tl-tecnico {
+    font-size: .78rem;
+    color: var(--text-secondary, #666);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.tl-date-av i, .tl-tecnico i { opacity: .6; }
+
+/* ── Badge de estado ─────────────────────────────────────── */
+.tl-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: .72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.tl-badge--open     { background: #fde8e6; color: #c0392b; }
+.tl-badge--resolved { background: #e0f7f0; color: #13a073; }
+
+/* ── Secção de descrição ─────────────────────────────────── */
+.tl-section {
+    margin-bottom: 10px;
+}
+.tl-section-label {
+    font-size: .7rem;
+    font-weight: 700;
+    color: var(--text-secondary, #666);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 4px;
+}
+.tl-text {
+    font-size: .84rem;
+    color: var(--text-primary, #1a2330);
+    margin: 0;
+    line-height: 1.55;
+}
+
+/* ── Bloco de reparação ──────────────────────────────────── */
+.tl-resolution {
+    background: var(--bg-table-alt, #f8f9fc);
+    border: 1px solid var(--border-color, #e4e9f0);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-top: 10px;
+}
+.tl-resolution-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .78rem;
+    font-weight: 700;
+    color: #13a073;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+.tl-resolution-header i { opacity: .8; }
+
+.tl-dias {
+    margin-left: auto;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--text-secondary, #666);
+    background: var(--bg-card, #fff);
+    border: 1px solid var(--border-color, #e4e9f0);
+    border-radius: 20px;
+    padding: 2px 9px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tl-solucao {
+    color: var(--text-secondary, #666);
+    font-style: italic;
+}
+
+/* ── Loading ─────────────────────────────────────────────── */
+.tl-loading {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-secondary, #666);
+    font-size: .9rem;
+}
+.tl-loading i { margin-right: 8px; color: #4b6cb7; }
+
+/* ── Dark mode overrides ─────────────────────────────────── */
+[data-theme="dark"] .tl-stat {
+    background: var(--bg-card);
+    border-color: var(--border-color);
+}
+[data-theme="dark"] .tl-stat-val       { color: var(--text-primary); }
+[data-theme="dark"] .tl-stat-label     { color: var(--text-secondary); }
+[data-theme="dark"] .tl-card           { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .tl-num            { background: var(--bg-table-alt); border-color: var(--border-color); color: var(--text-secondary); }
+[data-theme="dark"] .tl-text           { color: var(--text-primary); }
+[data-theme="dark"] .tl-resolution     { background: var(--bg-table-alt); border-color: var(--border-color); }
+[data-theme="dark"] .tl-resolution-header { color: #26d49a; }
+[data-theme="dark"] .tl-dias           { background: var(--bg-card); border-color: var(--border-color); color: var(--text-secondary); }
+[data-theme="dark"] .tl-dot            { border-color: var(--bg-page); box-shadow: 0 0 0 2px var(--border-color); }
+[data-theme="dark"] .tl-item.open     .tl-dot { background: rgba(231,74,59,.18); color: #f07167; }
+[data-theme="dark"] .tl-item.resolved .tl-dot { background: rgba(28,200,138,.15); color: #26d49a; }
+[data-theme="dark"] .tl-item.open     .tl-badge--open     { background: rgba(231,74,59,.15); color: #f07167; }
+[data-theme="dark"] .tl-item.resolved .tl-badge--resolved { background: rgba(28,200,138,.12); color: #26d49a; }
+[data-theme="dark"] .tl-item.open     .tl-card { border-left-color: #f07167; }
+[data-theme="dark"] .tl-item.resolved .tl-card { border-left-color: #26d49a; }
+[data-theme="dark"] .tl-line           { background: var(--border-color); }
+[data-theme="dark"] .tl-stat--danger  .tl-stat-val { color: #f07167; }
+[data-theme="dark"] .tl-stat--success .tl-stat-val { color: #26d49a; }
+[data-theme="dark"] .tl-stat--info    .tl-stat-val { color: #56c4d8; }
+[data-theme="dark"] .tl-stat--primary .tl-stat-val { color: #6489f5; }
+
+/* ── Responsivo ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+    .tl-stats-bar       { gap: 8px; }
+    .tl-stat            { min-width: calc(50% - 4px); }
+    .tl-card-header     { flex-direction: column; align-items: flex-start; }
+    .tl-card-meta       { gap: 6px; }
+}

@@ -1,0 +1,16 @@
+# ── Negar acesso direto via HTTP ─────────────────────────────────────────────
+# Impede que qualquer utilizador aceda diretamente aos ficheiros deste
+# diretório pelo browser (ex: https://site.com/importar_files/utilizadores.csv).
+# O acesso por include/require PHP interno continua a funcionar normalmente
+# porque esse acesso é feito pelo servidor, não pelo cliente HTTP.
+
+<IfModule mod_authz_core.c>
+    # Apache 2.4+
+    Require all denied
+</IfModule>
+
+<IfModule !mod_authz_core.c>
+    # Apache 2.2 (fallback)
+    Order deny,allow
+    Deny from all
+</IfModule>

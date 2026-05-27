@@ -1,0 +1,300 @@
+# GEI - Segurança Apache
+Options -Indexes
+Options -MultiViews
+
+<FilesMatch "\.(css|js|png|jpg|gif|ico|woff2)$">
+  Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+
+# Service Worker: sem cache + MIME type correcto
+<FilesMatch "^sw\.js$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Content-Type "application/javascript"
+</FilesMatch>
+
+# Manifest: cache curto (atualiza em 1 dia)
+<FilesMatch "^manifest\.json$">
+    Header set Cache-Control "max-age=86400, public"
+    Header set Content-Type "application/manifest+json"
+</FilesMatch>
+
+# Página offline: cachear pelo Service Worker (não pelo browser)
+<FilesMatch "^offline\.html$">
+    Header set Cache-Control "no-cache"
+</FilesMatch>
+
+# ================================================================
+# SEGURANÇA — adapta-se automaticamente a HTTP e HTTPS
+# ================================================================
+<IfModule mod_headers.c>
+
+    # ----------------------------------------------------------
+    # PWA — permitir Service Worker no scope /
+    # ----------------------------------------------------------
+    Header set Service-Worker-Allowed "/"
+
+    # ----------------------------------------------------------
+    # Content-Security-Policy
+    # 'unsafe-eval' removido — não é necessário nesta aplicação
+    # ----------------------------------------------------------
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self';"
+
+    # ----------------------------------------------------------
+    # Clickjacking — DENY é mais restrito que SAMEORIGIN
+    # ----------------------------------------------------------
+    Header always set X-Frame-Options "DENY"
+
+    # ----------------------------------------------------------
+    # MIME sniffing
+    # ----------------------------------------------------------
+    Header always set X-Content-Type-Options "nosniff"
+
+    # ----------------------------------------------------------
+    # Referrer — strict-origin-when-cross-origin como base
+    # (substitui no-referrer-when-downgrade que é menos seguro)
+    # ----------------------------------------------------------
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # ----------------------------------------------------------
+    # Permissions-Policy — desativar todas as funcionalidades
+    # não utilizadas pela aplicação
+    # ----------------------------------------------------------
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), accelerometer=(), gyroscope=(), magnetometer=(), fullscreen=(self)"
+
+    # ----------------------------------------------------------
+    # X-XSS-Protection removido — obsoleto nos browsers modernos
+    # e pode criar vulnerabilidades; a CSP acima substitui-o
+    # ----------------------------------------------------------
+
+    # ----------------------------------------------------------
+    # Ocultar informação do servidor
+    # ----------------------------------------------------------
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+    Header always unset Server
+
+    # ----------------------------------------------------------
+    # HSTS — só enviado quando a ligação é HTTPS
+    # ----------------------------------------------------------
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+
+</IfModule>
+
+# Bloquear acesso a ficheiros sensíveis
+<FilesMatch "(^\.env|\.env\..*|composer\.(json|lock)|package\.json|\.gitignore|\.git|\.sql|\.log|\.bak|\.backup|\.old)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# ================================================================
+# PHP — Configurações de segurança
+# Requerem AllowOverride Options ou AllowOverride All no servidor.
+# Se o servidor não permitir php_flag/php_value via .htaccess,
+# aplicar as mesmas diretivas no php.ini ou no VirtualHost.
+# ================================================================
+<IfModule mod_php.c>
+    # Nunca expor erros ao utilizador final em produção
+    php_flag  display_errors         Off
+    php_flag  display_startup_errors Off
+
+    # Registar erros para ficheiro de log fora do webroot
+    php_flag  log_errors             On
+    php_value error_log              /var/log/php/gei_errors.log
+
+    # Ocultar versão do PHP nos headers HTTP (X-Powered-By)
+    php_flag  expose_php             Off
+
+    # Sessão — cookies seguros
+    php_flag  session.cookie_httponly  On
+    php_flag  session.cookie_secure    On
+    php_value session.cookie_samesite  Lax
+
+    # Sessão — proteção adicional
+    php_value session.use_strict_mode  1
+    php_flag  session.use_only_cookies On
+</IfModule>
+
+# Compatibilidade com PHP-FPM (FastCGI) — as diretivas acima não funcionam
+# com mod_php quando se usa FPM; nesse caso usar .user.ini no webroot:
+#   display_errors = Off
+#   log_errors = On
+#   error_log = /var/log/php/gei_errors.log
+#   expose_php = Off
+#   session.cookie_httponly = On
+#   session.cookie_secure = On
+#   session.cookie_samesite = Lax
+#   session.use_strict_mode = 1
+
+
+
+
+
+
+
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # ── Forçar HTTPS ── só redireciona fora de localhost
+    RewriteCond %{HTTPS} off
+    RewriteCond %{SERVER_PORT} !^443$
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP_HOST} !^localhost$ [NC]
+    RewriteCond %{HTTP_HOST} !^127\.0\.0\.1$ [NC]
+    RewriteCond %{HTTP_HOST} !^::1$ [NC]
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+    RewriteRule ^logs/ - [F,L]
+    RewriteRule ^\.env - [F,L]
+
+    # Ficheiros PHP públicos — acesso directo (sem rewrite)
+    RewriteRule ^avaria_qr\.php$ - [L]
+
+    # PWA — acesso directo (sem rewrite)
+    RewriteRule ^sw\.js$ - [L]
+    RewriteRule ^manifest\.json$ - [L]
+    RewriteRule ^offline\.html$ - [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule ^i$ index.php [L]
+    RewriteRule ^l$ login.php [L]
+
+    RewriteRule ^sair$ logout.php [L]
+
+    RewriteRule ^equip$ equipamento.php [L]
+    RewriteRule ^avaria$ avarias.php [L]
+    RewriteRule ^lista$ listagens.php [L]
+    RewriteRule ^manut$ manutencao.php [L]
+    RewriteRule ^configura$ configuracao.php [L]
+    #RewriteRule ^tare$ tarefas.php [L]
+    RewriteRule ^tarescinst$ tarefas_num_escola.php [L]
+
+    RewriteRule ^recuperapass/([^/.]+)$ recupera_reset_pass.php?url=$1 [QSA,L]
+
+    RewriteRule ^registauser$ registauser.php [L]
+    RewriteRule ^gravaus$ gravauser.php [L]
+
+    RewriteRule ^validaus/([^/.]+)$ validauser.php?url=$1 [QSA,L]
+
+    RewriteRule ^inserirequip$ inserir_equipamento.php [L]
+    RewriteRule ^equip$ equipamento.php [L]
+    RewriteRule ^gravaequip$ grava_equipamento.php [L]
+    RewriteRule ^atualiequip$ atualizar_equipamento.php [L]
+    RewriteRule ^verequipsala$ ver_equipamentos_sala.php [L]
+
+    RewriteRule ^inseriroutequip$ inserir_outro_equipamento.php [L]
+    RewriteRule ^gravaoutequip$ grava_outro_equipamento.php [L]
+    RewriteRule ^atualioutequip$ atualizar_outro_equipamento.php [L]
+    RewriteRule ^eliminaoutequip/([0-9-/]+)/([^/]+)/([^/]+)$ elimina_outro_equip.php?url=$1&url2=$2&url3=$3 [QSA,L]
+
+    RewriteRule ^eliminaequip/([0-9-/]+)/([^/]+)/([^/]+)$ elimina_equip.php?url=$1&url2=$2&url3=$3 [QSA,L]
+
+    RewriteRule ^tiposequip$ tipos_equipamento.php [L]
+    RewriteRule ^inserirtequip$ inserir_tipo_equip.php [L]
+    RewriteRule ^gravatequip$ grava_tipo_equip.php [L]
+
+    RewriteRule ^eliminatequip/([0-9-/]+)$ elimina_tipo_equip.php?url=$1 [QSA,L]
+    RewriteRule ^atualtequip/([^/.]+)$ atualiza_tipo_equip.php?url=$1 [QSA,L]
+
+    RewriteRule ^eliminaequiesc/([0-9-/]+)$ elimina_equi_esc.php?url=$1 [QSA,L]
+    RewriteRule ^eliminaequisala/([0-9-/]+)$ elimina_equi_sala.php?url=$1 [QSA,L]
+    RewriteRule ^eliminaoutequisala/([0-9-/]+)$ elimina_out_equi_sala.php?url=$1 [QSA,L]
+
+    RewriteRule ^peri$ periodos.php [L]
+    RewriteRule ^atualizaper/([^/.]+)$ atualiza_periodo.php?url=$1 [QSA,L]
+    RewriteRule ^eliminaper/([0-9-/]+)$ elimina_periodo.php?url=$1 [QSA,L]
+    RewriteRule ^inserirper$ inserir_periodo.php [L]
+    RewriteRule ^gravaper$ grava_periodo.php [L]
+
+    RewriteRule ^sala$ salas.php [L]
+    RewriteRule ^atualizasala/([^/.]+)$ atualiza_sala.php?url=$1 [QSA,L]
+    RewriteRule ^eliminasala/([0-9-/]+)/([0-9-/]+)$ elimina_sala.php?url=$1&url2=$2 [QSA,L]
+    RewriteRule ^inserirsala$ inserir_sala.php [L]
+    RewriteRule ^gravasala$ grava_sala.php [L]
+    RewriteRule ^copiasala/([0-9-/]+)$ copia_sala.php?url=$1 [QSA,L]
+    RewriteRule ^importarsalas$ importar_salas.php [L]
+    RewriteRule ^eliminasalasemequi/([0-9-/]+)$ elimina_sala_semequi.php?url=$1 [QSA,L]
+    RewriteRule ^salasnum$ salas_num_escola.php [L]
+
+    RewriteRule ^utiliz$ utilizadores.php [L]
+    RewriteRule ^inserirutil$ inserir_utiliz.php [L]
+    RewriteRule ^eliminauser/([0-9-/]+)$ elimina_user.php?url=$1 [QSA,L]
+    RewriteRule ^importarusers$ importar_users.php [L]
+    RewriteRule ^userspdf$ utilizadores_pdf.php [L]
+    RewriteRule ^userscsv$ utilizadores_csv.php [L]
+    RewriteRule ^atualizautili/([^/.]+)$ atualiza_utiliz.php?url=$1 [QSA,L]
+    RewriteRule ^utiliz_inativos$ utilizadores_inativos.php [L]
+
+    RewriteRule ^dadosesc$ inserir_logotipo.php [L]
+    RewriteRule ^gravaesc$ grava_logotipo.php [L]
+    RewriteRule ^dadosescola$ dados_escola.php [L]
+    RewriteRule ^atualizaesc/([^/.]+)$ atualiza_escola.php?url=$1 [QSA,L]
+    RewriteRule ^atualizaescok/([^/.]+)$ atualiza_ok_escola.php?url=$1 [QSA,L]
+    RewriteRule ^eliminaesc/([0-9-/]+)$ elimina_escola.php?url=$1 [QSA,L]
+
+    RewriteRule ^inserirmanut$ inserir_manutencao.php [L]
+    RewriteRule ^gravamanutsala/([0-9-/]+)$ grava_manutencao_sala.php?url=$1 [QSA,L]
+
+    RewriteRule ^eliminaavaria/([0-9-/]+)$ elimina_avaria.php?url=$1 [QSA,L]
+    RewriteRule ^atualavaria/([^/.]+)$ atualiza_avaria.php?url=$1 [QSA,L]
+    RewriteRule ^atualokavaria/([^/.]+)$ atualiza_ok_avaria.php?url=$1 [QSA,L]
+
+    RewriteRule ^myavarias$ minhas_avarias.php [L]
+    RewriteRule ^last5avarias$ ultm5avarias.php [L]
+    RewriteRule ^last5avariastot$ ultm5avariastot.php [L]
+    RewriteRule ^insereavaria$ inserir_avaria.php [L]
+
+    RewriteRule ^reparafazsala/([0-9-/]+)$ reparacoes_efetuar_sala.php?url=$1 [QSA,L]
+    RewriteRule ^reparafaz$ reparacoes_efetuar.php [L]
+
+    RewriteRule ^eliminatarefa/([0-9-/]+)/([0-9-/]+)$ elimina_tarefa.php?url=$1&url2=$2 [QSA,L]
+    RewriteRule ^atualtarefa/([^/.]+)/([^/]+)$ atualiza_tarefa.php?url=$1&url2=$2 [QSA,L]
+
+    RewriteRule ^eliminafovi/([^/]+)/([^/]+)$ elimina_foto_video_avaria.php?url=$1&url2=$2 [QSA,L]
+
+    RewriteRule ^reqequip$ requisicao_equip.php [L]
+    RewriteRule ^myrequi$ minhas_requisicoes.php [L]
+
+    RewriteRule ^eliminarequi/([0-9-/]+)$ elimina_requisicao.php?url=$1 [QSA,L]
+    RewriteRule ^atualokrequi/([^/.]+)$ atualiza_ok_requisicao.php?url=$1 [QSA,L]
+
+    RewriteRule ^mudarsalaequi/([0-9-/]+)/([^/]+)/([^/]+)$ mudarsalaequi.php?url=$1&url2=$2&url3=$3 [QSA,L]
+
+    RewriteRule ^acessorap$ ecraboas.php [L]
+
+    RewriteRule ^tiposmanuten$ tipos_manuten.php [L]
+    RewriteRule ^inserirtmanuten$ inserir_tipo_manuten.php [L]
+    RewriteRule ^gravatmanuten$ grava_tipo_manuten.php [L]
+    RewriteRule ^eliminatmanuten/([0-9-/]+)$ elimina_tipo_manuten.php?url=$1 [QSA,L]
+    RewriteRule ^atualtmanuten/([^/.]+)$ atualiza_tipo_manuten.php?url=$1 [QSA,L]
+    RewriteRule ^eliminaman/([0-9-/]+)$ elimina_manutencao.php?url=$1 [QSA,L]
+
+    RewriteRule ^emsess$ email_sessao.php [L]
+    RewriteRule ^inseriremse$ inserir_emailsessao.php [L]
+    RewriteRule ^gravaemse$ grava_emailsessao.php [L]
+    RewriteRule ^atualtemse/([^/.]+)$ atualiza_emailsessao.php?url=$1 [QSA,L]
+
+    RewriteRule ^atulog$ atualiza_logotipo.php [L]
+    RewriteRule ^atulogok$ atualiza_ok_logotipo.php [L]
+
+    RewriteRule ^poravar$ portal_avarias.php [L]
+    RewriteRule ^dash$ dashboard.php [L]
+
+    RewriteRule ^retencao_dados$ retencao_dados.php [L]
+    RewriteRule ^toggle_ativo_user/([0-9]+)/([01])$ toggle_ativo_user.php?url=$1/$2 [QSA,L]
+
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png  "access plus 1 month"
+    ExpiresByType text/css   "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+</IfModule>

@@ -1,0 +1,41 @@
+{
+  "name": "SGEI - Gestão de Equipamentos Informáticos",
+  "short_name": "SGEI",
+  "description": "Sistema de Gestão de Equipamentos Informáticos",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f6fb",
+  "theme_color": "#4b6cb7",
+  "lang": "pt",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "Equipamentos",
+      "short_name": "Equipamentos",
+      "url": "/equip",
+      "icons": [{ "src": "/images/logo.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Avarias",
+      "short_name": "Avarias",
+      "url": "/avaria",
+      "icons": [{ "src": "/images/logo.png", "sizes": "192x192" }]
+    }
+  ]
+}

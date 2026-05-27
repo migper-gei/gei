@@ -1,0 +1,12 @@
+/*
+ * tokens.css — Variáveis de design globais do SGEI
+ * Incluir ANTES de style.css em head.php
+ * Fonte única de verdade para fontes, cores e espaçamentos.
+ */
+
+:root {
+  /* ── Tipografia ─────────────────────────────────────────────── */
+  --font-heading: 'Raleway', sans-serif;   /* títulos, headings, logo */
+  --font-body:    'DM Sans', sans-serif;   /* corpo, labels, UI geral */
+  --font-mono:    'DM Mono', monospace;    /* valores numéricos, KPIs  */
+}

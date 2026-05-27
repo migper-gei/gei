@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GEI — Sem ligação</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f4f6fb;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(75,108,183,.13);
+            padding: 48px 40px;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+        }
+        .icon {
+            width: 72px;
+            height: 72px;
+            background: #eef2fb;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+        }
+        .icon svg { width: 36px; height: 36px; stroke: #4b6cb7; }
+        h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #182848;
+            margin-bottom: 12px;
+        }
+        p {
+            color: #7b88a0;
+            font-size: .95rem;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+        .btn {
+            display: inline-block;
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 32px;
+            font-size: .95rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity .2s;
+        }
+        .btn:hover { opacity: .88; }
+        .logo {
+            width: 56px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .status {
+            margin-top: 20px;
+            font-size: .8rem;
+            color: #aab;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="/gei/images/logo.png" alt="GEI" class="logo">
+        <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="1" y1="1" x2="23" y2="23"/>
+                <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.55"/>
+                <path d="M5 12.55a10.94 10.94 0 0 1 5.17-2.39"/>
+                <path d="M10.71 5.05A16 16 0 0 1 22.56 9"/>
+                <path d="M1.42 9a15.91 15.91 0 0 1 4.7-2.88"/>
+                <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                <line x1="12" y1="20" x2="12.01" y2="20"/>
+            </svg>
+        </div>
+        <h1>Sem ligação à internet</h1>
+        <p>
+            Não foi possível carregar esta página.<br>
+            Verifique a sua ligação e tente novamente.<br><br>
+            As páginas que visitou anteriormente poderão estar disponíveis em cache.
+        </p>
+        <button class="btn" onclick="window.location.reload()">
+            Tentar novamente
+        </button>
+        <div class="status" id="status"></div>
+    </div>
+
+    <script>
+        // Mostrar estado da ligação em tempo real
+        function updateStatus() {
+            var el = document.getElementById('status');
+            if (navigator.onLine) {
+                el.textContent = '✓ Ligação detetada — a recarregar...';
+                el.style.color = '#28a745';
+                setTimeout(() => window.history.back(), 1200);
+            } else {
+                el.textContent = 'Ainda sem ligação.';
+                el.style.color = '#dc3545';
+            }
+        }
+        window.addEventListener('online', updateStatus);
+        window.addEventListener('offline', updateStatus);
+    </script>
+</body>
+</html>
