@@ -1,0 +1,12 @@
+# Nega todo o acesso HTTP a este diretório (dumps SQL, ficheiros sensíveis)
+
+# Apache 2.4+
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>
+
+# Apache 2.2 (compatibilidade)
+<IfModule !mod_authz_core.c>
+    Order deny,allow
+    Deny from all
+</IfModule>
