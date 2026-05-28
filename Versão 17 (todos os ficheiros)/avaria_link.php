@@ -106,6 +106,25 @@ if (!$_found || empty($_nomebd)) {
     die('Código de instituição inválido.');
 }
 
+// ── Verificar configurações SMTP na BD da instituição ──────────────────────
+$_smtp_ok = false;
+try {
+    $dbInst = new mysqli($_serverbd, DB_USERNAME, DB_PASSWORD, $_nomebd);
+    $dbInst->set_charset('utf8mb4');
+    $resSmtp = $dbInst->query(
+        "SELECT COUNT(*) FROM settings
+         WHERE email_user IS NOT NULL AND email_user <> ''
+           AND pass       IS NOT NULL
+           AND email_smtp IS NOT NULL AND email_smtp <> ''
+         LIMIT 1"
+    );
+    $_smtp_ok = ((int)$resSmtp->fetch_row()[0]) > 0;
+    $dbInst->close();
+} catch (mysqli_sql_exception $e) {
+    error_log('avaria_link SMTP check error: ' . $e->getMessage());
+    // Em caso de erro de BD, deixar $_smtp_ok = false
+}
+
 // Gerar token CSRF
 if (empty($_SESSION['csrf_avlink']) || empty($_SESSION['csrf_avlink_time']) ||
     (time() - $_SESSION['csrf_avlink_time']) > 1800) {
@@ -243,7 +262,24 @@ if (!empty($_SESSION['avlink_feedback'])) {
 
     <div class="card-body-qr">
 
-    <?php if ($enviado): ?>
+    <?php if (!$_smtp_ok): ?>
+
+        <div class="alert-qr alert-danger-qr" style="align-items:flex-start;">
+            <i class="fas fa-exclamation-triangle fa-lg" style="margin-top:2px;flex-shrink:0;"></i>
+            <div>
+                <strong>Envio de email não disponível</strong><br>
+                <span style="font-weight:400;">
+                    As configurações de email (SMTP) ainda não foram definidas pelo administrador.
+                    Não é possível enviar o link de acesso ao formulário de avaria.
+                </span>
+            </div>
+        </div>
+        <div class="info-box" style="margin-bottom:0;">
+            <i class="fas fa-user-shield"></i>
+            <span>Se for o administrador, aceda às <strong>Definições → Email / SMTP</strong> e configure o servidor de envio de email.</span>
+        </div>
+
+    <?php elseif ($enviado): ?>
 
         <div class="alert-qr alert-success-qr">
             <i class="fas fa-check-circle fa-lg"></i>
