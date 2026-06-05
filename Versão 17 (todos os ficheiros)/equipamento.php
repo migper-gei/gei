@@ -417,7 +417,7 @@ if ($contaeq>0) {
 
                 <div class="col-md-6 mb-3">
                     <a href="<?php echo SVRURL ?>inserir_equipamento_massa.php?ies=<?php echo base64_encode($esc) ?>" style="display:block;width:100%;">
-                        <button type="button" class="action-button btn-primary-action" style="width:100%;">
+                        <button type="button" class="action-button btn-primary-action" style="width:100%;font-size:unset;">
                             <i class="fas fa-layer-group btn-icon"></i> &nbsp;Inserção em Massa
                         </button>
                     </a>
@@ -493,8 +493,8 @@ $resulta = $sqla-> get_result();
                         </select>
                     </div>
                     <div class="col-md-4 mb-1">
-                        <button type="submit" class="action-button btn-secondary-action">
-                            <i class="fas fa-eye btn-icon"></i> &nbsp;Ver Equipamentos
+                        <button type="submit" class="action-button btn-secondary-action" style="font-size:0.78rem;white-space:nowrap;padding-left:8px;padding-right:8px;">
+                            <i class="fas fa-eye btn-icon"></i> &nbsp;Ver
                         </button>
                     </div>
                 </div>
