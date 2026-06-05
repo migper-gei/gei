@@ -676,3 +676,20 @@ CREATE TABLE IF NOT EXISTS `auditoria` (
     INDEX `idx_ip`         (`ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Registo de auditoria de ações do sistema GEI';
+
+  CREATE TABLE IF NOT EXISTS `software_instalado` (
+  `id`               INT           NOT NULL AUTO_INCREMENT,
+  `id_equipamento`   INT           NOT NULL,
+  `nome`             VARCHAR(150)  NOT NULL               COMMENT 'Nome do programa',
+  `versao`           VARCHAR(50)   DEFAULT NULL           COMMENT 'Versão instalada',
+  `fabricante`       VARCHAR(100)  DEFAULT NULL,
+  `licenca`          VARCHAR(100)  DEFAULT NULL           COMMENT 'Nº de licença ou tipo (ex: OEM, Volume)',
+  `data_instalacao`  DATE          DEFAULT NULL,
+  `observacoes`      VARCHAR(255)  DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_software_equipamento_idx` (`id_equipamento`),
+  CONSTRAINT `fk_software_equipamento`
+    FOREIGN KEY (`id_equipamento`) REFERENCES `equipamento` (`id`)
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+  COMMENT='Programas instalados por equipamento';
