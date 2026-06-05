@@ -88,64 +88,45 @@ include("sessao_timeout.php");
 if($_SERVER["REQUEST_METHOD"] == "POST") {
         
 $id = (int)base64_decode($_GET["id"]);
-
+$parte = $_GET["parte"] ?? 'tec';
 
 if ( $_SESSION['tipo']==1)
 {
 
-
+if ($parte === 'tec') {
     $_cpu=$_POST["cpu"]??'';$_ram=$_POST["ram"]??'';$_disco=$_POST["disco"]??'';
-$_gfx=$_POST["grafica"]??'';$_rede=$_POST["rede"]??'';$_som=$_POST["som"]??'';
-$_mon=$_POST["monitor"]??'';$_tec=$_POST["teclado"]??'';$_rato=$_POST["rato"]??'';
-$_col=$_POST["colunas"]??'';$_cddvd=$_POST["cddvd"]??'';$_ri=$_POST["ratointerface"]??'';$_ti=$_POST["tecladointerface"]??'';
-$stmt_tec=$db->prepare("UPDATE equipamento SET processador=?,memoria=?,disco=?,placagrafica=?,placarede=?,placasom=?,monitor=?,teclado=?,rato=?,colunas=?,cd_dvd=?,ratointerface=?,tecladointerface=? WHERE id=?");
-$stmt_tec->bind_param("sssssssssssssi",$_cpu,$_ram,$_disco,$_gfx,$_rede,$_som,$_mon,$_tec,$_rato,$_col,$_cddvd,$_ri,$_ti,$id);
-$stmt_tec->execute();$stmt_tec->close();
-
-
-
-
-    $sql = "update equipamento set 
-    dominio='".$_POST["dominio"]."',
-    ip='".$_POST["ip"]."',
-    mascara_rede='".$_POST["mascara"]."',
-    gateway='".$_POST["gateway"]."',
-    dns_principal='".$_POST["dnsp"]."',
-    dns_alternativo='".$_POST["dnsa"]."'
-    
-        where id=".$id." ";
-     
-    
-    $result = mysqli_query($db,$sql);
+    $_gfx=$_POST["grafica"]??'';$_rede=$_POST["rede"]??'';$_som=$_POST["som"]??'';
+    $_mon=$_POST["monitor"]??'';$_tec=$_POST["teclado"]??'';$_rato=$_POST["rato"]??'';
+    $_col=$_POST["colunas"]??'';$_cddvd=$_POST["cddvd"]??'';$_ri=$_POST["ratointerface"]??'';$_ti=$_POST["tecladointerface"]??'';
+    $stmt_tec=$db->prepare("UPDATE equipamento SET processador=?,memoria=?,disco=?,placagrafica=?,placarede=?,placasom=?,monitor=?,teclado=?,rato=?,colunas=?,cd_dvd=?,ratointerface=?,tecladointerface=? WHERE id=?");
+    $stmt_tec->bind_param("sssssssssssssi",$_cpu,$_ram,$_disco,$_gfx,$_rede,$_som,$_mon,$_tec,$_rato,$_col,$_cddvd,$_ri,$_ti,$id);
+    $stmt_tec->execute();$stmt_tec->close();
+} else {
+    $stmt_rede = $db->prepare("UPDATE equipamento SET dominio=?,ip=?,mascara_rede=?,gateway=?,dns_principal=?,dns_alternativo=? WHERE id=?");
+    $_dom=$_POST["dominio"]??'';$_ip=$_POST["ip"]??'';$_mas=$_POST["mascara"]??'';
+    $_gw=$_POST["gateway"]??'';$_dnsp=$_POST["dnsp"]??'';$_dnsa=$_POST["dnsa"]??'';
+    $stmt_rede->bind_param("ssssssi",$_dom,$_ip,$_mas,$_gw,$_dnsp,$_dnsa,$id);
+    $stmt_rede->execute();$stmt_rede->close();
+}
 
 mysqli_close($db);
 ?>
 
 <script>
-    
     swal({
 title: 'Os dados foram atualizados!',
-//text: 'Os dados foram guardados!',
 icon: 'success',
-//buttons: false,
-
 })
 .then(function() {
 window.location = "<?php echo SVRURL ?>equip";
 });
-
-
 </script>
-
 
 <br><br><br><br><br><br><br><br><br><br>
 
 <?php
 }
-
-
 else
-
 {
 ?>
     <script>
@@ -154,13 +135,8 @@ window.setTimeout(function() {
 }, 10);
 </script>
 
-
 <?php
-
 }
-
-
-
 }
 
 ?>

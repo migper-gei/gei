@@ -210,11 +210,6 @@ include("msg_bemvindo.php");
                 <i class="fas fa-network-wired"></i> Dados de Rede
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#tab-sw" onclick="switchTab(event,'tab-sw')">
-                <i class="fas fa-box-open"></i> Software
-            </a>
-        </li>
     </ul>
 
     <div class="tab-content">
@@ -381,11 +376,6 @@ include("msg_bemvindo.php");
                     </button>
                 </div>
             </form>
-        </div>
-
-        <!-- TAB: Software -->
-        <div id="tab-sw" style="display:none;">
-            <?php include("software_equipamento_ajax.php"); ?>
         </div>
 
     </div><!-- /tab-content -->
