@@ -1,5 +1,66 @@
 <?php
 
+// ================================================================
+// TRATAMENTO DE ERROS — mostra erro via SweetAlert em vez de página em branco
+// ================================================================
+function gei_error_handler(int $errno, string $errstr, string $errfile, int $errline): bool
+{
+    // Ignorar erros suprimidos com @
+    if (!(error_reporting() & $errno)) {
+        return false;
+    }
+
+    $tipos = [
+        E_ERROR             => 'Erro Fatal',
+        E_WARNING           => 'Aviso',
+        E_PARSE             => 'Erro de Sintaxe',
+        E_NOTICE            => 'Aviso (Notice)',
+        E_USER_ERROR        => 'Erro de Utilizador',
+        E_USER_WARNING      => 'Aviso de Utilizador',
+        E_RECOVERABLE_ERROR => 'Erro Recuperável',
+    ];
+    $tipo = $tipos[$errno] ?? "Erro ($errno)";
+
+    // Registar no log do servidor (sempre)
+    error_log("[GEI] $tipo em $errfile:$errline — $errstr");
+
+    // Limpar qualquer output anterior para garantir HTML limpo
+    if (ob_get_level()) {
+        ob_clean();
+    }
+
+    $errstrSafe  = htmlspecialchars($errstr,  ENT_QUOTES);
+    $errfileSafe = htmlspecialchars(basename($errfile), ENT_QUOTES);
+    $svrurl      = defined('SVRURL') ? SVRURL : '/';
+
+    echo '<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    </head><body>
+    <script>
+    window.addEventListener("load", function() {
+        swal({
+            title: "Erro interno",
+            text: "' . addslashes($tipo) . ' (linha ' . $errline . ' de ' . addslashes($errfileSafe) . '):\n' . addslashes($errstrSafe) . '",
+            icon: "error"
+        }).then(function() {
+            window.location = "' . $svrurl . 'l";
+        });
+    });
+    </script></body></html>';
+
+    exit(1);
+}
+
+function gei_shutdown_handler(): void
+{
+    $error = error_get_last();
+    if ($error && in_array($error['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR], true)) {
+        gei_error_handler($error['type'], $error['message'], $error['file'], $error['line']);
+    }
+}
+
+set_error_handler('gei_error_handler', E_ALL);
+register_shutdown_function('gei_shutdown_handler');
 
 ob_start(); // Buffer output — necessário para session_regenerate_id() após includes com HTML
 
