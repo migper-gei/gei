@@ -386,6 +386,31 @@ Ao inserir os dados obrigatórios (a azul claro), os anteriores serão substitu�
 -->
 
 
+<?php
+// ── Buscar dados existentes ───────────────────────────────────
+// Tabela logotipo (nomeescola + site)
+$row_logo = [];
+$res_logo = mysqli_query($db, "SELECT nomeescola, site FROM logotipo WHERE id = 1");
+if ($res_logo) $row_logo = mysqli_fetch_assoc($res_logo) ?? [];
+
+// Tabela escolas (morada, codigopostal, localidade, telefone da escola 1)
+$row_esc1 = [];
+$res_esc1 = mysqli_query($db, "SELECT morada, codigopostal, localidade, telefone FROM escolas WHERE id = 1");
+if ($res_esc1) $row_esc1 = mysqli_fetch_assoc($res_esc1) ?? [];
+
+// Nomes das instituições 2..11
+$nomes_esc = [];
+for ($i = 2; $i <= 11; $i++) {
+    $res_i = mysqli_query($db, "SELECT nome_escola FROM escolas WHERE id = " . $i);
+    $nomes_esc[$i] = ($res_i && $r = mysqli_fetch_row($res_i)) ? $r[0] : '';
+}
+
+// Helper para value seguro
+function val(array $arr, string $key): string {
+    return htmlspecialchars($arr[$key] ?? '', ENT_QUOTES, 'UTF-8');
+}
+?>
+
 <br>
 <form name="a" action="<?php echo SVRURL ?>gravaesc" method="post" enctype="multipart/form-data" class="needs-validation" novalidate >
 <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token, ENT_QUOTES, 'UTF-8'); ?>">
@@ -416,33 +441,33 @@ Ao inserir os dados obrigatórios (a azul claro), os anteriores serão substitu�
                  
                     <label>Nome da instituição: </label>  
                     <br>
-                     <input    style="width: 100%;" class="form-control required-field" required  type = "text" name="nomeescola" placeholder="Nome da instituição">
+                     <input    style="width: 100%;" class="form-control required-field" required  type = "text" name="nomeescola" placeholder="Nome da instituição" value="<?php echo val($row_logo, 'nomeescola'); ?>">
                      <br>   <br>       
                     <label>Site:   </label>  
                     <br>
-                     <input style="width:100%" class="form-control required-field"  required  type = "text" name="site" placeholder="https://www.">
+                     <input style="width:100%" class="form-control required-field"  required  type = "text" name="site" placeholder="https://www." value="<?php echo val($row_logo, 'site'); ?>">
                      <br><br>
                      <label>Morada: </label>  
                     <br>
-                     <input style="width:100%" class="form-control required-field" type = "text" name="morada" placeholder="Morada" required >
+                     <input style="width:100%" class="form-control required-field" type = "text" name="morada" placeholder="Morada" required value="<?php echo val($row_esc1, 'morada'); ?>">
                      <br><br>
                      <label>Código Postal (0000-000): </label>  
                     <br>
                      <input maxlength="8" pattern="\d{4}-\d{3}" required 
                      onBlur="validarCP();" id="cp"
-                     style="width:100%"  class="form-control required-field" type = "text" name="codpostal" placeholder="Código Postal">
+                     style="width:100%"  class="form-control required-field" type = "text" name="codpostal" placeholder="Código Postal" value="<?php echo val($row_esc1, 'codigopostal'); ?>">
                      <span id="cp_err"></span>
                      <br>  
                      <label>Localidade: </label>  
                     <br>
-                     <input style="width:100%" class="form-control required-field" required  type = "text" name="localidade" placeholder="Localidade">
+                     <input style="width:100%" class="form-control required-field" required  type = "text" name="localidade" placeholder="Localidade" value="<?php echo val($row_esc1, 'localidade'); ?>">
                      <br><br>
           
                      <label>Contato: </label>  
                     <br>
                      <input onBlur="cont_validation();"  class="form-control required-field"
                      maxlength="9" 
-                                  style="width:100%"  type = "text" name="telefone" placeholder="Contato" id="con" required >
+                                  style="width:100%"  type = "text" name="telefone" placeholder="Contato" id="con" required value="<?php echo val($row_esc1, 'telefone'); ?>">
                      <span id="con_err"></span>
                     
 
@@ -460,29 +485,29 @@ Ao inserir os dados obrigatórios (a azul claro), os anteriores serão substitu�
         <div class="col-6">
         <label>Nome da instituição 2: </label>  
                  <br>
-                  <input   style="width:100%" type = "text" name = "nomeescola2">
+                  <input   style="width:100%" type = "text" name = "nomeescola2" value="<?php echo htmlspecialchars($nomes_esc[2], ENT_QUOTES, 'UTF-8'); ?>">
                   <br>     <br />
                      
                  <label>Nome da instituição 4: </label>  
                  <br>
-                  <input  style="width:100%"  type = "text" name = "nomeescola4">
+                  <input  style="width:100%"  type = "text" name = "nomeescola4" value="<?php echo htmlspecialchars($nomes_esc[4], ENT_QUOTES, 'UTF-8'); ?>">
                   <br> 
                   <br>    
               
                      
                      <label>Nome da instituição 6: </label>  
                      <br>
-                      <input  style="width:100%"  type = "text" name = "nomeescola6">
+                      <input  style="width:100%"  type = "text" name = "nomeescola6" value="<?php echo htmlspecialchars($nomes_esc[6], ENT_QUOTES, 'UTF-8'); ?>">
                       <br> 
                       <br>  
                       <label>Nome da instituição 8: </label>  
                      <br>
-                      <input  style="width:100%"  type = "text" name = "nomeescola8">
+                      <input  style="width:100%"  type = "text" name = "nomeescola8" value="<?php echo htmlspecialchars($nomes_esc[8], ENT_QUOTES, 'UTF-8'); ?>">
                       <br> 
                       <br>  
                       <label>Nome da instituição 10: </label>  
                      <br>
-                      <input  style="width:100%"  type = "text" name = "nomeescola10">
+                      <input  style="width:100%"  type = "text" name = "nomeescola10" value="<?php echo htmlspecialchars($nomes_esc[10], ENT_QUOTES, 'UTF-8'); ?>">
                       <br> 
                       <br>  
         </div>
@@ -493,12 +518,12 @@ Ao inserir os dados obrigatórios (a azul claro), os anteriores serão substitu�
                
         <label>Nome da instituição 3: </label>  
                  <br>
-                  <input  style="width:100%"  type = "text" name = "nomeescola3">
+                  <input  style="width:100%"  type = "text" name = "nomeescola3" value="<?php echo htmlspecialchars($nomes_esc[3], ENT_QUOTES, 'UTF-8'); ?>">
                   <br>     <br />
 
                        <label>Nome da instituição 5: </label>  
                   <br>
-                   <input  style="width:100%"  type = "text" name = "nomeescola5">
+                   <input  style="width:100%"  type = "text" name = "nomeescola5" value="<?php echo htmlspecialchars($nomes_esc[5], ENT_QUOTES, 'UTF-8'); ?>">
                    <br>      
                    
 			<br>
@@ -507,19 +532,19 @@ Ao inserir os dados obrigatórios (a azul claro), os anteriores serão substitu�
 
 <label>Nome da instituição 7: </label>  
 <br>
-<input  style="width:100%"  type = "text" name = "nomeescola7">
+<input  style="width:100%"  type = "text" name = "nomeescola7" value="<?php echo htmlspecialchars($nomes_esc[7], ENT_QUOTES, 'UTF-8'); ?>">
 <br> 
 <br>     
 
 <label>Nome da instituição 9: </label>  
 <br>
-<input  style="width:100%"  type = "text" name = "nomeescola9">
+<input  style="width:100%"  type = "text" name = "nomeescola9" value="<?php echo htmlspecialchars($nomes_esc[9], ENT_QUOTES, 'UTF-8'); ?>">
 <br> 
 <br>     
 
 <label>Nome da instituição 11: </label>  
 <br>
-<input  style="width:100%"  type = "text" name = "nomeescola11">
+<input  style="width:100%"  type = "text" name = "nomeescola11" value="<?php echo htmlspecialchars($nomes_esc[11], ENT_QUOTES, 'UTF-8'); ?>">
 
 
         </div>
