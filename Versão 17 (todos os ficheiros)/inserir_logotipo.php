@@ -390,12 +390,12 @@ Ao inserir os dados obrigatórios (a azul claro), os anteriores serão substitu�
 // ── Buscar dados existentes ───────────────────────────────────
 // Tabela logotipo (nomeescola + site)
 $row_logo = [];
-$res_logo = mysqli_query($db, "SELECT nomeescola, site FROM logotipo WHERE id = 1");
+$res_logo = mysqli_query($db, "SELECT nomeescola, site FROM logotipo LIMIT 1");
 if ($res_logo) $row_logo = mysqli_fetch_assoc($res_logo) ?? [];
 
 // Tabela escolas (morada, codigopostal, localidade, telefone da escola 1)
 $row_esc1 = [];
-$res_esc1 = mysqli_query($db, "SELECT morada, codigopostal, localidade, telefone FROM escolas WHERE id = 1");
+$res_esc1 = mysqli_query($db, "SELECT morada, codigopostal, localidade, telefone FROM escolas WHERE id = (SELECT MIN(id) FROM escolas)");
 if ($res_esc1) $row_esc1 = mysqli_fetch_assoc($res_esc1) ?? [];
 
 // Nomes das instituições 2..11
