@@ -167,30 +167,9 @@ $filename = $_FILES["logo"]["name"];
 
 if ($filename=="")
 {
-
-$tmp="";
-$x=1;
-?>
-
-<script>
-
-swal({
-title: 'Não foi escolhido nenhuma imagem!',
-//text: 'Os dados foram guardados!',
-icon: 'success',
-//buttons: false,
-
-})
-.then(function() {
-window.location = "<?php echo SVRURL ?>dadosesc";
-});
-
-
-</script>
-
-
-
-<?php
+    // Sem ficheiro novo — é válido (o logotipo existente mantém-se)
+    $tmp = "";
+    $x   = 0;
 }
 
 elseif  ($filename<>"")
@@ -255,32 +234,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && $x==0)
 
 
 
-if (isset($_POST['checklogo']))
-{
 
-  // echo ($_POST['checklogo']);
-echo htmlspecialchars($_POST['checklogo'], ENT_QUOTES, 'UTF-8');
-?>
 
-   <script>
-
-   swal({
-   title: 'Os dados foram guardados!',
-   //text: 'Os dados foram guardados!',
-   icon: 'success',
-   //buttons: false,
-   
-   })
-   .then(function() {
-   window.location = "<?php echo SVRURL ?>configura";
-   });
-   
-   
-   </script>
-   
-   <?php
-   }
-   
 
 
 
@@ -304,10 +259,17 @@ if ($totalesc==0)
 
 $_log_nome = $_POST["nomeescola"] ?? '';
 $_log_site = $_POST["site"]       ?? '';
-$stmt_ins  = $db->prepare("INSERT INTO logotipo (nomeescola, logotipo, site) VALUES (?, ?, ?)");
-$null      = null; // bind_param("b") requer uma variável por referência
-$stmt_ins->bind_param("sbs", $_log_nome, $null, $_log_site);
-$stmt_ins->send_long_data(1, $tmp); // envia o BLOB em bloco separado, sem escaping
+if ($tmp !== "") {
+    // Com imagem nova
+    $stmt_ins = $db->prepare("INSERT INTO logotipo (nomeescola, logotipo, site) VALUES (?, ?, ?)");
+    $null = null;
+    $stmt_ins->bind_param("sbs", $_log_nome, $null, $_log_site);
+    $stmt_ins->send_long_data(1, $tmp);
+} else {
+    // Sem imagem
+    $stmt_ins = $db->prepare("INSERT INTO logotipo (nomeescola, site) VALUES (?, ?)");
+    $stmt_ins->bind_param("ss", $_log_nome, $_log_site);
+}
 $stmt_ins->execute();
 $stmt_ins->close();
 
@@ -332,16 +294,25 @@ $stmt_ins_esc->close();
 
 
 
-// Inserir instituições adicionais com prepared statement (evita SQL injection)
-$_stmt_esc_add = $db->prepare("INSERT INTO escolas (nome_escola) VALUES (?)");
+// Instituições adicionais 2..11 — INSERT/UPDATE se preenchido, DELETE se vazio
 for ($i = 2; $i <= 11; $i++) {
     $_nome_add = trim($_POST["nomeescola{$i}"] ?? '');
     if ($_nome_add !== '') {
-        $_stmt_esc_add->bind_param("s", $_nome_add);
+        $_stmt_esc_add = $db->prepare(
+            "INSERT INTO escolas (id, nome_escola) VALUES (?, ?)
+             ON DUPLICATE KEY UPDATE nome_escola = VALUES(nome_escola)"
+        );
+        $_stmt_esc_add->bind_param("is", $i, $_nome_add);
         $_stmt_esc_add->execute();
+        $_stmt_esc_add->close();
+    } else {
+        // Campo vazio — apagar o registo se existir
+        $_stmt_esc_del = $db->prepare("DELETE FROM escolas WHERE id = ?");
+        $_stmt_esc_del->bind_param("i", $i);
+        $_stmt_esc_del->execute();
+        $_stmt_esc_del->close();
     }
 }
-$_stmt_esc_add->close();
 
 
 
@@ -396,16 +367,25 @@ elseif ($totalesc>0)
 
 
 
-// Inserir instituições adicionais com prepared statement (evita SQL injection)
-$_stmt_esc_add = $db->prepare("INSERT INTO escolas (nome_escola) VALUES (?)");
+// Instituições adicionais 2..11 — INSERT/UPDATE se preenchido, DELETE se vazio
 for ($i = 2; $i <= 11; $i++) {
     $_nome_add = trim($_POST["nomeescola{$i}"] ?? '');
     if ($_nome_add !== '') {
-        $_stmt_esc_add->bind_param("s", $_nome_add);
+        $_stmt_esc_add = $db->prepare(
+            "INSERT INTO escolas (id, nome_escola) VALUES (?, ?)
+             ON DUPLICATE KEY UPDATE nome_escola = VALUES(nome_escola)"
+        );
+        $_stmt_esc_add->bind_param("is", $i, $_nome_add);
         $_stmt_esc_add->execute();
+        $_stmt_esc_add->close();
+    } else {
+        // Campo vazio — apagar o registo se existir
+        $_stmt_esc_del = $db->prepare("DELETE FROM escolas WHERE id = ?");
+        $_stmt_esc_del->bind_param("i", $i);
+        $_stmt_esc_del->execute();
+        $_stmt_esc_del->close();
     }
 }
-$_stmt_esc_add->close();
 
 
 }

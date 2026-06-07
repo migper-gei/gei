@@ -103,6 +103,13 @@ CREATE TABLE `escolas` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+ALTER TABLE escolas 
+    MODIFY morada VARCHAR(255) NOT NULL DEFAULT '',
+    MODIFY codigopostal VARCHAR(10) NOT NULL DEFAULT '',
+    MODIFY localidade VARCHAR(100) NOT NULL DEFAULT '',
+    MODIFY telefone INT NOT NULL DEFAULT 0;
+
+
 --
 -- Dumping data for table `escolas`
 --
