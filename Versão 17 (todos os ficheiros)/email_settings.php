@@ -1,26 +1,18 @@
-<?php 
+<?php
 
 use PHPMailer\PHPMailer\PHPMailer;
 
 //$mail->SMTPDebug = 1;
 
-// --- Chave de desencriptação via variável de ambiente (não hardcoded) ---
-// Deve estar definida no .env: SMTP_KEY=<mesma chave usada em grava_emailsessao.php>
+// $emailConfigOk é inicializada a false antes do include (em gravauser.php)
+// Este ficheiro define-a a true apenas se tudo correr bem.
+
+// --- Chave de desencriptação via variável de ambiente ---
 $_smtpKey = $_ENV['SMTP_KEY'] ?? getenv('SMTP_KEY') ?? '';
 
 if (empty($_smtpKey)) {
-?>
-<script>
-swal({
-    title: 'Configuração de email em falta!',
-    text: 'A variável SMTP_KEY não está definida no servidor. Contacte o administrador.',
-    icon: 'error',
-})
-.then(function() {
-    window.location = "<?php echo SVRURL ?>emsess";
-});
-</script>
-<?php
+    error_log("[PTE] email_settings.php: SMTP_KEY não está definida no servidor.");
+    // $emailConfigOk permanece false — o caller trata o erro
     return;
 }
 
@@ -30,24 +22,20 @@ $stmt_cfg->execute();
 $row02 = $stmt_cfg->get_result()->fetch_assoc();
 $stmt_cfg->close();
 
-if ($row02)
-{
+if ($row02 && !empty($row02['email_smtp']) && !empty($row02['pass_dec'])) {
     $mail->Host        = $row02['email_smtp'];
     $mail->Port        = (int)$row02['email_smtpport'];
     $mail->SMTPAuth    = true;
     $mail->Username    = $row02['email_user'];
     $mail->Password    = $row02['pass_dec'];
-    // Usar STARTTLS (porta 587) ou SMTPS (porta 465)
     $mail->SMTPSecure  = ((int)$row02['email_smtpport'] === 465)
                             ? PHPMailer::ENCRYPTION_SMTPS
                             : PHPMailer::ENCRYPTION_STARTTLS;
     $mail->SMTPAutoTLS = true;
     $mail->Timeout     = 15;
 
-    // NOTA: SMTPOptions com verify_peer=false foi removido.
-    // A verificação do certificado TLS fica activa (comportamento padrão do PHP).
-    // Se o servidor SMTP usar uma CA interna/auto-assinada, descomente e ajuste:
-    //
+    // Certificado TLS activo por defeito.
+    // Se o servidor SMTP usar CA interna/auto-assinada, descomente:
     // $mail->SMTPOptions = [
     //     'ssl' => [
     //         'verify_peer'       => true,
@@ -56,19 +44,11 @@ if ($row02)
     //         'cafile'            => '/caminho/para/ca-bundle.crt',
     //     ],
     // ];
-}
-else
-{
-?>
-<script>
-swal({
-    title: 'Ainda não foram definidas as configurações de email!',
-    icon: 'error',
-})
-.then(function() {
-    window.location = "<?php echo SVRURL ?>emsess";
-});
-</script>
-<?php
+
+    $emailConfigOk = true;
+
+} else {
+    error_log("[PTE] email_settings.php: settings não encontradas na BD ou pass_dec vazia. Verifique SMTP_KEY e a tabela settings.");
+    // $emailConfigOk permanece false
 }
 ?>
