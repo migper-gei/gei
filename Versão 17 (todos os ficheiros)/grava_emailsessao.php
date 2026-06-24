@@ -141,48 +141,63 @@ if (empty($_smtpKey)) { ?>
 <?php exit; }
 
 // ── 9. Inserir na BD ──────────────────────────────────────────────────────────
-// A password é encriptada com AES_ENCRYPT (compatível com o esquema original).
-// Os restantes campos incluem o novo codigo_acesso_qr.
+// CORREÇÃO: a query original tinha 8 colunas mas só 7 valores
+// (faltava o placeholder de codigo_acesso_qr). Isso fazia o prepare() falhar
+// e o bind_param() seguinte rebentar com um Fatal Error -> página em branco,
+// nada gravado, sem redirect.
+// Agora o codigo_acesso_qr é gravado já no próprio INSERT, eliminando
+// também a necessidade do UPDATE extra a seguir.
 $stmt_ins = $db->prepare("
     INSERT INTO settings
         (email_user, pass, email_smtp, email_smtpport,
          nome_app, sessao_timeout, tempoduracaopass, codigo_acesso_qr)
     VALUES
-        (?, AES_ENCRYPT(?, ?), ?, ?, ?, ?, ?)
+        (?, AES_ENCRYPT(?, ?), ?, ?, ?, ?, ?, ?)
 ");
-// Marcadores: 1=email_user  2=pass  3=smtpKey  4=smtp  5=smtpport  6=nome  7=sessao  8=tempdur
-// AES_ENCRYPT(?,?) conta como 2 '?' → total 8 '?' → bind_param com 8 vars + 1 extra para a chave
-// Tipos: s(email) s(pass) s(key) s(smtp) i(port) s(nome) i(sessao) i(tempdur)
+
+if ($stmt_ins === false) {
+    // Se o prepare falhar, mostra o erro em vez de rebentar com fatal error
+    error_log("Erro no prepare do INSERT settings: " . $db->error); ?>
+    <script>
+    swal({ title: 'Erro interno!',
+           text: 'Não foi possível preparar a operação. Contacte o suporte.',
+           icon: 'error' })
+    .then(function(){ window.location = "<?php echo SVRURL ?>inseriremse"; });
+    </script>
+<?php
+    exit;
+}
+
+// Marcadores: 1=email_user 2=pass 3=smtpKey 4=email_smtp 5=email_smtpport
+//             6=nome_app 7=sessao_timeout 8=tempoduracaopass 9=codigo_acesso_qr
+// Tipos:        s          s      s         s               i
+//               s          i               i                  s
 $stmt_ins->bind_param(
-    "ssssiis",   // ← ATENÇÃO: ajustar 'i'/'s' conforme tipos reais na BD
+    "ssssisiis",
     $em,          // s — email_user
-    $_pa,         // s — pass (antes do AES_ENCRYPT no MySQL)
+    $_pa,         // s — pass (texto, antes do AES_ENCRYPT)
     $_smtpKey,    // s — chave AES (2.º arg de AES_ENCRYPT)
     $_smtp,       // s — email_smtp
     $_smtpport,   // i — email_smtpport
     $_nome,       // s — nome_app
     $_sessao,     // i — sessao_timeout
-    $_tempdur     // i — tempoduracaopass
+    $_tempdur,    // i — tempoduracaopass
+    $_codigo_qr   // s — codigo_acesso_qr
 );
-// O codigo_acesso_qr é guardado numa 2.ª query após o INSERT
-// (evita confusão no bind_param com AES_ENCRYPT a ocupar 2 placeholders)
-$stmt_ins->execute();
+
+$ok = $stmt_ins->execute();
 $novo_id = $db->insert_id;
 $stmt_ins->close();
 
-if ($novo_id > 0) {
-    // Guardar o código QR na linha recém-inserida
-    $stmt_qr = $db->prepare("UPDATE settings SET codigo_acesso_qr = ? WHERE id = ?");
-    $stmt_qr->bind_param("si", $_codigo_qr, $novo_id);
-    $stmt_qr->execute();
-    $stmt_qr->close();
+if ($ok && $novo_id > 0) {
     mysqli_close($db); ?>
     <script>
     swal({ title: 'Os dados foram guardados!', icon: 'success' })
     .then(function(){ window.location = "<?php echo SVRURL ?>emsess"; });
     </script>
 <?php
-} else { ?>
+} else {
+    error_log("Erro ao inserir settings: " . $db->error); ?>
     <script>
     swal({ title: 'Erro ao guardar!',
            text: 'Ocorreu um erro na base de dados. Tente novamente.',
