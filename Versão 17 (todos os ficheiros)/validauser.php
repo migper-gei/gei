@@ -3,6 +3,72 @@
 // ================================================================
 // TRATAMENTO DE ERROS — mostra erro via SweetAlert em vez de página em branco
 // ================================================================
+
+// Garantir que TODOS os erros são capturados pelo nosso handler (nada fica
+// dependente da configuração do php.ini do servidor) e que o PHP não chega
+// a imprimir o erro "nativo" antes do nosso ecrã SweetAlert aparecer.
+//error_reporting(E_ALL);
+// display_errors a '1' como rede de segurança: se por algum motivo o nosso
+// handler não for acionado, o PHP mostra o erro nativo em vez de ficar em branco.
+// (Em produção normal, recomenda-se voltar a '0' depois de resolvido o problema.)
+//ini_set('display_errors', '1');
+
+// Forçar o registo de erros num ficheiro local, dentro da mesma pasta deste
+// script — útil quando não há acesso ao error_log do servidor/Apache.
+// Depois de testares, abre "gei_error.log" (está na mesma pasta do validauser.php).
+//ini_set('log_errors', '1');
+//ini_set('error_log', __DIR__ . '/gei_error.log');
+
+function gei_render_erro(string $titulo, string $linha): void
+{
+    // Limpar qualquer output anterior para garantir HTML limpo
+    if (ob_get_level()) {
+        ob_clean();
+    }
+
+    $svrurl = defined('SVRURL') ? SVRURL : '/';
+
+    $tituloHtml = htmlspecialchars($titulo, ENT_QUOTES);
+    $linhaHtml  = nl2br(htmlspecialchars($linha, ENT_QUOTES));
+
+    echo '<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <style>
+            body{font-family:Arial,sans-serif;background:#f4f6fb;margin:0;padding:40px 20px}
+            .gei-erro-box{max-width:560px;margin:40px auto;background:#fff;border:1px solid #f5c0bb;
+                border-left:6px solid #c0392b;border-radius:8px;padding:22px 26px;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+            .gei-erro-box h2{color:#c0392b;margin:0 0 10px;font-size:1.15rem}
+            .gei-erro-box p{color:#3d4e6b;font-size:.92rem;line-height:1.5;white-space:pre-line}
+            .gei-erro-box a{display:inline-block;margin-top:16px;color:#fff;background:#4b6cb7;
+                padding:8px 16px;border-radius:6px;text-decoration:none;font-size:.85rem;font-weight:600}
+        </style>
+    </head><body>
+    <!-- Fallback visível em HTML puro: aparece mesmo que o SweetAlert (CDN) não carregue -->
+    <div class="gei-erro-box" id="gei-fallback">
+        <h2>' . $tituloHtml . '</h2>
+        <p>' . $linhaHtml . '</p>
+        <a href="' . htmlspecialchars($svrurl . 'l', ENT_QUOTES) . '">&larr; Voltar ao login</a>
+    </div>
+    <script>
+    // Se o SweetAlert carregar, substitui o fallback por um modal mais bonito.
+    window.addEventListener("load", function() {
+        if (typeof swal === "function") {
+            var fb = document.getElementById("gei-fallback");
+            if (fb) fb.style.display = "none";
+            swal({
+                title: "' . addslashes($titulo) . '",
+                text: "' . addslashes($linha) . '",
+                icon: "error"
+            }).then(function() {
+                window.location = "' . $svrurl . 'l";
+            });
+        }
+    });
+    </script></body></html>';
+
+    exit(1);
+}
+
 function gei_error_handler(int $errno, string $errstr, string $errfile, int $errline): bool
 {
     // Ignorar erros suprimidos com @
@@ -24,31 +90,34 @@ function gei_error_handler(int $errno, string $errstr, string $errfile, int $err
     // Registar no log do servidor (sempre)
     error_log("[GEI] $tipo em $errfile:$errline — $errstr");
 
-    // Limpar qualquer output anterior para garantir HTML limpo
-    if (ob_get_level()) {
-        ob_clean();
-    }
-
     $errstrSafe  = htmlspecialchars($errstr,  ENT_QUOTES);
     $errfileSafe = htmlspecialchars(basename($errfile), ENT_QUOTES);
-    $svrurl      = defined('SVRURL') ? SVRURL : '/';
 
-    echo '<!DOCTYPE html><html lang="pt"><head><meta charset="UTF-8">
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    </head><body>
-    <script>
-    window.addEventListener("load", function() {
-        swal({
-            title: "Erro interno",
-            text: "' . addslashes($tipo) . ' (linha ' . $errline . ' de ' . addslashes($errfileSafe) . '):\n' . addslashes($errstrSafe) . '",
-            icon: "error"
-        }).then(function() {
-            window.location = "' . $svrurl . 'l";
-        });
-    });
-    </script></body></html>';
+    gei_render_erro(
+        'Erro interno',
+        "$tipo (linha $errline de $errfileSafe):\n$errstrSafe"
+    );
+    return true; // nunca chega aqui (gei_render_erro termina com exit), mas mantém o tipo bool
+}
 
-    exit(1);
+/**
+ * Captura exceções/erros não apanhados por try/catch (Throwable),
+ * que set_error_handler() NÃO intercepta (ex: TypeError, Exception lançada
+ * por mysqli em modo de exceções, DivisionByZeroError, etc.)
+ */
+function gei_exception_handler(\Throwable $e): void
+{
+    $errfile = basename($e->getFile());
+    $errline = $e->getLine();
+    $errmsg  = $e->getMessage();
+    $classe  = get_class($e);
+
+    error_log("[GEI] Excepção não apanhada ($classe) em {$e->getFile()}:$errline — $errmsg");
+
+    gei_render_erro(
+        'Erro interno',
+        htmlspecialchars($classe, ENT_QUOTES) . " (linha $errline de " . htmlspecialchars($errfile, ENT_QUOTES) . "):\n" . htmlspecialchars($errmsg, ENT_QUOTES)
+    );
 }
 
 function gei_shutdown_handler(): void
@@ -60,6 +129,7 @@ function gei_shutdown_handler(): void
 }
 
 set_error_handler('gei_error_handler', E_ALL);
+set_exception_handler('gei_exception_handler');
 register_shutdown_function('gei_shutdown_handler');
 
 ob_start(); // Buffer output — necessário para session_regenerate_id() após includes com HTML
@@ -282,9 +352,8 @@ if (
 ) {
 ?>
 <script>
-window.setTimeout(function() {
-    window.location.href = '<?php echo SVRURL ?>l';
-}, 10);
+swal({ title: 'Sessão inválida', text: 'Acesso direto não permitido. Faça login novamente.', icon: 'error' })
+.then(function() { window.location.href = '<?php echo SVRURL ?>l'; });
 </script>
 <?php
     exit; // Parar execução — campos em falta
@@ -298,9 +367,8 @@ if (isset($_GET['url']) && is_numeric(base64_decode($_GET['url']))) {
 } else {
 ?>
 <script>
-window.setTimeout(function() {
-    window.location.href = '<?php echo SVRURL ?>l';
-}, 10);
+swal({ title: 'Erro', text: 'Parâmetro de acesso inválido.', icon: 'error' })
+.then(function() { window.location.href = '<?php echo SVRURL ?>l'; });
 </script>
 <?php
     exit;
@@ -328,9 +396,8 @@ $z1 = $url[0];
 if ($z1 != 0) {
 ?>
 <script>
-window.setTimeout(function() {
-    window.location.href = '<?php echo SVRURL ?>l';
-}, 10);
+swal({ title: 'Erro', text: 'Parâmetro de acesso inválido (z1).', icon: 'error' })
+.then(function() { window.location.href = '<?php echo SVRURL ?>l'; });
 </script>
 <?php
     exit;
@@ -347,9 +414,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!validateCsrfToken()) {
         ?>
         <script>
-        window.setTimeout(function() {
-            window.location.href = '<?php echo SVRURL ?>l';
-        }, 10);
+        swal({ title: 'Sessão expirada', text: 'Token de segurança inválido ou expirado. Faça login novamente.', icon: 'error' })
+        .then(function() { window.location.href = '<?php echo SVRURL ?>l'; });
         </script>
         <?php
         exit;
@@ -401,9 +467,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($db0->connect_errno) {
         error_log("Erro ligação BD principal: " . $db0->connect_error);
+        $msgErroBd0 = addslashes('Erro ligação BD principal (' . $db0->connect_errno . '): ' . $db0->connect_error);
         ?>
         <script>
-        swal({ title: 'ERRO', text: 'Erro interno. Tente mais tarde.', icon: 'error' })
+        swal({ title: 'ERRO', text: '<?php echo $msgErroBd0; ?>', icon: 'error' })
         .then(function() { window.location = "<?php echo SVRURL ?>l"; });
         </script>
         <?php
@@ -468,13 +535,27 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // ----------------------------------------------------------
     // 7. Ligar à BD do utilizador
     // ----------------------------------------------------------
-    $db = new mysqli($serverbd, DB_USERNAME, DB_PASSWORD, $nomebd);
+    // NOTA: $serverbd pode vir no formato "host:porta" (ex: "localhost:3306").
+    // O mysqli espera o host e a porta como parâmetros SEPARADOS — passar a
+    // string completa como host faz com que o MySQL tente resolver
+    // "localhost:3306" como nome de máquina, falhando a ligação.
+    $hostbd = $serverbd;
+    $portbd = null;
+    if (strpos($serverbd, ':') !== false) {
+        [$hostbd, $portStr] = explode(':', $serverbd, 2);
+        $portbd = (int) $portStr;
+    }
+
+    $db = ($portbd !== null)
+        ? new mysqli($hostbd, DB_USERNAME, DB_PASSWORD, $nomebd, $portbd)
+        : new mysqli($hostbd, DB_USERNAME, DB_PASSWORD, $nomebd);
 
     if ($db->connect_errno) {
         error_log("Erro ligação BD utilizador: " . $db->connect_error);
+        $msgErroBd = addslashes('Erro ligação BD utilizador (' . $db->connect_errno . '): ' . $db->connect_error);
         ?>
         <script>
-        swal({ title: 'ERRO', text: 'Erro interno. Tente mais tarde.', icon: 'error' })
+        swal({ title: 'ERRO', text: '<?php echo $msgErroBd; ?>', icon: 'error' })
         .then(function() { window.location = "<?php echo SVRURL ?>l"; });
         </script>
         <?php
@@ -633,9 +714,8 @@ gei_audit($db, 'login_ok', 'sessao', null, 'Login', $row['id'], $row['nome'], $r
     // Não é POST — redirecionar
     ?>
     <script>
-    window.setTimeout(function() {
-        window.location.href = '<?php echo SVRURL ?>l';
-    }, 10);
+    swal({ title: 'Acesso inválido', text: 'Esta página só pode ser acedida através do formulário de login.', icon: 'warning' })
+    .then(function() { window.location.href = '<?php echo SVRURL ?>l'; });
     </script>
     <?php
 }
