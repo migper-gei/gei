@@ -1,3 +1,9 @@
+# GEI Versão 18 (em desenvolvimento): 
+- planos de manutenção e respetivas ordens
+- Chat: possibilidade de criar grupos de utilizadores
+- Comparar lado a lado as especificações técnicas de dois ou mais equipamentos.
+- Permitir ao administrador reatribuir a avaria a outro técnico com notificação automática por e-mail.
+  
 # GEI Versão 17 (maio 2026): Testar em: https://gei.miguelarpereira.pt/    
 - dashboard: Visão geral dos equipamentos e manutenção (atualização automática)
 - visualização do estado de cada avaria
