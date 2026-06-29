@@ -279,14 +279,24 @@ function validarDataRep(form) {
                     <span class="gei-label" style="margin-top:6px;">Descrição</span>
                     <span><?php echo htmlspecialchars($row['avaria'], ENT_QUOTES, 'UTF-8'); ?></span>
                     <?php if (!empty($row['imgavaria'])): ?>
+                        <?php
+                        // FIX: detectar MIME real dos bytes (evita falha com PNG/GIF/BMP)
+                        $finfo   = finfo_open(FILEINFO_MIME_TYPE);
+                        $imgMime = finfo_buffer($finfo, $row['imgavaria']) ?: 'image/jpeg';
+                        finfo_close($finfo);
+                        ?>
                         <div style="margin-top:8px;">
-                            <img class="gei-img" src="data:image/jpeg;base64,<?php echo base64_encode($row['imgavaria']); ?>" alt="Imagem avaria">
+                            <img class="gei-img"
+                                 src="data:<?php echo htmlspecialchars($imgMime, ENT_QUOTES, 'UTF-8'); ?>;base64,<?php echo base64_encode($row['imgavaria']); ?>"
+                                 alt="Imagem avaria">
                         </div>
                     <?php endif; ?>
                     <?php if (!empty($row['video'])): ?>
                         <div style="margin-top:8px;">
+                            <!-- FIX: usar streamvideo.php autónomo em vez de base64 inline -->
                             <video width="200" height="150" controls style="border-radius:6px;border:1px solid #e3e8f4;">
-                                <source src="data:video/mp4;base64,<?php echo base64_encode($row['video']); ?>">
+                                <source src="streamvideo.php?id=<?php echo base64_encode($row['id']); ?>" type="video/mp4">
+                                O seu browser não suporta a reprodução de vídeo.
                             </video>
                         </div>
                     <?php endif; ?>
