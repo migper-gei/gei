@@ -1,5 +1,5 @@
 # GEI Versão 18 (em desenvolvimento): 
-- planos de manutenção e respetivas ordens
+- Planos de manutenção e respetivas ordens
 - Chat: possibilidade de criar grupos de utilizadores
 - Comparar lado a lado as especificações técnicas de dois ou mais equipamentos.
 - Permitir ao administrador reatribuir a avaria a outro técnico com notificação automática por e-mail.
