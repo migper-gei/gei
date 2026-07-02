@@ -2,7 +2,8 @@
 - Planos de manutenção e respetivas ordens
 - Permitir ao administrador reatribuir a avaria a outro técnico com notificação automática por e-mail.
 - Chat: possibilidade de criar grupos de utilizadores
-- Comparar lado a lado as especificações técnicas de dois ou mais equipamentos.
+- Comparar lado a lado as especificações técnicas de dois ou mais equipamentos
+- Definição dos dados da Instituição / Base de Dados
 
   
 # GEI Versão 17 (maio 2026): Testar em: https://gei.miguelarpereira.pt/    
