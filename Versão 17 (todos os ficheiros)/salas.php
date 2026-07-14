@@ -313,13 +313,13 @@ if ($filtro_req !== '') $export_qs .= '&filtro_req=' . urlencode($filtro_req);
 
 <?php
 if ($_SESSION['tipo']==1) {
-    $stmt3 = $db->prepare("SELECT COUNT(*) AS conta, id, nome FROM salas WHERE id_escola = ? AND id NOT IN (SELECT s.id FROM equipamento e, salas s WHERE s.id = e.id_sala AND s.id_escola = ?) GROUP BY id, nome");
+    $stmt3 = $db->prepare("SELECT COUNT(*) AS conta FROM salas WHERE id_escola = ? AND id NOT IN (SELECT s.id FROM equipamento e, salas s WHERE s.id = e.id_sala AND s.id_escola = ?)");
     $stmt3->bind_param("ii", $esc, $esc);
     $stmt3->execute();
     $result3 = $stmt3->get_result();
     $rows3 = $result3->fetch_row();
     $stmt3->close();
-    $contasalas = $rows3[0];
+    $contasalas = $rows3[0] ?? 0;
 ?>
 <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:10px 0;margin-bottom:8px;">
     <div style="display:flex;align-items:center;gap:7px;">
