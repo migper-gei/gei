@@ -723,6 +723,9 @@ if (isConfirm) {
     <table class="gei-table">
         <thead>
             <tr>
+                <th style="text-align:center;width:34px;" title="Selecionar para comparar">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                </th>
                 <th>Tipo / Nome</th>
                 <th>Dados técnicos</th>
                 <th>Dados rede</th>
@@ -752,7 +755,13 @@ if (isConfirm) {
 
                     ?>
                 <tr>
-                    <th width="30%"  scope="row"><?php echo htmlspecialchars($row['tipo'], ENT_QUOTES, 'UTF-8'); echo('<br>/<br>'); echo htmlspecialchars($row['nomeequi'], ENT_QUOTES, 'UTF-8');  ?>
+                    <td data-label="Comparar" style="text-align:center;">
+                        <input type="checkbox" class="gei-compare-check" value="<?php echo (int)$n; ?>"
+                               data-nome="<?php echo htmlspecialchars($noeq, ENT_QUOTES, 'UTF-8'); ?>"
+                               data-sala="<?php echo htmlspecialchars($ns, ENT_QUOTES, 'UTF-8'); ?>"
+                               onchange="giCompareToggle(this)" style="width:16px;height:16px;cursor:pointer;">
+                    </td>
+                    <th width="30%"  scope="row"><?php echo htmlspecialchars($row['tipo'] ?? '', ENT_QUOTES, 'UTF-8'); echo('<br>/<br>'); echo htmlspecialchars($row['nomeequi'] ?? '', ENT_QUOTES, 'UTF-8');  ?>
                     <br>  <br><br>
                     Escola Digital: 
                     <?php
@@ -848,31 +857,31 @@ if (isConfirm) {
 
                     <td data-label="Dados técnicos">
                         <div style="font-size:.78rem;line-height:1.8;color:#1e2a45;">
-                        Nº série: <?php echo htmlspecialchars($row['numserie'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        Marca / Modelo: <?php echo htmlspecialchars($row['marca_modelo'], ENT_QUOTES, 'UTF-8'); ?><br><br>
-                        CPU: <?php echo htmlspecialchars($row['processador'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        RAM (GB): <?php echo htmlspecialchars($row['memoria'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        Disco (GB): <?php echo htmlspecialchars($row['disco'], ENT_QUOTES, 'UTF-8'); ?><br><br>
-                        Gráfica: <?php echo htmlspecialchars($row['placagrafica'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        Som: <?php echo htmlspecialchars($row['placasom'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        Rede: <?php echo htmlspecialchars($row['placarede'], ENT_QUOTES, 'UTF-8'); ?><br><br>
-                        Monitor: <?php echo htmlspecialchars($row['monitor'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        Teclado: <?php echo htmlspecialchars($row['teclado'], ENT_QUOTES, 'UTF-8'); ?> — <?php echo htmlspecialchars($row['tecladointerface'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        Rato: <?php echo htmlspecialchars($row['rato'], ENT_QUOTES, 'UTF-8'); ?> — <?php echo htmlspecialchars($row['ratointerface'], ENT_QUOTES, 'UTF-8'); ?>
+                        Nº série: <?php echo htmlspecialchars($row['numserie'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        Marca / Modelo: <?php echo htmlspecialchars($row['marca_modelo'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br><br>
+                        CPU: <?php echo htmlspecialchars($row['processador'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        RAM (GB): <?php echo htmlspecialchars($row['memoria'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        Disco (GB): <?php echo htmlspecialchars($row['disco'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br><br>
+                        Gráfica: <?php echo htmlspecialchars($row['placagrafica'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        Som: <?php echo htmlspecialchars($row['placasom'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        Rede: <?php echo htmlspecialchars($row['placarede'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br><br>
+                        Monitor: <?php echo htmlspecialchars($row['monitor'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        Teclado: <?php echo htmlspecialchars($row['teclado'] ?? '', ENT_QUOTES, 'UTF-8'); ?> — <?php echo htmlspecialchars($row['tecladointerface'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        Rato: <?php echo htmlspecialchars($row['rato'] ?? '', ENT_QUOTES, 'UTF-8'); ?> — <?php echo htmlspecialchars($row['ratointerface'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                         </div>
                     </td>
 
 
                     <td data-label="Dados rede">
                         <div style="font-size:.78rem;line-height:1.8;color:#1e2a45;">
-                        Domínio: <?php echo htmlspecialchars($row['dominio'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        IP: <?php echo htmlspecialchars($row['ip'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        Máscara: <?php echo htmlspecialchars($row['mascara_rede'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        Gateway: <?php echo htmlspecialchars($row['gateway'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        DNS principal: <?php echo htmlspecialchars($row['dns_principal'], ENT_QUOTES, 'UTF-8'); ?><br>
-                        DNS alternativo: <?php echo htmlspecialchars($row['dns_alternativo'], ENT_QUOTES, 'UTF-8'); ?><br><br>
+                        Domínio: <?php echo htmlspecialchars($row['dominio'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        IP: <?php echo htmlspecialchars($row['ip'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        Máscara: <?php echo htmlspecialchars($row['mascara_rede'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        Gateway: <?php echo htmlspecialchars($row['gateway'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        DNS principal: <?php echo htmlspecialchars($row['dns_principal'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br>
+                        DNS alternativo: <?php echo htmlspecialchars($row['dns_alternativo'] ?? '', ENT_QUOTES, 'UTF-8'); ?><br><br>
                         <em>Observações:</em><br>
-                        <?php echo htmlspecialchars($row['observacoes'], ENT_QUOTES, 'UTF-8'); ?>
+                        <?php echo htmlspecialchars($row['observacoes'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                         </div>
                     </td>
 
@@ -1016,9 +1025,9 @@ if ($count>0)
 
                     ?>
                 <tr>
-                    <td data-label="Nome"><?php echo htmlspecialchars($row['nomeoutro'], ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td data-label="Quantidade"><span class="gei-badge"><?php echo htmlspecialchars($row['qta'], ENT_QUOTES, 'UTF-8'); ?></span></td>
-                    <td data-label="Observações"><?php echo htmlspecialchars($row['observacoes'], ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td data-label="Nome"><?php echo htmlspecialchars($row['nomeoutro'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td data-label="Quantidade"><span class="gei-badge"><?php echo htmlspecialchars($row['qta'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span></td>
+                    <td data-label="Observações"><?php echo htmlspecialchars($row['observacoes'] ?? '', ENT_QUOTES, 'UTF-8'); ?></td>
                     <?php if ($_SESSION['tipo']==1): ?>
                     <td data-label="Ações" style="text-align:center;white-space:nowrap;">
                         <a class="gei-action-btn gei-btn-edit" title="Atualizar"
@@ -1168,6 +1177,101 @@ document.addEventListener('keydown', function(e) {
 }
 </style>
 
+<!-- ══════════ Barra flutuante: Comparar equipamentos ══════════ -->
+<style>
+#gi-compare-bar {
+    position: fixed; left: 50%; bottom: 18px; transform: translateX(-50%) translateY(120%);
+    z-index: 10000; display: flex; align-items: center; gap: 14px;
+    background: #182848; color: #fff; padding: 10px 18px; border-radius: 40px;
+    box-shadow: 0 10px 30px rgba(24,40,72,.35); font-size: .84rem; font-weight: 600;
+    transition: transform .25s ease; max-width: 92vw;
+}
+#gi-compare-bar.active { transform: translateX(-50%) translateY(0); }
+#gi-compare-bar .gi-compare-count { background: #507feb; padding: 3px 10px; border-radius: 20px; font-size: .78rem; }
+#gi-compare-bar button {
+    border: none; border-radius: 20px; padding: 7px 16px; font-size: .8rem; font-weight: 700; cursor: pointer;
+}
+#gi-compare-bar .gi-btn-go { background: #1cc88a; color: #fff; }
+#gi-compare-bar .gi-btn-go:disabled { background: #4a5a80; color: #b7c2da; cursor: not-allowed; }
+#gi-compare-bar .gi-btn-clear { background: transparent; color: #d8deee; text-decoration: underline; }
+@media (max-width: 560px) {
+    #gi-compare-bar { flex-wrap: wrap; justify-content: center; text-align: center; border-radius: 16px; }
+}
+</style>
+
+<div id="gi-compare-bar">
+    <span><span class="gi-compare-count" id="gi-compare-count">0</span> selecionado(s) para comparar</span>
+    <button type="button" class="gi-btn-go" id="gi-compare-go" onclick="giCompareIr()" disabled>Comparar</button>
+    <button type="button" class="gi-btn-clear" onclick="giCompareLimpar()">Limpar seleção</button>
+</div>
+
+<script>
+// ══════════ Seleção de equipamentos para comparação (persiste via sessionStorage) ══════════
+(function () {
+    var CHAVE = 'gei_compare_ids';
+
+    function lerSelecao() {
+        try { return JSON.parse(sessionStorage.getItem(CHAVE) || '[]'); }
+        catch (e) { return []; }
+    }
+    function gravarSelecao(lista) {
+        sessionStorage.setItem(CHAVE, JSON.stringify(lista));
+    }
+    function atualizarBarra() {
+        var lista = lerSelecao();
+        var bar = document.getElementById('gi-compare-bar');
+        var btn = document.getElementById('gi-compare-go');
+        document.getElementById('gi-compare-count').textContent = lista.length;
+        btn.disabled = lista.length < 2;
+        bar.classList.toggle('active', lista.length > 0);
+    }
+    function marcarCheckboxesVisiveis() {
+        var lista = lerSelecao().map(function (i) { return i.id; });
+        document.querySelectorAll('.gei-compare-check').forEach(function (cb) {
+            cb.checked = lista.indexOf(parseInt(cb.value, 10)) !== -1;
+        });
+    }
+
+    window.giCompareToggle = function (checkbox) {
+        var id = parseInt(checkbox.value, 10);
+        var lista = lerSelecao();
+        var idx = lista.findIndex(function (i) { return i.id === id; });
+        if (checkbox.checked) {
+            if (idx === -1) {
+                if (lista.length >= 6) {
+                    checkbox.checked = false;
+                    alert('Podes comparar no máximo 6 equipamentos de cada vez.');
+                    return;
+                }
+                lista.push({ id: id, nome: checkbox.dataset.nome, sala: checkbox.dataset.sala });
+            }
+        } else if (idx !== -1) {
+            lista.splice(idx, 1);
+        }
+        gravarSelecao(lista);
+        atualizarBarra();
+    };
+
+    window.giCompareLimpar = function () {
+        gravarSelecao([]);
+        marcarCheckboxesVisiveis();
+        atualizarBarra();
+    };
+
+    window.giCompareIr = function () {
+        var lista = lerSelecao();
+        if (lista.length < 2) return;
+        var ids = lista.map(function (i) { return i.id; });
+        var b64 = btoa(JSON.stringify(ids));
+        window.location.href = '<?php echo SVRURL ?>comparar_equipamentos.php?ids=' + encodeURIComponent(b64);
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        marcarCheckboxesVisiveis();
+        atualizarBarra();
+    });
+})();
+</script>
 
    </body>
 </html>
