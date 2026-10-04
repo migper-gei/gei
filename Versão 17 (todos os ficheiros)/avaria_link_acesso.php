@@ -12,6 +12,45 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
+// ── DEPURAÇÃO ────────────────────────────────────────────────────────────────
+// Ativar (true) para ver o erro e a LINHA no ecrã e em avaria_debug.log
+// (na mesma pasta deste ficheiro). Pôr a false quando o problema estiver resolvido.
+define('AVARIA_DEBUG', true);
+
+error_reporting(E_ALL);
+ini_set('log_errors', '1');
+ini_set('error_log', __DIR__ . DIRECTORY_SEPARATOR . 'avaria_debug.log');
+ini_set('display_errors', AVARIA_DEBUG ? '1' : '0');
+
+function avaria_dbg_mostrar($tipo, $msg, $ficheiro, $linha, $trace = '')
+{
+    $txt = '[' . date('Y-m-d H:i:s') . "] $tipo: $msg em " . basename($ficheiro) . " linha $linha";
+    @file_put_contents(__DIR__ . DIRECTORY_SEPARATOR . 'avaria_debug.log', $txt . "\n" . $trace . "\n", FILE_APPEND);
+    if (!headers_sent()) {
+        http_response_code(500);
+        header('Content-Type: text/html; charset=utf-8');
+    }
+    if (AVARIA_DEBUG) {
+        echo '<pre style="background:#fde8e6;color:#c0392b;padding:14px;margin:16px;border:1px solid #f5c6c6;'
+           . 'border-radius:8px;font-size:13px;white-space:pre-wrap;z-index:99999;position:relative;">'
+           . htmlspecialchars($txt . "\n\n" . $trace) . '</pre>';
+    } else {
+        echo '<p style="font-family:Arial;padding:24px;">Ocorreu um erro. Tente novamente mais tarde.</p>';
+    }
+}
+
+set_exception_handler(function ($e) {
+    avaria_dbg_mostrar(get_class($e), $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString());
+});
+
+register_shutdown_function(function () {
+    $err = error_get_last();
+    if ($err && in_array($err['type'], [E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR, E_USER_ERROR], true)) {
+        avaria_dbg_mostrar('Erro fatal', $err['message'], $err['file'], $err['line']);
+    }
+});
+// ─────────────────────────────────────────────────────────────────────────────
+
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'phpmailer' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Exception.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'phpmailer' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'PHPMailer.php';
 require __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'phpmailer' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'SMTP.php';
@@ -545,7 +584,7 @@ const equips = <?php
     foreach ($equipamentos as $eq) {
         $byRoom[$eq['id_sala']][] = [
             'id'       => (int)$eq['id'],
-            'nome'     => htmlspecialchars($eq['nomeequi'], ENT_QUOTES),
+            'nome'     => $eq['nomeequi'],
             'id_escola'=> (int)$eq['id_escola'],
         ];
     }
