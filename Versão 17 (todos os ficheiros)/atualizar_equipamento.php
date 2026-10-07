@@ -178,24 +178,24 @@ window.setTimeout(function() {
                   <!-- Equipamento -->
                   <div style="display:flex; flex-direction:column;">
                      <span style="font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.4px; color:#7b88a0;">Equipamento</span>
-                     <span style="font-size:.95rem; font-weight:700; color:#182848;"><?php echo htmlspecialchars($row3['nomeequi'], ENT_QUOTES, 'UTF-8'); ?></span>
+                     <span style="font-size:.95rem; font-weight:700; color:#182848;"><?php echo htmlspecialchars($row3['nomeequi'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
                   </div>
                   <span style="color:#c5cde0;">|</span>
                   <!-- Sala -->
                   <div style="display:flex; flex-direction:column;">
                      <span style="font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.4px; color:#7b88a0;">Sala</span>
-                     <span style="font-size:.95rem; font-weight:700; color:#182848;"><?php echo htmlspecialchars($row3['nome'], ENT_QUOTES, 'UTF-8'); ?></span>
+                     <span style="font-size:.95rem; font-weight:700; color:#182848;"><?php echo htmlspecialchars($row3['nome'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
                   </div>
                   <span style="color:#c5cde0;">|</span>
                   <!-- Escola -->
                   <div style="display:flex; flex-direction:column;">
                      <span style="font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.4px; color:#7b88a0;">Instituição</span>
-                     <span style="font-size:.95rem; font-weight:700; color:#182848;"><?php echo htmlspecialchars($row3['nome_escola'], ENT_QUOTES, 'UTF-8'); ?></span>
+                     <span style="font-size:.95rem; font-weight:700; color:#182848;"><?php echo htmlspecialchars($row3['nome_escola'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
                   </div>
                </div>
 
 <?php
-$isEscolaDigital = ($row3['escola_digital'] == "Sim");
+$isEscolaDigital = (($row3['escola_digital'] ?? '') == "Sim");
 ?>
 
 <style>
@@ -287,9 +287,9 @@ $isEscolaDigital = ($row3['escola_digital'] == "Sim");
                         <select name="tipoeq" id="tipoeq" required class="form-control required-field">
                             <option value=""></option>
                             <?php while($row=mysqli_fetch_array($result)): ?>
-                                <option value="<?php echo htmlspecialchars($row['no'], ENT_QUOTES, 'UTF-8'); ?>"
-                                    <?php echo ($row['no']==$row3['tipo']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($row['no'], ENT_QUOTES, 'UTF-8'); ?>
+                                <option value="<?php echo htmlspecialchars($row['no'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                                    <?php echo ($row['no']==($row3['tipo'] ?? '')) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($row['no'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                                 </option>
                             <?php endwhile; ?>
                         </select>
@@ -305,9 +305,9 @@ $isEscolaDigital = ($row3['escola_digital'] == "Sim");
                         ?>
                         <select name="sala" class="form-control required-field" required>
                             <?php while($row2=mysqli_fetch_array($result2)): ?>
-                                <option value="<?php echo $row2['said']; ?>"
+                                <option value="<?php echo (int)$row2['said']; ?>"
                                     <?php echo ($row2['said']==$sa) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($row2['no'], ENT_QUOTES, 'UTF-8'); ?>
+                                    <?php echo htmlspecialchars($row2['no'] ?? '', ENT_QUOTES, 'UTF-8'); ?>
                                 </option>
                             <?php endwhile; ?>
                         </select>
@@ -318,7 +318,7 @@ $isEscolaDigital = ($row3['escola_digital'] == "Sim");
                     <div class="tab-form-col">
                         <label><i class="fas fa-laptop"></i> Nome do equipamento</label>
                         <input required type="text" name="nomeq"
-                               value="<?php echo htmlspecialchars($row3['nomeequi'], ENT_QUOTES, 'UTF-8')?>"
+                               value="<?php echo htmlspecialchars($row3['nomeequi'] ?? '', ENT_QUOTES, 'UTF-8')?>"
                                class="form-control required-field" placeholder="Nome do equipamento">
                     </div>
                     <div class="tab-form-col">
@@ -339,7 +339,7 @@ $isEscolaDigital = ($row3['escola_digital'] == "Sim");
                     <div class="tab-form-col">
                         <label><i class="fas fa-calendar-alt"></i> Data da compra</label>
                         <input type="date" name="datacompra" class="form-control"
-                               value="<?php echo htmlspecialchars($row3['data_compra'], ENT_QUOTES, 'UTF-8')?>">
+                               value="<?php echo htmlspecialchars($row3['data_compra'] ?? '', ENT_QUOTES, 'UTF-8')?>">
                     </div>
                 </div>
 
@@ -347,7 +347,7 @@ $isEscolaDigital = ($row3['escola_digital'] == "Sim");
                     <div class="tab-form-col-full">
                         <label><i class="fas fa-comment-alt"></i> Observações</label>
                         <textarea class="form-control" rows="4" name="obs"
-                                  placeholder="Observações"><?php echo htmlspecialchars($row3['observacoes'])?></textarea>
+                                  placeholder="Observações"><?php echo htmlspecialchars($row3['observacoes'] ?? '')?></textarea>
                     </div>
                 </div>
 
@@ -364,27 +364,27 @@ $isEscolaDigital = ($row3['escola_digital'] == "Sim");
         <div class="tab-pane fade" id="tab-escdig" role="tabpanel">
             <form class="needs-validation" novalidate action="<?php echo SVRURL ?>atualiza_equipamento_OK.php?ide=<?php echo base64_encode($id)?>&&sai=<?php echo base64_encode($sa)?>&&ies=<?php echo base64_encode($idescola)?>" method="post">
                 <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrf_token); ?>">
-                <input type="hidden" name="tipoeq" value="<?php echo htmlspecialchars($row3['tipo'], ENT_QUOTES, 'UTF-8')?>">
-                <input type="hidden" name="sala" value="<?php echo htmlspecialchars($sa, ENT_QUOTES, 'UTF-8')?>">
-                <input type="hidden" name="nomeq" value="<?php echo htmlspecialchars($row3['nomeequi'], ENT_QUOTES, 'UTF-8')?>">
+                <input type="hidden" name="tipoeq" value="<?php echo htmlspecialchars($row3['tipo'] ?? '', ENT_QUOTES, 'UTF-8')?>">
+                <input type="hidden" name="sala" value="<?php echo htmlspecialchars((string)$sa, ENT_QUOTES, 'UTF-8')?>">
+                <input type="hidden" name="nomeq" value="<?php echo htmlspecialchars($row3['nomeequi'] ?? '', ENT_QUOTES, 'UTF-8')?>">
                 <input type="hidden" name="nserie" value="<?php echo htmlspecialchars($row3['numserie'] ?? '', ENT_QUOTES, 'UTF-8')?>">
                 <input type="hidden" name="marcamod" value="<?php echo htmlspecialchars($row3['marca_modelo'] ?? '', ENT_QUOTES, 'UTF-8')?>">
-                <input type="hidden" name="datacompra" value="<?php echo htmlspecialchars($row3['data_compra'], ENT_QUOTES, 'UTF-8')?>">
-                <input type="hidden" name="obs" value="<?php echo htmlspecialchars($row3['observacoes'])?>">
+                <input type="hidden" name="datacompra" value="<?php echo htmlspecialchars($row3['data_compra'] ?? '', ENT_QUOTES, 'UTF-8')?>">
+                <input type="hidden" name="obs" value="<?php echo htmlspecialchars($row3['observacoes'] ?? '', ENT_QUOTES, 'UTF-8')?>">
 
                 <div class="tab-form-row">
                     <div class="tab-form-col">
                         <label><i class="fas fa-hashtag"></i> Nº inventário Dgest</label>
                         <input required type="text" name="numinv" class="form-control"
                                style="background-color:#CEF6CE;"
-                               value="<?php echo htmlspecialchars($row3['num_inv_dgest'], ENT_QUOTES, 'UTF-8')?>"
+                               value="<?php echo htmlspecialchars($row3['num_inv_dgest'] ?? '', ENT_QUOTES, 'UTF-8')?>"
                                placeholder="Nº inventário Dgest">
                     </div>
                     <div class="tab-form-col">
                         <label><i class="fas fa-building"></i> Fornecedor</label>
                         <input required type="text" name="fornecedor" class="form-control"
                                style="background-color:#CEF6CE;"
-                               value="<?php echo htmlspecialchars($row3['fornecedor'], ENT_QUOTES, 'UTF-8')?>"
+                               value="<?php echo htmlspecialchars($row3['fornecedor'] ?? '', ENT_QUOTES, 'UTF-8')?>"
                                placeholder="Fornecedor">
                     </div>
                 </div>
@@ -395,7 +395,7 @@ $isEscolaDigital = ($row3['escola_digital'] == "Sim");
                         <input required type="text" name="emailfornecedor" class="form-control"
                                style="background-color:#CEF6CE;"
                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$"
-                               value="<?php echo htmlspecialchars($row3['email_fornecedor'], ENT_QUOTES, 'UTF-8')?>"
+                               value="<?php echo htmlspecialchars($row3['email_fornecedor'] ?? '', ENT_QUOTES, 'UTF-8')?>"
                                placeholder="Email do fornecedor">
                     </div>
                     <div class="tab-form-col">
@@ -403,7 +403,7 @@ $isEscolaDigital = ($row3['escola_digital'] == "Sim");
                         <input required maxlength="9" type="text" name="nifpessoa" class="form-control"
                                style="background-color:#CEF6CE;"
                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                               value="<?php echo htmlspecialchars($row3['nif_pessoa'], ENT_QUOTES, 'UTF-8')?>"
+                               value="<?php echo htmlspecialchars($row3['nif_pessoa'] ?? '', ENT_QUOTES, 'UTF-8')?>"
                                placeholder="NIF da pessoa">
                     </div>
                 </div>
