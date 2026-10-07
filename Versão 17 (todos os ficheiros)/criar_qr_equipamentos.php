@@ -101,6 +101,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sala_qr'])) {
             // ── Gerar PDF com FPDF ────────────────────────────────────────────
             require('fpdf/fpdf.php');
 
+            // utf8_decode() está obsoleta no PHP 8.2+; esta função faz o mesmo (UTF-8 -> ISO-8859-1)
+            if (!function_exists('pdf_txt')) {
+                function pdf_txt($s) {
+                    $s = (string)$s;
+                    if (function_exists('mb_convert_encoding')) {
+                        return mb_convert_encoding($s, 'ISO-8859-1', 'UTF-8');
+                    }
+                    return iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $s);
+                }
+            }
+
             // phpqrcode — usar método text() que NÃO precisa de GD
             $use_local_qr = file_exists(__DIR__ . '/phpqrcode/qrlib.php');
             if ($use_local_qr) {
@@ -187,17 +198,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['sala_qr'])) {
                 $pdf->SetFont('Arial', 'I', 5.5);
                 $pdf->SetTextColor(100, 115, 140);
                 $pdf->SetXY($txt_x, $y + 3);
-                $pdf->Cell($avail_w, 3, utf8_decode($nome_escola_etiq ?? ''), 0, 1, 'L');
+                $pdf->Cell($avail_w, 3, pdf_txt($nome_escola_etiq ?? ''), 0, 1, 'L');
 
                 $pdf->SetFont('Arial', 'B', 7);
                 $pdf->SetTextColor(24, 40, 72);
                 $pdf->SetXY($txt_x, $pdf->GetY() + 1);
-                $pdf->MultiCell($avail_w, 4, utf8_decode($eq['nomeequi']), 0, 'L');
+                $pdf->MultiCell($avail_w, 4, pdf_txt($eq['nomeequi']), 0, 'L');
 
                 $pdf->SetFont('Arial', '', 6);
                 $pdf->SetTextColor(100, 115, 140);
                 $pdf->SetXY($txt_x, $pdf->GetY() + 1);
-                $pdf->Cell($avail_w, 3.5, utf8_decode($sala_info['nome']), 0, 1, 'L');
+                $pdf->Cell($avail_w, 3.5, pdf_txt($sala_info['nome']), 0, 1, 'L');
 
                 $pdf->SetFont('Arial', 'I', 5.5);
                 $pdf->SetTextColor(150, 160, 175);
