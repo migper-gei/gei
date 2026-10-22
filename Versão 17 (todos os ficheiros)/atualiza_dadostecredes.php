@@ -125,6 +125,12 @@ include("msg_bemvindo.php");
                 and e.id=".$id."";
                 $result = mysqli_query($db,$sql); 
                 $row=mysqli_fetch_array($result);
+
+                // Colunas NULL na BD passam a string vazia (evita o aviso de
+                // depreciação do htmlspecialchars() no PHP 8.1+)
+                $row = is_array($row)
+                    ? array_map(function ($v) { return $v === null ? '' : $v; }, $row)
+                    : [];
                ?>
 
                <!-- Cabeçalho com info do equipamento -->
