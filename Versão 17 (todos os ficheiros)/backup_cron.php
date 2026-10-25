@@ -200,7 +200,8 @@ try {
         'escolas','logotipo','salas','equipamento','avarias_reparacoes',
         'chat_message','equip_requisitado','manutencao','outro_equipamento',
         'periodos','requisicao','settings','tarefas','tipos_equipamento',
-        'tipos_manutencao','utilizadores','backup_agendamento','backup_historico',
+        'tipos_manutencao','software_instalado','software_catalogo',
+        'utilizadores','backup_agendamento','backup_historico',
     ];
 
     $total_rows = 0;

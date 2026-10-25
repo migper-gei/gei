@@ -205,6 +205,8 @@ if (AUTO_DOWNLOAD) {
         'tarefas',
         'tipos_equipamento',
         'tipos_manutencao',
+        'software_instalado',
+        'software_catalogo',
         'utilizadores',
     ];
 
@@ -412,6 +414,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['tipo']) && $_SESSI
             $tables_cron = ['escolas','logotipo','salas','equipamento','avarias_reparacoes',
                 'chat_message','equip_requisitado','manutencao','outro_equipamento','periodos',
                 'requisicao','settings','tarefas','tipos_equipamento','tipos_manutencao',
+                'software_instalado','software_catalogo',
                 'utilizadores','backup_agendamento','backup_historico'];
             $total_rows_cron = 0;
             foreach ($tables_cron as $tbl_c) {
