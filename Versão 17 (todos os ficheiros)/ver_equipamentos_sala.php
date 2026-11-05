@@ -707,6 +707,12 @@ if (isConfirm) {
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 9 2 12 5 15"/><polyline points="9 5 12 2 15 5"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
                 Mover em massa
             </a>
+            <a href="<?php echo SVRURL ?>copiar_equipamentos_sala.php?si=<?php echo base64_encode($said); ?>&&ies=<?php echo base64_encode($idescola); ?>"
+               class="gei-btn-resumo" title="Copiar os equipamentos desta sala para outra sala (muda só o nome e a sala)"
+               style="color:#1a7a52 !important;background:#e6f9f2;border-color:#a8e6cf;text-decoration:none;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copiar para outra sala
+            </a>
             <?php endif; ?>
         </div>
         <?php if (($totallinhas>0) && ($_SESSION['tipo']==1)): ?>
@@ -1263,7 +1269,12 @@ document.addEventListener('keydown', function(e) {
         if (lista.length < 2) return;
         var ids = lista.map(function (i) { return i.id; });
         var b64 = btoa(JSON.stringify(ids));
-        window.location.href = '<?php echo SVRURL ?>comparar_equipamentos.php?ids=' + encodeURIComponent(b64);
+        // Passa escola e sala para a página de comparação poder voltar à lista da sala
+        var ies = '<?php echo base64_encode((string)$idescola); ?>';
+        var si  = '<?php echo base64_encode((string)$said); ?>';
+        window.location.href = '<?php echo SVRURL ?>comparar_equipamentos.php?ids=' + encodeURIComponent(b64)
+            + '&ies=' + encodeURIComponent(ies)
+            + '&si=' + encodeURIComponent(si);
     };
 
     document.addEventListener('DOMContentLoaded', function () {
