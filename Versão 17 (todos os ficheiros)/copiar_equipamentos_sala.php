@@ -93,9 +93,11 @@ $csrf_token = $_SESSION['csrf_token'];
             $equips         = isset($_POST['equip']) && is_array($_POST['equip']) ? $_POST['equip'] : [];
             $nomes          = isset($_POST['nome'])  && is_array($_POST['nome'])  ? $_POST['nome']  : [];
             $outros         = isset($_POST['outro']) && is_array($_POST['outro']) ? $_POST['outro'] : [];
-            $copiar_serie   = !empty($_POST['copiar_serie'])    ? 1 : 0;
-            $copiar_ip      = !empty($_POST['copiar_ip'])       ? 1 : 0;
             $copiar_sw      = !empty($_POST['copiar_software']) ? 1 : 0;
+            $copiar_marca   = !empty($_POST['copiar_marca'])    ? 1 : 0;
+            $copiar_cpu     = !empty($_POST['copiar_cpu'])      ? 1 : 0;
+            $copiar_ram     = !empty($_POST['copiar_ram'])      ? 1 : 0;
+            $copiar_disco   = !empty($_POST['copiar_disco'])    ? 1 : 0;
 
             if ($sala_destino <= 0)            cpy_erro("Selecione a sala de destino.");
             if ($sala_destino === $said)       cpy_erro("A sala de destino tem de ser diferente da sala de origem.");
@@ -158,11 +160,12 @@ $csrf_token = $_SESSION['csrf_token'];
                  colunas, cd_dvd, dominio, ip, mascara_rede, gateway, dns_principal, dns_alternativo,
                  sala_temp, data_compra, observacoes, escola_digital, num_inv_dgest, fornecedor,
                  email_fornecedor, nif_pessoa, num_rma, data_fim_garantia)
-              SELECT ?, IF(?=1, numserie, NULL), ?, marca_modelo, tipo, processador, memoria, disco,
+              SELECT ?, NULL, ?, IF(?=1, marca_modelo, NULL), tipo,
+                 IF(?=1, processador, NULL), IF(?=1, memoria, NULL), IF(?=1, disco, NULL),
                  placagrafica, placasom, placarede, monitor, teclado, tecladointerface, rato, ratointerface,
-                 colunas, cd_dvd, dominio, IF(?=1, ip, NULL), mascara_rede, gateway, dns_principal, dns_alternativo,
+                 colunas, cd_dvd, dominio, NULL, mascara_rede, gateway, dns_principal, dns_alternativo,
                  NULL, IF(CAST(data_compra AS CHAR)='0000-00-00', NULL, data_compra), observacoes, escola_digital,
-                 IF(?=1, num_inv_dgest, NULL), fornecedor,
+                 NULL, fornecedor,
                  email_fornecedor, nif_pessoa, num_rma,
                  IF(CAST(data_fim_garantia AS CHAR)='0000-00-00', NULL, data_fim_garantia)
               FROM equipamento WHERE id = ? AND id_sala = ?";
@@ -186,7 +189,9 @@ $csrf_token = $_SESSION['csrf_token'];
 
                 foreach ($copias as $c) {
                     $nome = $c['nome']; $eid = $c['id'];
-                    $st_copy->bind_param("siiiiii", $nome, $copiar_serie, $sala_destino, $copiar_ip, $copiar_serie, $eid, $said);
+                    $st_copy->bind_param("siiiiiii", $nome, $sala_destino,
+                        $copiar_marca, $copiar_cpu, $copiar_ram, $copiar_disco,
+                        $eid, $said);
                     $st_copy->execute();
                     if ($st_copy->affected_rows < 1) {
                         throw new Exception("Falha ao copiar \"" . $c['origem'] . "\".");
@@ -378,9 +383,11 @@ $csrf_token = $_SESSION['csrf_token'];
                            </div>
 
                            <div class="opcoes-copia">
-                              <label><input type="checkbox" name="copiar_serie" value="1" checked> Copiar nº de série / nº inventário DGEST</label>
-                              <label><input type="checkbox" name="copiar_ip" value="1" checked> Copiar IP</label>
                               <label><input type="checkbox" name="copiar_software" value="1" checked> Copiar programas instalados</label>
+                              <label><input type="checkbox" name="copiar_marca" value="1" checked> Copiar Marca / Modelo</label>
+                              <label><input type="checkbox" name="copiar_cpu" value="1" checked> Copiar CPU</label>
+                              <label><input type="checkbox" name="copiar_ram" value="1" checked> Copiar RAM (GB)</label>
+                              <label><input type="checkbox" name="copiar_disco" value="1" checked> Copiar Disco (GB)</label>
                            </div>
                         </div>
 
