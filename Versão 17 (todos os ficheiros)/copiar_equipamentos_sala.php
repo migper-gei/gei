@@ -98,6 +98,7 @@ $csrf_token = $_SESSION['csrf_token'];
             $copiar_cpu     = !empty($_POST['copiar_cpu'])      ? 1 : 0;
             $copiar_ram     = !empty($_POST['copiar_ram'])      ? 1 : 0;
             $copiar_disco   = !empty($_POST['copiar_disco'])    ? 1 : 0;
+            $copiar_monitor = !empty($_POST['copiar_monitor'])  ? 1 : 0;
 
             if ($sala_destino <= 0)            cpy_erro("Selecione a sala de destino.");
             if ($sala_destino === $said)       cpy_erro("A sala de destino tem de ser diferente da sala de origem.");
@@ -162,7 +163,7 @@ $csrf_token = $_SESSION['csrf_token'];
                  email_fornecedor, nif_pessoa, num_rma, data_fim_garantia)
               SELECT ?, NULL, ?, IF(?=1, marca_modelo, NULL), tipo,
                  IF(?=1, processador, NULL), IF(?=1, memoria, NULL), IF(?=1, disco, NULL),
-                 placagrafica, placasom, placarede, monitor, teclado, tecladointerface, rato, ratointerface,
+                 placagrafica, placasom, placarede, IF(?=1, monitor, NULL), teclado, tecladointerface, rato, ratointerface,
                  colunas, cd_dvd, dominio, NULL, mascara_rede, gateway, dns_principal, dns_alternativo,
                  NULL, IF(CAST(data_compra AS CHAR)='0000-00-00', NULL, data_compra), observacoes, escola_digital,
                  NULL, fornecedor,
@@ -189,8 +190,8 @@ $csrf_token = $_SESSION['csrf_token'];
 
                 foreach ($copias as $c) {
                     $nome = $c['nome']; $eid = $c['id'];
-                    $st_copy->bind_param("siiiiiii", $nome, $sala_destino,
-                        $copiar_marca, $copiar_cpu, $copiar_ram, $copiar_disco,
+                    $st_copy->bind_param("siiiiiiii", $nome, $sala_destino,
+                        $copiar_marca, $copiar_cpu, $copiar_ram, $copiar_disco, $copiar_monitor,
                         $eid, $said);
                     $st_copy->execute();
                     if ($st_copy->affected_rows < 1) {
@@ -388,6 +389,7 @@ $csrf_token = $_SESSION['csrf_token'];
                               <label><input type="checkbox" name="copiar_cpu" value="1" checked> Copiar CPU</label>
                               <label><input type="checkbox" name="copiar_ram" value="1" checked> Copiar RAM (GB)</label>
                               <label><input type="checkbox" name="copiar_disco" value="1" checked> Copiar Disco (GB)</label>
+                              <label><input type="checkbox" name="copiar_monitor" value="1" checked> Copiar Monitor</label>
                            </div>
                         </div>
 
