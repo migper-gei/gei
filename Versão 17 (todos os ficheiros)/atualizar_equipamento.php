@@ -252,6 +252,27 @@ $isEscolaDigital = (($row3['escola_digital'] ?? '') == "Sim");
         display: block;
         font-size: .88rem;
     }
+
+    /* ── Separador Software (estilos que existiam só em dados_tec_redes.php) ── */
+    .btn-custom { background-color:#3498db; color:#fff; border:none; padding:12px 25px; border-radius:8px; font-weight:600; transition:all .3s; cursor:pointer; }
+    .btn-custom:hover { background-color:#2980b9; transform:translateY(-2px); color:#fff; }
+    .sw-table-wrap { overflow-x:auto; border-radius:10px; box-shadow:0 2px 12px rgba(75,108,183,.10); margin-top:18px; }
+    .sw-table { width:100%; border-collapse:collapse; font-size:.85rem; background:#fff; }
+    .sw-table thead tr { background:linear-gradient(90deg,#4b6cb7 0%,#182848 100%); color:#fff; }
+    .sw-table thead th { padding:10px 13px; font-weight:600; white-space:nowrap; border:none; }
+    .sw-table tbody tr { border-bottom:1px solid #eef0f7; transition:background .15s; }
+    .sw-table tbody tr:hover { background:#f4f6fb; }
+    .sw-table tbody td { padding:9px 13px; vertical-align:middle; color:#2d3748; }
+    .sw-table tbody td.td-nome { font-weight:600; color:#182848; }
+    .sw-table .badge-lic { display:inline-block; background:#e8eefa; color:#4b6cb7; border-radius:5px; padding:2px 8px; font-size:.78rem; font-weight:600; }
+    .sw-table .btn-del { background:none; border:none; color:#dc3545; cursor:pointer; font-size:.9rem; padding:2px 6px; border-radius:5px; transition:background .15s; }
+    .sw-table .btn-del:hover { background:#fde8ea; }
+    .sw-empty { text-align:center; padding:30px; color:#8a93a8; font-size:.9rem; }
+    .sw-form-card { background:#fff; border:1px solid #e3e8f4; border-radius:12px; padding:22px 26px; margin-top:10px; box-shadow:0 2px 10px rgba(75,108,183,.08); }
+    .sw-form-card .form-group { margin-bottom:12px; }
+    .sw-form-title { font-size:.95rem; font-weight:700; color:#182848; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+    .sw-counter { display:inline-flex; align-items:center; gap:6px; background:#e8eefa; color:#4b6cb7; font-weight:700; font-size:.8rem; padding:3px 10px; border-radius:20px; margin-left:8px; }
+    .sw-alert-ok { background:#d4edda; color:#155724; border:1px solid #c3e6cb; border-radius:8px; padding:10px 16px; font-size:.88rem; font-weight:600; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
 </style>
 
 <div class="equipment-tabs" style="margin-top:10px;">
@@ -268,6 +289,11 @@ $isEscolaDigital = (($row3['escola_digital'] ?? '') == "Sim");
             </a>
         </li>
         <?php endif; ?>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo SVRURL ?>dados_tec_redes.php?qi=<?php echo base64_encode($id); ?>&z=3&ies=<?php echo base64_encode($idescola) ?>">
+                <i class="fas fa-box-open"></i> Software
+            </a>
+        </li>
     </ul>
 
     <div class="tab-content" id="equipTabsContent">
