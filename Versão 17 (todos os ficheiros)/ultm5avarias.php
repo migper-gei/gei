@@ -95,7 +95,100 @@ mysqli_stmt_bind_param($stmt, 'i', $idescola);
 mysqli_stmt_execute($stmt);
 $result      = mysqli_stmt_get_result($stmt);
 $totalLinhas = mysqli_num_rows($result);
+
+// Lista de técnicos disponíveis para reatribuição (apenas para admins, tipo 1)
+$tecnicos_disponiveis = [];
+if (isset($_SESSION['tipo']) && (int)$_SESSION['tipo'] === 1) {
+    $meu_user_id = (int)($_SESSION['user_id'] ?? 0);
+    $stmt_tec = $db->prepare("SELECT id, nome FROM utilizadores WHERE tipo IN (1,3) AND ativo = 1 AND id != ? ORDER BY nome");
+    $stmt_tec->bind_param("i", $meu_user_id);
+    $stmt_tec->execute();
+    $res_tec = $stmt_tec->get_result();
+    while ($t = $res_tec->fetch_assoc()) {
+        $tecnicos_disponiveis[] = $t;
+    }
+    $stmt_tec->close();
+}
 ?>
+
+<script>
+// SweetAlert2 é necessário para a função reatribuirAvaria() (usa Swal.fire),
+// mas o projeto só tem carregada a SweetAlert v1 (função swal() em minúsculas).
+// Carregamos a v2 aqui só se ainda não estiver presente, para não conflituar
+// com o swal() v1 usado no resto da página (nomes globais diferentes: swal vs Swal).
+if (typeof window.Swal === 'undefined') {
+    document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">');
+    document.write('<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"><\/script>');
+}
+</script>
+<script>
+// Lista de técnicos disponíveis (apenas preenchida para admins)
+var GEI_TECNICOS = <?php echo json_encode($tecnicos_disponiveis); ?>;
+var GEI_CSRF      = <?php echo json_encode($_SESSION['csrf_token']); ?>;
+
+function reatribuirAvaria(avariaId, tecnicoAtualId) {
+    var opcoes = '<option value="">— Selecione um técnico —</option>';
+    GEI_TECNICOS.forEach(function (t) {
+        if (parseInt(t.id, 10) === parseInt(tecnicoAtualId, 10)) { return; }
+        opcoes += '<option value="' + t.id + '">' + t.nome + '</option>';
+    });
+
+    Swal.fire({
+        title: 'Reatribuir avaria #' + avariaId,
+        html:
+            '<div style="text-align:left;">' +
+            '<label style="font-size:.78rem;font-weight:700;text-transform:uppercase;color:#7b88a0;display:block;margin-bottom:4px;">Novo técnico</label>' +
+            '<select id="swal-novo-tecnico" class="swal2-select" style="width:100%;margin:0 0 14px;padding:8px;border-radius:6px;border:1.5px solid #c7d4f0;">' + opcoes + '</select>' +
+            '<label style="font-size:.78rem;font-weight:700;text-transform:uppercase;color:#7b88a0;display:block;margin-bottom:4px;">Motivo (opcional)</label>' +
+            '<textarea id="swal-motivo" class="swal2-textarea" style="width:100%;margin:0;" rows="3"></textarea>' +
+            '</div>',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Reatribuir',
+        cancelButtonText: 'Cancelar',
+        focusConfirm: false,
+        preConfirm: function () {
+            var novoTecnico = document.getElementById('swal-novo-tecnico').value;
+            if (!novoTecnico) {
+                Swal.showValidationMessage('Selecione um técnico.');
+                return false;
+            }
+            return {
+                novo_tecnico_id: novoTecnico,
+                motivo: document.getElementById('swal-motivo').value
+            };
+        }
+    }).then(function (result) {
+        if (!result.isConfirmed) { return; }
+
+        var dados = new URLSearchParams();
+        dados.append('avaria_id', avariaId);
+        dados.append('novo_tecnico_id', result.value.novo_tecnico_id);
+        dados.append('motivo', result.value.motivo);
+        dados.append('csrf_token', GEI_CSRF);
+
+        Swal.fire({ title: 'A reatribuir...', allowOutsideClick: false, didOpen: function () { Swal.showLoading(); } });
+
+        fetch('<?php echo SVRURL ?>reatribuir_avaria_ajax.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: dados.toString()
+        })
+        .then(function (resp) { return resp.json(); })
+        .then(function (data) {
+            if (data.sucesso) {
+                Swal.fire({ title: 'Reatribuída!', text: data.mensagem, icon: 'success' })
+                    .then(function () { window.location.reload(); });
+            } else {
+                Swal.fire({ title: 'Erro', text: data.erro || 'Não foi possível reatribuir a avaria.', icon: 'error' });
+            }
+        })
+        .catch(function () {
+            Swal.fire({ title: 'Erro', text: 'Falha de comunicação com o servidor.', icon: 'error' });
+        });
+    });
+}
+</script>
 
       <!-- about -->
       <div class="about">
@@ -162,6 +255,8 @@ $totalLinhas = mysqli_num_rows($result);
 .gei-rep-textarea:focus { outline:none; border-color:#4b6cb7; background:#fff; }
 .gei-btn-rep { display:inline-flex; align-items:center; gap:6px; padding:6px 16px; border-radius:7px; font-size:.82rem; font-weight:700; border:none; background:#1a7f4b; color:#fff !important; cursor:pointer; transition:background .15s; }
 .gei-btn-rep:hover { background:#145f38; }
+.gei-btn-reassign { display:inline-flex; align-items:center; gap:6px; padding:6px 16px; border-radius:7px; font-size:.82rem; font-weight:700; border:none; background:#4b6cb7; color:#fff !important; cursor:pointer; transition:background .15s; }
+.gei-btn-reassign:hover { background:#37539a; }
 @media (max-width:768px) {
     .gei-table thead { display:none; }
     .gei-table tbody tr { display:block; border:1px solid #e3e8f4; border-radius:8px; margin-bottom:10px; padding:10px 12px; background:#fff; box-shadow:0 1px 6px rgba(75,108,183,.08); }
@@ -269,6 +364,14 @@ $totalLinhas = mysqli_num_rows($result);
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             Reparar
                         </button>
+                        <br>
+                        <?php if (isset($_SESSION['tipo']) && (int)$_SESSION['tipo'] === 1): ?>
+                        <button type="button" class="gei-btn-reassign" title="Reatribuir avaria a outro técnico"
+                                onclick="reatribuirAvaria(<?php echo (int)$n; ?>, <?php echo (int)($row['tecnico_id'] ?? 0); ?>)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                            Reatribuir
+                        </button>
+                        <?php endif; ?>
                     </div>
                 </td>
                 <?php else: ?>
