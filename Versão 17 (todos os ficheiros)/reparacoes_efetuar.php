@@ -21,6 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
+$csrf_token = $_SESSION['csrf_token'];
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -53,56 +54,79 @@ $result3 = mysqli_query($db, $sql3);
 $rows3   = mysqli_fetch_row($result3);
 $anoAtual = $rows3[0];
 
-// Contagem total
+// Contagem total (mesmos JOINs da query principal, para o total coincidir com as linhas listadas)
+$joinsContagem = "FROM avarias_reparacoes ar
+         INNER JOIN equipamento e   ON e.id   = ar.id_equi
+         INNER JOIN salas s         ON s.id   = ar.id_sala
+         INNER JOIN escolas esc     ON esc.id = ar.id_escola";
 if ($op === 't') {
-    $result1     = mysqli_query($db, "SELECT COUNT(*) FROM avarias_reparacoes WHERE datareparacao IS NULL");
-    $totallinhas = mysqli_fetch_row($result1)[0];
-} elseif ($op === 'al') {
-    $stmt_cnt = mysqli_prepare($db, "SELECT COUNT(*) FROM avarias_reparacoes WHERE datareparacao IS NULL AND ano_letivo = ?");
+    $result1     = mysqli_query($db, "SELECT COUNT(*) $joinsContagem WHERE ar.datareparacao IS NULL");
+    $repTotal = (int)mysqli_fetch_row($result1)[0];
+} else {
+    $stmt_cnt = mysqli_prepare($db, "SELECT COUNT(*) $joinsContagem WHERE ar.datareparacao IS NULL AND ar.ano_letivo = ?");
     mysqli_stmt_bind_param($stmt_cnt, 's', $anoAtual);
     mysqli_stmt_execute($stmt_cnt);
-    $totallinhas = mysqli_fetch_row(mysqli_stmt_get_result($stmt_cnt))[0];
+    $repTotal = (int)mysqli_fetch_row(mysqli_stmt_get_result($stmt_cnt))[0];
 }
 
 // Paginação
 if (isset($_POST['records-limit'])) {
     $_SESSION['records-limit'] = $_POST['records-limit'];
 }
-$limit           = isset($_SESSION['records-limit']) ? (int)$_SESSION['records-limit'] : 10;
-$page            = (isset($_GET['page']) && is_numeric($_GET['page'])) ? (int)$_GET['page'] : 1;
-$paginationStart = ($page - 1) * $limit;
-$totalPages      = ceil($totallinhas / $limit);
-$prev            = $page - 1;
-$next            = $page + 1;
+$repLimit           = isset($_SESSION['records-limit']) ? (int)$_SESSION['records-limit'] : 10;
+$repPage            = (isset($_GET['page']) && is_numeric($_GET['page'])) ? (int)$_GET['page'] : 1;
+$repStart = ($repPage - 1) * $repLimit;
+$repPages      = ceil($repTotal / $repLimit);
+$repPrev            = $repPage - 1;
+$repNext            = $repPage + 1;
 
 // Query principal
 if ($op === 't') {
     $stmt = mysqli_prepare($db,
-        "SELECT ar.*, e.nomeequi, s.nome AS nomsala, esc.nome_escola
+        "SELECT ar.*, e.nomeequi, s.nome AS nomsala, esc.nome_escola, ut.nome AS tecnico_nome
          FROM avarias_reparacoes ar
          INNER JOIN equipamento e   ON e.id   = ar.id_equi
          INNER JOIN salas s         ON s.id   = ar.id_sala
          INNER JOIN escolas esc     ON esc.id = ar.id_escola
+         LEFT JOIN utilizadores ut  ON ut.id  = ar.tecnico_id
          WHERE ar.datareparacao IS NULL
          ORDER BY ar.dataavaria ASC
          LIMIT ?, ?"
     );
-    mysqli_stmt_bind_param($stmt, 'ii', $paginationStart, $limit);
+    mysqli_stmt_bind_param($stmt, 'ii', $repStart, $repLimit);
 } else {
     $stmt = mysqli_prepare($db,
-        "SELECT ar.*, e.nomeequi, s.nome AS nomsala, esc.nome_escola
+        "SELECT ar.*, e.nomeequi, s.nome AS nomsala, esc.nome_escola, ut.nome AS tecnico_nome
          FROM avarias_reparacoes ar
          INNER JOIN equipamento e   ON e.id   = ar.id_equi
          INNER JOIN salas s         ON s.id   = ar.id_sala
          INNER JOIN escolas esc     ON esc.id = ar.id_escola
+         LEFT JOIN utilizadores ut  ON ut.id  = ar.tecnico_id
          WHERE ar.datareparacao IS NULL AND ar.ano_letivo = ?
          ORDER BY ar.dataavaria ASC
          LIMIT ?, ?"
     );
-    mysqli_stmt_bind_param($stmt, 'sii', $anoAtual, $paginationStart, $limit);
+    mysqli_stmt_bind_param($stmt, 'sii', $anoAtual, $repStart, $repLimit);
 }
 mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
+$repResult = mysqli_stmt_get_result($stmt);
+
+// Se a 1.ª página não devolve linhas, o total tem de ser 0 (evita "Total: 7" com tabela vazia)
+$numLinhas = mysqli_num_rows($repResult);
+if ($repPage <= 1 && $numLinhas === 0) {
+    $repTotal = 0;
+    $repPages  = 0;
+}
+
+// Diagnóstico: acrescentar &debug=1 ao URL (só administradores)
+if (isset($_GET['debug']) && isset($_SESSION['tipo']) && (int)$_SESSION['tipo'] === 1) {
+    echo '<pre style="background:#fff3cd;border:1px solid #ffe082;padding:8px;font-size:12px;margin:8px;">'
+       . 'ficheiro: reparacoes_efetuar.php (versao com $joinsContagem)' . "\n"
+       . 'op=' . htmlspecialchars($op) . ' | anoAtual=' . htmlspecialchars((string)$anoAtual)
+       . ' | page=' . $repPage . ' | limit=' . $repLimit . ' | start=' . $repStart . "\n"
+       . 'totallinhas=' . $repTotal . ' | linhas devolvidas=' . $numLinhas
+       . '</pre>';
+}
 ?>
 
       <!-- about -->
@@ -174,12 +198,15 @@ $result = mysqli_stmt_get_result($stmt);
 .gei-img { height:120px; width:200px; object-fit:cover; border-radius:6px; border:1px solid #e3e8f4; cursor:zoom-in; transition:transform .25s ease; }
 .gei-img:hover { transform:scale(2.5); z-index:10; position:relative; }
 .gei-badge-warn { display:inline-flex; align-items:center; padding:2px 10px; border-radius:5px; font-size:.78rem; font-weight:700; background:#fff8e1; color:#b07d00; border:1.5px solid #ffe082; }
+.gei-badge-reassigned { display:inline-flex; align-items:center; gap:4px; padding:2px 10px; border-radius:5px; font-size:.75rem; font-weight:700; background:#eef2fb; color:#4b6cb7; border:1.5px solid #c7d4f0; margin-top:6px; cursor:default; }
 .gei-rep-input { width:100%; padding:5px 8px; border:1.5px solid #c7d4f0; border-radius:6px; font-size:.83rem; color:#1e2a45; background:#f8faff; margin-bottom:6px; box-sizing:border-box; }
 .gei-rep-input:focus { outline:none; border-color:#4b6cb7; background:#fff; }
 .gei-rep-textarea { width:100%; padding:6px 8px; border:1.5px solid #c7d4f0; border-radius:6px; font-size:.83rem; color:#1e2a45; background:#f8faff; resize:vertical; box-sizing:border-box; }
 .gei-rep-textarea:focus { outline:none; border-color:#4b6cb7; background:#fff; }
 .gei-btn-rep { display:inline-flex; align-items:center; gap:6px; padding:6px 16px; border-radius:7px; font-size:.82rem; font-weight:700; border:none; background:#1a7f4b; color:#fff !important; cursor:pointer; transition:background .15s; }
 .gei-btn-rep:hover { background:#145f38; }
+.gei-btn-reassign { display:inline-flex; align-items:center; gap:6px; padding:6px 16px; border-radius:7px; font-size:.82rem; font-weight:700; border:none; background:#4b6cb7; color:#fff !important; cursor:pointer; transition:background .15s; }
+.gei-btn-reassign:hover { background:#37539a; }
 .gei-select { padding:5px 10px; border:1.5px solid #3a5a9a; border-radius:7px; font-size:.82rem; color:#fff; background:#253d6e; font-weight:600; cursor:pointer; }
 .gei-select:focus { outline:none; }
 .gei-pagination { display:flex; align-items:center; justify-content:center; gap:4px; flex-wrap:wrap; padding:14px 0 4px; }
@@ -197,6 +224,32 @@ $result = mysqli_stmt_get_result($stmt);
 }
 </style>
 
+<?php
+// Lista de técnicos disponíveis para reatribuição (apenas para admins, tipo 1)
+$tecnicos_disponiveis = [];
+if (isset($_SESSION['tipo']) && (int)$_SESSION['tipo'] === 1) {
+    $meu_user_id = (int)($_SESSION['user_id'] ?? 0);
+    $stmt_tec = $db->prepare("SELECT id, nome FROM utilizadores WHERE tipo IN (1,3) AND ativo = 1 AND id != ? ORDER BY nome");
+    $stmt_tec->bind_param("i", $meu_user_id);
+    $stmt_tec->execute();
+    $res_tec = $stmt_tec->get_result();
+    while ($t = $res_tec->fetch_assoc()) {
+        $tecnicos_disponiveis[] = $t;
+    }
+    $stmt_tec->close();
+}
+?>
+
+<script>
+// SweetAlert2 é necessário para a função reatribuirAvaria() (usa Swal.fire),
+// mas o projeto só tem carregada a SweetAlert v1 (função swal() em minúsculas).
+// Carregamos a v2 aqui só se ainda não estiver presente, para não conflituar
+// com o swal() v1 usado no resto da página (nomes globais diferentes: swal vs Swal).
+if (typeof window.Swal === 'undefined') {
+    document.write('<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">');
+    document.write('<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"><\/script>');
+}
+</script>
 <script>
 function validarDataRep(form) {
     var dre = form.querySelector('[name="datarep"]').value;
@@ -207,12 +260,98 @@ function validarDataRep(form) {
     }
     return true;
 }
+
+// Lista de técnicos disponíveis (apenas preenchida para admins)
+var GEI_TECNICOS = <?php echo json_encode($tecnicos_disponiveis); ?>;
+var GEI_CSRF      = <?php echo json_encode($csrf_token); ?>;
+
+function reatribuirAvaria(avariaId, tecnicoAtualId, instituicao, sala, equipamento) {
+    var opcoes = '<option value="">— Selecione um técnico —</option>';
+    GEI_TECNICOS.forEach(function (t) {
+        if (parseInt(t.id, 10) === parseInt(tecnicoAtualId, 10)) { return; }
+        opcoes += '<option value="' + t.id + '">' + t.nome + '</option>';
+    });
+
+    var escapeHtml = function (s) {
+        return String(s == null ? '' : s)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+    };
+
+    Swal.fire({
+        title: 'Reatribuir avaria #' + avariaId,
+        html:
+            '<div style="text-align:left;">' +
+            '<div style="background:#f4f6fb;border:1px solid #e3e8f4;border-radius:8px;padding:10px 12px;margin-bottom:14px;font-size:.82rem;">' +
+                '<span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#7b88a0;display:block;">Instituição</span>' +
+                '<span style="font-weight:700;color:#1e2a45;display:block;margin-bottom:6px;">' + escapeHtml(instituicao) + '</span>' +
+                '<span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#7b88a0;display:block;">Sala</span>' +
+                '<span style="color:#1e2a45;display:block;margin-bottom:6px;">' + escapeHtml(sala) + '</span>' +
+                '<span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#7b88a0;display:block;">Equipamento</span>' +
+                '<span style="color:#1e2a45;display:block;">' + escapeHtml(equipamento) + '</span>' +
+            '</div>' +
+            '<label style="font-size:.78rem;font-weight:700;text-transform:uppercase;color:#7b88a0;display:block;margin-bottom:4px;">Novo técnico</label>' +
+            '<select id="swal-novo-tecnico" class="swal2-select" style="width:100%;margin:0 0 14px;padding:8px;border-radius:6px;border:1.5px solid #c7d4f0;">' + opcoes + '</select>' +
+            '<label style="font-size:.78rem;font-weight:700;text-transform:uppercase;color:#7b88a0;display:block;margin-bottom:4px;">Motivo (opcional)</label>' +
+            '<textarea id="swal-motivo" class="swal2-textarea" style="width:100%;margin:0;" rows="3"></textarea>' +
+            '</div>',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Reatribuir',
+        cancelButtonText: 'Cancelar',
+        focusConfirm: false,
+        preConfirm: function () {
+            var novoTecnico = document.getElementById('swal-novo-tecnico').value;
+            if (!novoTecnico) {
+                Swal.showValidationMessage('Selecione um técnico.');
+                return false;
+            }
+            return {
+                novo_tecnico_id: novoTecnico,
+                motivo: document.getElementById('swal-motivo').value
+            };
+        }
+    }).then(function (result) {
+        if (!result.isConfirmed) { return; }
+
+        var dados = new URLSearchParams();
+        dados.append('avaria_id', avariaId);
+        dados.append('novo_tecnico_id', result.value.novo_tecnico_id);
+        dados.append('motivo', result.value.motivo);
+        dados.append('csrf_token', GEI_CSRF);
+
+        Swal.fire({ title: 'A reatribuir...', allowOutsideClick: false, didOpen: function () { Swal.showLoading(); } });
+
+        fetch('<?php echo SVRURL ?>reatribuir_avaria_ajax.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: dados.toString()
+        })
+        .then(function (resp) { return resp.json(); })
+        .then(function (data) {
+            if (data.sucesso) {
+                Swal.fire({ title: 'Reatribuída!', text: data.mensagem, icon: 'success' })
+                    .then(function () { window.location.reload(); });
+            } else {
+                Swal.fire({ title: 'Erro', text: data.erro || 'Não foi possível reatribuir a avaria.', icon: 'error' });
+            }
+        })
+        .catch(function () {
+            Swal.fire({ title: 'Erro', text: 'Falha de comunicação com o servidor.', icon: 'error' });
+        });
+    });
+}
 </script>
 
-<?php if ($totallinhas == 0): ?>
+<?php if ($repTotal == 0): ?>
 <div style="padding:36px 16px;text-align:center;color:#7b88a0;font-size:.9rem;background:#f4f6fb;border:1px solid #e3e8f4;border-radius:10px;">
     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#c5cde0" stroke-width="1.5" style="display:block;margin:0 auto 14px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
     Não existem avarias por reparar.
+</div>
+<div style="text-align:center;margin:16px 0;">
+    <span class="gei-total-badge">Total: 0</span>
 </div>
 <?php else: ?>
 
@@ -246,7 +385,7 @@ function validarDataRep(form) {
         </thead>
         <tbody>
 
-<?php while ($row = mysqli_fetch_array($result)):
+<?php while ($row = mysqli_fetch_array($repResult)):
     $n  = $row['id'];
     $em = $row['autoravaria'];
 
@@ -267,6 +406,15 @@ function validarDataRep(form) {
                     <div style="margin-top:8px;">
                         <span class="gei-badge-warn">&#9679; Por reparar</span>
                     </div>
+                    <?php if (!empty($row['tecnico_id']) && !empty($row['data_reatribuicao'])): ?>
+                    <div>
+                        <span class="gei-badge-reassigned"
+                              title="<?php echo !empty($row['motivo_reatribuicao']) ? 'Motivo: ' . htmlspecialchars($row['motivo_reatribuicao'], ENT_QUOTES, 'UTF-8') : 'Sem motivo indicado'; ?>">
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                            Reatribuída a <?php echo htmlspecialchars($row['tecnico_nome'] ?? '—', ENT_QUOTES, 'UTF-8'); ?>
+                        </span>
+                    </div>
+                    <?php endif; ?>
                 </td>
 
                 <td data-label="Avaria">
@@ -302,40 +450,50 @@ function validarDataRep(form) {
                     <?php endif; ?>
                 </td>
 
-                <form onsubmit="return validarDataRep(this);"
-                      action="<?php echo SVRURL ?>repara_avaria.php?ia=<?php echo base64_encode($n); ?>&em=<?php echo urlencode($em); ?>"
-                      method="post">
-                <input type="hidden" name="dav"        value="<?php echo htmlspecialchars($row['dataavaria'], ENT_QUOTES, 'UTF-8'); ?>">
-                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
-
+                <!-- FIX: <form> já não envolve os <td> (HTML inválido); fica fora da tr,
+                     ligado aos campos via form="<id>". -->
                 <td data-label="Registar reparação">
                     <span class="gei-label">Data de reparação</span>
-                    <input class="gei-rep-input" required type="date" name="datarep" value="<?php echo date('Y-m-d'); ?>">
+                    <input class="gei-rep-input" required type="date" name="datarep" value="<?php echo date('Y-m-d'); ?>" form="form-rep-<?php echo (int)$n; ?>">
                     <span class="gei-label" style="margin-top:6px;">Descrição</span>
-                    <textarea class="gei-rep-textarea" required rows="4" name="reparacao"></textarea>
+                    <textarea class="gei-rep-textarea" required rows="4" name="reparacao" form="form-rep-<?php echo (int)$n; ?>"></textarea>
                     <span class="gei-label" style="margin-top:6px;">Reparado por</span>
-                    <input class="gei-rep-input" required type="text" name="repar_por">
+                    <input class="gei-rep-input" required type="text" name="repar_por" form="form-rep-<?php echo (int)$n; ?>">
                 </td>
 
                 <?php if (isset($_SESSION['tipo']) && ($_SESSION['tipo'] == 1 || $_SESSION['tipo'] == 3)): ?>
                 <td data-label="Ação" style="vertical-align:middle;">
                     <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px;">
                         <label style="display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:600;color:#4b6cb7;cursor:pointer;" title="Enviar email ao autor da avaria">
-                            <input type="checkbox" name="my_check" value="yes" style="width:16px;height:16px;cursor:pointer;">
+                            <input type="checkbox" name="my_check" value="yes" style="width:16px;height:16px;cursor:pointer;" form="form-rep-<?php echo (int)$n; ?>">
                             Email autor
                         </label>
-                        <button type="submit" class="gei-btn-rep" title="Registar reparação">
+                        <button type="submit" class="gei-btn-rep" title="Registar reparação" form="form-rep-<?php echo (int)$n; ?>">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                             Reparar
                         </button>
+                        <br>
+                        <?php if (isset($_SESSION['tipo']) && (int)$_SESSION['tipo'] === 1): ?>
+                        <button type="button" class="gei-btn-reassign" title="Reatribuir avaria a outro técnico"
+                                onclick="reatribuirAvaria(<?php echo (int)$n; ?>, <?php echo (int)($row['tecnico_id'] ?? 0); ?>, <?php echo htmlspecialchars(json_encode($row['nome_escola'], JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars(json_encode($row['nomsala'], JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8'); ?>, <?php echo htmlspecialchars(json_encode($row['nomeequi'], JSON_UNESCAPED_UNICODE), ENT_QUOTES, 'UTF-8'); ?>)">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                            Reatribuir
+                        </button>
+                        <?php endif; ?>
                     </div>
                 </td>
                 <?php else: ?>
                 <td></td>
                 <?php endif; ?>
 
-                </form>
             </tr>
+            <!-- form vive fora da <tr>/<table>, ligado aos campos acima via atributo form= -->
+            <form id="form-rep-<?php echo (int)$n; ?>" onsubmit="return validarDataRep(this);"
+                  action="<?php echo SVRURL ?>repara_avaria.php?ia=<?php echo base64_encode($n); ?>&em=<?php echo urlencode($em); ?>"
+                  method="post" style="display:none;">
+                <input type="hidden" name="dav"        value="<?php echo htmlspecialchars($row['dataavaria'], ENT_QUOTES, 'UTF-8'); ?>">
+                <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8'); ?>">
+            </form>
 <?php endwhile; ?>
 
         </tbody>
@@ -343,25 +501,25 @@ function validarDataRep(form) {
 </div>
 
 <!-- Paginação -->
-<?php if ($totalPages > 1): ?>
+<?php if ($repPages > 1): ?>
 <div class="gei-pagination">
-    <a class="gei-page-btn <?php if ($page <= 1) echo 'disabled'; ?>"
-       href="<?php echo $page > 1 ? SVRURL . "reparafaz?op=$op&page=$prev" : '#'; ?>">&#8249;</a>
+    <a class="gei-page-btn <?php if ($repPage <= 1) echo 'disabled'; ?>"
+       href="<?php echo $repPage > 1 ? SVRURL . "reparafaz?op=$op&page=$repPrev" : '#'; ?>">&#8249;</a>
 
-    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-    <a class="gei-page-btn <?php if ($page == $i) echo 'active'; ?>"
+    <?php for ($i = 1; $i <= $repPages; $i++): ?>
+    <a class="gei-page-btn <?php if ($repPage == $i) echo 'active'; ?>"
        href="<?php echo SVRURL ?>reparafaz?op=<?php echo $op ?>&page=<?= $i ?>">
         <?= $i ?>
     </a>
     <?php endfor; ?>
 
-    <a class="gei-page-btn <?php if ($page >= $totalPages) echo 'disabled'; ?>"
-       href="<?php echo $page < $totalPages ? SVRURL . "reparafaz?op=$op&page=$next" : '#'; ?>">&#8250;</a>
+    <a class="gei-page-btn <?php if ($repPage >= $repPages) echo 'disabled'; ?>"
+       href="<?php echo $repPage < $repPages ? SVRURL . "reparafaz?op=$op&page=$repNext" : '#'; ?>">&#8250;</a>
 </div>
 <?php endif; ?>
 
 <div style="text-align:center;margin-bottom:16px;">
-    <span class="gei-total-badge">Total: <?php echo $totallinhas; ?></span>
+    <span class="gei-total-badge">Total: <?php echo $repTotal; ?></span>
 </div>
 
 <?php endif; ?>
