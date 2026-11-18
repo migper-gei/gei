@@ -43,6 +43,8 @@ if ($op === 't') {
     $op2 = 'Todas';
 } elseif ($op === 'al') {
     $op2 = 'Ano ';
+} elseif ($op === 'm') {
+    $op2 = 'Atribuídas a mim';
 } else {
 ?>
 <script>window.setTimeout(function(){ window.location.href='<?php echo SVRURL ?>reparafaz?op=t'; }, 10);</script>
@@ -59,9 +61,15 @@ $joinsContagem = "FROM avarias_reparacoes ar
          INNER JOIN equipamento e   ON e.id   = ar.id_equi
          INNER JOIN salas s         ON s.id   = ar.id_sala
          INNER JOIN escolas esc     ON esc.id = ar.id_escola";
+$meuIdRep = (int)($_SESSION['user_id'] ?? 0);
 if ($op === 't') {
     $result1     = mysqli_query($db, "SELECT COUNT(*) $joinsContagem WHERE ar.datareparacao IS NULL");
     $repTotal = (int)mysqli_fetch_row($result1)[0];
+} elseif ($op === 'm') {
+    $stmt_cnt = mysqli_prepare($db, "SELECT COUNT(*) $joinsContagem WHERE ar.datareparacao IS NULL AND ar.tecnico_id = ?");
+    mysqli_stmt_bind_param($stmt_cnt, 'i', $meuIdRep);
+    mysqli_stmt_execute($stmt_cnt);
+    $repTotal = (int)mysqli_fetch_row(mysqli_stmt_get_result($stmt_cnt))[0];
 } else {
     $stmt_cnt = mysqli_prepare($db, "SELECT COUNT(*) $joinsContagem WHERE ar.datareparacao IS NULL AND ar.ano_letivo = ?");
     mysqli_stmt_bind_param($stmt_cnt, 's', $anoAtual);
@@ -94,6 +102,19 @@ if ($op === 't') {
          LIMIT ?, ?"
     );
     mysqli_stmt_bind_param($stmt, 'ii', $repStart, $repLimit);
+} elseif ($op === 'm') {
+    $stmt = mysqli_prepare($db,
+        "SELECT ar.*, e.nomeequi, s.nome AS nomsala, esc.nome_escola, ut.nome AS tecnico_nome
+         FROM avarias_reparacoes ar
+         INNER JOIN equipamento e   ON e.id   = ar.id_equi
+         INNER JOIN salas s         ON s.id   = ar.id_sala
+         INNER JOIN escolas esc     ON esc.id = ar.id_escola
+         LEFT JOIN utilizadores ut  ON ut.id  = ar.tecnico_id
+         WHERE ar.datareparacao IS NULL AND ar.tecnico_id = ?
+         ORDER BY ar.dataavaria ASC
+         LIMIT ?, ?"
+    );
+    mysqli_stmt_bind_param($stmt, 'iii', $meuIdRep, $repStart, $repLimit);
 } else {
     $stmt = mysqli_prepare($db,
         "SELECT ar.*, e.nomeequi, s.nome AS nomsala, esc.nome_escola, ut.nome AS tecnico_nome
@@ -174,6 +195,10 @@ if (isset($_GET['debug']) && isset($_SESSION['tipo']) && (int)$_SESSION['tipo'] 
                         <a href="<?php echo SVRURL ?>reparafaz?op=al"
                            style="display:inline-flex;align-items:center;gap:5px;padding:5px 14px;border-radius:7px;font-size:.8rem;font-weight:700;text-decoration:none;border:1.5px solid <?php echo $op==='al' ? '#182848' : '#c7d4f0'; ?>;background:<?php echo $op==='al' ? '#182848' : '#fff'; ?>;color:<?php echo $op==='al' ? '#fff' : '#4b6cb7'; ?>;">
                            Ano: <?php echo htmlspecialchars($anoAtual, ENT_QUOTES, 'UTF-8'); ?>
+                        </a>
+                        <a href="<?php echo SVRURL ?>reparafaz?op=m"
+                           style="display:inline-flex;align-items:center;gap:5px;padding:5px 14px;border-radius:7px;font-size:.8rem;font-weight:700;text-decoration:none;border:1.5px solid <?php echo $op==='m' ? '#182848' : '#c7d4f0'; ?>;background:<?php echo $op==='m' ? '#182848' : '#fff'; ?>;color:<?php echo $op==='m' ? '#fff' : '#4b6cb7'; ?>;">
+                           Atribuídas a mim
                         </a>
                      </div>
                   </div>

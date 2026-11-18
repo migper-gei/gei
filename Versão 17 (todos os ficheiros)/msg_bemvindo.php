@@ -142,6 +142,10 @@ include("verifica_sessao.php");
     background: linear-gradient(135deg, #4a9fd4 0%, #2980b9 100%) !important;
     box-shadow: 0 2px 10px rgba(41,128,185,0.35);
 }
+.gei-action-btn-teal {
+    background: linear-gradient(135deg, #2bb5a8 0%, #178f85 100%) !important;
+    box-shadow: 0 2px 10px rgba(23,143,133,0.35);
+}
 .gei-action-btn-slate {
     background: linear-gradient(135deg, #8a94a2 0%, #6c757d 100%) !important;
     box-shadow: 0 2px 10px rgba(108,117,125,0.30);
@@ -376,12 +380,29 @@ include("verifica_sessao.php");
   $rows2 = mysqli_fetch_row($result2);
   $totallinhas2 = $rows2[0];
 
+  // Avarias por reparar atribuídas ao utilizador com sessão iniciada (mesmos JOINs da página de listagem)
+  $minhasAvarias = 0;
+  $meuIdBemvindo = (int)($_SESSION['user_id'] ?? 0);
+  if ($meuIdBemvindo > 0 && isset($_SESSION['login_user']) && ($_SESSION['tipo']==1 || $_SESSION['tipo']==3)) {
+      $stmt_minhas = mysqli_prepare($db,
+          "SELECT COUNT(*) FROM avarias_reparacoes ar
+           INNER JOIN equipamento e ON e.id = ar.id_equi
+           INNER JOIN salas s       ON s.id = ar.id_sala
+           INNER JOIN escolas esc   ON esc.id = ar.id_escola
+           WHERE ar.datareparacao IS NULL AND ar.tecnico_id = ?");
+      mysqli_stmt_bind_param($stmt_minhas, 'i', $meuIdBemvindo);
+      mysqli_stmt_execute($stmt_minhas);
+      $minhasAvarias = (int)mysqli_fetch_row(mysqli_stmt_get_result($stmt_minhas))[0];
+      mysqli_stmt_close($stmt_minhas);
+  }
+  $mostrar_minhas = ($minhasAvarias > 0);
+
   $mostrar_reparacoes = ($totallinhas > 0 && isset($_SESSION['login_user']) && ($_SESSION['tipo']==1 || $_SESSION['tipo']==3));
   $mostrar_tarefas    = ($totallinhas2 > 0 && isset($_SESSION['login_user']) && $_SESSION['tipo']==1);
   $mostrar_dashboard  = (isset($_SESSION['login_user']) && $_SESSION['tipo']==1);
   $mostrar_avarias    = isset($_SESSION['login_user']);
   $mostrar_calendario = (isset($_SESSION['login_user']) && ($_SESSION['tipo']==1 || $_SESSION['tipo']==4));
-  $mostrar_barra      = $mostrar_reparacoes || $mostrar_tarefas || $mostrar_dashboard || $mostrar_avarias || $mostrar_calendario || (isset($_SESSION['login_user']) && $_SESSION['tipo']==1);
+  $mostrar_barra      = $mostrar_reparacoes || $mostrar_tarefas || $mostrar_minhas || $mostrar_dashboard || $mostrar_avarias || $mostrar_calendario || (isset($_SESSION['login_user']) && $_SESSION['tipo']==1);
 ?>
 
 <?php if ($mostrar_barra): ?>
@@ -407,7 +428,17 @@ include("verifica_sessao.php");
     </a>
     <?php endif; ?>
 
-    <?php if (($mostrar_reparacoes || $mostrar_tarefas) && ($mostrar_dashboard || $mostrar_avarias || $mostrar_calendario)): ?>
+    <?php if ($mostrar_minhas): ?>
+    <a href="<?php echo SVRURL ?>reparafaz?op=m" class="gei-action-btn gei-action-btn-teal" title="Avarias por reparar atribuídas a mim">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+        </svg>
+        <span>Avarias atribuídas a mim</span>
+        <span class="gei-action-count"><?php echo $minhasAvarias; ?></span>
+    </a>
+    <?php endif; ?>
+
+    <?php if (($mostrar_reparacoes || $mostrar_tarefas || $mostrar_minhas) && ($mostrar_dashboard || $mostrar_avarias || $mostrar_calendario)): ?>
     <div class="gei-action-divider"></div>
     <?php endif; ?>
 
