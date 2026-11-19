@@ -376,15 +376,17 @@ include('sessao_timeout.php');
         <div class="cal-wrap">
 
           <!-- Breadcrumb -->
-          <nav style="margin-bottom:16px;">
-            <ol style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;list-style:none;padding:0;margin:0;font-size:.8rem;font-weight:600;color:#7b88a0;">
-              <li><a href="<?php echo SVRURL ?>equip" style="color:#4b6cb7;text-decoration:none;"><i class="fas fa-desktop"></i> Equipamentos</a></li>
+         <!--  <nav style="margin-bottom:16px;">
+             <ol style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;list-style:none;padding:0;margin:0;font-size:.8rem;font-weight:600;color:#7b88a0;">
+            
+            <li><a href="<?php echo SVRURL ?>equip" style="color:#4b6cb7;text-decoration:none;"><i class="fas fa-desktop"></i> Equipamentos</a></li>
               <li style="color:#c5cde0;">&#8250;</li>
               <li><a href="<?php echo SVRURL ?>calreservas" style="color:#4b6cb7;text-decoration:none;">Calendário semanal</a></li>
               <li style="color:#c5cde0;">&#8250;</li>
               <li style="color:#1e2a45;">Vista mensal</li>
+
             </ol>
-          </nav>
+          </nav>-->
 
           <div class="page-title">
             <div class="page-title-icon"><i class="fa-solid fa-calendar-days"></i></div>
