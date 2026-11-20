@@ -301,23 +301,24 @@ $ne = $rows11[0];
                         <span style="color:#4b6cb7;">Equipamentos</span>
                      </li>
                      <li style="color:#c5cde0;font-size:.9rem;">&#8250;</li>
-                     <li style="color:#1e2a45;">Inserir</li>
+                     <li style="color:#1e2a45;">Atualizar</li>
                   </ol>
                </nav>
-               <div class="titlepage">
-                     <h2>Dados técnicos e de rede
-                        <br> <?php echo $ne ?>
-
-                     </h2>
-                  </div>
                </div>
             </div>
             
             <div class="container">
                <div class="row">
-                  <div class="col-md-10 offset-md-2">
+                  <div class="col-md-10 offset-md-1">
               
-                        
+                     <!-- Welcome Section -->
+ <div class="welcome-section">
+               
+               <div>
+             
+                   <?php include("msg_bemvindo.php"); ?>
+               </div>
+       </div>    
 
 
 
@@ -342,7 +343,7 @@ if ($conta==0)
 else
 {
    
-$sql3 = "select e.nomeequi as neq,s.nome as nos,e.tipo as ti from equipamento e, salas s
+$sql3 = "select e.nomeequi as neq,s.nome as nos,e.tipo as ti,s.id as sid from equipamento e, salas s
 where s.id=e.id_sala
 and e.id=".$id."";
 $result3 = mysqli_query($db,$sql3); 
@@ -358,26 +359,37 @@ $dados = mysqli_fetch_assoc($result_dados);
 $dados = $dados ?: [];
 ?>
 
-<div  style=" text-align:center;width:90%">
-<?php
-echo('<h4>');
-echo htmlspecialchars($row['ti'], ENT_QUOTES, 'UTF-8');
-echo(" | ");
-echo htmlspecialchars($row['neq'], ENT_QUOTES, 'UTF-8');
-echo(" | ");
-echo htmlspecialchars($row['nos'], ENT_QUOTES, 'UTF-8');
-echo('</h4>');
-   ?>
+<!-- Cabeçalho com info do equipamento -->
+<div style="display:flex; align-items:center; flex-wrap:wrap; gap:16px; margin:14px 0 10px; padding:12px 16px; background:#f4f6fb; border:1px solid #e3e8f4; border-radius:10px;">
+   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4b6cb7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+   <div style="display:flex; flex-direction:column;">
+      <span style="font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.4px; color:#7b88a0;">Equipamento</span>
+      <span style="font-size:.95rem; font-weight:700; color:#182848;"><?php echo htmlspecialchars($row['neq'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
+   </div>
+   <span style="color:#c5cde0;">|</span>
+   <div style="display:flex; flex-direction:column;">
+      <span style="font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.4px; color:#7b88a0;">Sala</span>
+      <span style="font-size:.95rem; font-weight:700; color:#182848;"><?php echo htmlspecialchars($row['nos'] ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
+   </div>
+   <span style="color:#c5cde0;">|</span>
+   <div style="display:flex; flex-direction:column;">
+      <span style="font-size:.7rem; font-weight:600; text-transform:uppercase; letter-spacing:.4px; color:#7b88a0;">Instituição</span>
+      <span style="font-size:.95rem; font-weight:700; color:#182848;"><?php echo htmlspecialchars($ne ?? '', ENT_QUOTES, 'UTF-8'); ?></span>
+   </div>
 </div>
-
-
-
 
 <br>
 
                         <!-- Tabs for Technical and Network Data -->
                         <div class="equipment-tabs">
                             <ul class="nav nav-tabs" id="equipmentTabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                       href="<?php echo SVRURL ?>atualizar_equipamento.php?ide=<?php echo base64_encode($id); ?>&sai=<?php echo base64_encode($row['sid']); ?>&ies=<?php echo base64_encode($idescola) ?>"
+                                       role="tab">
+                                        <i class="fas fa-laptop"></i> Dados Gerais
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link <?php echo ($z == 1) ? 'active' : ''; ?>" 
                                        href="<?php echo SVRURL ?>dados_tec_redes.php?qi=<?php echo base64_encode($id); ?>&z=1&ies=<?php echo base64_encode($idescola) ?>" 

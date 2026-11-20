@@ -207,6 +207,11 @@ include("msg_bemvindo.php");
 <div class="equipment-tabs" style="margin-top:10px;">
     <ul class="nav nav-tabs" id="tecRedesTabs" role="tablist">
         <li class="nav-item">
+            <a class="nav-link" href="<?php echo SVRURL ?>atualizar_equipamento.php?ide=<?php echo base64_encode($id); ?>&sai=<?php echo base64_encode($sa); ?>&ies=<?php echo base64_encode($ies); ?>">
+                <i class="fas fa-laptop"></i> Dados Gerais
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link active" href="#tab-tec" onclick="switchTab(event,'tab-tec')">
                 <i class="fas fa-microchip"></i> Dados Técnicos
             </a>
