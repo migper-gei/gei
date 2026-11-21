@@ -428,6 +428,17 @@ include("verifica_sessao.php");
     </a>
     <?php endif; ?>
 
+
+       <?php if ($mostrar_avarias): ?>
+    <a href="<?php echo SVRURL ?>poravar" class="gei-action-btn gei-action-btn-green" title="Estado das minhas avarias">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+            <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/><line x1="9" y1="9" x2="12" y2="9"/>
+        </svg>
+        <span>Estado das minhas avarias</span>
+    </a>
+    <?php endif; ?>
+
     <?php if ($mostrar_minhas): ?>
     <a href="<?php echo SVRURL ?>reparafaz?op=m" class="gei-action-btn gei-action-btn-teal" title="Avarias por reparar atribuídas a mim">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
@@ -452,15 +463,7 @@ include("verifica_sessao.php");
     </a>
     <?php endif; ?>
 
-    <?php if ($mostrar_avarias): ?>
-    <a href="<?php echo SVRURL ?>poravar" class="gei-action-btn gei-action-btn-green" title="Estado das minhas avarias">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
-            <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/><line x1="9" y1="9" x2="12" y2="9"/>
-        </svg>
-        <span>Estado das minhas avarias</span>
-    </a>
-    <?php endif; ?>
+ 
 
     <?php if ($mostrar_calendario): ?>
     <a href="<?php echo SVRURL ?>requisicoes_calendario_mensal.php" class="gei-action-btn gei-action-btn-purple" title="Calendário mensal de reservas">
@@ -482,12 +485,19 @@ include("verifica_sessao.php");
         </svg>
         <span>Relatório por idade</span>
     </a>
+    <a href="<?php echo SVRURL ?>relatorio_anual.php" class="gei-action-btn gei-action-btn-indigo" title="Relatório anual por instituição (PDF)">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+            <line x1="8" y1="18" x2="8" y2="13"/><line x1="12" y1="18" x2="12" y2="10"/><line x1="16" y1="18" x2="16" y2="15"/>
+        </svg>
+        <span>Relatório anual</span>
+    </a>
     <a href="<?php echo SVRURL ?>planta_salas.php" class="gei-action-btn gei-action-btn-steel" title="Planta interactiva da instituição">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
             <line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>
         </svg>
-        <span>Planta da instituição</span>
+        <span>Planta</span>
     </a>
     <a href="<?php echo SVRURL ?>auditoria.php" class="gei-action-btn gei-action-btn-slate" title="Registos de auditoria do sistema">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
